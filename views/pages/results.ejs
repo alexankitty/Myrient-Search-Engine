@@ -147,14 +147,15 @@
         "order": [[6, 'desc']],
         "columns": [
             { "data": "name" },      // Name
-            { "data": "category" },   // Category
-            { "data": "region" },     // Region
-            { "data": "type" },       // Type
-            { "data": "size" },       // Size
-            { "data": "date" },       // Date
-            { "data": "score" },      // Search Score
+            { "data": "group" },     // Group
+            { "data": "category" },  // Category
+            { "data": "region" },    // Region
+            { "data": "type" },      // Type
+            { "data": "size" },      // Size
+            { "data": "date" },      // Date
+            { "data": "score" },     // Search Score
             <% if (process.env.EMULATOR_ENABLED === 'true') { %>
-            { "data": "play", "orderable": false }  // Play button column
+                { "data": "play", "orderable": false }  // Play button column
             <% } %>
         ],
         "lengthMenu": [100, { label: 'All', value: -1 }, 50, 25, 10],
