@@ -18,6 +18,32 @@
                     <a href="https://myrient.erista.me/donate/" class="btn btn-secondary">Donate to Myrient</a>
                 </div>
 
+                <div class="mb-4 border-top pt-3">
+                    <h5>Built-in Emulator</h5>
+                    <% if (process.env.EMULATOR_ENABLED === 'true') { %>
+                        <p>This website includes a built-in emulator powered by <a href="https://emulatorjs.org/">EmulatorJS</a> that brings retro gaming directly to your browser.</p>
+                        <p>Compatible games will feature a play button on their search result page.</p>
+
+                        <p>For the best gaming experience, use a Chromium-based browser with hardware acceleration turned on.</p>
+
+                        <p class="text-secondary">
+                            <small>
+                                <i class="fas fa-info-circle"></i>
+                                Games are loaded directly from Myrient's public archive. Save states are stored locally in the browser.
+                            </small>
+                            <br>
+                            <small>
+                                <i class="fas fa-exclamation-triangle"></i>
+                                ROM hacks, soundtracks, and other non-game content are not supported by the emulator and may fail to load.
+                            </small>
+                        </p>
+
+                    <% } else { %>
+                        <p>Web Emulator functionality was disabled by the administrator.</p>
+                        <p>Contact the administrator or spin up your own instance of <%= process.env.INSTANCE_NAME || 'Myrient' %> Search.</p>
+                    <% } %>
+                </div>
+
                 <div class="border-top pt-3">
                     <p>Search engine created by <a href="https://github.com/alexankitty">Alexankitty</a></p>
                     <p><a href="https://github.com/alexankitty/myrient-global-search">View project on GitHub</a></p>

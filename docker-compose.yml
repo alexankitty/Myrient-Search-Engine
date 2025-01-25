@@ -14,6 +14,7 @@ services:
       - MAX_JOB_QUEUE=1000
       - MAX_FETCH_JOBS=1000
       - INSTANCE_NAME=Myrient
+      - EMULATOR_ENABLED=true
     volumes:
       - ./data:/usr/src/app/data
     restart: unless-stopped

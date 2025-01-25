@@ -10,13 +10,17 @@ import sanitize from "sanitize";
 import debugPrint from "./lib/debugprint.js";
 import compression from "compression";
 import { generateAsciiArt } from './lib/asciiart.js';
+import { getEmulatorConfig, isEmulatorCompatible, isNonGameContent } from './lib/emulatorConfig.js';
+import fetch from 'node-fetch';
 
 let fileListPath = "./data/filelist.json";
 let queryCountFile = "./data/queries.txt";
 let categoryListPath = "./lib/categories.json"
 let searchAlikesPath = './lib/searchalikes.json'
+let nonGameTermsPath = './lib/nonGameTerms.json'
 let categoryList = await FileHandler.parseJsonFile(categoryListPath);
 global.searchAlikes = await FileHandler.parseJsonFile(searchAlikesPath)
+let nonGameTerms = await FileHandler.parseJsonFile(nonGameTermsPath);
 let crawlTime = 0;
 let queryCount = 0;
 let fileCount = 0;
@@ -101,7 +105,8 @@ let defaultOptions = {
   queryCount: queryCount,
   fileCount: fileCount,
   termCount: search.miniSearch.termCount,
-  generateAsciiArt: generateAsciiArt
+  generateAsciiArt: generateAsciiArt,
+  isEmulatorCompatible: isEmulatorCompatible
 };
 
 function updateDefaults(){
@@ -214,6 +219,97 @@ app.post("/suggest", async function(req, res){
 app.get("/about", function (req, res) {
   let page = "about";
   res.render(indexPage, buildOptions(page));
+});
+
+app.get("/play/:id", async function (req, res) {
+  // Block access if emulator is disabled
+  if (process.env.EMULATOR_ENABLED !== 'true') {
+    res.redirect('/');
+    return;
+  }
+
+  let fileId = parseInt(req.params.id);
+  let romFile = search.findIndex(fileId);
+
+  if (!romFile) {
+    res.redirect('/');
+    return;
+  }
+
+  let options = {
+    romFile: romFile,
+    emulatorConfig: getEmulatorConfig(romFile.category),
+    isNonGame: isNonGameContent(romFile.filename, nonGameTerms)
+  };
+
+  let page = "emulator";
+  options = buildOptions(page, options);
+  res.render(indexPage, options);
+});
+
+app.get("/proxy-rom/:id", async function (req, res) {
+  // Block access if emulator is disabled
+  if (process.env.EMULATOR_ENABLED !== 'true') {
+    res.status(403).send('Emulator feature is disabled');
+    return;
+  }
+
+  let fileId = parseInt(req.params.id);
+  let romFile = search.findIndex(fileId);
+
+  if (!romFile) {
+    res.status(404).send('ROM not found');
+    return;
+  }
+
+  try {
+    const response = await fetch(romFile.path);
+    const contentLength = response.headers.get('content-length');
+
+    res.setHeader('Content-Type', 'application/zip');
+    res.setHeader('Content-Length', contentLength);
+    res.setHeader('Content-Disposition', `attachment; filename="${romFile.filename}"`);
+
+    response.body.pipe(res);
+  } catch (error) {
+    console.error('Error proxying ROM:', error);
+    res.status(500).send('Error fetching ROM');
+  }
+});
+
+app.get("/proxy-bios", async function (req, res) {
+  // Block access if emulator is disabled
+  if (process.env.EMULATOR_ENABLED !== 'true') {
+    res.status(403).send('Emulator feature is disabled');
+    return;
+  }
+
+  const biosUrl = req.query.url;
+
+  // Validate that URL is from GitHub
+  if (!biosUrl || !biosUrl.startsWith('https://github.com')) {
+    res.status(403).send('Invalid BIOS URL - only GitHub URLs are allowed');
+    return;
+  }
+
+  try {
+    const response = await fetch(biosUrl);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const contentLength = response.headers.get('content-length');
+    const contentType = response.headers.get('content-type');
+
+    res.setHeader('Content-Type', contentType || 'application/octet-stream');
+    res.setHeader('Content-Length', contentLength);
+
+    response.body.pipe(res);
+  } catch (error) {
+    console.error('Error proxying BIOS:', error);
+    res.status(500).send('Error fetching BIOS file');
+  }
 });
 
 server.listen(process.env.PORT, process.env.BIND_ADDRESS);

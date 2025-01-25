@@ -13,7 +13,8 @@
     "node-html-parser": "^6.1.13",
     "piscina": "^4.7.0",
     "sanitize": "^2.1.2",
-    "figlet": "^1.7.0"
+    "figlet": "^1.7.0",
+    "jszip": "^3.10.1"
   },
   "type": "module"
 }
