@@ -22,8 +22,10 @@ services:
     volumes:
       - ./data:/usr/src/app/data
     depends_on:
-      - postgres
-      - elasticsearch
+      postgres:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
     restart: unless-stopped
 
   elasticsearch:
@@ -31,23 +33,35 @@ services:
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=false
-      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+      - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s http://localhost:9200/_cluster/health | grep -q '\"status\":\"green\"\\|\"status\":\"yellow\"'"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
     deploy: # Remove if you have a lot of free memory
       resources:
         limits:
-          memory: 512M
+          memory: 1GB
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
     restart: unless-stopped
 
   postgres:
-    image: postgres:alpine
+    image: postgres:16-alpine
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: this-is-a-secure-db-password
       POSTGRES_DB: myrient
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
     restart: unless-stopped
 
 volumes:
