@@ -2,15 +2,14 @@
 It is finally here. There is now a way to search all of Myrient's offerings.
 [Myrient Search](https://myrient.mahou.one) can be accessed by clicking the link.
 # Resource Requirements
-- Requires at least 1.1GB worth of memory to complete the crawl
-- Requires roughly 2.1GB worth of memory to complete indexing. Once done idle memory usage is about 1.1GB. Consider using swap in a low memory environment.
+- 1.5GB-ish of memory for the initial crawl (can be reduced by tweaking environment variables at the cost of slower indexing)
+- 800MB-ish of memory for running the server
 
 # Self-Hosting
 
 ## Docker Method (Recommended)
 ### Requirements
-- Docker
-- Docker Compose
+- Docker / Docker Compose
 
 ### Instructions
 1. Download the `docker-compose.yml` file
@@ -20,11 +19,15 @@ It is finally here. There is now a way to search all of Myrient's offerings.
 ### Requirements
 - nodejs
 - npm
+- PostgreSQL
+- Elasticsearch
+- Docker (optional)
 
 ### Instructions
 1. Clone the repository. `git clone https://github.com/alexankitty/Myrient-Search-Engine`
 2. Install dependencies. `npm i`
-3. Start the server. `node server.js`
+3. Run your PostgreSQL and Elasticsearch instances. A docker compose file is provided in the repository for convenience.
+4. Start the server. `node server.js`
 
 # HTTPS Encryption
 Use something like `nginx` and add a site to sites-available called myrient-search in `/etc/ngix/sites-available`.

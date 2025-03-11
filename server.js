@@ -2,7 +2,6 @@ import getAllFiles from "./lib/dircrawl.js";
 import FileHandler from "./lib/filehandler.js";
 import Searcher from "./lib/search.js";
 import cron from "node-cron";
-import FileOlderThan from "file-older-than";
 import "dotenv/config";
 import express from "express";
 import http from "http";
@@ -12,9 +11,9 @@ import compression from "compression";
 import { generateAsciiArt } from './lib/asciiart.js';
 import { getEmulatorConfig, isEmulatorCompatible, isNonGameContent } from './lib/emulatorConfig.js';
 import fetch from 'node-fetch';
+import { initDB, File, QueryCount } from './lib/database.js';
+import { initElasticsearch } from './lib/services/elasticsearch.js';
 
-let fileListPath = "./data/filelist.json";
-let queryCountFile = "./data/queries.txt";
 let categoryListPath = "./lib/categories.json"
 let searchAlikesPath = './lib/searchalikes.json'
 let nonGameTermsPath = './lib/nonGameTerms.json'
@@ -25,12 +24,15 @@ let crawlTime = 0;
 let queryCount = 0;
 let fileCount = 0;
 let indexPage = "pages/index";
-if (FileHandler.fileExists(fileListPath)) {
-  crawlTime = await FileHandler.fileTime(fileListPath);
-}
-if (FileHandler.fileExists(queryCountFile)) {
-  queryCount = parseInt(await FileHandler.readFile(queryCountFile));
-}
+
+// Initialize databases
+await initDB();
+await initElasticsearch();
+
+// Get initial counts
+fileCount = await File.count();
+crawlTime = (await File.max('updatedAt'))?.getTime() || 0;
+queryCount = (await QueryCount.findOne())?.count || 0;
 
 let searchFields = ["filename", "category", "type", "region"];
 
@@ -52,29 +54,16 @@ for (let field in searchFields) {
   }
 }
 
-let fileList = [];
-let search; //cheat so we can check before assignment
+let search = new Searcher(searchFields);
 
 async function getFilesJob() {
   console.log("Updating the file list.");
-  fileList = await getAllFiles(categoryList);
-  if(!fileList){
-    if(typeof search == "undefined"){
-      //fall back to loading the list if it exists
-      await loadFileList()
-    }
-    return
+  fileCount = await getAllFiles(categoryList);
+  if(!fileCount) {
+    console.log("File update failed");
+    return;
   }
-  await FileHandler.saveJsonFile(fileListPath, fileList);
-  fileCount = fileList.length;
-  if (typeof search == "undefined") {
-    search = new Searcher(searchFields);
-    await search.createIndex(fileList)
-  } else {
-    await search.updateIndex(fileList);
-  }
-  fileList = [];
-  crawlTime = await FileHandler.fileTime(fileListPath);
+  crawlTime = Date.now();
   console.log(`Finished updating file list. ${fileCount} found.`);
 }
 
@@ -82,38 +71,19 @@ function buildOptions(page, options) {
   return { page: page, ...options, ...defaultOptions };
 }
 
-async function loadFileList(){
-  fileList = await FileHandler.parseJsonFile(fileListPath);
-  fileCount = fileList.length;
-  search = new Searcher(searchFields, searchAlikes.StringGroups);
-  await search.createIndex(fileList)
-  fileList = [];
-}
-
-if (
-  process.env.FORCE_FILE_REBUILD == "1" ||
-  !FileHandler.fileExists(fileListPath) ||
-  FileOlderThan(fileListPath, "1w")
-) {
-  await getFilesJob();
-} else {
-  await loadFileList()
-}
-
 let defaultOptions = {
   crawlTime: crawlTime,
   queryCount: queryCount,
   fileCount: fileCount,
-  termCount: search.miniSearch.termCount,
+  termCount: 0,
   generateAsciiArt: generateAsciiArt,
   isEmulatorCompatible: isEmulatorCompatible
 };
 
 function updateDefaults(){
-  defaultOptions.crawlTime = crawlTime
-  defaultOptions.queryCount = queryCount
-  defaultOptions.fileCount = fileCount
-  defaultOptions.termCount = search.miniSearch.termCount
+  defaultOptions.crawlTime = crawlTime;
+  defaultOptions.queryCount = queryCount;
+  defaultOptions.fileCount = fileCount;
 }
 
 let app = express();
@@ -154,13 +124,16 @@ app.get("/search", async function (req, res) {
     }
   }
   if (settings.combineWith != "AND") {
-    delete settings.combineWith; //remove if unset to avoid crashing
+    delete settings.combineWith;
   }
   let results = await search.findAllMatches(query, settings);
   debugPrint(results);
   if(results.items.length && pageNum == 1){
     queryCount += 1;
-    FileHandler.writeFile(queryCountFile, String(queryCount));
+    await QueryCount.update(
+      { count: queryCount },
+      { where: { id: 1 } }
+    );
     updateDefaults()
   }
   let options = {
@@ -173,26 +146,31 @@ app.get("/search", async function (req, res) {
   let page = "results";
   options = buildOptions(page, options);
   res.render(indexPage, options);
-
 });
 
 app.get("/lucky", async function (req, res) {
   let results = [];
   if (req.query.q) {
-    let settings = req.query.s ? JSON.parse(req.query.s) : defaultSettings;
+    let settings = req.query.s ? JSON.parse(atob(req.query.s)) : defaultSettings;
     results = await search.findAllMatches(req.query.q, settings);
     debugPrint(results);
   }
-  if (results.length) {
+  if (results.items.length) {
     res.redirect(results.items[0].path);
   } else {
-    const magicNum = Math.floor(Math.random() * search.getIndexSize());
-    const luckyPath = search.findIndex(magicNum).path;
-    debugPrint(`${magicNum}: ${luckyPath}`);
-    res.redirect(luckyPath);
+    const count = await File.count();
+    const randomId = Math.floor(Math.random() * count);
+    const luckyFile = await File.findOne({
+      offset: randomId
+    });
+    debugPrint(`${randomId}: ${luckyFile?.path}`);
+    res.redirect(luckyFile?.path || '/');
   }
   queryCount += 1;
-  FileHandler.writeFile(queryCountFile, String(queryCount));
+  await QueryCount.update(
+    { count: queryCount },
+    { where: { id: 1 } }
+  );
   updateDefaults()
 });
 
@@ -229,7 +207,7 @@ app.get("/play/:id", async function (req, res) {
   }
 
   let fileId = parseInt(req.params.id);
-  let romFile = search.findIndex(fileId);
+  let romFile = await search.findIndex(fileId);
 
   if (!romFile) {
     res.redirect('/');
@@ -255,7 +233,7 @@ app.get("/proxy-rom/:id", async function (req, res) {
   }
 
   let fileId = parseInt(req.params.id);
-  let romFile = search.findIndex(fileId);
+  let romFile = await search.findIndex(fileId);
 
   if (!romFile) {
     res.status(404).send('ROM not found');
@@ -321,5 +299,14 @@ server.on("listening", function () {
   );
 });
 console.log(`Loaded ${fileCount} known files.`);
+
+// Run file update job if needed
+if (
+  process.env.FORCE_FILE_REBUILD == "1" ||
+  !fileCount ||
+  (crawlTime && Date.now() - crawlTime > 7 * 24 * 60 * 60 * 1000) // 1 week
+) {
+  await getFilesJob();
+}
 
 cron.schedule("0 30 2 * * *", getFilesJob);

@@ -1,20 +1,24 @@
 {
   "dependencies": {
+    "@elastic/elasticsearch": "^8.12.2",
     "compression": "^1.7.4",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
+    "figlet": "^1.7.0",
     "file-older-than": "^1.0.0",
     "innertext": "^1.0.3",
     "jsdom": "^25.0.1",
-    "minisearch": "^7.1.0",
+    "jszip": "^3.10.1",
     "node-cron": "^3.0.3",
     "node-fetch": "^3.3.2",
     "node-html-parser": "^6.1.13",
+    "pg": "^8.11.3",
+    "pg-hstore": "^2.3.4",
     "piscina": "^4.7.0",
     "sanitize": "^2.1.2",
-    "figlet": "^1.7.0",
-    "jszip": "^3.10.1"
+    "sequelize": "^6.37.1",
+    "sequelize-cli": "^6.6.2"
   },
   "type": "module"
 }
