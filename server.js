@@ -149,13 +149,13 @@ app.get("/search", async function (req, res) {
 });
 
 app.get("/lucky", async function (req, res) {
-  let results = [];
+  let results = { items: [] };
   if (req.query.q) {
     let settings = req.query.s ? JSON.parse(atob(req.query.s)) : defaultSettings;
     results = await search.findAllMatches(req.query.q, settings);
     debugPrint(results);
   }
-  if (results.items.length) {
+  if (results?.items?.length) {
     res.redirect(results.items[0].path);
   } else {
     const count = await File.count();
