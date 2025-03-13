@@ -17,9 +17,11 @@ import { initElasticsearch } from './lib/services/elasticsearch.js';
 let categoryListPath = "./lib/categories.json"
 let searchAlikesPath = './lib/searchalikes.json'
 let nonGameTermsPath = './lib/nonGameTerms.json'
+let emulatorsPath = './lib/emulators.json'
 let categoryList = await FileHandler.parseJsonFile(categoryListPath);
 global.searchAlikes = await FileHandler.parseJsonFile(searchAlikesPath)
 let nonGameTerms = await FileHandler.parseJsonFile(nonGameTermsPath);
+let emulatorsData = await FileHandler.parseJsonFile(emulatorsPath);
 let crawlTime = 0;
 let queryCount = 0;
 let fileCount = 0;
@@ -288,6 +290,16 @@ app.get("/proxy-bios", async function (req, res) {
     console.error('Error proxying BIOS:', error);
     res.status(500).send('Error fetching BIOS file');
   }
+});
+
+app.get("/emulators", function (req, res) {
+  let page = "emulators";
+  let options = { emulators: emulatorsData };
+  res.render(indexPage, buildOptions(page, options));
+});
+
+app.get("/api/emulators", function (req, res) {
+  res.json(emulatorsData);
 });
 
 server.listen(process.env.PORT, process.env.BIND_ADDRESS);
