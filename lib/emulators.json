@@ -304,7 +304,7 @@
       },
       "Ryujinx (Ryubing Fork)": {
         "logo": "https://raw.githubusercontent.com/Ryubing/Assets/refs/heads/main/RyujinxApp_1024.png",
-        "url": "https://github.com/Ryubing/Ryujinx",
+        "url": "https://ryujinx.app/",
         "description": "A specialized fork of the Ryujinx Switch emulator with additional optimizations and enhancements over the main project's development branch.",
         "platforms": ["Windows", "Linux", "macOS"]
       }
