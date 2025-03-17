@@ -18,6 +18,7 @@
     "editor",
     "emulator",
     "expansion",
+    "figurine",
     "firmware",
     "guide",
     "hack",
@@ -26,6 +27,7 @@
     "installer",
     "intro",
     "json",
+    "jpg",
     "manual",
     "mod",
     "movie",
@@ -44,6 +46,7 @@
     "sdk",
     "setup",
     "soundtrack",
+    "sqlite",
     "terms",
     "tool",
     "trainer",
@@ -51,7 +54,8 @@
     "update",
     "utility",
     "video",
-    "Virtual Console",
-    "wallpaper"
+    "virtual console",
+    "wallpaper",
+    "xml"
   ]
 }

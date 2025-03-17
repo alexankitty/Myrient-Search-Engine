@@ -44,6 +44,7 @@ let defaultSettings = {
   fields: searchFields,
   fuzzy: 0,
   prefix: true,
+  hideNonGame: true,
 };
 
 //programmatically set the default boosts while reducing overhead when adding another search field
@@ -79,7 +80,9 @@ let defaultOptions = {
   fileCount: fileCount,
   termCount: 0,
   generateAsciiArt: generateAsciiArt,
-  isEmulatorCompatible: isEmulatorCompatible
+  isEmulatorCompatible: isEmulatorCompatible,
+  isNonGameContent: isNonGameContent,
+  nonGameTerms: nonGameTerms
 };
 
 function updateDefaults(){
@@ -143,7 +146,8 @@ app.get("/search", async function (req, res) {
     results: results,
     pageNum: pageNum,
     indexing: search.indexing,
-    urlPrefix: urlPrefix
+    urlPrefix: urlPrefix,
+    settings: settings
   };
   let page = "results";
   options = buildOptions(page, options);

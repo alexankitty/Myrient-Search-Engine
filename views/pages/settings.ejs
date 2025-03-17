@@ -49,6 +49,10 @@
                 <input type="checkbox" id="combineWith" value="AND">
                 Match All Words <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Requires all words in the search query to match."></i>
               </label>
+              <label class="checkbox-inline p-1">
+                <input type="checkbox" id="hideNonGame" value="true">
+                Hide Non-Game Content <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Filters out ROM hacks, patches, artwork, and other non-game content from search results."></i>
+              </label>
             </div>
           </div>
         </div>
@@ -96,9 +100,11 @@
         if(typeof settings.combineWith == 'undefined') {settings.combineWith = defaults.combineWith}
         if(typeof settings.fuzzy == 'undefined') {settings.fuzzy = defaults.fuzzy}
         if(typeof settings.prefix == 'undefined') {settings.prefix = defaults.prefix}
+        if(typeof settings.hideNonGame == 'undefined') {settings.hideNonGame = defaults.hideNonGame}
         document.getElementById('combineWith').checked = settings.combineWith ? true : false
         document.getElementById('fuzzy').value = settings.fuzzy
         document.getElementById('prefix').checked = settings.prefix
+        document.getElementById('hideNonGame').checked = settings.hideNonGame
       }
 
       function saveSettings(){
@@ -112,6 +118,7 @@
         settings.combineWith = document.getElementById('combineWith').checked ? 'AND' : ''
         settings.fuzzy = parseFloat (document.getElementById('fuzzy').value)
         settings.prefix = document.getElementById('prefix').checked
+        settings.hideNonGame = document.getElementById('hideNonGame').checked
         localStorage.setItem('settings', JSON.stringify(settings))
         window.location.href = '/'
       }

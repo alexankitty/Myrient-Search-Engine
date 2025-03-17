@@ -30,7 +30,14 @@
             </div>
             <ul class="SuggestionList col-sm-12" id="suggestionList" style="width: 50%;left: 195px;"></ul>
         </div>
-        <p class="m-2">Found <%= results.items.length %> result<%= results.items.length != 1 ? 's': '' %> in <%= results.elapsed %> seconds. <%= indexing ? "Indexing in progress, if the list is missing something please try reloading in a few minutes" : "" %></p>
+        <p class="m-2">Found <%= results.items.length %> result<%= results.items.length != 1 ? 's': '' %> in <%= results.elapsed %> seconds. <%= indexing ? "Indexing in progress, if the list is missing something please try reloading in a few minutes" : "" %>
+            <% if (settings.hideNonGame) { %>
+            <span class="badge badge-info" data-toggle="tooltip" data-placement="top" title="Hiding ROM hacks, patches, and other non-game content. Disable this in Settings.">
+                Non-game content filter is active
+                <a href="/settings" class="text-white ml-1"><i class="bi bi-gear-fill"></i></a>
+            </span>
+            <% } %>
+        </p>
     </form>
 
     <div class="col-sm-12 w-100 mt-3">
@@ -164,5 +171,10 @@
         "layout": {
             "bottomStart": ''
         }
+    });
+
+    // Initialize tooltips
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
     });
 </script>
