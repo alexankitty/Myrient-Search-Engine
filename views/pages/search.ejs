@@ -2,17 +2,17 @@
   <div class="col-sm-12 my-auto">
     <pre style="font: 20px / 19px monospace; color: white; text-align: center; overflow: hidden;">
 <%= generateAsciiArt() %>
-                                Search!
+                                <%= __('nav.search') %>!
     </pre>
     <div class="text-center text-white">
       <form>
         <input type="hidden" name="s" id="searchSettings">
         <input id="search" type="text" style="width: 80%;display: inline;" class="form-control bg-dark text-white mb-2"
-          name="q" autocomplete="off">
+          name="q" autocomplete="off" placeholder="<%= __('search.placeholder') %>">
         <ul class="SuggestionList col-sm-12" id="suggestionList" style="width: 78%;left: 11%;"></ul>
         <div>
-          <button type="submit" formaction="/search" class="btn btn-secondary">Myrient Search</button>
-          <button type="submit" formaction="/lucky" class="btn btn-secondary">I'm Feeling Lucky</button>
+          <button type="submit" formaction="/search" class="btn btn-secondary"><%= __('search.button') %></button>
+          <button type="submit" formaction="/lucky" class="btn btn-secondary"><%= __('search.lucky') %></button>
         </div>
     </div>
     </form>

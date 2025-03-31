@@ -6,7 +6,7 @@
 <div class="emulators-container">
   <pre style="font: 20px / 19px monospace; color: white; text-align: center; overflow: hidden;">
 <%= generateAsciiArt() %>
-                              Emulators
+                              <%= __('nav.emulators') %>
   </pre>
 
   <div class="container mt-4">
@@ -16,7 +16,7 @@
           <div class="col-md-4 col-sm-6 mb-4">
             <div class="card console-card h-100" data-console="<%= consoleName %>">
               <div class="text-center pt-3">
-                <img src="<%= consoleData.icon %>" alt="<%= consoleName %>" class="console-icon mb-2">
+                <img src="/proxy-image?url=<%= encodeURIComponent(consoleData.icon) %>" alt="<%= consoleName %>" class="console-icon mb-2">
                 <div class="console-card-title"><%= consoleName %></div>
               </div>
             </div>
@@ -25,7 +25,7 @@
       <% } else { %>
         <div class="col-12 text-center">
           <div class="alert alert-warning">
-            No emulator data available. Please check your configuration.
+            <%= __('emulator.warning.no_data') %>
           </div>
         </div>
       <% } %>
@@ -39,7 +39,7 @@
     <div class="modal-content bg-dark text-white">
       <div class="modal-header border-bottom border-secondary">
         <h5 class="modal-title" id="emulatorModalLabel">
-          <i class="fas fa-gamepad mr-2 text-warning"></i>Recommended Emulators
+          <i class="fas fa-gamepad mr-2 text-warning"></i><%= __('emulator.recommended') %>
         </h5>
         <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -241,14 +241,14 @@
       const modalTitle = document.getElementById('emulatorModalLabel');
       const emulatorList = document.getElementById('emulatorList');
 
-      modalTitle.innerHTML = `<i class="fas fa-gamepad mr-2 text-warning"></i>Recommended Emulators | ${consoleName}`;
+      modalTitle.innerHTML = `<i class="fas fa-gamepad mr-2 text-warning"></i><%= __('emulator.recommended') %> | ${consoleName}`;
       emulatorList.innerHTML = '';
 
       // Create console icon at the top of the modal
       const consoleIconContainer = document.createElement('div');
       consoleIconContainer.className = 'text-center mb-4';
       consoleIconContainer.innerHTML = `
-        <img src="${consoleData.icon}" alt="${consoleName}" style="max-height: 80px;">
+        <img src="/proxy-image?url=${encodeURIComponent(consoleData.icon)}" alt="${consoleName}" style="max-height: 80px;">
         <h4 class="mt-3 text-warning">${consoleName}</h4>
         <div class="separator my-3"><span></span></div>
       `;
@@ -280,7 +280,7 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="emulator-logo-container">
-                  <img src="${emulatorData.logo}" alt="${emulatorName}" class="emulator-logo">
+                  <img src="/proxy-image?url=${encodeURIComponent(emulatorData.logo)}" alt="${emulatorName}" class="emulator-logo">
                 </div>
               </div>
               <div class="col-md-8">
@@ -289,7 +289,7 @@
                   ${platformsHtml}
                 </div>
                 <a href="${emulatorData.url}" target="_blank" class="btn download-btn">
-                  <i class="fas fa-download mr-2"></i>Download
+                  <i class="fas fa-download mr-2"></i><%= __('emulator.download') %>
                 </a>
               </div>
             </div>

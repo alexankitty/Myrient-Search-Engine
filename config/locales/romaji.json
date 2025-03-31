@@ -1,0 +1,149 @@
+{
+    "app": {
+        "name": "Myrient Search",
+        "description": "Myrient no tame no kensaku enjin - Erista ni yoru bideo gēmu hozon wo mokuteki to shita sābisu.",
+        "tagline": "Myrient wa jikan no nagare to tomo ni ushinawarenai you, seiton sareta koukai gēmu korekushon wo teikyou shiteimasu.",
+        "disclaimer": "Myrient/Erista to teikei shite imasen!"
+    },
+    "nav": {
+        "settings": "Settei",
+        "emulators": "Emyurēta",
+        "about": "Saito ni tsuite",
+        "search": "Kensaku",
+        "results": "Kensaku kekka"
+    },
+    "search": {
+        "placeholder": "Kensaku...",
+        "button": "Kensaku",
+        "lucky": "Rakkī kensaku",
+        "found": "{{count}}ken no kekka",
+        "found_plural": "{{count}}ken no kekka",
+        "in_seconds": "{{seconds}}byou de kensaku kanryou",
+        "indexing": "Indeksu sakusei chū desu. Risuto ni hyōji sarenai mono ga aru baai wa, sūfun go ni saikenshite kudasai",
+        "non_game_filter": "Hi-gēmu kontentsu fuiruta ga yūkō desu",
+        "displaying_results": "{{start}}ken-me kara {{end}}ken-me wo hyōji chū."
+    },
+    "about": {
+        "title": "Saito ni tsuite",
+        "support": "Kono purojekuto ga ki ni itta nara, Myrient he no sapōto mo go kōryō kudasai:",
+        "donate": "Myrient he kifu suru",
+        "emulator": {
+            "title": "Tōsai Emyurēta",
+            "description": "Kono saito niwa EmulatorJS wo riyō shita tōsai emyurēta ga ari, retoro gēmu wo burazua jō de chokusetsu purei dekimasu.",
+            "compatibility": "Taiō gēmu wa kensaku kekka pēji ni purei botan ga hyōji saremasu.",
+            "browser_tip": "Saiteki na gēmu taiken wo eru tame ni, hādouea akuserarēshon wo yūkō ni shita Chromium bēsu no burazua wo goriyō kudasai.",
+            "save_states": "Gēmu wa Myrient no kōkai ākaibu kara chokusetsu yomikoma remasu. Sēbu dēta wa burazua ni rōkaru hozon saremasu.",
+            "limitations": "ROM hakku, saundotorakku, sono ta no hi-gēmu kontentsu wa emyurēta de sapōto sareteorazu, yomikomi ni shippai suru kanōsei ga arimasu.",
+            "disabled": "Webu emyurēta kinō wa kanrisha ni yotte mukouka sareteimasu.",
+            "contact": "Kanrisha ni otoiawase itadaku ka, go jishin de Myrient Search no insutansu wo tachiagetekudasai."
+        },
+        "credits": {
+            "created_by": "Kensaku enjin kaihatsusha:",
+            "view_github": "GitHub de purojekuto wo miru"
+        }
+    },
+    "settings": {
+        "title": "Settei",
+        "search_columns": {
+            "title": "Kensaku Karamu",
+            "tooltip": "Kensaku enjin ga kensaku wo okonau karamu wo sentaku shimasu."
+        },
+        "score_multiplier": {
+            "title": "Kensaku Sukoa Bairitsu",
+            "tooltip": "Mitsukerareta tango no kategorī ni motozuite, matchi sukoa wo chōsei shimasu."
+        },
+        "extras": {
+            "title": "Kakuchō Settei",
+            "fuzzy": {
+                "label": "Aimai Kensaku",
+                "tooltip": "Tango ga icchi to minasareru tame no rubaenshuhtain kyori wo 0.00~1.00 no aida de settei shimasu. Takai chi hodo, yori yuruyaka na icchi ga kyoka saremasu. 0 de mukouka ni narimasu."
+            },
+            "prefix": {
+                "label": "Settōji Icchi wo Kyoka",
+                "tooltip": "Tango no sentan bubun deno icchi wo kyoka shimasu."
+            },
+            "match_all": {
+                "label": "Subete no Tango wo Icchi",
+                "tooltip": "Kensaku kueri no subete no tango ga icchi suru hitsuyō ga arimasu."
+            },
+            "hide_non_game": {
+                "label": "Hi-gēmu Kontentsu wo Hyōji Shinai",
+                "tooltip": "ROM hakku, patchi, ātowāku, sono ta no gēmu igai no kontentsu wo kensaku kekka kara jokyo shimasu."
+            }
+        },
+        "save": "Settei wo Hozon"
+    },
+    "footer": {
+        "queries": "Kensaku Kueri Sū:",
+        "files": "Tōroku Fairu Sū:",
+        "terms": "Indeksu Tango Sū:",
+        "last_crawl": "Saishū Kōshin Jikoku:"
+    },
+    "emulator": {
+        "loading": {
+            "rom": "ROM wo yomikomi chū...",
+            "downloading": "ROM wo daunrōdo chū",
+            "downloading_progress": "Daunrōdo chū: {{percent}}%",
+            "decompressing": "Gēmu wo kaifuku chū..."
+        },
+        "error": {
+            "loading": "Gēmu no yomikomi ni shippai shimashita",
+            "no_rom": "Ākaibu nai ni ROM fairu ga mitsukarimasen",
+            "http_error": "HTTP erā: {{status}}"
+        },
+        "warning": {
+            "non_game": "Chuui: Kono fairu wa geemu ROM de wa nai kanousei ga ari, web emyureetaa de tadashiku dousa shinai baai ga arimasu.",
+            "see_about": "Kuwashii jouhou wa {{link}} peeji wo goran kudasai.",
+            "no_data": "Emyureetaa deeta ga arimasen.",
+            "https": "Anzen denai HTTP setsuzoku: Ichibu no emyureetaa wa seijou ni dousa suru tame ni HTTPS ga hitsuyou desu. Kono saito wa tadashiku settei sarete imasen."
+        },
+        "console": {
+            "about": "Kore wa Myrient no kōkai ākaibu kara chokusetsu gēmu wo jikkō suru onrain emyurēta desu.",
+            "disclaimer": "Kono saito ni gēmu ROM wa hozon sareteorimasen. Subete no kontentsu wa Myrient sāba kara chokusetsu yomikoma remasu.",
+            "more_info": "Kono sābisu ni tsuite no kuwashii jōhō wa, saito ni tsuite no pēji wo goran kudasai."
+        },
+        "recommended": "Suishou Emyurēta",
+        "download": "Daunrōdo",
+        "play": "Purei",
+        "not_available": "----",
+        "disclaimer": "Kono emyurēta wa {{link}} kara chokusetsu gēmu wo yomikomi masu. Kuwashiku wa {{about}} pēji wo goran kudasai."
+    },
+    "results": {
+        "table": {
+            "name": "Taitoru",
+            "group": "Gurūpu",
+            "category": "Kategorī",
+            "region": "Chiiki",
+            "type": "Taipu",
+            "size": "Saizu",
+            "date": "Hizuke",
+            "score": "Kanrensei",
+            "play": "Purei"
+        }
+    },
+    "error": {
+        "title": "Erā",
+        "message": "Mondai ga hassei shimashita",
+        "details": "Erā shōsai: {{message}}",
+        "back_home": "Hōmu ni modoru",
+        "go_back": "Modoru"
+    },
+    "languages": {
+        "en": "English",
+        "es": "Español",
+        "pt": "Português",
+        "zh": "中文",
+        "ja": "日本語",
+        "fr": "Français",
+        "de": "Deutsch",
+        "ko": "한국어",
+        "pl": "Polski",
+        "tr": "Türkçe",
+        "it": "Italiano",
+        "romaji": "Romaji",
+        "hi": "हिन्दी",
+        "ar": "العربية",
+        "bn": "বাংলা",
+        "ru": "Русский"
+    }
+}

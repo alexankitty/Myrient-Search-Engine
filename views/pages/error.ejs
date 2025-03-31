@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= __('error.title') %> - <%= process.env.INSTANCE_NAME || 'Myrient' %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .error-container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 800px;
+            width: 100%;
+            background-color: #262626;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+        .error-code {
+            font-size: 8rem;
+            font-weight: bold;
+            color: #dc3545;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(220, 53, 69, 0.5);
+        }
+        .error-message {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #f8f9fa;
+        }
+        .error-details {
+            color: #adb5bd;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background-color: #333;
+            border-radius: 8px;
+            text-align: left;
+            max-height: 200px;
+            overflow-y: auto;
+            word-break: break-word;
+        }
+        .actions {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .error-info {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #6c757d;
+            border-top: 1px solid #444;
+            padding-top: 1rem;
+        }
+        .error-info div {
+            margin: 0.5rem 1rem;
+        }
+        .btn {
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0069d9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .btn-outline-secondary {
+            color: #f8f9fa;
+            border-color: #6c757d;
+        }
+        .btn-outline-secondary:hover {
+            background-color: #6c757d;
+            color: #f8f9fa;
+            transform: translateY(-2px);
+        }
+        .icon-large {
+            font-size: 1.5rem;
+            vertical-align: middle;
+        }
+        @media (max-width: 576px) {
+            .error-code {
+                font-size: 5rem;
+            }
+            .error-message {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-code"><%= status %></div>
+        <div class="error-message">
+            <%= __('error.message') %>
+        </div>
+        <% if (message) { %>
+        <div class="error-details">
+            <code><%= __('error.details', { message: message }) %></code>
+            <% if (stack && process.env.NODE_ENV !== 'production') { %>
+                <pre class="mt-2"><%= stack %></pre>
+            <% } %>
+        </div>
+        <% } %>
+
+        <div class="actions">
+            <a href="/" class="btn btn-primary">
+                <i class="bi bi-house-fill mr-2"></i> <%= __('error.back_home') %>
+            </a>
+            <button onclick="window.history.back()" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left mr-2"></i> <%= __('error.go_back') %>
+            </button>
+        </div>
+
+        <div class="error-info">
+            <div>
+                <i class="bi bi-clock icon-large"></i>
+                <span id="timestamp"><%= new Date().toISOString() %></span>
+            </div>
+            <div>
+                <i class="bi bi-bookmark icon-large"></i>
+                <span><%= req.originalUrl || 'Unknown URL' %></span>
+            </div>
+            <div>
+                <i class="bi bi-shield-exclamation icon-large"></i>
+                <span>Request ID: <%= requestId %></span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,149 @@
+{
+    "app": {
+        "name": "Myrient Search",
+        "description": "Un moteur de recherche pour Myrient - un service d'Erista dédié à la préservation des jeux vidéo.",
+        "tagline": "Myrient propose des collections de jeux vidéo organisées et accessibles au public, les sauvegardant de l'oubli.",
+        "disclaimer": "Sans lien avec Myrient/Erista !"
+    },
+    "nav": {
+        "settings": "Paramètres",
+        "emulators": "Émulateurs",
+        "about": "À propos",
+        "search": "Recherche",
+        "results": "Résultats"
+    },
+    "search": {
+        "placeholder": "Rechercher...",
+        "button": "Rechercher",
+        "lucky": "J'ai de la chance",
+        "found": "{{count}} résultat trouvé",
+        "found_plural": "{{count}} résultats trouvés",
+        "in_seconds": "en {{seconds}} secondes",
+        "indexing": "Indexation en cours, si quelque chose manque dans la liste, réessayez dans quelques minutes",
+        "non_game_filter": "Le filtre de contenu non-jeu est activé",
+        "displaying_results": "Résultats {{start}} à {{end}}."
+    },
+    "about": {
+        "title": "À propos",
+        "support": "Si vous appréciez ce projet, n'hésitez pas à soutenir Myrient :",
+        "donate": "Faire un don à Myrient",
+        "emulator": {
+            "title": "Émulateur intégré",
+            "description": "Ce site intègre un émulateur propulsé par EmulatorJS qui vous permet de jouer à des jeux rétro directement dans votre navigateur.",
+            "compatibility": "Les jeux compatibles disposent d'un bouton de lecture sur leur page de résultats.",
+            "browser_tip": "Pour une expérience optimale, utilisez un navigateur basé sur Chromium avec l'accélération matérielle activée.",
+            "save_states": "Les jeux sont chargés directement depuis l'archive publique de Myrient. Les sauvegardes sont stockées localement dans votre navigateur.",
+            "limitations": "Les ROM hackées, les bandes sonores et autres contenus non-jeu ne sont pas pris en charge par l'émulateur et risquent de ne pas se charger.",
+            "disabled": "La fonctionnalité d'émulation web a été désactivée par l'administrateur.",
+            "contact": "Contactez l'administrateur ou lancez votre propre instance de Myrient Search."
+        },
+        "credits": {
+            "created_by": "Moteur de recherche créé par",
+            "view_github": "Voir le projet sur GitHub"
+        }
+    },
+    "settings": {
+        "title": "Paramètres",
+        "search_columns": {
+            "title": "Colonnes de recherche",
+            "tooltip": "Définit les colonnes dans lesquelles le moteur de recherche effectuera ses recherches."
+        },
+        "score_multiplier": {
+            "title": "Multiplicateur de score",
+            "tooltip": "Multiplie le score de correspondance pour chaque mot trouvé selon la catégorie dans laquelle il se trouve."
+        },
+        "extras": {
+            "title": "Options avancées",
+            "fuzzy": {
+                "label": "Recherche approximative",
+                "tooltip": "Valeur entre 0,00 et 1,00 qui détermine la distance de Levenshtein pour qu'un mot soit considéré comme une correspondance. Une valeur plus élevée permet des correspondances moins strictes. Une valeur de 0 désactive cette fonction."
+            },
+            "prefix": {
+                "label": "Autoriser les préfixes",
+                "tooltip": "Permet les correspondances partielles au début des mots."
+            },
+            "match_all": {
+                "label": "Correspondre à tous les mots",
+                "tooltip": "Exige que tous les mots de la recherche soient trouvés."
+            },
+            "hide_non_game": {
+                "label": "Masquer le contenu non-jeu",
+                "tooltip": "Filtre les ROM hackées, les patches, les illustrations et autres contenus qui ne sont pas des jeux dans les résultats de recherche."
+            }
+        },
+        "save": "Enregistrer les paramètres"
+    },
+    "footer": {
+        "queries": "Nombre de requêtes :",
+        "files": "Fichiers connus :",
+        "terms": "Nombre de termes :",
+        "last_crawl": "Dernière mise à jour :"
+    },
+    "emulator": {
+        "loading": {
+            "rom": "Chargement de la ROM...",
+            "downloading": "Téléchargement de la ROM",
+            "downloading_progress": "Téléchargement : {{percent}}%",
+            "decompressing": "Décompression du jeu..."
+        },
+        "error": {
+            "loading": "Erreur lors du chargement du jeu",
+            "no_rom": "Aucun fichier ROM trouvé dans l'archive",
+            "http_error": "Erreur HTTP ! Statut : {{status}}"
+        },
+        "warning": {
+            "non_game": "Attention : Ce fichier n'est peut-être pas une ROM de jeu et pourrait ne pas fonctionner correctement dans l'émulateur web.",
+            "see_about": "Consultez la page {{link}} pour plus d'informations.",
+            "no_data": "Aucune donnée d'émulateur disponible.",
+            "https": "Connexion HTTP non sécurisée : Certains émulateurs nécessitent HTTPS pour fonctionner correctement. Ce site n'est pas configuré correctement."
+        },
+        "console": {
+            "about": "Cet émulateur en ligne exécute des jeux directement depuis l'archive publique de Myrient.",
+            "disclaimer": "Aucun jeu n'est hébergé sur ce site. Tout le contenu est chargé directement depuis les serveurs de Myrient.",
+            "more_info": "Pour plus d'informations sur ce service, consultez la page À propos."
+        },
+        "recommended": "Émulateurs recommandés",
+        "download": "Télécharger",
+        "play": "Jouer",
+        "not_available": "----",
+        "disclaimer": "Cet émulateur charge les jeux directement depuis {{link}}. En savoir plus sur la page {{about}}."
+    },
+    "results": {
+        "table": {
+            "name": "Nom",
+            "group": "Groupe",
+            "category": "Catégorie",
+            "region": "Région",
+            "type": "Type",
+            "size": "Taille",
+            "date": "Date",
+            "score": "Pertinence",
+            "play": "Jouer"
+        }
+    },
+    "error": {
+        "title": "Erreur",
+        "message": "Un problème est survenu",
+        "details": "Détails de l'erreur : {{message}}",
+        "back_home": "Retour à l'accueil",
+        "go_back": "Retour"
+    },
+    "languages": {
+        "en": "English",
+        "es": "Español",
+        "pt": "Português",
+        "zh": "中文",
+        "ja": "日本語",
+        "fr": "Français",
+        "de": "Deutsch",
+        "ko": "한국어",
+        "pl": "Polski",
+        "tr": "Türkçe",
+        "it": "Italiano",
+        "romaji": "Romaji",
+        "hi": "हिन्दी",
+        "ar": "العربية",
+        "bn": "বাংলা",
+        "ru": "Русский"
+    }
+}

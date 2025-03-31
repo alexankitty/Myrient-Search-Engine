@@ -1,292 +1,410 @@
-<div class="container-fluid">
-    <!-- Header with game info -->
-    <div class="row mb-4 mt-3">
-      <div class="col-12 text-center">
-        <h2 class="text-white"><%= romFile.filename.replace(/\.[^/.]+$/, '') %></h2>
-        <p class="text-secondary"><%= romFile.category %></p>
+    <div class="container-fluid">
+        <!-- Header with game info -->
+        <div class="row mb-4 mt-3">
+          <div class="col-12 text-center">
+            <h2 class="text-white"><%= romFile.filename.replace(/\.[^/.]+$/, '') %></h2>
+            <p class="text-secondary"><%= romFile.category %></p>
 
-        <% if (isNonGame) { %>
-          <div class="alert alert-warning" role="alert">
-            <i class="fas fa-exclamation-triangle"></i>
-            Warning: This file may not be a game ROM and might not work properly in the web emulator.
-            See the <a href="/about" class="alert-link">About</a> page for more information.
+            <% if (isNonGame) { %>
+              <div class="alert alert-warning" role="alert">
+                <i class="fas fa-exclamation-triangle"></i>
+                <%= __('emulator.warning.non_game') %>
+                <%= __('emulator.warning.see_about', { link: __('nav.about') }) %>
+              </div>
+            <% } %>
+
+            <!-- Security and Compatibility Warnings -->
+            <div id="security-warnings"></div>
           </div>
-        <% } %>
-      </div>
-    </div>
+        </div>
 
-    <!-- Main game container with proper padding and height -->
-    <div class="row justify-content-center">
-      <div class="col-12 col-lg-10 col-xl-8">
-        <div id="game-wrapper" class="position-relative">
-          <div id="game" class="w-100"></div>
-          <!-- Progress bar inside game container -->
-          <div id="progress-container" class="progress-overlay">
-            <div class="progress" style="height: 25px; background-color: #2a2a2a; width: 80%; max-width: 500px;">
-              <div class="progress-bar progress-bar-striped progress-bar-animated"
-                   role="progressbar"
-                   style="width: 0%"
-                   id="download-progress">
-                <span id="progress-text">Loading ROM...</span>
+        <!-- Main game container with proper padding and height -->
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-10 col-xl-8">
+            <div id="game-wrapper" class="position-relative">
+              <div id="game" class="w-100"></div>
+              <!-- Progress bar inside game container -->
+              <div id="progress-container" class="progress-overlay">
+                <div class="progress" style="height: 25px; background-color: #2a2a2a; width: 80%; max-width: 500px;">
+                  <div class="progress-bar progress-bar-striped progress-bar-animated"
+                       role="progressbar"
+                       style="width: 0%"
+                       id="download-progress">
+                    <span id="progress-text"><%= __('emulator.loading.rom') %></span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Disclaimer footer -->
-    <div class="row mt-4 mb-3">
-      <div class="col-12 text-center">
-        <div class="alert alert-secondary" role="alert">
-          <small>
-            <i class="fas fa-info-circle"></i>
-            This emulator loads ROMs directly from <a href="https://myrient.erista.me/" class="alert-link">Myrient</a> and is not affiliated with them.
-            See the <a href="/about" class="alert-link">About</a> page for more information.
-          </small>
+        <!-- Disclaimer footer -->
+        <div class="row mt-4 mb-3">
+          <div class="col-12 text-center">
+            <div class="alert alert-secondary" role="alert">
+              <small>
+                <i class="fas fa-info-circle"></i>
+                <%= __('emulator.disclaimer', { link: 'Myrient', about: __('nav.about') }) %>
+              </small>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <style>
-    /* Only keep basic container styling */
-    #game-wrapper {
-      padding-top: 0;
-      background: #222;
-      border-radius: 8px;
-      overflow: hidden;
-      margin-bottom: 20px;
-      max-width: 1024px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* Keep only the aspect ratio for the game container */
-    #game {
-      aspect-ratio: 4/3;
-      max-height: 700px;
-    }
-
-    /* Keep alert styling for consistency */
-    .alert-secondary {
-      background-color: #2a2a2a;
-      border-color: #3a3a3a;
-      color: #999;
-      display: inline-block;
-      margin: 0 auto;
-      padding: 0.75rem 1.25rem;
-    }
-
-    .alert-secondary a.alert-link {
-      color: #bbb;
-      text-decoration: underline;
-    }
-
-    .alert-secondary a.alert-link:hover {
-      color: #fff;
-    }
-
-    .progress-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      display: none; /* Hidden by default */
-      justify-content: center;
-      align-items: center;
-      background-color: rgba(0, 0, 0, 0.8);
-      z-index: 1000;
-    }
-
-    .progress {
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    }
-
-    #progress-text {
-      font-size: 14px;
-      font-weight: bold;
-    }
-
-    .alert-warning {
-      display: inline-block;
-      margin: 0 auto;
-      padding: 0.75rem 1.25rem;
-    }
-  </style>
-
-  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
-  <script>
-    // Display important notice immediately
-    console.log('%cAbout this Page', 'font-size: 20px; font-weight: bold; color: #4CAF50;');
-    console.log(
-      '%cThis page contains a game emulator that provides access to games through Myrient\'s public archive.\n' +
-      'We are not affiliated with or endorsed by Myrient.\n' +
-      'Visit the About page for more details on how this integration works and other important information.',
-      'font-size: 14px; color: #90CAF9;'
-    );
-    console.log(`%c${window.location.origin}/about`, 'font-size: 14px; color: #90CAF9;');
-
-    // Configure EmulatorJS
-    console.log('[Emulator] Starting emulator configuration');
-    console.log('[Emulator] System:', '<%= emulatorConfig.system %>');
-    console.log('[Emulator] Core:', '<%= emulatorConfig.core %>');
-
-    window.EJS_player = '#game';
-    window.EJS_core = '<%= emulatorConfig.core %>';
-    window.EJS_gameUrl = '/proxy-rom/<%= romFile.id %>';
-    window.EJS_pathtodata = 'https://cdn.emulatorjs.org/stable/data/';
-    window.EJS_startOnLoaded = true;
-    window.EJS_gameName = '<%= romFile.filename.replace(/\.[^/.]+$/, "") %>';
-    window.EJS_backgroundBlur = true;
-    window.EJS_defaultOptions = {
-        'save-state-slot': 1,
-        'save-state-location': 'local'
-    };
-
-    // BIOS configuration
-    window.EJS_biosUrl = <% if (emulatorConfig.bios) { %>
-        '/proxy-bios?url=' + encodeURIComponent(<%- JSON.stringify(Object.values(emulatorConfig.bios.files)[0].url) %>)
-    <% } else { %>
-        undefined
-    <% } %>;
-
-    console.log('[Emulator] BIOS configuration:', window.EJS_biosUrl);
-
-    // Required for Sega CD ??
-    window.EJS_loadStateURL = window.location.href;
-    window.EJS_saveStateURL = window.location.href;
-    window.EJS_cheats = true;
-
-    // Add error event listener for the emulator
-    window.EJS_onGameStart = () => {
-        console.log('[Emulator] Game started successfully');
-    };
-
-    window.EJS_onLoadState = (state) => {
-        console.log('[Emulator] Load state:', state);
-    };
-
-    window.EJS_onSaveState = (state) => {
-        console.log('[Emulator] Save state:', state);
-    };
-
-    window.EJS_onLoadError = (error) => {
-        console.error('[Emulator] Load error:', error);
-    };
-
-    async function loadRom() {
-      try {
-        console.log('[Emulator] Starting ROM load process');
-        const progressContainer = document.getElementById('progress-container');
-        const progressBar = document.getElementById('download-progress');
-        const progressText = document.getElementById('progress-text');
-        progressContainer.style.display = 'flex';
-
-        const isCompressed = /\.(zip|7z)$/i.test('<%= romFile.filename %>');
-        const shouldUnpack = <%= emulatorConfig.unpackRoms %>;
-        console.log(`[Emulator] ROM compression status: ${isCompressed ? 'compressed' : 'uncompressed'}`);
-        console.log(`[Emulator] Should unpack: ${shouldUnpack}`);
-
-        progressText.textContent = 'Downloading ROM...';
-        console.log('[Emulator] Initiating ROM download');
-
-        const response = await fetch(EJS_gameUrl);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+      <style>
+        /* Only keep basic container styling */
+        #game-wrapper {
+          padding-top: 0;
+          background: #222;
+          border-radius: 8px;
+          overflow: hidden;
+          margin-bottom: 20px;
+          max-width: 1024px;
+          margin-left: auto;
+          margin-right: auto;
         }
 
-        // If we're not unpacking, still show download progress but return direct URL
-        if (!isCompressed || !shouldUnpack) {
-          const contentLength = response.headers.get('content-length');
-          const total = parseInt(contentLength, 10);
-          let loaded = 0;
-
-          const reader = response.body.getReader();
-          const chunks = [];
-
-          while (true) {
-            const { done, value } = await reader.read();
-            if (done) break;
-
-            chunks.push(value);
-            loaded += value.length;
-
-            const percent = Math.round((loaded / total) * 100);
-            progressBar.style.width = percent + '%';
-            progressText.textContent = `Downloading ROM: ${percent}%`;
-          }
-
-          console.log('[Emulator] Using direct URL for ROM');
-          progressContainer.style.display = 'none';
-
-          // Create blob from chunks for direct loading
-          const blob = new Blob(chunks);
-          return URL.createObjectURL(blob);
+        /* Keep only the aspect ratio for the game container */
+        #game {
+          aspect-ratio: 4/3;
+          max-height: 700px;
         }
 
-        // For compressed files that need unpacking, continue with decompression
-        const contentLength = response.headers.get('content-length');
-        const total = parseInt(contentLength, 10);
-        let loaded = 0;
-
-        const reader = response.body.getReader();
-        const chunks = [];
-
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-
-          chunks.push(value);
-          loaded += value.length;
-
-          const percent = Math.round((loaded / total) * 100);
-          progressBar.style.width = percent + '%';
-          progressText.textContent = `Downloading ROM: ${percent}%`;
+        /* Keep alert styling for consistency */
+        .alert-secondary {
+          background-color: #2a2a2a;
+          border-color: #3a3a3a;
+          color: #999;
+          display: inline-block;
+          margin: 0 auto;
+          padding: 0.75rem 1.25rem;
         }
 
-        // Decompression phase
-        progressText.textContent = 'Decompressing the game...';
-        console.log('[Emulator] Starting ZIP extraction');
-
-        const blob = new Blob(chunks);
-        const zip = await JSZip.loadAsync(blob);
-        const files = Object.keys(zip.files);
-        console.log('[Emulator] ZIP contents:', files);
-
-        const romFile = files.find(f => !zip.files[f].dir);
-        if (!romFile) {
-          throw new Error('No ROM file found in ZIP archive');
+        .alert-secondary a.alert-link {
+          color: #bbb;
+          text-decoration: underline;
         }
-        console.log('[Emulator] Found ROM file in ZIP:', romFile);
 
-        const romData = await zip.files[romFile].async('blob');
-        console.log('[Emulator] ROM extraction complete');
-        progressContainer.style.display = 'none';
-        return URL.createObjectURL(romData);
-      } catch (error) {
-        console.error('[Emulator] Error in loadRom:', error);
-        throw error;
-      }
-    }
+        .alert-secondary a.alert-link:hover {
+          color: #fff;
+        }
 
-    loadRom()
-      .then(romUrl => {
-        console.log('[Emulator] ROM loaded successfully, initializing EmulatorJS');
-        window.EJS_gameUrl = romUrl;
-        const script = document.createElement('script');
-        script.src = `${window.EJS_pathtodata}loader.js`;
-        script.onerror = (error) => {
-          console.error('[Emulator] Failed to load EmulatorJS:', error);
+        .progress-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          display: none; /* Hidden by default */
+          justify-content: center;
+          align-items: center;
+          background-color: rgba(0, 0, 0, 0.8);
+          z-index: 1000;
+        }
+
+        .progress {
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        #progress-text {
+          font-size: 14px;
+          font-weight: bold;
+        }
+
+        .alert-warning {
+          display: inline-block;
+          margin: 0 auto;
+          padding: 0.75rem 1.25rem;
+        }
+
+        /* Security Warning Styles */
+        .security-alert {
+          text-align: left;
+          border: none;
+          border-radius: 8px;
+          margin-bottom: 1rem;
+          padding: 0.75rem 1rem;
+          box-shadow: 0 2px 10px rgba(220, 53, 69, 0.3);
+          position: relative;
+          overflow: hidden;
+          font-size: 0.9rem;
+          display: inline-block;
+          line-height: 1.4;
+        }
+
+        .security-alert::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 4px;
+          height: 100%;
+          background: currentColor;
+          opacity: 0.7;
+        }
+
+        .security-alert.alert-danger {
+          background-color: rgba(220, 53, 69, 0.1);
+          color: #dc3545;
+        }
+
+        .security-alert.alert-warning {
+          background-color: rgba(255, 193, 7, 0.1);
+          color: #ffc107;
+        }
+
+        .security-alert i {
+          vertical-align: middle;
+        }
+
+        .security-alert strong {
+          vertical-align: middle;
+        }
+
+        .security-alert ul {
+          margin-top: 0.75rem;
+          margin-bottom: 0;
+          padding-left: 2.5rem;
+          color: #e9ecef;
+        }
+
+        .security-alert ul li {
+          margin: 0.5rem 0;
+          line-height: 1.4;
+        }
+
+        .security-alert small {
+          display: block;
+          margin-top: 1rem;
+          padding-top: 1rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          color: #e9ecef;
+        }
+
+        .security-alert pre {
+          background: rgba(0, 0, 0, 0.2);
+          border-radius: 4px;
+          padding: 0.75rem;
+          margin: 0.75rem 0 0;
+          color: #e9ecef;
+          font-size: 0.9rem;
+        }
+      </style>
+
+      <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+      <script>
+        // Check if   in a context that supports SharedArrayBuffer
+        const isHttps = window.location.protocol === 'https:';
+        const hasSharedArrayBuffer = typeof SharedArrayBuffer !== 'undefined';
+        const isCrossOriginIsolated = window.crossOriginIsolated === true;
+        const canUseThreads = hasSharedArrayBuffer && isCrossOriginIsolated;
+
+        // Display security warnings
+        const warningsDiv = document.getElementById('security-warnings');
+
+        if (!isHttps) {
+          warningsDiv.innerHTML += `
+            <div class="alert security-alert alert-danger py-2">
+              <i class="fas fa-exclamation-triangle mr-2"></i>
+              <strong><%= __('emulator.warning.https').split(':')[0] %>:</strong>
+              <%- __('emulator.warning.https').split(':')[1] %>
+            </div>
+          `;
+        }
+
+        // Display important notice immediately
+        console.log('%cAbout this Page', 'font-size: 20px; font-weight: bold; color: #4CAF50;');
+        console.log(
+          '%c<%= __("emulator.console.about") %>\n' +
+          '<%= __("emulator.console.disclaimer") %>\n' +
+          '<%= __("emulator.console.more_info") %>',
+          'font-size: 14px; color: #90CAF9;'
+        );
+        console.log(`%c${window.location.origin}/about`, 'font-size: 14px; color: #90CAF9;');
+
+        // Configure EmulatorJS
+        console.log('[Emulator] Starting emulator configuration');
+        console.log('[Emulator] System:', '<%= emulatorConfig.system %>');
+        console.log('[Emulator] Core:', '<%= emulatorConfig.core %>');
+
+        console.log('[Emulator] SharedArrayBuffer available:', hasSharedArrayBuffer);
+        console.log('[Emulator] Cross-Origin-Isolation status:', isCrossOriginIsolated);
+        console.log('[Emulator] Can use threads:', canUseThreads);
+
+        window.EJS_player = '#game';
+
+        window.EJS_core = '<%= emulatorConfig.core %>';
+        window.EJS_gameUrl = '/proxy-rom/<%= romFile.id %>';
+        window.EJS_pathtodata = '/emulatorjs/data/';
+        window.EJS_startOnLoaded = true;
+        window.EJS_gameID = 1
+
+        // Using threads improves performance by a lot
+        // But also creates freezes, crashes and some emulators need to be reconfigured to work
+        // This should be revisited in the future.
+        // We're using threads only on PSP for now
+        window.EJS_threads = '<%= emulatorConfig.system %>' === 'Sony PlayStation Portable' ? (navigator.hardwareConcurrency || 4) : false;
+        window.EJS_gameName = '<%= romFile.filename.replace(/\.[^/.]+$/, "") %>';
+        window.EJS_backgroundBlur = true;
+        window.EJS_defaultOptions = {
+            'save-state-slot': 1,
+            'save-state-location': 'local'
         };
-        document.body.appendChild(script);
-      })
-      .catch(error => {
-        console.error('[Emulator] Fatal error:', error);
-        const gameDiv = document.getElementById('game');
-        gameDiv.innerHTML = `<div class="alert alert-danger">
-          Error loading game: ${error.message}
-        </div>`;
-      });
-  </script>
+
+        // BIOS configuration
+        window.EJS_biosUrl = <% if (emulatorConfig.bios) { %>
+            '/proxy-bios?url=' + encodeURIComponent(<%- JSON.stringify(Object.values(emulatorConfig.bios.files)[0].url) %>)
+        <% } else { %>
+            undefined
+        <% } %>;
+
+        console.log('[Emulator] BIOS configuration:', window.EJS_biosUrl);
+
+        // Required for Sega CD ??
+        window.EJS_loadStateURL = window.location.href;
+        window.EJS_saveStateURL = window.location.href;
+        window.EJS_cheats = true;
+
+        // Add error event listener for the emulator
+        window.EJS_onGameStart = () => {
+            console.log('[Emulator] Game started successfully');
+        };
+
+        window.EJS_onLoadState = (state) => {
+            console.log('[Emulator] Load state:', state);
+        };
+
+        window.EJS_onSaveState = (state) => {
+            console.log('[Emulator] Save state:', state);
+        };
+
+        window.EJS_onLoadError = (error) => {
+            console.error('[Emulator] Load error:', error);
+        };
+
+        async function loadRom() {
+          try {
+            console.log('[Emulator] Starting ROM load process');
+            const progressContainer = document.getElementById('progress-container');
+            const progressBar = document.getElementById('download-progress');
+            const progressText = document.getElementById('progress-text');
+            progressContainer.style.display = 'flex';
+
+            const isCompressed = /\.(zip|7z)$/i.test('<%= romFile.filename %>');
+            const shouldUnpack = <%= emulatorConfig.unpackRoms %>;
+            console.log(`[Emulator] ROM compression status: ${isCompressed ? 'compressed' : 'uncompressed'}`);
+            console.log(`[Emulator] Should unpack: ${shouldUnpack}`);
+
+            progressText.textContent = '<%= __("emulator.loading.downloading") %> (0%)';
+            console.log('[Emulator] Initiating ROM download');
+
+            const response = await fetch(EJS_gameUrl);
+            if (!response.ok) {
+              throw new Error('<%= __("emulator.error.http_error", { status: "response.status" }) %>'.replace('response.status', response.status));
+            }
+
+            // If we're not unpacking, still show download progress but return direct URL
+            if (!isCompressed || !shouldUnpack) {
+              const contentLength = response.headers.get('content-length');
+              const total = parseInt(contentLength, 10);
+              let loaded = 0;
+
+              const reader = response.body.getReader();
+              const chunks = [];
+
+              while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+
+                chunks.push(value);
+                loaded += value.length;
+
+                const percent = Math.round((loaded / total) * 100);
+                progressBar.style.width = percent + '%';
+                progressText.textContent = `<%= __("emulator.loading.downloading") %> (${percent}%)`;
+              }
+
+              console.log('[Emulator] Using direct URL for ROM');
+              progressContainer.style.display = 'none';
+
+              // Create blob from chunks for direct loading
+              const blob = new Blob(chunks);
+              return URL.createObjectURL(blob);
+            }
+
+            // For compressed files that need unpacking, continue with decompression
+            const contentLength = response.headers.get('content-length');
+            const total = parseInt(contentLength, 10);
+            let loaded = 0;
+
+            const reader = response.body.getReader();
+            const chunks = [];
+
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+
+              chunks.push(value);
+              loaded += value.length;
+
+              const percent = Math.round((loaded / total) * 100);
+              progressBar.style.width = percent + '%';
+              progressText.textContent = `<%= __("emulator.loading.downloading") %> (${percent}%)`;
+            }
+
+            // Decompression phase
+            progressText.textContent = '<%= __("emulator.loading.decompressing") %>';
+            console.log('[Emulator] Starting ZIP extraction');
+
+            const blob = new Blob(chunks);
+            const zip = await JSZip.loadAsync(blob);
+            const files = Object.keys(zip.files);
+            console.log('[Emulator] ZIP contents:', files);
+
+            const romFile = files.find(f => !zip.files[f].dir);
+            if (!romFile) {
+              throw new Error('<%= __("emulator.error.no_rom") %>');
+            }
+            console.log('[Emulator] Found ROM file in ZIP:', romFile);
+
+            const romData = await zip.files[romFile].async('blob');
+            console.log('[Emulator] ROM extraction complete');
+            progressContainer.style.display = 'none';
+            return URL.createObjectURL(romData);
+          } catch (error) {
+            console.error('[Emulator] Error in loadRom:', error);
+            throw error;
+          }
+        }
+
+        loadRom()
+          .then(romUrl => {
+            console.log('[Emulator] ROM loaded successfully, initializing EmulatorJS');
+            window.EJS_gameUrl = romUrl;
+
+            // We need to wait a moment to ensure cross-origin isolation is properly applied
+            setTimeout(() => {
+              const script = document.createElement('script');
+              script.src = `${window.EJS_pathtodata}loader.js`;
+              script.onerror = (error) => {
+                const gameDiv = document.getElementById('game');
+                gameDiv.innerHTML = `<div class="alert alert-danger">
+                  Failed to load EmulatorJS. Please refresh the page or try again later.
+                </div>`;
+              };
+              document.body.appendChild(script);
+            }, 500);
+          })
+          .catch(error => {
+            const gameDiv = document.getElementById('game');
+            gameDiv.innerHTML = `<div class="alert alert-danger">
+              <%= __("emulator.error.loading") %>: ${error.message}
+            </div>`;
+          });
+      </script>
+</body>
+</html>

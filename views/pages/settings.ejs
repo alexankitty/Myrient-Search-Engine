@@ -5,12 +5,12 @@
   <div class="col-sm-12 my-auto text-center">
     <pre style="font: 20px / 19px monospace; color: white; text-align: center; overflow: hidden;">
 <%= generateAsciiArt() %>
-                                Settings
+                                <%= __('settings.title') %>
     </pre>
     <div class="card w-auto mx-auto text-center d-inline-block p-3">
       <form>
         <div class="form-group">
-          <h4 class="d-inline mr-2">Search Columns</h4><i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Selects which columns the search engine will search on."></i>
+          <h4 class="d-inline mr-2"><%= __('settings.search_columns.title') %></h4><i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="<%= __('settings.search_columns.tooltip') %>"></i>
           <div class="">
             <% for(let field in defaultSettings.fields) { %>
             <label class="checkbox-inline p-1" for="<%= defaultSettings.fields[field] %>">
@@ -21,7 +21,7 @@
           </div>
         </div>
         <div class="form-group">
-          <h4 class="d-inline mr-2">Search Score Multiplier</h4><i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Multiplies the match score for each word found based on the category it's found in."></i>
+          <h4 class="d-inline mr-2"><%= __('settings.score_multiplier.title') %></h4><i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="<%= __('settings.score_multiplier.tooltip') %>"></i>
           <div class="">
             <% for(let field in defaultSettings.boost) { %>
             <div class="d-inline-block">
@@ -32,10 +32,10 @@
           </div>
         </div>
         <div class="form-group">
-          <h4>Extras</h4>
+          <h4><%= __('settings.extras.title') %></h4>
           <div class="form-group">
             <div class="d-inline-block">
-              <label for="fuzzy">Fuzzy Value <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Value between 0.00 and 1.00 that determines the fuzzy distance (Levenshtein distance) for how closely a word needs to be considered a match. A higher value allows for less stringent matches. A value of 0 disables. "></i></label>
+              <label for="fuzzy"><%= __('settings.extras.fuzzy.label') %> <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="<%= __('settings.extras.fuzzy.tooltip') %>"></i></label>
               <input type="number" class="form-control bg-dark text-white" id="fuzzy" name="fuzzy" step="0.01" min="0" max="1">
             </div>
           </div>
@@ -43,131 +43,131 @@
             <div class="">
               <label class="checkbox-inline p-1">
                 <input type="checkbox" id="prefix" value="true">
-                Allow Prefixes <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Allows partial matches of words at the start of the word."></i>
+                <%= __('settings.extras.prefix.label') %> <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="<%= __('settings.extras.prefix.tooltip') %>"></i>
               </label>
               <label class="checkbox-inline p-1">
                 <input type="checkbox" id="combineWith" value="AND">
-                Match All Words <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Requires all words in the search query to match."></i>
+                <%= __('settings.extras.match_all.label') %> <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="<%= __('settings.extras.match_all.tooltip') %>"></i>
               </label>
               <label class="checkbox-inline p-1">
                 <input type="checkbox" id="hideNonGame" value="true">
-                Hide Non-Game Content <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="Filters out ROM hacks, patches, artwork, and other non-game content from search results."></i>
+                <%= __('settings.extras.hide_non_game.label') %> <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="<%= __('settings.extras.hide_non_game.tooltip') %>"></i>
               </label>
             </div>
           </div>
         </div>
-        <button type="button" class="btn btn-secondary mb-2" action="#" id="saveSettings">Save Settings</button>
+        <button type="button" class="btn btn-secondary mb-2" action="#" id="saveSettings"><%= __('settings.save') %></button>
       </form>
     </div>
   </div>
 </div>
 
-    <script defer>
-      defaults = <%-JSON.stringify(defaultSettings)%>
-      settingStore = localStorage.getItem('settings')
-      settings = undefined
+<script defer>
+  defaults = <%-JSON.stringify(defaultSettings)%>
+  settingStore = localStorage.getItem('settings')
+  settings = undefined
 
-      function setBoosts(){
-        for(let boost in defaults.boost){
-          if(typeof settings.boost[boost] == 'undefined') {settings.boost[boost] == defaults.boost[boost]}
-          document.getElementById(boost + 'boost').value = settings.boost[boost]
-          document.getElementById(boost + 'boost').addEventListener('keyup', () => {
-            validate(document.getElementById(boost + 'boost'))
-          })
-        }
-      }
-
-      function setColumns(){
-        for(let field in settings.fields){
-          let element = document.getElementById(settings.fields[field])
-          if(!element){settings.fields.splice(field, 1)}
-          else{element.checked = true}
-        }
-        for(let field in defaults.fields){
-          document.getElementById(defaults.fields[field]).addEventListener('change', () => {
-            toggleLinkedTextBox(document.getElementById(defaults.fields[field]), document.getElementById(defaults.fields[field] + 'boost'))
-          })
-          let elem = document.getElementById(defaults.fields[field])
-          if(!elem.checked){
-            let boostField = document.getElementById(defaults.fields[field] + 'boost')
-            boostField.classList.add('text-secondary')
-            boostField.disabled = true
-          }
-        }
-      }
-      //combinewith fuzzy prefix
-      function setOthers(){
-        if(typeof settings.combineWith == 'undefined') {settings.combineWith = defaults.combineWith}
-        if(typeof settings.fuzzy == 'undefined') {settings.fuzzy = defaults.fuzzy}
-        if(typeof settings.prefix == 'undefined') {settings.prefix = defaults.prefix}
-        if(typeof settings.hideNonGame == 'undefined') {settings.hideNonGame = defaults.hideNonGame}
-        document.getElementById('combineWith').checked = settings.combineWith ? true : false
-        document.getElementById('fuzzy').value = settings.fuzzy
-        document.getElementById('prefix').checked = settings.prefix
-        document.getElementById('hideNonGame').checked = settings.hideNonGame
-      }
-
-      function saveSettings(){
-        for(let boost in defaults.boost){settings.boost[boost] = parseInt(document.getElementById(boost + 'boost').value)}
-        settings.fields = []
-        for(let field in defaults.fields){
-          if(document.getElementById(defaults.fields[field]).checked){
-            settings.fields.push(defaults.fields[field])
-          }
-        }
-        settings.combineWith = document.getElementById('combineWith').checked ? 'AND' : ''
-        settings.fuzzy = parseFloat (document.getElementById('fuzzy').value)
-        settings.prefix = document.getElementById('prefix').checked
-        settings.hideNonGame = document.getElementById('hideNonGame').checked
-        localStorage.setItem('settings', JSON.stringify(settings))
-        window.location.href = '/'
-      }
-
-      function loadSettings(){
-          $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-          })
-        if(!settingStore) {
-          settings = structuredClone(defaults)
-          settingStore = JSON.stringify(settings)
-          localStorage.setItem('settings', settingStore)
-        }
-        else{
-          try{
-            settings = JSON.parse(settingStore)
-          }
-          catch{
-            //load defaults if not exist
-            settings = defaults
-          }
-        }
-        setBoosts()
-        setColumns()
-        setOthers()
-      }
-      document.body.onload = loadSettings
-      document.getElementById('saveSettings').onclick = saveSettings
-
-      function validate(element){
-        let max = parseInt(element.max)
-        let min = parseInt(element.min)
-        let value = parseInt(element.value)
-        if(value > max) {element.value = max}
-        if(value < min) {element.value = min}
-        console.log(max, min, value)
-      }
-      fuzzyElem = document.getElementById('fuzzy')
-      fuzzyElem.addEventListener('keyup', () => {
-        validate(fuzzyElem)
+  function setBoosts(){
+    for(let boost in defaults.boost){
+      if(typeof settings.boost[boost] == 'undefined') {settings.boost[boost] == defaults.boost[boost]}
+      document.getElementById(boost + 'boost').value = settings.boost[boost]
+      document.getElementById(boost + 'boost').addEventListener('keyup', () => {
+        validate(document.getElementById(boost + 'boost'))
       })
-      function toggleLinkedTextBox(checkBox, textBox){
-        if(!    checkBox.checked) {
-          textBox.classList.add('text-secondary')
-          textBox.disabled = true
-        }
-        else {
-          textBox.classList.remove('text-secondary')
-          textBox.disabled = false
-        }
+    }
+  }
+
+  function setColumns(){
+    for(let field in settings.fields){
+      let element = document.getElementById(settings.fields[field])
+      if(!element){settings.fields.splice(field, 1)}
+      else{element.checked = true}
+    }
+    for(let field in defaults.fields){
+      document.getElementById(defaults.fields[field]).addEventListener('change', () => {
+        toggleLinkedTextBox(document.getElementById(defaults.fields[field]), document.getElementById(defaults.fields[field] + 'boost'))
+      })
+      let elem = document.getElementById(defaults.fields[field])
+      if(!elem.checked){
+        let boostField = document.getElementById(defaults.fields[field] + 'boost')
+        boostField.classList.add('text-secondary')
+        boostField.disabled = true
       }
-  </script>
+    }
+  }
+
+  function setOthers(){
+    if(typeof settings.combineWith == 'undefined') {settings.combineWith = defaults.combineWith}
+    if(typeof settings.fuzzy == 'undefined') {settings.fuzzy = defaults.fuzzy}
+    if(typeof settings.prefix == 'undefined') {settings.prefix = defaults.prefix}
+    if(typeof settings.hideNonGame == 'undefined') {settings.hideNonGame = defaults.hideNonGame}
+    document.getElementById('combineWith').checked = settings.combineWith ? true : false
+    document.getElementById('fuzzy').value = settings.fuzzy
+    document.getElementById('prefix').checked = settings.prefix
+    document.getElementById('hideNonGame').checked = settings.hideNonGame
+  }
+
+  function saveSettings(){
+    for(let boost in defaults.boost){settings.boost[boost] = parseInt(document.getElementById(boost + 'boost').value)}
+    settings.fields = []
+    for(let field in defaults.fields){
+      if(document.getElementById(defaults.fields[field]).checked){
+        settings.fields.push(defaults.fields[field])
+      }
+    }
+    settings.combineWith = document.getElementById('combineWith').checked ? 'AND' : ''
+    settings.fuzzy = parseFloat (document.getElementById('fuzzy').value)
+    settings.prefix = document.getElementById('prefix').checked
+    settings.hideNonGame = document.getElementById('hideNonGame').checked
+    localStorage.setItem('settings', JSON.stringify(settings))
+    window.location.href = '/'
+  }
+
+  function loadSettings(){
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    if(!settingStore) {
+      settings = structuredClone(defaults)
+      settingStore = JSON.stringify(settings)
+      localStorage.setItem('settings', settingStore)
+    }
+    else{
+      try{
+        settings = JSON.parse(settingStore)
+      }
+      catch{
+        //load defaults if not exist
+        settings = defaults
+      }
+    }
+    setBoosts()
+    setColumns()
+    setOthers()
+  }
+  document.body.onload = loadSettings
+  document.getElementById('saveSettings').onclick = saveSettings
+
+  function validate(element){
+    let max = parseInt(element.max)
+    let min = parseInt(element.min)
+    let value = parseInt(element.value)
+    if(value > max) {element.value = max}
+    if(value < min) {element.value = min}
+    console.log(max, min, value)
+  }
+  fuzzyElem = document.getElementById('fuzzy')
+  fuzzyElem.addEventListener('keyup', () => {
+    validate(fuzzyElem)
+  })
+  function toggleLinkedTextBox(checkBox, textBox){
+    if(!checkBox.checked) {
+      textBox.classList.add('text-secondary')
+      textBox.disabled = true
+    }
+    else {
+      textBox.classList.remove('text-secondary')
+      textBox.disabled = false
+    }
+  }
+</script>
