@@ -2,54 +2,57 @@
     <div class="col-sm-12 my-auto text-center">
         <pre style="font: 20px / 19px monospace; color: white; text-align: center; overflow: hidden;">
 <%= generateAsciiArt() %>
-                                About
+                                <%= __('about.title') %>
     </pre>
         <div class="card w-auto mx-auto text-center d-inline-block p-3">
             <div class="about-content">
-                <h4>About <%= process.env.INSTANCE_NAME || 'Myrient' %> Search</h4>
-                <p>A search engine for <a href="https://github.com/alexankitty/myrient-global-search">Myrient</a> -
-                    a service by Erista dedicated to video game preservation.</p>
-                <p>Myrient offers organized and publicly available video game collections, keeping them from becoming
-                    lost to time.</p>
-                <p class="text-secondary mb-4">Not affiliated with Myrient/Erista!</p>
+                <h4><%= __('about.title') %> <%= process.env.INSTANCE_NAME || 'Myrient' %> Search</h4>
+                <p><%= __('app.description') %></p>
+                <p><%= __('app.tagline') %></p>
+                <p class="text-secondary mb-4"><%= __('app.disclaimer') %></p>
 
                 <div class="mb-4">
-                    <p>If you like this project, please consider supporting Myrient:</p>
-                    <a href="https://myrient.erista.me/donate/" class="btn btn-secondary">Donate to Myrient</a>
+                    <p><%= __('about.support') %></p>
+                    <a href="https://myrient.erista.me/donate/" class="btn btn-secondary"><%= __('about.donate') %></a>
                 </div>
 
                 <div class="mb-4 border-top pt-3">
-                    <h5>Built-in Emulator</h5>
+                    <h5><%= __('about.emulator.title') %></h5>
                     <% if (process.env.EMULATOR_ENABLED === 'true') { %>
-                        <p>This website includes a built-in emulator powered by <a href="https://emulatorjs.org/">EmulatorJS</a> that brings retro gaming directly to your browser.</p>
-                        <p>Compatible games will feature a play button on their search result page.</p>
+                        <p><%= __('about.emulator.description') %></p>
+                        <p><%= __('about.emulator.compatibility') %></p>
 
-                        <p>For the best gaming experience, use a Chromium-based browser with hardware acceleration turned on.</p>
+                        <p><%= __('about.emulator.browser_tip') %></p>
 
                         <p class="text-secondary">
                             <small>
                                 <i class="fas fa-info-circle"></i>
-                                Games are loaded directly from Myrient's public archive. Save states are stored locally in the browser.
+                                <%= __('about.emulator.save_states') %>
                             </small>
                             <br>
                             <small>
                                 <i class="fas fa-exclamation-triangle"></i>
-                                ROM hacks, soundtracks, and other non-game content are not supported by the emulator and may fail to load.
+                                <%= __('about.emulator.limitations') %>
                             </small>
                         </p>
 
                     <% } else { %>
-                        <p>Web Emulator functionality was disabled by the administrator.</p>
-                        <p>Contact the administrator or spin up your own instance of <%= process.env.INSTANCE_NAME || 'Myrient' %> Search.</p>
+                        <p><%= __('about.emulator.disabled') %></p>
+                        <p><%= __('about.emulator.contact') %></p>
                     <% } %>
                 </div>
 
                 <div class="border-top pt-3">
-                    <p>Search engine created by <a href="https://github.com/alexankitty">Alexankitty</a></p>
-                    <p><a href="https://github.com/alexankitty/myrient-global-search">View project on GitHub</a></p>
+                    <p><%= __('about.credits.created_by') %> <a href="https://github.com/alexankitty">Alexankitty</a></p>
+                    <div class="mb-3">
+                        <a href="https://github.com/alexankitty/Myrient-Search-Engine/graphs/contributors">
+                            <img src="/proxy-image?url=<%= encodeURIComponent('https://contrib.rocks/image?repo=alexankitty/Myrient-Search-Engine') %>" alt="Contributors" />
+                        </a>
+                    </div>
+                    <p><a href="https://github.com/alexankitty/myrient-global-search"><%= __('about.credits.view_github') %></a></p>
                     <a href='https://ko-fi.com/Q5Q4IFNAO' target='_blank'>
                         <img height='36' style='border:0px;height:36px;'
-                            src='https://storage.ko-fi.com/cdn/kofi5.png?v=3' alt='Buy Me a Coffee at ko-fi.com' />
+                            src='/proxy-image?url=<%= encodeURIComponent("https://storage.ko-fi.com/cdn/kofi5.png?v=3") %>' alt='Buy Me a Coffee at ko-fi.com' />
                     </a>
                 </div>
             </div>

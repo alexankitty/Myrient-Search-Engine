@@ -1,0 +1,149 @@
+{
+    "app": {
+        "name": "Myrient Search",
+        "description": "Myrientのための検索エンジン - Eristaによるビデオゲーム保存を目的としたサービス。",
+        "tagline": "Myrientは、時間の経過とともに失われないよう、整理された公開ゲームコレクションを提供しています。",
+        "disclaimer": "Myrient/Eristaとは提携していません！"
+    },
+    "nav": {
+        "settings": "設定",
+        "emulators": "エミュレータ",
+        "about": "サイトについて",
+        "search": "検索",
+        "results": "検索結果"
+    },
+    "search": {
+        "placeholder": "検索...",
+        "button": "検索",
+        "lucky": "ラッキー検索",
+        "found": "{{count}}件の結果",
+        "found_plural": "{{count}}件の結果",
+        "in_seconds": "{{seconds}}秒で検索完了",
+        "indexing": "インデックス作成中です。リストに表示されないものがある場合は、数分後に再度お試しください",
+        "non_game_filter": "非ゲームコンテンツフィルターが有効です",
+        "displaying_results": "{{start}}件目から{{end}}件目を表示中。"
+    },
+    "about": {
+        "title": "サイトについて",
+        "support": "このプロジェクトが気に入ったら、Myrientへのサポートもご検討ください：",
+        "donate": "Myrientに寄付する",
+        "emulator": {
+            "title": "内蔵エミュレータ",
+            "description": "当サイトにはEmulatorJSを利用した内蔵エミュレータがあり、レトロゲームをブラウザ上で直接プレイできます。",
+            "compatibility": "対応ゲームは検索結果ページにプレイボタンが表示されます。",
+            "browser_tip": "最適なゲーム体験を得るには、ハードウェアアクセラレーションを有効にしたChromiumベースのブラウザをご利用ください。",
+            "save_states": "ゲームはMyrientの公開アーカイブから直接読み込まれます。セーブデータはブラウザにローカル保存されます。",
+            "limitations": "ROMハック、サウンドトラック、その他の非ゲームコンテンツはエミュレータでサポートされておらず、読み込みに失敗する可能性があります。",
+            "disabled": "ウェブエミュレータ機能は管理者によって無効化されています。",
+            "contact": "管理者にお問い合わせいただくか、ご自身でMyrient Searchのインスタンスを立ち上げてください。"
+        },
+        "credits": {
+            "created_by": "検索エンジン開発者：",
+            "view_github": "GitHubでプロジェクトを見る"
+        }
+    },
+    "settings": {
+        "title": "設定",
+        "search_columns": {
+            "title": "検索対象の列",
+            "tooltip": "検索エンジンが検索を行う列を選択します。"
+        },
+        "score_multiplier": {
+            "title": "検索スコア倍率",
+            "tooltip": "見つかった単語のカテゴリに基づいて、マッチスコアを調整します。"
+        },
+        "extras": {
+            "title": "追加設定",
+            "fuzzy": {
+                "label": "あいまい検索",
+                "tooltip": "単語が一致とみなされるためのレーベンシュタイン距離を0.00〜1.00の間で設定します。値が高いほど、より緩やかな一致が許容されます。0で無効になります。"
+            },
+            "prefix": {
+                "label": "前方一致を許可",
+                "tooltip": "単語の先頭部分での一致を許可します。"
+            },
+            "match_all": {
+                "label": "すべての単語に一致",
+                "tooltip": "検索クエリのすべての単語が一致する必要があります。"
+            },
+            "hide_non_game": {
+                "label": "非ゲームコンテンツを非表示",
+                "tooltip": "ROMハック、パッチ、アートワーク、その他のゲーム以外のコンテンツを検索結果から除外します。"
+            }
+        },
+        "save": "設定を保存"
+    },
+    "footer": {
+        "queries": "検索クエリ数：",
+        "files": "登録ファイル数：",
+        "terms": "インデックス語数：",
+        "last_crawl": "最終更新時刻："
+    },
+    "emulator": {
+        "loading": {
+            "rom": "ROMを読み込み中...",
+            "downloading": "ROMをダウンロード中",
+            "downloading_progress": "ダウンロード中: {{percent}}%",
+            "decompressing": "ゲームを解凍中..."
+        },
+        "error": {
+            "loading": "ゲームの読み込みに失敗しました",
+            "no_rom": "アーカイブ内にROMファイルが見つかりません",
+            "http_error": "HTTPエラー：{{status}}"
+        },
+        "warning": {
+            "non_game": "警告：このファイルはゲームROMではない可能性があり、Webエミュレーターで正しく動作しない場合があります。",
+            "see_about": "詳細については{{link}}ページをご覧ください。",
+            "no_data": "エミュレーターデータがありません。",
+            "https": "安全でないHTTP接続：一部のエミュレーターは正常に動作するためにHTTPSが必要です。このサイトは正しく設定されていません。"
+        },
+        "console": {
+            "about": "これはMyrientの公開アーカイブから直接ゲームを実行するオンラインエミュレータです。",
+            "disclaimer": "当サイトにゲームROMは保存されていません。すべてのコンテンツはMyrientサーバーから直接読み込まれます。",
+            "more_info": "このサービスの詳細については、サイトについてのページをご覧ください。"
+        },
+        "recommended": "推奨エミュレータ",
+        "download": "ダウンロード",
+        "play": "プレイ",
+        "not_available": "----",
+        "disclaimer": "このエミュレータは{{link}}から直接ゲームを読み込みます。詳細は{{about}}ページをご確認ください。"
+    },
+    "results": {
+        "table": {
+            "name": "タイトル",
+            "group": "グループ",
+            "category": "カテゴリ",
+            "region": "地域",
+            "type": "タイプ",
+            "size": "サイズ",
+            "date": "日付",
+            "score": "関連度",
+            "play": "プレイ"
+        }
+    },
+    "error": {
+        "title": "エラー",
+        "message": "問題が発生しました",
+        "details": "エラー詳細: {{message}}",
+        "back_home": "ホームに戻る",
+        "go_back": "戻る"
+    },
+    "languages": {
+        "en": "English",
+        "es": "Español",
+        "pt": "Português",
+        "zh": "中文",
+        "ja": "日本語",
+        "fr": "Français",
+        "de": "Deutsch",
+        "ko": "한국어",
+        "pl": "Polski",
+        "tr": "Türkçe",
+        "it": "Italiano",
+        "romaji": "Romaji",
+        "hi": "हिन्दी",
+        "ar": "العربية",
+        "bn": "বাংলা",
+        "ru": "Русский"
+    }
+}

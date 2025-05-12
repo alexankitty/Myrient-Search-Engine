@@ -1,0 +1,149 @@
+{
+    "app": {
+        "name": "Myrient Search",
+        "description": "Myrient的搜索引擎 - 由Erista提供的视频游戏保存服务。",
+        "tagline": "Myrient提供组织完善的公开视频游戏收藏，防止它们随时间流逝而消失。",
+        "disclaimer": "与Myrient/Erista无关！"
+    },
+    "nav": {
+        "settings": "设置",
+        "emulators": "模拟器",
+        "about": "关于",
+        "search": "搜索",
+        "results": "结果"
+    },
+    "search": {
+        "placeholder": "搜索...",
+        "button": "搜索",
+        "lucky": "手气不错",
+        "found": "找到{{count}}个结果",
+        "found_plural": "找到{{count}}个结果",
+        "in_seconds": "用时{{seconds}}秒",
+        "indexing": "索引正在进行中，如果列表中缺少内容，请稍后再试",
+        "non_game_filter": "非游戏内容过滤已启用",
+        "displaying_results": "显示第{{start}}至{{end}}条结果。"
+    },
+    "about": {
+        "title": "关于",
+        "support": "如果您喜欢这个项目，请考虑支持Myrient：",
+        "donate": "捐赠给Myrient",
+        "emulator": {
+            "title": "内置模拟器",
+            "description": "本网站内置由EmulatorJS提供支持的模拟器，让您可以直接在浏览器中玩复古游戏。",
+            "compatibility": "兼容的游戏在搜索结果页面上会显示播放按钮。",
+            "browser_tip": "为获得最佳游戏体验，请使用开启了硬件加速的Chromium内核浏览器。",
+            "save_states": "游戏直接从Myrient的公共档案加载。存档保存在浏览器本地。",
+            "limitations": "ROM修改、音轨和其他非游戏内容不受模拟器支持，可能无法加载。",
+            "disabled": "网页模拟器功能已被管理员禁用。",
+            "contact": "请联系管理员或自行部署Myrient Search实例。"
+        },
+        "credits": {
+            "created_by": "搜索引擎开发者：",
+            "view_github": "在GitHub上查看项目"
+        }
+    },
+    "settings": {
+        "title": "设置",
+        "search_columns": {
+            "title": "搜索列",
+            "tooltip": "选择搜索引擎将在哪些列中进行搜索。"
+        },
+        "score_multiplier": {
+            "title": "搜索分数倍数",
+            "tooltip": "根据找到单词的类别为每个匹配词调整分数权重。"
+        },
+        "extras": {
+            "title": "高级选项",
+            "fuzzy": {
+                "label": "模糊搜索",
+                "tooltip": "设置0.00到1.00之间的值，决定单词相似度（莱文斯坦距离）的匹配阈值。值越高允许越宽松的匹配。设为0则禁用此功能。"
+            },
+            "prefix": {
+                "label": "允许前缀匹配",
+                "tooltip": "允许匹配单词的开头部分。"
+            },
+            "match_all": {
+                "label": "匹配所有关键词",
+                "tooltip": "要求搜索查询中的所有关键词都必须匹配。"
+            },
+            "hide_non_game": {
+                "label": "隐藏非游戏内容",
+                "tooltip": "从搜索结果中过滤掉ROM修改、补丁、游戏插图等非游戏内容。"
+            }
+        },
+        "save": "保存设置"
+    },
+    "footer": {
+        "queries": "查询次数：",
+        "files": "已知文件：",
+        "terms": "索引词数：",
+        "last_crawl": "最近更新时间："
+    },
+    "emulator": {
+        "loading": {
+            "rom": "正在加载ROM...",
+            "downloading": "正在下载ROM",
+            "downloading_progress": "下载进度：{{percent}}%",
+            "decompressing": "正在解压游戏..."
+        },
+        "error": {
+            "loading": "加载游戏时出错",
+            "no_rom": "在压缩包中未找到ROM文件",
+            "http_error": "HTTP错误！状态：{{status}}"
+        },
+        "warning": {
+            "non_game": "警告：此文件可能不是游戏ROM，可能无法在网页模拟器中正常运行。",
+            "see_about": "更多信息请参阅{{link}}页面。",
+            "no_data": "没有可用的模拟器数据。",
+            "https": "不安全的HTTP连接：部分模拟器需要HTTPS才能正常运行。当前站点配置不正确。"
+        },
+        "console": {
+            "about": "这是一个在线模拟器，直接从Myrient的公共档案运行游戏ROM。",
+            "disclaimer": "本网站不托管任何游戏ROM。所有内容都直接从Myrient服务器加载。",
+            "more_info": "有关此服务的更多信息，请访问关于页面。"
+        },
+        "recommended": "推荐模拟器",
+        "download": "下载",
+        "play": "开始游戏",
+        "not_available": "----",
+        "disclaimer": "此模拟器直接从{{link}}加载游戏。在{{about}}页面了解更多。"
+    },
+    "results": {
+        "table": {
+            "name": "名称",
+            "group": "分组",
+            "category": "类别",
+            "region": "地区",
+            "type": "类型",
+            "size": "大小",
+            "date": "日期",
+            "score": "相关度",
+            "play": "开始游戏"
+        }
+    },
+    "error": {
+        "title": "错误",
+        "message": "出现了问题",
+        "details": "错误详情: {{message}}",
+        "back_home": "返回首页",
+        "go_back": "返回"
+    },
+    "languages": {
+        "en": "English",
+        "es": "Español",
+        "pt": "Português",
+        "zh": "中文",
+        "ja": "日本語",
+        "fr": "Français",
+        "de": "Deutsch",
+        "ko": "한국어",
+        "pl": "Polski",
+        "tr": "Türkçe",
+        "it": "Italiano",
+        "romaji": "Romaji",
+        "hi": "हिन्दी",
+        "ar": "العربية",
+        "bn": "বাংলা",
+        "ru": "Русский"
+    }
+}

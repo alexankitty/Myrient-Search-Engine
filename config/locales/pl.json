@@ -1,0 +1,149 @@
+{
+    "app": {
+        "name": "Myrient Search",
+        "description": "Wyszukiwarka dla Myrient - serwisu Erista poświęconego ochronie gier wideo.",
+        "tagline": "Myrient oferuje uporządkowane i publicznie dostępne kolekcje gier wideo, chroniąc je przed zapomnieniem.",
+        "disclaimer": "Nie jesteśmy powiązani z Myrient/Erista!"
+    },
+    "nav": {
+        "settings": "Ustawienia",
+        "emulators": "Emulatory",
+        "about": "O nas",
+        "search": "Szukaj",
+        "results": "Wyniki"
+    },
+    "search": {
+        "placeholder": "Szukaj...",
+        "button": "Szukaj",
+        "lucky": "Szczęśliwy traf",
+        "found": "Znaleziono {{count}} wynik",
+        "found_plural": "Znaleziono {{count}} wyników",
+        "in_seconds": "w {{seconds}} sekund",
+        "indexing": "Trwa indeksowanie, jeśli brakuje czegoś na liście, spróbuj ponownie za kilka minut",
+        "non_game_filter": "Filtr treści niebędących grami jest aktywny",
+        "displaying_results": "Wyświetlanie wyników od {{start}} do {{end}}."
+    },
+    "about": {
+        "title": "O nas",
+        "support": "Jeśli podoba Ci się ten projekt, rozważ wsparcie Myrient:",
+        "donate": "Wesprzyj Myrient",
+        "emulator": {
+            "title": "Wbudowany emulator",
+            "description": "Ta strona zawiera wbudowany emulator oparty na EmulatorJS, który pozwala grać w klasyczne gry bezpośrednio w przeglądarce.",
+            "compatibility": "Kompatybilne gry będą miały przycisk uruchamiania na stronie wyników wyszukiwania.",
+            "browser_tip": "Dla najlepszych wrażeń z gry, używaj przeglądarki opartej na Chromium z włączonym przyspieszeniem sprzętowym.",
+            "save_states": "Gry są ładowane bezpośrednio z publicznego archiwum Myrient. Zapisy gier są przechowywane lokalnie w przeglądarce.",
+            "limitations": "Hacki ROM-ów, ścieżki dźwiękowe i inne treści niebędące grami nie są obsługiwane przez emulator i mogą nie działać.",
+            "disabled": "Funkcja emulatora internetowego została wyłączona przez administratora.",
+            "contact": "Skontaktuj się z administratorem lub uruchom własną instancję Myrient Search."
+        },
+        "credits": {
+            "created_by": "Wyszukiwarka stworzona przez",
+            "view_github": "Zobacz projekt na GitHub"
+        }
+    },
+    "settings": {
+        "title": "Ustawienia",
+        "search_columns": {
+            "title": "Kolumny wyszukiwania",
+            "tooltip": "Wybierz, w których kolumnach wyszukiwarka ma szukać."
+        },
+        "score_multiplier": {
+            "title": "Mnożnik wyników wyszukiwania",
+            "tooltip": "Mnoży wynik dopasowania dla każdego znalezionego słowa w zależności od kategorii, w której zostało znalezione."
+        },
+        "extras": {
+            "title": "Dodatkowe opcje",
+            "fuzzy": {
+                "label": "Wyszukiwanie rozmyte",
+                "tooltip": "Wartość między 0,00 a 1,00 określająca odległość (Levenshteina) dla dopasowania słów. Wyższa wartość pozwala na mniej ścisłe dopasowania. Wartość 0 wyłącza tę funkcję."
+            },
+            "prefix": {
+                "label": "Zezwalaj na prefiksy",
+                "tooltip": "Pozwala na częściowe dopasowania słów od początku słowa."
+            },
+            "match_all": {
+                "label": "Dopasuj wszystkie słowa",
+                "tooltip": "Wymaga, aby wszystkie słowa z zapytania zostały znalezione."
+            },
+            "hide_non_game": {
+                "label": "Ukryj treści niebędące grami",
+                "tooltip": "Filtruje hacki ROM-ów, patche, grafiki i inne treści niebędące grami z wyników wyszukiwania."
+            }
+        },
+        "save": "Zapisz ustawienia"
+    },
+    "footer": {
+        "queries": "Liczba zapytań:",
+        "files": "Znane pliki:",
+        "terms": "Liczba terminów:",
+        "last_crawl": "Ostatnia aktualizacja:"
+    },
+    "emulator": {
+        "loading": {
+            "rom": "Ładowanie ROM-u...",
+            "downloading": "Pobieranie ROM-u",
+            "downloading_progress": "Pobieranie: {{percent}}%",
+            "decompressing": "Rozpakowywanie gry..."
+        },
+        "error": {
+            "loading": "Błąd ładowania gry",
+            "no_rom": "Nie znaleziono pliku ROM w archiwum",
+            "http_error": "Błąd HTTP! Status: {{status}}"
+        },
+        "warning": {
+            "non_game": "Ostrzeżenie: Ten plik może nie być ROM-em gry i może nie działać poprawnie w emulatorze internetowym.",
+            "see_about": "Zobacz stronę {{link}}, aby uzyskać więcej informacji.",
+            "no_data": "Brak dostępnych danych emulatora.",
+            "https": "Niezabezpieczone połączenie HTTP: Niektóre emulatory wymagają HTTPS do prawidłowego działania. Ta strona nie jest poprawnie skonfigurowana."
+        },
+        "console": {
+            "about": "To jest emulator online uruchamiający gry bezpośrednio z publicznego archiwum Myrient.",
+            "disclaimer": "Ta strona nie przechowuje żadnych ROM-ów. Cała zawartość jest ładowana bezpośrednio z serwerów Myrient.",
+            "more_info": "Więcej informacji o tej usłudze znajdziesz na stronie O nas."
+        },
+        "recommended": "Polecane emulatory",
+        "download": "Pobierz",
+        "play": "Graj",
+        "not_available": "----",
+        "disclaimer": "Ten emulator ładuje gry bezpośrednio z {{link}}. Dowiedz się więcej na stronie {{about}}."
+    },
+    "results": {
+        "table": {
+            "name": "Nazwa",
+            "group": "Grupa",
+            "category": "Kategoria",
+            "region": "Region",
+            "type": "Typ",
+            "size": "Rozmiar",
+            "date": "Data",
+            "score": "Trafność",
+            "play": "Graj"
+        }
+    },
+    "error": {
+        "title": "Błąd",
+        "message": "Coś poszło nie tak",
+        "details": "Szczegóły błędu: {{message}}",
+        "back_home": "Powrót do strony głównej",
+        "go_back": "Wróć"
+    },
+    "languages": {
+        "en": "English",
+        "es": "Español",
+        "pt": "Português",
+        "zh": "中文",
+        "ja": "日本語",
+        "fr": "Français",
+        "de": "Deutsch",
+        "ko": "한국어",
+        "pl": "Polski",
+        "tr": "Türkçe",
+        "it": "Italiano",
+        "romaji": "Romaji",
+        "hi": "हिन्दी",
+        "ar": "العربية",
+        "bn": "বাংলা",
+        "ru": "Русский"
+    }
+}

@@ -1,0 +1,149 @@
+{
+    "app": {
+        "name": "Myrient Search",
+        "description": "Myrient için bir arama motoru - Erista tarafından video oyunlarını korumaya adanmış bir hizmet.",
+        "tagline": "Myrient, video oyunlarının zamanla kaybolmasını önlemek için düzenli ve herkese açık koleksiyonlar sunar.",
+        "disclaimer": "Myrient/Erista ile bağlantısı yoktur!"
+    },
+    "nav": {
+        "settings": "Ayarlar",
+        "emulators": "Emülatörler",
+        "about": "Hakkında",
+        "search": "Ara",
+        "results": "Sonuçlar"
+    },
+    "search": {
+        "placeholder": "Ara...",
+        "button": "Ara",
+        "lucky": "Şansımı Deneyeyim",
+        "found": "{{count}} sonuç bulundu",
+        "found_plural": "{{count}} sonuç bulundu",
+        "in_seconds": "{{seconds}} saniyede",
+        "indexing": "İndeksleme devam ediyor, listede eksik bir şey varsa lütfen birkaç dakika sonra tekrar deneyin",
+        "non_game_filter": "Oyun dışı içerik filtresi etkin",
+        "displaying_results": "{{start}} ile {{end}} arası sonuçlar gösteriliyor."
+    },
+    "about": {
+        "title": "Hakkında",
+        "support": "Bu projeyi beğendiyseniz, lütfen Myrient'i desteklemeyi düşünün:",
+        "donate": "Myrient'e Bağış Yap",
+        "emulator": {
+            "title": "Dahili Emülatör",
+            "description": "Bu web sitesi, retro oyunları doğrudan tarayıcınızda oynamanızı sağlayan EmulatorJS destekli dahili bir emülatör içerir.",
+            "compatibility": "Uyumlu oyunlar, arama sonuç sayfasında bir oyna düğmesine sahip olacaktır.",
+            "browser_tip": "En iyi oyun deneyimi için, donanım hızlandırma özelliği etkinleştirilmiş Chromium tabanlı bir tarayıcı kullanın.",
+            "save_states": "Oyunlar doğrudan Myrient'in herkese açık arşivinden yüklenir. Kayıt durumları yerel olarak tarayıcıda saklanır.",
+            "limitations": "ROM hackler, müzikler ve diğer oyun dışı içerikler emülatör tarafından desteklenmez ve yüklenemeyebilir.",
+            "disabled": "Web Emülatörü işlevi yönetici tarafından devre dışı bırakıldı.",
+            "contact": "Yöneticiyle iletişime geçin veya kendi Myrient Search örneğinizi kurun."
+        },
+        "credits": {
+            "created_by": "Arama motoru şu kişi tarafından oluşturuldu:",
+            "view_github": "Projeyi GitHub'da görüntüle"
+        }
+    },
+    "settings": {
+        "title": "Ayarlar",
+        "search_columns": {
+            "title": "Arama Sütunları",
+            "tooltip": "Arama motorunun hangi sütunlarda arama yapacağını seçer."
+        },
+        "score_multiplier": {
+            "title": "Arama Puanı Çarpanı",
+            "tooltip": "Bulunan her kelimenin eşleşme puanını, bulunduğu kategoriye göre çarpar."
+        },
+        "extras": {
+            "title": "Ekstralar",
+            "fuzzy": {
+                "label": "Bulanık Arama",
+                "tooltip": "Bir kelimenin eşleşme sayılması için yakınlık derecesini (Levenshtein mesafesi) belirleyen 0.00 ile 1.00 arasında bir değer. Daha yüksek değer, daha az kesin eşleşmelere izin verir. 0 değeri devre dışı bırakır."
+            },
+            "prefix": {
+                "label": "Öneklere İzin Ver",
+                "tooltip": "Kelimenin başlangıcında kısmi eşleşmelere izin verir."
+            },
+            "match_all": {
+                "label": "Tüm Kelimeleri Eşleştir",
+                "tooltip": "Arama sorgusundaki tüm kelimelerin eşleşmesini gerektirir."
+            },
+            "hide_non_game": {
+                "label": "Oyun Olmayan İçeriği Gizle",
+                "tooltip": "ROM hackleri, yamalar, görseller ve diğer oyun dışı içerikleri arama sonuçlarından filtreler."
+            }
+        },
+        "save": "Ayarları Kaydet"
+    },
+    "footer": {
+        "queries": "Sorgu Sayısı:",
+        "files": "Bilinen Dosyalar:",
+        "terms": "Terim Sayısı:",
+        "last_crawl": "Son Güncellenme Zamanı:"
+    },
+    "emulator": {
+        "loading": {
+            "rom": "ROM yükleniyor...",
+            "downloading": "ROM indiriliyor",
+            "downloading_progress": "İndiriliyor: %{{percent}}",
+            "decompressing": "Oyun açılıyor..."
+        },
+        "error": {
+            "loading": "Oyun yüklenirken hata oluştu",
+            "no_rom": "Arşivde ROM dosyası bulunamadı",
+            "http_error": "HTTP hatası! Durum: {{status}}"
+        },
+        "warning": {
+            "non_game": "Uyarı: Bu dosya bir oyun ROM'u olmayabilir ve web emülatöründe düzgün çalışmayabilir.",
+            "see_about": "Daha fazla bilgi için {{link}} sayfasına bakın.",
+            "no_data": "Emülatör verisi mevcut değil.",
+            "https": "Güvenli olmayan HTTP bağlantısı: Bazı emülatörler düzgün çalışmak için HTTPS gerektirir. Bu site doğru yapılandırılmamış."
+        },
+        "console": {
+            "about": "Bu, Myrient'in halka açık arşivinden doğrudan oyun ROM'larını çalıştıran bir online emülatördür.",
+            "disclaimer": "Bu web sitesinde hiçbir oyun ROM'u barındırılmamaktadır. Tüm içerik doğrudan Myrient sunucularından yüklenir.",
+            "more_info": "Bu hizmet hakkında daha fazla bilgi için lütfen Hakkında sayfasını ziyaret edin."
+        },
+        "recommended": "Önerilen Emülatörler",
+        "download": "İndir",
+        "play": "Oyna",
+        "not_available": "----",
+        "disclaimer": "Bu emülatör oyunları doğrudan {{link}} adresinden yükler. {{about}} sayfasında daha fazla bilgi edinin."
+    },
+    "results": {
+        "table": {
+            "name": "İsim",
+            "group": "Grup",
+            "category": "Kategori",
+            "region": "Bölge",
+            "type": "Tür",
+            "size": "Boyut",
+            "date": "Tarih",
+            "score": "Alaka Düzeyi",
+            "play": "Oyna"
+        }
+    },
+    "error": {
+        "title": "Hata",
+        "message": "Bir şeyler yanlış gitti",
+        "details": "Hata detayları: {{message}}",
+        "back_home": "Ana Sayfaya Dön",
+        "go_back": "Geri Dön"
+    },
+    "languages": {
+        "en": "English",
+        "es": "Español",
+        "pt": "Português",
+        "zh": "中文",
+        "ja": "日本語",
+        "fr": "Français",
+        "de": "Deutsch",
+        "ko": "한국어",
+        "pl": "Polski",
+        "tr": "Türkçe",
+        "it": "Italiano",
+        "romaji": "Romaji",
+        "hi": "हिन्दी",
+        "ar": "العربية",
+        "bn": "বাংলা",
+        "ru": "Русский"
+    }
+}

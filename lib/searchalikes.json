@@ -34,6 +34,25 @@
         ["mastersystem", "ms", "master system"],
         ["wii", "revolution"],
         ["bros", "brothers", "bros."],
-        ["bros.", "brothers", "bros"]
+        ["bros.", "brothers", "bros"],
+        ["playstation4", "ps4", "playstation 4"],
+        ["playstation5", "ps5", "playstation 5"],
+        ["playstationportable", "psp", "playstation portable"],
+        ["nintendoswitch", "switch", "nx"],
+        ["nintendo3ds", "3ds", "three ds"],
+        ["nintendods", "ds", "dual screen"],
+        ["nintendo64", "n64", "ultra 64"],
+        ["wiiu", "wii u"],
+        ["atari2600", "vcs", "video computer system"],
+        ["segasaturn", "saturn"],
+        ["genesis", "mega drive", "sega genesis"],
+        ["virtualboy", "vb", "virtual boy"],
+        ["playstationvr", "psvr", "playstation vr"],
+        ["pcengine", "pc engine", "turbografx"],
+        ["neogeo", "neo geo", "mvs"],
+        ["xboxone", "xone", "xbox one"],
+        ["xboxseriesx", "xsx", "xbox series x"],
+        ["xboxseriess", "xss", "xbox series s"],
+        ["amiibo", "nfc figure"]
     ]
 }

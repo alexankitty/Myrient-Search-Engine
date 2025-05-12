@@ -8,11 +8,14 @@ import http from "http";
 import sanitize from "sanitize";
 import debugPrint from "./lib/debugprint.js";
 import compression from "compression";
+import cookieParser from 'cookie-parser';
 import { generateAsciiArt } from './lib/asciiart.js';
 import { getEmulatorConfig, isEmulatorCompatible, isNonGameContent } from './lib/emulatorConfig.js';
 import fetch from 'node-fetch';
 import { initDB, File, QueryCount } from './lib/database.js';
 import { initElasticsearch } from './lib/services/elasticsearch.js';
+import i18n, { locales } from './config/i18n.js';
+import { v4 as uuidv4 } from 'uuid';
 
 let categoryListPath = "./lib/categories.json"
 let searchAlikesPath = './lib/searchalikes.json'
@@ -93,10 +96,63 @@ function updateDefaults(){
 
 let app = express();
 let server = http.createServer(app);
+
+app.use((req, res, next) => {
+  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+  res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+  next();
+});
+
 app.use(sanitize.middleware);
 app.use(compression())
 app.use(express.json())
+app.use(cookieParser())
 app.set("view engine", "ejs");
+
+app.use((req, res, next) => {
+  req.requestId = uuidv4();
+  next();
+});
+
+app.use(i18n.init);
+
+// Add language detection middleware
+app.use((req, res, next) => {
+  // check query parameter (dropdown)
+  let lang = null;
+  if (req.query.lang) {
+    lang = locales.includes(req.query.lang) ? req.query.lang : null;
+  }
+
+  // check cookie
+  if (!lang && req.cookies.lang) {
+    // Verify the cookie language is available
+    lang = locales.includes(req.cookies.lang) ? req.cookies.lang : null;
+  }
+
+  // check browser locale
+  if (!lang) {
+    lang = req.acceptsLanguages(locales);
+  }
+
+  // Fallback to English
+  if (!lang) {
+    lang = 'en';
+  }
+  req.setLocale(lang);
+  res.locals.locale = lang;
+
+  res.locals.availableLocales = locales;
+
+  res.cookie('lang', lang, { maxAge: 365 * 24 * 60 * 60 * 1000 }); // 1 year
+
+  next();
+});
+
+// Add helper function to all templates
+app.locals.__ = function() {
+  return i18n.__.apply(this, arguments);
+};
 
 app.get("/", function (req, res) {
   let page = "search";
@@ -231,19 +287,17 @@ app.get("/play/:id", async function (req, res) {
   res.render(indexPage, options);
 });
 
-app.get("/proxy-rom/:id", async function (req, res) {
+app.get("/proxy-rom/:id", async function (req, res, next) {
   // Block access if emulator is disabled
   if (process.env.EMULATOR_ENABLED !== 'true') {
-    res.status(403).send('Emulator feature is disabled');
-    return;
+    return next(new Error('Emulator feature is disabled'));
   }
 
   let fileId = parseInt(req.params.id);
   let romFile = await search.findIndex(fileId);
 
   if (!romFile) {
-    res.status(404).send('ROM not found');
-    return;
+    return next(new Error('ROM not found'));
   }
 
   try {
@@ -254,26 +308,29 @@ app.get("/proxy-rom/:id", async function (req, res) {
     res.setHeader('Content-Length', contentLength);
     res.setHeader('Content-Disposition', `attachment; filename="${romFile.filename}"`);
 
+    // Add all required cross-origin headers
+    res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
+    res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+
     response.body.pipe(res);
   } catch (error) {
     console.error('Error proxying ROM:', error);
-    res.status(500).send('Error fetching ROM');
+    next(error);
   }
 });
 
-app.get("/proxy-bios", async function (req, res) {
+app.get("/proxy-bios", async function (req, res, next) {
   // Block access if emulator is disabled
   if (process.env.EMULATOR_ENABLED !== 'true') {
-    res.status(403).send('Emulator feature is disabled');
-    return;
+    return next(new Error('Emulator feature is disabled'));
   }
 
   const biosUrl = req.query.url;
 
   // Validate that URL is from GitHub
   if (!biosUrl || !biosUrl.startsWith('https://github.com')) {
-    res.status(403).send('Invalid BIOS URL - only GitHub URLs are allowed');
-    return;
+    return next(new Error('Invalid BIOS URL - only GitHub URLs are allowed'));
   }
 
   try {
@@ -289,10 +346,66 @@ app.get("/proxy-bios", async function (req, res) {
     res.setHeader('Content-Type', contentType || 'application/octet-stream');
     res.setHeader('Content-Length', contentLength);
 
+    // Add all required cross-origin headers
+    res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
+    res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+
     response.body.pipe(res);
   } catch (error) {
     console.error('Error proxying BIOS:', error);
-    res.status(500).send('Error fetching BIOS file');
+    next(error);
+  }
+});
+
+// Proxy route for EmulatorJS content
+app.get('/emulatorjs/*', async function (req, res, next) {
+  try {
+    // Extract the path after /emulatorjs/
+    const filePath = req.path.replace(/^\/emulatorjs\//, '');
+
+    // Support both stable and latest paths
+    const emulatorJsUrl = `https://cdn.emulatorjs.org/stable/${filePath}`;
+
+    const response = await fetch(emulatorJsUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // Copy content type and length
+    const contentType = response.headers.get('content-type');
+    if (contentType) {
+      res.setHeader('Content-Type', contentType);
+    }
+
+    const contentLength = response.headers.get('content-length');
+    if (contentLength) {
+      res.setHeader('Content-Length', contentLength);
+    }
+
+    // Set special headers for WASM files
+    if (filePath.endsWith('.wasm')) {
+      res.setHeader('Content-Type', 'application/wasm');
+    }
+
+    // Special handling for JavaScript files
+    if (filePath.endsWith('.js')) {
+      res.setHeader('Content-Type', 'application/javascript');
+    }
+
+    res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
+    res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+
+    response.body.pipe(res);
+  } catch (error) {
+    console.error('Error proxying EmulatorJS content:', error);
+    next(error);
   }
 });
 
@@ -304,6 +417,69 @@ app.get("/emulators", function (req, res) {
 
 app.get("/api/emulators", function (req, res) {
   res.json(emulatorsData);
+});
+
+app.get("/proxy-image", async function (req, res, next) {
+  const imageUrl = req.query.url;
+
+  if (!imageUrl) {
+    return next(new Error('No image URL provided'));
+  }
+
+  try {
+    const response = await fetch(imageUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // Copy content type
+    const contentType = response.headers.get('content-type');
+    if (contentType) {
+      res.setHeader('Content-Type', contentType);
+    }
+
+    const contentLength = response.headers.get('content-length');
+    if (contentLength) {
+      res.setHeader('Content-Length', contentLength);
+    }
+
+    response.body.pipe(res);
+  } catch (error) {
+    console.error('Error proxying image:', error);
+    next(error);
+  }
+});
+
+// 404 handler
+app.use((req, res, next) => {
+  const err = new Error('Page Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  const status = err.status || 500;
+  const message = err.message || 'An unexpected error occurred';
+
+  if (process.env.NODE_ENV !== 'production') {
+    console.error(err);
+  }
+
+  res.status(status);
+
+  res.render('pages/error', {
+    status,
+    message,
+    stack: process.env.NODE_ENV !== 'production' ? err.stack : null,
+    req,
+    requestId: req.requestId
+  });
 });
 
 server.listen(process.env.PORT, process.env.BIND_ADDRESS);

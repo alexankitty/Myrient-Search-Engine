@@ -8,12 +8,12 @@
     let entryEnd = entryStart + 100
     entryEnd = entryEnd > results.items.length ? results.items.length : entryEnd
 %>
-<script src='https://code.jquery.com/jquery-3.7.1.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js'></script>
-<script src='https://cdn.datatables.net/2.1.8/js/dataTables.js'></script>
-<script src='https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap4.js'></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap4.css">
+<script src='https://code.jquery.com/jquery-3.7.1.js' crossorigin="anonymous"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js' crossorigin="anonymous"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js' crossorigin="anonymous"></script>
+<script src='https://cdn.datatables.net/2.1.8/js/dataTables.js' crossorigin="anonymous"></script>
+<script src='https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap4.js' crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap4.css" crossorigin="anonymous">
 <div class="row w-100 m-0">
     <form class="ml-2 form-inline w-100" action="/search">
         <div class="w-100 align-items-center">
@@ -24,16 +24,18 @@
                 </pre>
                 </a>
                 <input type="hidden" name="s" id="searchSettings">
-                <input id="search" type="text" class="w-50 form-control bg-dark text-white ml-2" name="q" value="<%= query %>" autocomplete="off">
-                <button type="submit" class="btn btn-secondary ml-2">Search</button>
+                <input id="search" type="text" class="w-50 form-control bg-dark text-white ml-2" name="q" value="<%= query %>" autocomplete="off" placeholder="<%= __('search.placeholder') %>">
+                <button type="submit" class="btn btn-secondary ml-2"><%= __('search.button') %></button>
 
             </div>
             <ul class="SuggestionList col-sm-12" id="suggestionList" style="width: 50%;left: 195px;"></ul>
         </div>
-        <p class="m-2">Found <%= results.items.length %> result<%= results.items.length != 1 ? 's': '' %> in <%= results.elapsed %> seconds. <%= indexing ? "Indexing in progress, if the list is missing something please try reloading in a few minutes" : "" %>
+        <p class="m-2">
+            <%= __('search.found_plural', { count: results.items.length }) %> <%= __('search.in_seconds', { seconds: results.elapsed }) %>.
+            <%= indexing ? __('search.indexing') : "" %>
             <% if (settings.hideNonGame) { %>
-            <span class="badge badge-info" data-toggle="tooltip" data-placement="top" title="Hiding ROM hacks, patches, and other non-game content. Disable this in Settings.">
-                Non-game content filter is active
+            <span class="badge badge-info" data-toggle="tooltip" data-placement="top" title="<%= __('settings.extras.hide_non_game.tooltip') %>">
+                <%= __('search.non_game_filter') %>
                 <a href="/settings" class="text-white ml-1"><i class="bi bi-gear-fill"></i></a>
             </span>
             <% } %>
@@ -41,20 +43,20 @@
     </form>
 
     <div class="col-sm-12 w-100 mt-3">
-        <p>Displaying results <%= entryStart %> through <%= entryEnd %>. </p>
+        <p><%= __('search.displaying_results', { start: entryStart, end: entryEnd }) %></p>
         <table class="table text-white table-bordered" id="results">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Group</th>
-                    <th>Category</th>
-                    <th>Region</th>
-                    <th>Type</th>
-                    <th>Size</th>
-                    <th>Date</th>
-                    <th>Search Score</th>
+                    <th><%= __('results.table.name') %></th>
+                    <th><%= __('results.table.group') %></th>
+                    <th><%= __('results.table.category') %></th>
+                    <th><%= __('results.table.region') %></th>
+                    <th><%= __('results.table.type') %></th>
+                    <th><%= __('results.table.size') %></th>
+                    <th><%= __('results.table.date') %></th>
+                    <th><%= __('results.table.score') %></th>
                     <% if (process.env.EMULATOR_ENABLED === 'true') { %>
-                        <th>Play</th>
+                        <th><%= __('results.table.play') %></th>
                     <% } %>
                 </tr>
             </thead>
@@ -89,9 +91,9 @@
                 <% if (process.env.EMULATOR_ENABLED === 'true') { %>
                 <td>
                     <% if (isEmulatorCompatible(results.items[x].category)) { %>
-                        <a href="/play/<%= results.items[x].id %>" class="btn btn-sm btn-secondary">Play</a>
+                        <a href="/play/<%= results.items[x].id %>" class="btn btn-sm btn-secondary"><%= __('emulator.play') %></a>
                     <% } else { %>
-                        <button class="btn btn-sm btn-secondary" disabled>----</button>
+                        <button class="btn btn-sm btn-secondary" disabled><%= __('emulator.not_available') %></button>
                     <% } %>
                 </td>
                 <% } %>

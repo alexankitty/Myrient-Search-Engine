@@ -1,0 +1,149 @@
+{
+    "app": {
+        "name": "Myrient Search",
+        "description": "Myrient를 위한 검색 엔진 - Erista에서 제공하는 비디오 게임 보존 서비스입니다.",
+        "tagline": "Myrient는 시간이 지나도 잊혀지지 않도록 체계적으로 정리된 공개 비디오 게임 컬렉션을 제공합니다.",
+        "disclaimer": "Myrient/Erista와 관련이 없습니다!"
+    },
+    "nav": {
+        "settings": "설정",
+        "emulators": "에뮬레이터",
+        "about": "소개",
+        "search": "검색",
+        "results": "결과"
+    },
+    "search": {
+        "placeholder": "검색어 입력...",
+        "button": "검색",
+        "lucky": "행운의 검색",
+        "found": "{{count}}개의 결과",
+        "found_plural": "{{count}}개의 결과",
+        "in_seconds": "{{seconds}}초 소요",
+        "indexing": "인덱싱 중입니다. 목록에 누락된 항목이 있다면 잠시 후 다시 시도해 주세요",
+        "non_game_filter": "비게임 콘텐츠 필터가 활성화되었습니다",
+        "displaying_results": "{{start}}번부터 {{end}}번까지의 결과를 표시합니다."
+    },
+    "about": {
+        "title": "소개",
+        "support": "이 프로젝트가 마음에 드신다면 Myrient를 지원해 주세요:",
+        "donate": "Myrient에 기부하기",
+        "emulator": {
+            "title": "내장 에뮬레이터",
+            "description": "이 웹사이트는 EmulatorJS로 구동되는 내장 에뮬레이터를 포함하고 있어 레트로 게임을 브라우저에서 바로 즐길 수 있습니다.",
+            "compatibility": "호환되는 게임은 검색 결과 페이지에 플레이 버튼이 표시됩니다.",
+            "browser_tip": "최상의 게임 경험을 위해 하드웨어 가속이 활성화된 크로미움 기반 브라우저를 사용하세요.",
+            "save_states": "게임은 Myrient의 공개 아카이브에서 직접 불러옵니다. 세이브 데이터는 브라우저에 로컬로 저장됩니다.",
+            "limitations": "ROM 해킹, 사운드트랙 및 기타 비게임 콘텐츠는 에뮬레이터에서 지원되지 않으며 로드에 실패할 수 있습니다.",
+            "disabled": "웹 에뮬레이터 기능이 관리자에 의해 비활성화되었습니다.",
+            "contact": "관리자에게 문의하거나 직접 Myrient Search 인스턴스를 설치해 보세요."
+        },
+        "credits": {
+            "created_by": "검색 엔진 개발자:",
+            "view_github": "GitHub에서 프로젝트 보기"
+        }
+    },
+    "settings": {
+        "title": "설정",
+        "search_columns": {
+            "title": "검색 열",
+            "tooltip": "검색 엔진이 검색할 열을 선택합니다."
+        },
+        "score_multiplier": {
+            "title": "검색 점수 배율",
+            "tooltip": "검색된 단어가 포함된 카테고리에 따라 일치 점수를 조정합니다."
+        },
+        "extras": {
+            "title": "추가 설정",
+            "fuzzy": {
+                "label": "유사 검색",
+                "tooltip": "단어가 일치로 간주되기 위한 유사도(레벤슈타인 거리)를 0.00에서 1.00 사이 값으로 설정합니다. 높은 값일수록 더 느슨한 일치를 허용합니다. 0이면 비활성화됩니다."
+            },
+            "prefix": {
+                "label": "접두사 허용",
+                "tooltip": "단어의 시작 부분만 일치하는 것을 허용합니다."
+            },
+            "match_all": {
+                "label": "모든 단어 일치",
+                "tooltip": "검색어의 모든 단어가 일치해야 결과에 포함됩니다."
+            },
+            "hide_non_game": {
+                "label": "비게임 콘텐츠 숨기기",
+                "tooltip": "ROM 해킹, 패치, 아트워크 등 게임이 아닌 콘텐츠를 검색 결과에서 제외합니다."
+            }
+        },
+        "save": "설정 저장"
+    },
+    "footer": {
+        "queries": "검색 횟수:",
+        "files": "등록된 파일:",
+        "terms": "색인된 단어 수:",
+        "last_crawl": "마지막 업데이트:"
+    },
+    "emulator": {
+        "loading": {
+            "rom": "롬 로딩 중...",
+            "downloading": "롬 다운로드 중",
+            "downloading_progress": "다운로드 진행률: {{percent}}%",
+            "decompressing": "게임 압축 해제 중..."
+        },
+        "error": {
+            "loading": "게임 로드 실패",
+            "no_rom": "아카이브에서 롬 파일을 찾을 수 없습니다",
+            "http_error": "HTTP 오류! 상태: {{status}}"
+        },
+        "warning": {
+            "non_game": "경고: 이 파일은 게임 ROM이 아닐 수 있으며 웹 에뮬레이터에서 제대로 작동하지 않을 수 있습니다.",
+            "see_about": "자세한 내용은 {{link}} 페이지를 참조하세요.",
+            "no_data": "사용 가능한 에뮬레이터 데이터가 없습니다.",
+            "https": "안전하지 않은 HTTP: 일부 에뮬레이터는 제대로 작동하려면 HTTPS가 필요합니다. 이 사이트는 올바르게 설정되지 않았습니다."
+        },
+        "console": {
+            "about": "이 온라인 에뮬레이터는 Myrient의 공개 아카이브에서 직접 게임 롬을 실행합니다.",
+            "disclaimer": "이 웹사이트에는 게임 롬이 저장되어 있지 않습니다. 모든 콘텐츠는 Myrient 서버에서 직접 불러옵니다.",
+            "more_info": "이 서비스에 대한 자세한 정보는 소개 페이지를 확인하세요."
+        },
+        "recommended": "추천 에뮬레이터",
+        "download": "다운로드",
+        "play": "플레이",
+        "not_available": "----",
+        "disclaimer": "이 에뮬레이터는 {{link}}에서 직접 게임을 불러옵니다. {{about}} 페이지에서 더 자세히 알아보세요."
+    },
+    "results": {
+        "table": {
+            "name": "이름",
+            "group": "그룹",
+            "category": "카테고리",
+            "region": "지역",
+            "type": "유형",
+            "size": "크기",
+            "date": "날짜",
+            "score": "관련도",
+            "play": "플레이"
+        }
+    },
+    "error": {
+        "title": "오류",
+        "message": "문제가 발생했습니다",
+        "details": "오류 세부 정보: {{message}}",
+        "back_home": "홈으로 돌아가기",
+        "go_back": "뒤로 가기"
+    },
+    "languages": {
+        "en": "English",
+        "es": "Español",
+        "pt": "Português",
+        "zh": "中文",
+        "ja": "日本語",
+        "fr": "Français",
+        "de": "Deutsch",
+        "ko": "한국어",
+        "pl": "Polski",
+        "tr": "Türkçe",
+        "it": "Italiano",
+        "romaji": "Romaji",
+        "hi": "हिन्दी",
+        "ar": "العربية",
+        "bn": "বাংলা",
+        "ru": "Русский"
+    }
+}
