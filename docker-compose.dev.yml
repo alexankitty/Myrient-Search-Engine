@@ -9,7 +9,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1GB
+          memory: 2GB
     ports:
       - "9200:9200"
     volumes:

@@ -1,0 +1,14 @@
+[
+  ["vmu", "visual memory unit"],
+  ["cd", "compact disc"],
+  ["bd", "blu-ray", "blu ray"],
+  ["hd", "high definition"],
+  ["pdf", "portable document format"],
+  ["dlc", "downloadable content"],
+  ["byteswapped", "byte swapped"],
+  ["bigendian", "big endian"],
+  ["littleendian", "little endian"],
+  ["pc88", "pc-88", "pc 88"],
+  ["dvd", "digital video disc", "digital versatile disc"],
+  ["bros", "brothers", "bros."]
+]
