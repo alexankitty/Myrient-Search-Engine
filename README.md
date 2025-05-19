@@ -31,7 +31,7 @@ It is finally here. There is now a way to search all of Myrient's offerings.
 4. Start the server. `node server.js`
 
 # HTTPS Encryption
-Use something like `nginx` and add a site to sites-available called myrient-search in `/etc/ngix/sites-available`.
+Use something like `nginx` and add a site to sites-available called myrient-search in `/etc/nginx/sites-available`.
 Link the site to the sites-enabled folder. `ln -sf /etc/nginx/sites-available/myrient-search /etc/nginx/sites-enabled/myrient-search`
 ## nginx Site Template
 ```
