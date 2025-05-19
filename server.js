@@ -508,4 +508,3 @@ if (
 }
 
 cron.schedule("0 30 2 * * *", getFilesJob);
-optimizeDatabaseKws();
