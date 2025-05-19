@@ -4,6 +4,7 @@ It is finally here. There is now a way to search all of Myrient's offerings.
 # Resource Requirements
 - 1.5GB-ish of memory for the initial crawl (can be reduced by tweaking environment variables at the cost of slower indexing)
 - 800MB-ish of memory for running the server
+- HTTPS for some CORS functions to work correctly.
 
 # Self-Hosting
 
@@ -69,5 +70,6 @@ For the SSL certificate you can use certbot via the `certbot -d servername.tld` 
 [Additional Information for Certbot Setup](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04)
 
 # Contributing
-You know the usual fluff.
-Is there a missing category or string association? `lib/categories.json` and `lib/searchalikes.json` can both updated to include these. If you do update/improve these, please put in a pull request so that it can be added to the public hosted server, as well.
+You know the usual fluff.  
+Is there a missing category or string association? `lib/categories.json` and any of the files under `lib/json/relatedkeywords` can both updated to include these. If you do update/improve these, please put in a pull request so that it can be added to the public hosted server, as well.  
+Pull requests are always welcome. Make sure to make any changes clear in your pull request, and if possible, run any files you've modified through prettier.
