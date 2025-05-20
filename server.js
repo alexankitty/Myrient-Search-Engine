@@ -105,6 +105,10 @@ app.use((req, res, next) => {
   next();
 });
 
+//static files
+app.use('/public', express.static('views/public'))
+
+//middleware
 app.use(sanitize.middleware);
 app.use(compression());
 app.use(express.json());
