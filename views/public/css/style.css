@@ -1,0 +1,146 @@
+html,
+body {
+  height: 100%;
+}
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #1c2020;
+  color: #fff !important;
+}
+a {
+  color: #ffffff;
+  text-decoration: none;
+}
+tr:hover td {
+  color: #ffffff;
+  background: #3d4351;
+}
+a:hover {
+  text-decoration: underline;
+  color: #ffffff;
+}
+td {
+  webkit-transition: background 300ms ease-in;
+  transition-behavior: normal;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in;
+  transition-delay: 0s;
+  transition-property: background;
+  -moz-transition: background 300ms ease-in;
+  -ms-transition: background 300ms ease-in;
+  -o-transition: background 300ms ease-in;
+  transition: background 300ms ease-in;
+  transition-behavior: normal;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in;
+  transition-delay: 0s;
+}
+td a {
+  display: block;
+}
+
+.footer-text {
+  margin: 0;
+}
+.selected {
+  color: rgb(255, 189, 51) !important;
+}
+.hidden {
+  display: none;
+}
+.nav-link:hover,
+.navbar-brand:hover {
+  color: #f0a400 !important;
+}
+.nav-link,
+.navbar-brand {
+  transition: all 0.5s;
+}
+.card {
+  background-color: #262c2c;
+  border: 1px solid rgba(255, 255, 255, 0.325);
+}
+.form-control:focus {
+  border-color: rgb(255, 189, 51) !important;
+  box-shadow: 0 0 0 0.2rem rgba(240, 164, 0, 0.25) !important;
+}
+.form-control {
+  background-color: #343a40 !important;
+  color: #fff !important;
+}
+.page-link {
+  background-color: #343a40 !important;
+  color: rgb(255, 189, 51) !important;
+  transition: all 0.5s;
+}
+.page-item.active .page-link {
+  border-color: rgb(255, 189, 51) !important;
+}
+.page-link:hover {
+  color: #f0a400 !important;
+  border-color: #f0a400;
+}
+.page-item.disabled .page-link {
+  color: #6c757d !important;
+}
+.custom-select:focus {
+  box-shadow: 0 0 0 0.2rem rgba(240, 164, 0, 0.25) !important;
+}
+.stats {
+  display: inline-block;
+  color: #6c757d;
+  margin-bottom: 5px;
+}
+.SuggestionList {
+  text-align: left;
+  display: none;
+  list-style: none;
+  list-style-image: none;
+  padding: 0;
+  border: 1px solid #ccc;
+  margin: 0 0 0.2em 0;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  background: #262c2c;
+  background-color: #262c2c;
+  background-image: none;
+  position: absolute;
+  z-index: 20;
+}
+.Suggestion {
+  padding: 0.5em 1em;
+  border-bottom: 1px solid #eee;
+}
+.Suggestion:last-child {
+  border: none;
+}
+.Suggestion:hover {
+  background: #484f60;
+}
+.Suggestion.selected {
+  background: #576075;
+}
+
+.dropdown-item:hover {
+  background-color: #3d4351 !important;
+}
+.dropdown-item.active {
+  background-color: #576075 !important;
+}
+.btn-dark {
+  border-color: #576075;
+}
+.btn-dark:focus,
+.btn-dark:hover {
+  border-color: rgb(255, 189, 51) !important;
+  box-shadow: 0 0 0 0.2rem rgba(240, 164, 0, 0.25) !important;
+}
+/* Ensure dropdown menu appears on top of everything */
+.dropdown-menu.show {
+  z-index: 9999 !important;
+}
+.dropdown {
+  position: relative;
+  z-index: 9999 !important;
+}
