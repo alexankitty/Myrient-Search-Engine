@@ -208,7 +208,7 @@ app.get("/search", async function (req, res) {
     urlPrefix: urlPrefix,
     settings: settings,
   };
-  let page = "results";
+  let page = "resultsnew";
   options = buildOptions(page, options);
   res.render(indexPage, options);
 });
