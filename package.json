@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@elastic/elasticsearch": "^8.12.2",
+    "@phalcode/ts-igdb-client": "^1.0.22",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.7",
     "dotenv": "^16.4.5",
@@ -8,7 +9,6 @@
     "express": "^4.21.1",
     "figlet": "^1.7.0",
     "i18n": "^0.15.1",
-    "igdb-api-node": "^6.0.5",
     "innertext": "^1.0.3",
     "jsdom": "^25.0.1",
     "jszip": "^3.10.1",
