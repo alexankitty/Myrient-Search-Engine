@@ -1,0 +1,167 @@
+.emulators-container {
+  padding-bottom: 80px;
+}
+
+.console-card {
+  transition: all 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.console-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  border-color: rgb(255, 189, 51);
+}
+
+.console-icon {
+  max-height: 100px;
+  max-width: 90%;
+  object-fit: contain;
+  margin: 5px auto;
+  display: block;
+  transition: transform 0.2s;
+}
+
+.console-card:hover .console-icon {
+  transform: scale(1.05);
+}
+
+.console-card-title {
+  font-weight: bold;
+  margin-top: 10px;
+  padding: 12px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 0 0 4px 4px;
+  transition: background-color 0.3s;
+}
+
+.console-card:hover .console-card-title {
+  background-color: rgba(255, 189, 51, 0.2);
+}
+
+/* Modal styles */
+.modal-content {
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 189, 51, 0.2);
+}
+
+.modal-header {
+  background-color: #1a1d21;
+  padding: 15px 20px;
+}
+
+.modal-title {
+  font-weight: 600;
+  color: rgb(255, 189, 51);
+}
+
+.modal-body {
+  padding: 25px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background-color: #232629;
+}
+
+/* Emulator card styles */
+.emulator-card {
+  background-color: #2a3030;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 20px;
+  border-radius: 8px;
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+.emulator-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 189, 51, 0.4);
+}
+
+.emulator-header {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.emulator-header h5 {
+  margin: 0;
+  color: rgb(255, 189, 51);
+  font-weight: 600;
+}
+
+.emulator-body {
+  padding: 20px;
+}
+
+.emulator-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  min-height: 120px;
+}
+
+.emulator-logo {
+  max-height: 100px;
+  max-width: 100%;
+  object-fit: contain;
+  transition: transform 0.3s;
+}
+
+.emulator-logo:hover {
+  transform: scale(1.05);
+}
+
+.emulator-description {
+  margin-bottom: 20px;
+  line-height: 1.6;
+  color: #e0e0e0;
+}
+
+.platform-badges {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.platform-badge {
+  background-color: #3d4451;
+  border-radius: 20px;
+  padding: 5px 15px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  display: inline-block;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.platform-badge:hover {
+  background-color: #4a5366;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.download-btn {
+  background-color: rgb(255, 189, 51);
+  color: #000;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 5px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.download-btn:hover {
+  background-color: rgb(255, 210, 115);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #000;
+}

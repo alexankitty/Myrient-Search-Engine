@@ -1,7 +1,3 @@
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
-
 <nav class="navbar navbar-expand-sm navbar-light text-white">
     <a id="brand-name" class="navbar-brand text-white" href="/"><%= process.env.INSTANCE_NAME || 'Myrient' %> Search</a>
     <a id="brand-name" class="navbar-brand text-white hidden" href="/search"><%= __('nav.results') %></a>
@@ -33,48 +29,4 @@
     </div>
 </nav>
 
-<script>
-  $(document).ready(function() {
-    // Make sure Bootstrap dropdown is properly initialized
-    $('.dropdown-toggle').dropdown();
-  });
-
-  const aTags = document.querySelectorAll('a')
-  aTags.forEach(aTag => {
-    if(aTag.getAttribute('href') == window.location.pathname){
-      aTag.classList.add('selected')
-      aTag.classList.remove('hidden')
-    }
-  })
-
-  function changeLanguage(lang) {
-    // Create URL with new language parameter
-    const url = new URL(window.location.href);
-    url.searchParams.set('lang', lang);
-    window.location.href = url.toString();
-  }
-</script>
-
-<style>
-  .dropdown-item:hover {
-    background-color: #3D4351 !important;
-  }
-  .dropdown-item.active {
-    background-color: #576075 !important;
-  }
-  .btn-dark {
-    border-color: #576075;
-  }
-  .btn-dark:focus, .btn-dark:hover {
-    border-color: rgb(255, 189, 51) !important;
-    box-shadow: 0 0 0 .2rem rgba(240, 164, 0, .25) !important;
-  }
-  /* Ensure dropdown menu appears on top of everything */
-  .dropdown-menu.show {
-    z-index: 9999 !important;
-  }
-  .dropdown {
-    position: relative;
-    z-index: 9999 !important;
-  }
-</style>
+<script src="/public/js/navbar.js"></script>

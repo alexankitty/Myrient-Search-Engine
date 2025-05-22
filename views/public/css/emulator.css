@@ -1,0 +1,137 @@
+/* Only keep basic container styling */
+#game-wrapper {
+  padding-top: 0;
+  background: #222;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Keep only the aspect ratio for the game container */
+#game {
+  aspect-ratio: 4/3;
+  max-height: 700px;
+}
+
+/* Keep alert styling for consistency */
+.alert-secondary {
+  background-color: #2a2a2a;
+  border-color: #3a3a3a;
+  color: #999;
+  display: inline-block;
+  margin: 0 auto;
+  padding: 0.75rem 1.25rem;
+}
+
+.alert-secondary a.alert-link {
+  color: #bbb;
+  text-decoration: underline;
+}
+
+.alert-secondary a.alert-link:hover {
+  color: #fff;
+}
+
+.progress-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none; /* Hidden by default */
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+}
+
+.progress {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#progress-text {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.alert-warning {
+  display: inline-block;
+  margin: 0 auto;
+  padding: 0.75rem 1.25rem;
+}
+
+/* Security Warning Styles */
+.security-alert {
+  text-align: left;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 2px 10px rgba(220, 53, 69, 0.3);
+  position: relative;
+  overflow: hidden;
+  font-size: 0.9rem;
+  display: inline-block;
+  line-height: 1.4;
+}
+
+.security-alert::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: currentColor;
+  opacity: 0.7;
+}
+
+.security-alert.alert-danger {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+}
+
+.security-alert.alert-warning {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: #ffc107;
+}
+
+.security-alert i {
+  vertical-align: middle;
+}
+
+.security-alert strong {
+  vertical-align: middle;
+}
+
+.security-alert ul {
+  margin-top: 0.75rem;
+  margin-bottom: 0;
+  padding-left: 2.5rem;
+  color: #e9ecef;
+}
+
+.security-alert ul li {
+  margin: 0.5rem 0;
+  line-height: 1.4;
+}
+
+.security-alert small {
+  display: block;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e9ecef;
+}
+
+.security-alert pre {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  padding: 0.75rem;
+  margin: 0.75rem 0 0;
+  color: #e9ecef;
+  font-size: 0.9rem;
+}
