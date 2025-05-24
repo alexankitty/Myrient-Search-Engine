@@ -44,11 +44,62 @@
 
     <div class="col-sm-12 w-100 mt-3">
         <p><%= __('search.displaying_results', { start: entryStart, end: entryEnd }) %></p>
-        <div>
+        <table class="table text-white table-bordered" id="results">
+            <thead>
+                <tr>
+                    <th class="dt-orderable"><span><%= __('results.table.name') %></span><span class="dt-column-order"></span></th>
+                    <th><%= __('results.table.group') %></th>
+                    <th><%= __('results.table.category') %></th>
+                    <th><%= __('results.table.region') %></th>
+                    <th><%= __('results.table.type') %></th>
+                    <th><%= __('results.table.size') %></th>
+                    <th><%= __('results.table.date') %></th>
+                    <th><%= __('results.table.score') %></th>
+                    <% if (process.env.EMULATOR_ENABLED === 'true') { %>
+                        <th><%= __('results.table.play') %></th>
+                    <% } %>
+                </tr>
+            </thead>
             <% for (let x = entryStart; x < entryEnd; x++) { %>
-            <%- include("../partials/result", {result: results.items[x]}) %>
+            <tr>
+                <td>
+                    <a href="<%= results.items[x].path %>">
+                        <%= results.items[x].filename %>
+                    </a>
+                </td>
+                <td>
+                    <%= results.items[x].group %>
+                </td>
+                <td>
+                    <%= results.items[x].category %>
+                </td>
+                <td>
+                    <%= results.items[x].region %>
+                </td>
+                <td>
+                    <%= results.items[x].type %>
+                </td>
+                <td>
+                    <%= results.items[x].size %>
+                </td>
+                <td>
+                    <%= results.items[x].date %>
+                </td>
+                <td>
+                    <%= results.items[x].score.toFixed(2) %>
+                </td>
+                <% if (process.env.EMULATOR_ENABLED === 'true') { %>
+                <td>
+                    <% if (isEmulatorCompatible(results.items[x].category)) { %>
+                        <a href="/play/<%= results.items[x].id %>" class="btn btn-sm btn-secondary"><%= __('emulator.play') %></a>
+                    <% } else { %>
+                        <button class="btn btn-sm btn-secondary" disabled><%= __('emulator.not_available') %></button>
+                    <% } %>
+                </td>
+                <% } %>
+            </tr>
             <% } %>
-        </div>
+        </table>
         <%
         if(pageCount > 1) {
         %>
@@ -100,3 +151,32 @@
         <% } %>
     </div>
 </div>
+<script defer>
+    /*resultTable = new DataTable('#results', {
+        "order": [[7, 'desc']],
+        "columns": [
+            { "data": "name" },      // Name
+            { "data": "group" },     // Group
+            { "data": "category" },  // Category
+            { "data": "region" },    // Region
+            { "data": "type" },      // Type
+            { "data": "size" },      // Size
+            { "data": "date" },      // Date
+            { "data": "score" },     // Search Score
+            <% if (process.env.EMULATOR_ENABLED === 'true') { %>
+                { "data": "play", "orderable": false }  // Play button column
+            <% } %>
+        ],
+        "lengthMenu": [100, { label: 'All', value: -1 }, 50, 25, 10],
+        "paging": false,
+        "filter": false,
+        "layout": {
+            "bottomStart": ''
+        }
+    });*/
+
+    // Initialize tooltips
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
+</script>

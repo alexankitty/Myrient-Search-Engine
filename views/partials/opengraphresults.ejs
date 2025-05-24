@@ -1,9 +1,8 @@
 <%
-let resultStart = Math.floor((pageNum - 1) * 100)
-let length = results.items.length > 5 + resultStart ? 5 + resultStart : results.items.length
+let length = results.length > 5 ? 5 : results.length
 let resultString = ''
-for(let x = resultStart ; x < length; x++){
-    resultString += `${x + 1}: ${results.items[x].filename}\n\n`
+for(let x = 0 ; x < length; x++){
+    resultString += `${x + 1}: ${results[x].filename}\n\n`
 }
 resultString = resultString.trim()
 %>

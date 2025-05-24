@@ -1,14 +1,19 @@
+<% 
+    const metadata = result.metadata || new Object()
+    const file = result.file || new Object()
+    const coverUrl = metadata.coverartid ? `/proxy-image?url=https://images.igdb.com/igdb/image/upload/t_cover_big/${metadata.coverartid}.webp` : "/public/images/coverart/nocoverart.png"
+%>
 <div class="col-md-auto row align-items-start searchresult">
     <div class="">
-        <img class="coverart" src="<%= result.image || "/public/images/coverart/nocoverart.png"%>">
+        <img class="coverart" src="<%= coverUrl %>">
     </div>
     <div class="col-md">
-        <p class="title"><%= result.title || result.filename %></p>
-        <p class="info"<span class="infoitem">Released: <%= result.releaseDate || result.date %></span> <span class="infoitem">Region: <%= result.region %></span></p>
-        <p class="description"><%= result.description || "No description was found." %></p>
-        <% if(result.title) {%>
-        <p class="file">Filename: <%= result.filename %></p>
+        <p class="title"><%= metadata.title || file.filename %></p>
+        <p class="info"<span class="infoitem">Released: <%= metadata.releasedate || file.date %></span> <span class="infoitem">Region: <%= file.region %></span> <span class="infoitem">Platform: <%= file.category %></span></p>
+        <p class="description"><%= metadata.description || "No description was found." %></p>
+        <% if(metadata.title) {%>
+        <p class="file">Filename: <%= file.filename %></p>
         <% } %>
-        <p class="actions"><button class="btn btn-sm btn-secondary" href="">More Info</button> <button class="btn btn-sm btn-secondary" href="<%= result.path %>">Download</button> <button class="btn btn-sm btn-secondary" href="/play/<%= result.id %>">Play In Browser</a></button>
+        <p class="actions"><button class="btn btn-sm btn-secondary" href="">More Info</button> <button class="btn btn-sm btn-secondary" href="<%= file.path %>">Download</button> <button class="btn btn-sm btn-secondary" href="/play/<%= file.id %>">Play In Browser</a></button>
     </div>
 </div>

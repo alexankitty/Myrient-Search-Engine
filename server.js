@@ -21,6 +21,7 @@ import { initElasticsearch } from "./lib/services/elasticsearch.js";
 import i18n, { locales } from "./config/i18n.js";
 import { v4 as uuidv4 } from "uuid";
 import { optimizeDatabaseKws } from "./lib/dboptimize.js";
+import MetadataSearch from "./lib/metadatasearch.js";
 
 let categoryListPath = "./lib/categories.json";
 let nonGameTermsPath = "./lib/nonGameTerms.json";
@@ -51,6 +52,7 @@ let defaultSettings = {
   fuzzy: 0,
   prefix: true,
   hideNonGame: true,
+  useOldResults: false,
 };
 
 //programmatically set the default boosts while reducing overhead when adding another search field
@@ -64,6 +66,7 @@ for (let field in searchFields) {
 }
 
 let search = new Searcher(searchFields);
+let metadataSearch = new MetadataSearch();
 
 async function getFilesJob() {
   console.log("Updating the file list.");
@@ -106,7 +109,7 @@ app.use((req, res, next) => {
 });
 
 //static files
-app.use('/public', express.static('views/public'))
+app.use("/public", express.static("views/public"));
 
 //middleware
 app.use(sanitize.middleware);
@@ -193,22 +196,35 @@ app.get("/search", async function (req, res) {
   if (settings.combineWith != "AND") {
     delete settings.combineWith;
   }
+  settings.pageSize = settings.useOldResults ? 100 : 10;
+  settings.page = pageNum - 1;
   let results = await search.findAllMatches(query, settings);
   debugPrint(results);
-  if (results.items.length && pageNum == 1) {
+  let metas = await metadataSearch.getGamesMetadata(results.db);
+  if (results.count && pageNum == 1) {
     queryCount += 1;
     await QueryCount.update({ count: queryCount }, { where: { id: 1 } });
     updateDefaults();
   }
+  let resultOutput = [];
+  for (let x in results.items) {
+    resultOutput.push({
+      file: results.items[x],
+      metadata: metas[x] || [],
+    });
+  }
   let options = {
     query: query,
-    results: results,
+    results: resultOutput,
+    count: results.count,
+    elapsed: results.elapsed,
     pageNum: pageNum,
+    pageCount: Math.ceil(results.count / settings.pageSize),
     indexing: search.indexing,
     urlPrefix: urlPrefix,
     settings: settings,
   };
-  let page = "resultsnew";
+  let page = settings.useOldResults ? "resultsold" : "results";
   options = buildOptions(page, options);
   res.render(indexPage, options);
 });

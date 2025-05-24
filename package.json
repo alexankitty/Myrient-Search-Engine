@@ -19,7 +19,7 @@
     "pg-hstore": "^2.3.4",
     "piscina": "^4.7.0",
     "sanitize": "^2.1.2",
-    "sequelize": "^6.37.1",
+    "sequelize": "^6.37.7",
     "sequelize-cli": "^6.6.2",
     "to-words": "^4.5.1",
     "uuid": "^11.1.0"
