@@ -10,6 +10,7 @@
 <script src='https://cdn.datatables.net/2.1.8/js/dataTables.js' crossorigin="anonymous"></script>
 <script src='https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap4.js' crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap4.css" crossorigin="anonymous">
+<link rel="stylesheet" href="/public/css/result.css">
 <div class="row w-100 m-0">
     <form class="ml-2 form-inline w-100" action="/search">
         <div class="w-100 align-items-center">
@@ -81,7 +82,9 @@
                             <li class="dt-paging-button page-item <%= pageNum == 1 ? 'disabled' : '' %>"><a <%= pageNum != 1 ? `href=${urlPrefix + (pageNum - 1)}` : '' %> class="page-link previous" aria-controls="results" aria-disabled="true" aria-label="Previous" data-dt-idx="previous" tabindex="-1">‹</a></li>
                             <li class="dt-paging-button page-item <%= pageNum == 1 ? 'active' : '' %>"><a href="<%= urlPrefix + 1 %>" class="page-link" aria-controls="results" aria-current="page" data-dt-idx="0">1</a></li>
                             <%-  pageNum >= 5 ? ellipsesElem : '' %>
-                            <% for(let x = pageRange.lower; x <= pageRange.upper; x++){ %>
+                            <% for(let x = pageRange.lower; x <= pageRange.upper; x++){ 
+                                if(x == pageCount) break;
+                            %>
                             <li class="dt-paging-button page-item <%= pageNum == x ? 'active' : '' %>"><a href="<%= urlPrefix + x %>" class="page-link" aria-controls="results" aria-current="page" data-dt-idx="<%= x - 1 %>"><%= x %></a></li>
                             <% } %>
                             <%-  pageNum <= pageCount - 5 ? ellipsesElem : '' %>

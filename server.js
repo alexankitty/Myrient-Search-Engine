@@ -206,16 +206,9 @@ app.get("/search", async function (req, res) {
     await QueryCount.update({ count: queryCount }, { where: { id: 1 } });
     updateDefaults();
   }
-  let resultOutput = [];
-  for (let x in results.items) {
-    resultOutput.push({
-      file: results.items[x],
-      metadata: metas[x] || [],
-    });
-  }
   let options = {
     query: query,
-    results: resultOutput,
+    results: metas?.length ? metas : results.items,
     count: results.count,
     elapsed: results.elapsed,
     pageNum: pageNum,

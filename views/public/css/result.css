@@ -1,0 +1,42 @@
+.coverart{
+  object-fit: contain;
+  height: 200px;
+  width: 150px;
+}
+.description{
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.searchresult {
+  padding: 10px;
+}
+.searchresult div > p {
+    margin-bottom: 0.5rem;
+}
+.title {
+  font-weight: bold;
+  color: #f0a400;
+  margin-bottom: 0!important;
+}
+.title a {
+    font-weight: bold;
+    color: #f0a400;
+}
+.info {
+  font-size: 0.8em;
+}
+.file {
+  font-size: 0.8em;
+}
+.group {
+  font-size: 0.8em;
+}
+.infoitem{
+  margin-right: 0;
+}
+.cover{
+    margin-left: 1rem;
+}

@@ -184,31 +184,3 @@ thead > tr > th.dt-orderable span.dt-column-order.order-desc::before{
 thead > tr > th.dt-orderable span.dt-column-order.order-asc::after{
   opacity: 1;
 }
-.coverart{
-  object-fit: contain;
-  height: 200px;
-  width: 150px;
-}
-.description{
-  white-space: normal;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.searchresult {
-  padding: 10px;
-}
-.title {
-  font-weight: bold;
-  color: #f0a400;
-}
-.info {
-  font-size: 0.8em;
-}
-.file {
-  font-size: 0.8em;
-}
-.infoitem{
-  margin-right: 1rem;
-}

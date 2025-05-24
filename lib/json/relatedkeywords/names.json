@@ -10,5 +10,8 @@
   ["littleendian", "little endian"],
   ["pc88", "pc-88", "pc 88"],
   ["dvd", "digital video disc", "digital versatile disc"],
-  ["bros", "brothers", "bros."]
+  ["bros", "brothers", "bros."],
+  ["&", "and"],
+  ["+", "plus"],
+  [".hack", "dothack"]
 ]

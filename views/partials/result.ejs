@@ -4,16 +4,26 @@
     const coverUrl = metadata.coverartid ? `/proxy-image?url=https://images.igdb.com/igdb/image/upload/t_cover_big/${metadata.coverartid}.webp` : "/public/images/coverart/nocoverart.png"
 %>
 <div class="col-md-auto row align-items-start searchresult">
-    <div class="">
-        <img class="coverart" src="<%= coverUrl %>">
-    </div>
-    <div class="col-md">
-        <p class="title"><%= metadata.title || file.filename %></p>
-        <p class="info"<span class="infoitem">Released: <%= metadata.releasedate || file.date %></span> <span class="infoitem">Region: <%= file.region %></span> <span class="infoitem">Platform: <%= file.category %></span></p>
-        <p class="description"><%= metadata.description || "No description was found." %></p>
-        <% if(metadata.title) {%>
-        <p class="file">Filename: <%= file.filename %></p>
-        <% } %>
-        <p class="actions"><button class="btn btn-sm btn-secondary" href="">More Info</button> <button class="btn btn-sm btn-secondary" href="<%= file.path %>">Download</button> <button class="btn btn-sm btn-secondary" href="/play/<%= file.id %>">Play In Browser</a></button>
-    </div>
+  <div class="cover">
+    <img class="coverart" src="<%= coverUrl %>" href="<%= file.path %>">
+  </div>
+  <div class="col-md">
+    <p class="title"><a href="<%= file.path %>"><%= metadata.title || file.filename %></a></p>
+    <p class="info"><span class="infoitem badge badge-secondary">Released: <%= metadata.releasedate || file.date %></span>
+      <span class="infoitem badge badge-secondary">Region: <%= file.region %></span>
+      <span class="infoitem badge badge-secondary">Platform: <%= file.category %></span>
+      <% if(metadata.genre){ %>
+      <span class="infoitem badge badge-secondary">Genres: <%= JSON.parse(metadata.genre).join(' / ') %></span>
+      <% } %>
+    </p>
+    <p class="description"><%= metadata.description || "No description was found."//todo: localize %></p>
+    <% if(metadata.title) {%>
+    <p class="file">Filename: <%= file.filename %></p>
+    <% } %>
+    <p class="group">Release Group: <%= file.group %></p>
+    <p class="actions">
+        <a class="btn btn-sm btn-secondary" href="">More Info</a>
+        <a class="btn btn-sm btn-secondary" href="<%= file.path %>">Download</a>
+        <a class="btn btn-sm btn-secondary" href="/play/<%= file.id %>">Play In Browser</a></a>
+  </div>
 </div>

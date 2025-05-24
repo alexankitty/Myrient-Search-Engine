@@ -9,12 +9,6 @@
 </div>
 
 <script defer>
-    function timeConverter(UNIX_timestamp){
-        var timestamp = parseInt(UNIX_timestamp)
-        var date = new Date(timestamp);
-        var options = { hour12: false };
-        return date.toLocaleString(options)
-    }
     document.getElementById('crawl-time').innerText += ` ${timeConverter('<%= crawlTime %>')}`
     document.getElementById('file-count').innerText += ` ${(<%= fileCount %>).toLocaleString(undefined)}`
     document.getElementById('query-count').innerText += ` ${(<%= queryCount %>).toLocaleString(undefined)}`
