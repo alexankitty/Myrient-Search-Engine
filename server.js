@@ -171,7 +171,11 @@ app.get("/", function (req, res) {
 app.get("/search", async function (req, res) {
   let query = req.query.q ? req.query.q : "";
   let pageNum = parseInt(req.query.p);
-  let urlPrefix = encodeURI(`/search?s=${req.query.s}&q=${req.query.q}&p=`);
+  let urlPrefix = encodeURI(
+    `/search?s=${req.query.s}&q=${req.query.q}${
+      req.query.o ? "&o=" + req.query.o : ""
+    }&p=`
+  );
   pageNum = pageNum ? pageNum : 1;
   let settings = {};
   try {
@@ -198,9 +202,13 @@ app.get("/search", async function (req, res) {
   }
   settings.pageSize = settings.useOldResults ? 100 : 10;
   settings.page = pageNum - 1;
+  settings.sort = req.query.o || "";
   let results = await search.findAllMatches(query, settings);
   debugPrint(results);
-  let metas = await metadataSearch.queueGetGamesMetadata(results.db);
+  let metas = [];
+  if (!settings.useOldResults) {
+    metas = await metadataSearch.queueGetGamesMetadata(results.db);
+  }
   if (results.count && pageNum == 1) {
     queryCount += 1;
     await QueryCount.update({ count: queryCount }, { where: { id: 1 } });
@@ -297,6 +305,29 @@ app.get("/play/:id", async function (req, res) {
   };
 
   let page = "emulator";
+  options = buildOptions(page, options);
+  res.render(indexPage, options);
+});
+
+app.get("/info/:id", async function (req, res) {
+  //set header to allow video embed
+  res.setHeader("Cross-Origin-Embedder-Policy", "unsafe-non");
+  if (!metadataSearch.authorized) {
+    res.redirect("/");
+    return;
+  }
+  let romId = parseInt(req.params.id);
+  let romFile = await search.findIndex(romId);
+  let romInfo = await metadataSearch.queueGetGamesMetadata([romFile]);
+
+  if (!romInfo.length) {
+    res.redirect("/");
+    return;
+  }
+  let options = {
+    romFile: romInfo[0],
+  };
+  let page = "info";
   options = buildOptions(page, options);
   res.render(indexPage, options);
 });

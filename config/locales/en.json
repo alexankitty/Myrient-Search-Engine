@@ -21,7 +21,12 @@
         "in_seconds": "in {{seconds}} seconds",
         "indexing": "Indexing in progress, if the list is missing something please try reloading in a few minutes",
         "non_game_filter": "Non-game content filter is active",
-        "displaying_results": "Displaying results {{start}} through {{end}}."
+        "no_description": "No descrption found.",
+        "no_metadata": "No metadata found.",
+        "displaying_results": "Displaying results {{start}} through {{end}}.",
+        "released": "Released",
+        "region": "Region",
+        "platform": "Platform"
     },
     "about": {
         "title": "About",
@@ -40,6 +45,10 @@
         "credits": {
             "created_by": "Search engine created by",
             "view_github": "View project on GitHub"
+        },
+        "metadata": {
+            "title": "Metadata Information",
+            "description": "This website pulls metadata information about games from {{metadata_source}}. This information is pulled on search. Search queries may be slow until metadata has been cached in the database."
         }
     },
     "settings": {
@@ -69,6 +78,10 @@
             "hide_non_game": {
                 "label": "Hide Non-Game Content",
                 "tooltip": "Filters out ROM hacks, patches, artwork, and other non-game content from search results."
+            },
+            "use_old_results": {
+                "label": "Old Search",
+                "tooltip": "Redirects your search to the old table formatted results. These will load faster as they will ignore pulling metadata."
             }
         },
         "save": "Save Settings"

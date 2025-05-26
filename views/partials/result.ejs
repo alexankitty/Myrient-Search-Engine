@@ -9,21 +9,31 @@
   </div>
   <div class="col-md">
     <p class="title"><a href="<%= file.path %>"><%= metadata.title || file.filename %></a></p>
-    <p class="info"><span class="infoitem badge badge-secondary">Released: <%= metadata.releasedate || file.date %></span>
-      <span class="infoitem badge badge-secondary">Region: <%= file.region %></span>
-      <span class="infoitem badge badge-secondary">Platform: <%= file.category %></span>
+    <p class="info"><span class="infoitem badge badge-secondary"><%= __('search.released') %>: <%= metadata.releasedate || file.date %></span>
+      <span class="infoitem badge badge-secondary"><%= __('search.region') %>: <%= file.region %></span>
+      <span class="infoitem badge badge-secondary"><%= __('search.platform') %>: <%= file.category %></span>
       <% if(metadata.genre){ %>
       <span class="infoitem badge badge-secondary">Genres: <%= JSON.parse(metadata.genre).join(' / ') %></span>
       <% } %>
     </p>
-    <p class="description"><%= metadata.description || "No description was found."//todo: localize %></p>
+    <% if(metadata.title) {%>
+    <p class="description"><%= metadata.description || __('search.no_description') %></p>
+    <% } else { %>
+    <p class="description"><%= __('search.no_metadata') %></p>
+    <% } %>
     <% if(metadata.title) {%>
     <p class="file">Filename: <%= file.filename %></p>
     <% } %>
     <p class="group">Release Group: <%= file.group %></p>
     <p class="actions">
-        <a class="btn btn-sm btn-secondary" href="">More Info</a>
-        <a class="btn btn-sm btn-secondary" href="<%= file.path %>">Download</a>
-        <a class="btn btn-sm btn-secondary" href="/play/<%= file.id %>">Play In Browser</a></a>
+      <a class="btn btn-sm btn-secondary" href="/info/<%=file.id %>">More Info</a>
+      <a class="btn btn-sm btn-secondary" href="<%= file.path %>">Download</a>
+      <% if (process.env.EMULATOR_ENABLED === 'true') { %>
+      <% if (isEmulatorCompatible(file.category)) { %>
+      <a class="btn btn-sm btn-secondary" href="/play/<%= file.id %>"><%= __('emulator.play')%></a></a> <% } else { %>
+      <button class="btn btn-sm btn-secondary" disabled><%= __('emulator.not_available') %></button>
+      <% } 
+    }%>
+
   </div>
 </div>

@@ -1,0 +1,42 @@
+.dt-orderable {
+  position: absolute;
+  
+
+}
+.dt-column-order {
+  position: absolute;
+  width: 12px;
+  color: #ffffff20;
+  line-height: 9px;
+  font-size: 0.8em;
+  right: 12px;
+  top: 0;
+  bottom: 0;
+}
+.table thead > tr > th {
+  position: relative;
+  padding-right: 30px;
+}
+thead > tr > th.dt-orderable span.dt-column-order::before {
+  position: absolute;
+  display: block;
+  bottom: 50%;
+  content: "▲";
+  content: "▲"/"";
+}
+thead > tr > th.dt-orderable span.dt-column-order::after {
+  position: absolute;
+  display: block;
+  top: 50%;
+  content: "▼";
+  content: "▼"/"";
+}
+
+thead > tr > th.dt-orderable span.dt-column-order.order-asc::before{
+  opacity: 1;
+  color: #ffffffff;
+}
+thead > tr > th.dt-orderable span.dt-column-order.order-desc::after{
+  opacity: 1;
+  color: #ffffffff;
+}

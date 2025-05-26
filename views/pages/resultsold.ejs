@@ -1,12 +1,8 @@
 <%
-    let pageCount = Math.ceil(results.items.length / 100)
     pageCount = pageCount ? pageCount : 1 //always ensure 1 page
     if(pageNum > pageCount){
         pageNum = 1
     }
-    let entryStart = Math.floor((pageNum - 1) * 100)
-    let entryEnd = entryStart + 100
-    entryEnd = entryEnd > results.items.length ? results.items.length : entryEnd
 %>
 <script src='https://code.jquery.com/jquery-3.7.1.js' crossorigin="anonymous"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js' crossorigin="anonymous"></script>
@@ -14,6 +10,7 @@
 <script src='https://cdn.datatables.net/2.1.8/js/dataTables.js' crossorigin="anonymous"></script>
 <script src='https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap4.js' crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap4.css" crossorigin="anonymous">
+<link rel="stylesheet" href="/public/css/resultsold.css">
 <div class="row w-100 m-0">
     <form class="ml-2 form-inline w-100" action="/search">
         <div class="w-100 align-items-center">
@@ -31,7 +28,7 @@
             <ul class="SuggestionList col-sm-12" id="suggestionList" style="width: 50%;left: 195px;"></ul>
         </div>
         <p class="m-2">
-            <%= __('search.found_plural', { count: results.items.length }) %> <%= __('search.in_seconds', { seconds: results.elapsed }) %>.
+            <%= __('search.found_plural', { count: count }) %> <%= __('search.in_seconds', { seconds: elapsed }) %>.
             <%= indexing ? __('search.indexing') : "" %>
             <% if (settings.hideNonGame) { %>
             <span class="badge badge-info" data-toggle="tooltip" data-placement="top" title="<%= __('settings.extras.hide_non_game.tooltip') %>">
@@ -43,55 +40,55 @@
     </form>
 
     <div class="col-sm-12 w-100 mt-3">
-        <p><%= __('search.displaying_results', { start: entryStart, end: entryEnd }) %></p>
+        <p><%= __('search.displaying_results', { start: ((pageNum - 1) * 100), end: pageNum * 100 < count ? pageNum * 100  : count }) %></p>
         <table class="table text-white table-bordered" id="results">
             <thead>
                 <tr>
-                    <th class="dt-orderable"><span><%= __('results.table.name') %></span><span class="dt-column-order"></span></th>
-                    <th><%= __('results.table.group') %></th>
-                    <th><%= __('results.table.category') %></th>
-                    <th><%= __('results.table.region') %></th>
-                    <th><%= __('results.table.type') %></th>
-                    <th><%= __('results.table.size') %></th>
-                    <th><%= __('results.table.date') %></th>
-                    <th><%= __('results.table.score') %></th>
+                    <th class="" id="filename"><span><%= __('results.table.name') %></span><span class="dt-column-order"></span></th>
+                    <th class="" id="group"><span><%= __('results.table.group') %></span><span class="dt-column-order"></span></th>
+                    <th class="" id="category"><span><%= __('results.table.category') %></span><span class="dt-column-order"></span></th>
+                    <th class="" id="region"><span><%= __('results.table.region') %></span><span class="dt-column-order"></span></th>
+                    <th class="" id="type"><span><%= __('results.table.type') %></span><span class="dt-column-order"></span></th>
+                    <th class="" id="size"><span><%= __('results.table.size') %></span><span class="dt-column-order"></span></th>
+                    <th class="" id="date"><span><%= __('results.table.date') %></span><span class="dt-column-order"></span></th>
+                    <th class="" id="score"><span><%= __('results.table.score') %></span><span class="dt-column-order"></span></th>
                     <% if (process.env.EMULATOR_ENABLED === 'true') { %>
                         <th><%= __('results.table.play') %></th>
                     <% } %>
                 </tr>
             </thead>
-            <% for (let x = entryStart; x < entryEnd; x++) { %>
+            <% for (let x = 0; x < results.length; x++) { %>
             <tr>
                 <td>
-                    <a href="<%= results.items[x].path %>">
-                        <%= results.items[x].filename %>
+                    <a href="<%= results[x].file.path %>">
+                        <%= results[x].file.filename %>
                     </a>
                 </td>
                 <td>
-                    <%= results.items[x].group %>
+                    <%= results[x].file.group %>
                 </td>
                 <td>
-                    <%= results.items[x].category %>
+                    <%= results[x].file.category %>
                 </td>
                 <td>
-                    <%= results.items[x].region %>
+                    <%= results[x].file.region %>
                 </td>
                 <td>
-                    <%= results.items[x].type %>
+                    <%= results[x].file.type %>
                 </td>
                 <td>
-                    <%= results.items[x].size %>
+                    <%= results[x].file.size %>
                 </td>
                 <td>
-                    <%= results.items[x].date %>
+                    <%= results[x].file.date %>
                 </td>
                 <td>
-                    <%= results.items[x].score.toFixed(2) %>
+                    <%= results[x].score.toFixed(2) %>
                 </td>
                 <% if (process.env.EMULATOR_ENABLED === 'true') { %>
                 <td>
-                    <% if (isEmulatorCompatible(results.items[x].category)) { %>
-                        <a href="/play/<%= results.items[x].id %>" class="btn btn-sm btn-secondary"><%= __('emulator.play') %></a>
+                    <% if (isEmulatorCompatible(results[x].category)) { %>
+                        <a href="/play/<%= results[x].id %>" class="btn btn-sm btn-secondary"><%= __('emulator.play') %></a>
                     <% } else { %>
                         <button class="btn btn-sm btn-secondary" disabled><%= __('emulator.not_available') %></button>
                     <% } %>
@@ -137,7 +134,9 @@
                             <li class="dt-paging-button page-item <%= pageNum == 1 ? 'disabled' : '' %>"><a <%= pageNum != 1 ? `href=${urlPrefix + (pageNum - 1)}` : '' %> class="page-link previous" aria-controls="results" aria-disabled="true" aria-label="Previous" data-dt-idx="previous" tabindex="-1">‹</a></li>
                             <li class="dt-paging-button page-item <%= pageNum == 1 ? 'active' : '' %>"><a href="<%= urlPrefix + 1 %>" class="page-link" aria-controls="results" aria-current="page" data-dt-idx="0">1</a></li>
                             <%-  pageNum >= 5 ? ellipsesElem : '' %>
-                            <% for(let x = pageRange.lower; x <= pageRange.upper; x++){ %>
+                            <% for(let x = pageRange.lower; x <= pageRange.upper; x++){ 
+                                if(x == pageCount) break;
+                            %>
                             <li class="dt-paging-button page-item <%= pageNum == x ? 'active' : '' %>"><a href="<%= urlPrefix + x %>" class="page-link" aria-controls="results" aria-current="page" data-dt-idx="<%= x - 1 %>"><%= x %></a></li>
                             <% } %>
                             <%-  pageNum <= pageCount - 5 ? ellipsesElem : '' %>
@@ -152,31 +151,28 @@
     </div>
 </div>
 <script defer>
-    /*resultTable = new DataTable('#results', {
-        "order": [[7, 'desc']],
-        "columns": [
-            { "data": "name" },      // Name
-            { "data": "group" },     // Group
-            { "data": "category" },  // Category
-            { "data": "region" },    // Region
-            { "data": "type" },      // Type
-            { "data": "size" },      // Size
-            { "data": "date" },      // Date
-            { "data": "score" },     // Search Score
-            <% if (process.env.EMULATOR_ENABLED === 'true') { %>
-                { "data": "play", "orderable": false }  // Play button column
-            <% } %>
-        ],
-        "lengthMenu": [100, { label: 'All', value: -1 }, 50, 25, 10],
-        "paging": false,
-        "filter": false,
-        "layout": {
-            "bottomStart": ''
-        }
-    });*/
-
-    // Initialize tooltips
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    });
+// URLParams = new URLSearchParams(window.location.search);
+// if(!URLParams.get('o')){
+//     // URLParams.set('o', 'score:asc');
+//     // $('#score .dt-column-order').addClass('order-asc')
+// }
+// else{
+//     let sorting = URLParams.get('o').split(':');
+//     $(`#${sorting[0]} .dt-column-order`).addClass(`order-${sorting[1]}`)
+// }
+// $(".dt-orderable").each(function( i ){
+    
+//     $( this ).on( "click", function (){
+//         if($(this).find('.dt-column-order').hasClass('order-asc')){
+//             URLParams.set('o', `${$(this).attr('id')}:desc`)
+//         }
+//         else if($(this).find('.dt-column-order').hasClass('order-desc')){
+//             URLParams.delete('o')
+//         }
+//         else {
+//             URLParams.set('o', `${$(this).attr('id')}:asc`)
+//         }
+//         window.location = location.protocol + '//' + location.host + location.pathname + '?' + URLParams.toString()
+//     })
+// })
 </script>

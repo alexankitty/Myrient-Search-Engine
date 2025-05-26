@@ -32,10 +32,12 @@
     if(typeof settings.fuzzy == 'undefined') {settings.fuzzy = defaults.fuzzy}
     if(typeof settings.prefix == 'undefined') {settings.prefix = defaults.prefix}
     if(typeof settings.hideNonGame == 'undefined') {settings.hideNonGame = defaults.hideNonGame}
+    if(typeof settings.hideNonGame == 'undefined') {settings.useOldResults = defaults.useOldResults}
     document.getElementById('combineWith').checked = settings.combineWith ? true : false
     document.getElementById('fuzzy').value = settings.fuzzy
     document.getElementById('prefix').checked = settings.prefix
     document.getElementById('hideNonGame').checked = settings.hideNonGame
+    document.getElementById('useOldResults').checked = settings.useOldResults
   }
 
   function saveSettings(){
@@ -50,6 +52,7 @@
     settings.fuzzy = parseFloat (document.getElementById('fuzzy').value)
     settings.prefix = document.getElementById('prefix').checked
     settings.hideNonGame = document.getElementById('hideNonGame').checked
+    settings.useOldResults = document.getElementById('useOldResults').checked
     localStorage.setItem('settings', JSON.stringify(settings))
     window.location.href = '/'
   }
