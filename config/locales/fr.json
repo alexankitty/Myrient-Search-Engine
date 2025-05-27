@@ -21,7 +21,22 @@
         "in_seconds": "en {{seconds}} secondes",
         "indexing": "Indexation en cours, si quelque chose manque dans la liste, réessayez dans quelques minutes",
         "non_game_filter": "Le filtre de contenu non-jeu est activé",
-        "displaying_results": "Résultats {{start}} à {{end}}."
+        "displaying_results": "Résultats {{start}} à {{end}}.",
+        "no_description": "Aucune description trouvée.",
+        "no_metadata": "Aucune métadonnée trouvée.",
+        "released": "Sorti le :",
+        "release_date": "Date de sortie :",
+        "region": "Région :",
+        "platform": "Plateforme :",
+        "genre": "Genre :",
+        "published": "Publié par :",
+        "developed": "Développé par :",
+        "modes": "Modes de jeu :",
+        "download": "Télécharger :",
+        "filename": "Nom du fichier :",
+        "release_group": "Groupe de release :",
+        "upload_date": "Date de téléchargement :",
+        "more_info": "Plus d'infos"
     },
     "about": {
         "title": "À propos",
@@ -40,6 +55,10 @@
         "credits": {
             "created_by": "Moteur de recherche créé par",
             "view_github": "Voir le projet sur GitHub"
+        },
+        "metadata": {
+            "title": "Informations sur les métadonnées",
+            "description": "Ce site web récupère les métadonnées des jeux depuis {{metadata_source}}. Ces informations sont récupérées lors de la recherche. Les requêtes de recherche peuvent être lentes jusqu'à ce que les métadonnées soient mises en cache dans la base de données."
         }
     },
     "settings": {

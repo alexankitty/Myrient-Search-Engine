@@ -21,7 +21,22 @@
         "in_seconds": "{{seconds}} saniyede",
         "indexing": "İndeksleme devam ediyor, listede eksik bir şey varsa lütfen birkaç dakika sonra tekrar deneyin",
         "non_game_filter": "Oyun dışı içerik filtresi etkin",
-        "displaying_results": "{{start}} ile {{end}} arası sonuçlar gösteriliyor."
+        "displaying_results": "{{start}} ile {{end}} arası sonuçlar gösteriliyor.",
+        "no_description": "Açıklama bulunamadı.",
+        "no_metadata": "Meta veri bulunamadı.",
+        "released": "Yayınlandı:",
+        "release_date": "Çıkış tarihi:",
+        "region": "Bölge:",
+        "platform": "Platform:",
+        "genre": "Tür:",
+        "published": "Yayıncı:",
+        "developed": "Geliştirici:",
+        "modes": "Oyun modları:",
+        "download": "İndir:",
+        "filename": "Dosya adı:",
+        "release_group": "Yayın grubu:",
+        "upload_date": "Yükleme tarihi:",
+        "more_info": "Daha fazla bilgi"
     },
     "about": {
         "title": "Hakkında",
@@ -40,6 +55,10 @@
         "credits": {
             "created_by": "Arama motoru şu kişi tarafından oluşturuldu:",
             "view_github": "Projeyi GitHub'da görüntüle"
+        },
+        "metadata": {
+            "title": "Meta Veri Bilgisi",
+            "description": "Bu web sitesi {{metadata_source}} üzerinden oyunlar hakkında meta veri bilgisi çeker. Bu bilgiler arama sırasında çekilir. Meta veriler veritabanında önbelleğe alınana kadar arama sorguları yavaş olabilir."
         }
     },
     "settings": {
@@ -67,8 +86,12 @@
                 "tooltip": "Arama sorgusundaki tüm kelimelerin eşleşmesini gerektirir."
             },
             "hide_non_game": {
-                "label": "Oyun Olmayan İçeriği Gizle",
-                "tooltip": "ROM hackleri, yamalar, görseller ve diğer oyun dışı içerikleri arama sonuçlarından filtreler."
+                "label": "Oyun Dışı İçeriği Gizle",
+                "tooltip": "ROM hack'leri, yamalar, görseller ve diğer oyun dışı içerikleri arama sonuçlarından filtreler."
+            },
+            "use_old_results": {
+                "label": "Eski Arama",
+                "tooltip": "Aramanızı eski tablo formatındaki sonuçlara yönlendirir. Bunlar meta verileri çekmeyeceği için daha hızlı yüklenecektir."
             }
         },
         "save": "Ayarları Kaydet"

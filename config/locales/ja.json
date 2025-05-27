@@ -21,7 +21,22 @@
         "in_seconds": "{{seconds}}秒で検索完了",
         "indexing": "インデックス作成中です。リストに表示されないものがある場合は、数分後に再度お試しください",
         "non_game_filter": "非ゲームコンテンツフィルターが有効です",
-        "displaying_results": "{{start}}件目から{{end}}件目を表示中。"
+        "displaying_results": "{{start}}件目から{{end}}件目を表示中。",
+        "no_description": "説明が見つかりません。",
+        "no_metadata": "メタデータが見つかりません。",
+        "released": "発売日：",
+        "release_date": "リリース日：",
+        "region": "地域：",
+        "platform": "プラットフォーム：",
+        "genre": "ジャンル：",
+        "published": "発売元：",
+        "developed": "開発元：",
+        "modes": "ゲームモード：",
+        "download": "ダウンロード：",
+        "filename": "ファイル名：",
+        "release_group": "リリースグループ：",
+        "upload_date": "アップロード日：",
+        "more_info": "詳細情報"
     },
     "about": {
         "title": "サイトについて",
@@ -40,6 +55,10 @@
         "credits": {
             "created_by": "検索エンジン開発者：",
             "view_github": "GitHubでプロジェクトを見る"
+        },
+        "metadata": {
+            "title": "メタデータ情報",
+            "description": "このサイトは{{metadata_source}}からゲームのメタデータ情報を取得します。この情報は検索時に取得されます。メタデータがデータベースにキャッシュされるまで、検索クエリは遅くなる可能性があります。"
         }
     },
     "settings": {

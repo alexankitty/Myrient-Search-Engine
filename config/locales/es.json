@@ -21,7 +21,22 @@
         "in_seconds": "en {{seconds}} segundos",
         "indexing": "Indexación en curso, si falta algo en la lista, inténtelo de nuevo en unos minutos",
         "non_game_filter": "El filtro de contenido que no es juego está activado",
-        "displaying_results": "Mostrando resultados del {{start}} al {{end}}."
+        "displaying_results": "Mostrando resultados del {{start}} al {{end}}.",
+        "no_description": "No se encontró descripción.",
+        "no_metadata": "No se encontraron metadatos.",
+        "released": "Lanzado:",
+        "release_date": "Fecha de lanzamiento:",
+        "region": "Región:",
+        "platform": "Plataforma:",
+        "genre": "Género:",
+        "published": "Publicado por:",
+        "developed": "Desarrollado por:",
+        "modes": "Modos de juego:",
+        "download": "Descargar:",
+        "filename": "Nombre del archivo:",
+        "release_group": "Grupo de lanzamiento:",
+        "upload_date": "Fecha de subida:",
+        "more_info": "Más información"
     },
     "about": {
         "title": "Acerca de",
@@ -40,6 +55,10 @@
         "credits": {
             "created_by": "Buscador creado por",
             "view_github": "Ver proyecto en GitHub"
+        },
+        "metadata": {
+            "title": "Información de Metadatos",
+            "description": "Este sitio web obtiene información de metadatos sobre juegos de {{metadata_source}}. Esta información se obtiene durante la búsqueda. Las consultas de búsqueda pueden ser lentas hasta que los metadatos se almacenen en caché en la base de datos."
         }
     },
     "settings": {
@@ -67,11 +86,15 @@
                 "tooltip": "Requiere que todas las palabras de la búsqueda tengan coincidencias."
             },
             "hide_non_game": {
-                "label": "Ocultar contenido que no son juegos",
-                "tooltip": "Filtra hacks de ROM, parches, imágenes y otros contenidos que no son juegos de los resultados de búsqueda."
+                "label": "Ocultar contenido que no es juego",
+                "tooltip": "Filtra ROM hacks, parches, ilustraciones y otro contenido que no sea juegos de los resultados de búsqueda."
+            },
+            "use_old_results": {
+                "label": "Búsqueda antigua",
+                "tooltip": "Redirige tu búsqueda al antiguo formato de tabla de resultados. Estos cargarán más rápido ya que ignorarán la obtención de metadatos."
             }
         },
-        "save": "Guardar Configuración"
+        "save": "Guardar ajustes"
     },
     "footer": {
         "queries": "Número de Consultas:",

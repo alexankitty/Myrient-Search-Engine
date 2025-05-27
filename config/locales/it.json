@@ -21,7 +21,22 @@
         "in_seconds": "in {{seconds}} secondi",
         "indexing": "Indicizzazione in corso, se manca qualcosa nell'elenco riprova tra qualche minuto",
         "non_game_filter": "Filtro per contenuti non-gioco attivo",
-        "displaying_results": "Risultati da {{start}} a {{end}}."
+        "displaying_results": "Risultati da {{start}} a {{end}}.",
+        "no_description": "Nessuna descrizione trovata.",
+        "no_metadata": "Nessun metadato trovato.",
+        "released": "Rilasciato:",
+        "release_date": "Data di uscita:",
+        "region": "Regione:",
+        "platform": "Piattaforma:",
+        "genre": "Genere:",
+        "published": "Pubblicato da:",
+        "developed": "Sviluppato da:",
+        "modes": "Modalità di gioco:",
+        "download": "Scarica:",
+        "filename": "Nome file:",
+        "release_group": "Gruppo di release:",
+        "upload_date": "Data di caricamento:",
+        "more_info": "Più informazioni"
     },
     "about": {
         "title": "Informazioni",
@@ -40,6 +55,10 @@
         "credits": {
             "created_by": "Motore di ricerca creato da",
             "view_github": "Visualizza progetto su GitHub"
+        },
+        "metadata": {
+            "title": "Informazioni sui Metadati",
+            "description": "Questo sito web recupera informazioni sui metadati dei giochi da {{metadata_source}}. Queste informazioni vengono recuperate durante la ricerca. Le query di ricerca potrebbero essere lente fino a quando i metadati non vengono memorizzati nella cache del database."
         }
     },
     "settings": {
@@ -68,10 +87,14 @@
             },
             "hide_non_game": {
                 "label": "Nascondi contenuti non di gioco",
-                "tooltip": "Filtra ROM modificate, patch, grafica e altri contenuti non di gioco dai risultati della ricerca."
+                "tooltip": "Filtra ROM hack, patch, artwork e altri contenuti non di gioco dai risultati di ricerca."
+            },
+            "use_old_results": {
+                "label": "Ricerca vecchia",
+                "tooltip": "Reindirizza la tua ricerca ai risultati nel vecchio formato tabellare. Questi caricheranno più velocemente poiché ignoreranno il recupero dei metadati."
             }
         },
-        "save": "Salva Impostazioni"
+        "save": "Salva impostazioni"
     },
     "footer": {
         "queries": "Numero di Ricerche:",

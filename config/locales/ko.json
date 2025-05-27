@@ -21,7 +21,22 @@
         "in_seconds": "{{seconds}}초 소요",
         "indexing": "인덱싱 중입니다. 목록에 누락된 항목이 있다면 잠시 후 다시 시도해 주세요",
         "non_game_filter": "비게임 콘텐츠 필터가 활성화되었습니다",
-        "displaying_results": "{{start}}번부터 {{end}}번까지의 결과를 표시합니다."
+        "displaying_results": "{{start}}번부터 {{end}}번까지의 결과를 표시합니다.",
+        "no_description": "설명을 찾을 수 없습니다.",
+        "no_metadata": "메타데이터를 찾을 수 없습니다.",
+        "released": "출시일：",
+        "release_date": "발매일：",
+        "region": "지역：",
+        "platform": "플랫폼：",
+        "genre": "장르：",
+        "published": "퍼블리셔：",
+        "developed": "개발사：",
+        "modes": "게임 모드：",
+        "download": "다운로드：",
+        "filename": "파일명：",
+        "release_group": "릴리즈 그룹：",
+        "upload_date": "업로드 날짜：",
+        "more_info": "자세히 보기"
     },
     "about": {
         "title": "소개",
@@ -40,6 +55,10 @@
         "credits": {
             "created_by": "검색 엔진 개발자:",
             "view_github": "GitHub에서 프로젝트 보기"
+        },
+        "metadata": {
+            "title": "메타데이터 정보",
+            "description": "이 웹사이트는 {{metadata_source}}에서 게임의 메타데이터 정보를 가져옵니다. 이 정보는 검색 시 가져옵니다. 메타데이터가 데이터베이스에 캐시될 때까지 검색 쿼리가 느릴 수 있습니다."
         }
     },
     "settings": {
@@ -103,7 +122,6 @@
             "more_info": "이 서비스에 대한 자세한 정보는 소개 페이지를 확인하세요."
         },
         "recommended": "추천 에뮬레이터",
-        "download": "다운로드",
         "play": "플레이",
         "not_available": "----",
         "disclaimer": "이 에뮬레이터는 {{link}}에서 직접 게임을 불러옵니다. {{about}} 페이지에서 더 자세히 알아보세요."

@@ -21,7 +21,22 @@
         "in_seconds": "w {{seconds}} sekund",
         "indexing": "Trwa indeksowanie, jeśli brakuje czegoś na liście, spróbuj ponownie za kilka minut",
         "non_game_filter": "Filtr treści niebędących grami jest aktywny",
-        "displaying_results": "Wyświetlanie wyników od {{start}} do {{end}}."
+        "displaying_results": "Wyświetlanie wyników od {{start}} do {{end}}.",
+        "no_description": "Nie znaleziono opisu.",
+        "no_metadata": "Nie znaleziono metadanych.",
+        "released": "Wydano:",
+        "release_date": "Data wydania:",
+        "region": "Region:",
+        "platform": "Platforma:",
+        "genre": "Gatunek:",
+        "published": "Wydawca:",
+        "developed": "Deweloper:",
+        "modes": "Tryby gry:",
+        "download": "Pobierz:",
+        "filename": "Nazwa pliku:",
+        "release_group": "Grupa wydania:",
+        "upload_date": "Data przesłania:",
+        "more_info": "Więcej informacji"
     },
     "about": {
         "title": "O nas",
@@ -40,6 +55,10 @@
         "credits": {
             "created_by": "Wyszukiwarka stworzona przez",
             "view_github": "Zobacz projekt na GitHub"
+        },
+        "metadata": {
+            "title": "Informacje o metadanych",
+            "description": "Ta strona pobiera informacje o metadanych gier z {{metadata_source}}. Te informacje są pobierane podczas wyszukiwania. Zapytania wyszukiwania mogą być wolne, dopóki metadane nie zostaną zapisane w pamięci podręcznej bazy danych."
         }
     },
     "settings": {
@@ -67,8 +86,12 @@
                 "tooltip": "Wymaga, aby wszystkie słowa z zapytania zostały znalezione."
             },
             "hide_non_game": {
-                "label": "Ukryj treści niebędące grami",
+                "label": "Ukryj zawartość niebędącą grami",
                 "tooltip": "Filtruje hacki ROM-ów, patche, grafiki i inne treści niebędące grami z wyników wyszukiwania."
+            },
+            "use_old_results": {
+                "label": "Stare wyszukiwanie",
+                "tooltip": "Przekierowuje twoje wyszukiwanie do starego formatu tabelarycznego wyników. Te będą ładować się szybciej, ponieważ pomijają pobieranie metadanych."
             }
         },
         "save": "Zapisz ustawienia"
@@ -103,7 +126,6 @@
             "more_info": "Więcej informacji o tej usłudze znajdziesz na stronie O nas."
         },
         "recommended": "Polecane emulatory",
-        "download": "Pobierz",
         "play": "Graj",
         "not_available": "----",
         "disclaimer": "Ten emulator ładuje gry bezpośrednio z {{link}}. Dowiedz się więcej na stronie {{about}}."

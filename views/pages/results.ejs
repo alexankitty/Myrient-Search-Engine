@@ -6,49 +6,49 @@
 %>
 <link rel="stylesheet" href="/public/css/result.css">
 <div class="row w-100 m-0">
-    <form class="ml-2 form-inline w-100" action="/search">
-        <div class="w-100 align-items-center">
-            <div class="form-group">
-                <a href="/">
-                <pre class="mt-4 ml-2" style="font: 6px / 5px monospace; color: white; text-align: center; overflow: hidden; display: inline-flex;">
+  <form class="ml-2 form-inline w-100" action="/search">
+    <div class="w-100 align-items-center">
+      <div class="form-group">
+        <a href="/">
+          <pre class="mt-4 ml-2" style="font: 6px / 5px monospace; color: white; text-align: center; overflow: hidden; display: inline-flex;">
 <%= generateAsciiArt() %>
                 </pre>
-                </a>
-                <input type="hidden" name="s" id="searchSettings">
-                <input id="search" type="text" class="w-50 form-control bg-dark text-white ml-2" name="q" value="<%= query %>" autocomplete="off" placeholder="<%= __('search.placeholder') %>">
-                <button type="submit" class="btn btn-secondary ml-2"><%= __('search.button') %></button>
+        </a>
+        <input type="hidden" name="s" id="searchSettings">
+        <input id="search" type="text" class="w-50 form-control bg-dark text-white ml-2" name="q" value="<%= query %>" autocomplete="off" placeholder="<%= __('search.placeholder') %>">
+        <button type="submit" class="btn btn-secondary ml-2"><%= __('search.button') %></button>
 
-            </div>
-            <ul class="SuggestionList col-sm-12" id="suggestionList" style="width: 50%;left: 195px;"></ul>
-        </div>
-        <p class="m-2">
-            <%= __('search.found_plural', { count: count }) %> <%= __('search.in_seconds', { seconds: elapsed }) %>.
-            <%= indexing ? __('search.indexing') : "" %>
-            <% if (settings.hideNonGame) { %>
-            <span class="badge badge-info" data-toggle="tooltip" data-placement="top" title="<%= __('settings.extras.hide_non_game.tooltip') %>">
-                <%= __('search.non_game_filter') %>
-                <a href="/settings" class="text-white ml-1"><i class="bi bi-gear-fill"></i></a>
-            </span>
-            <% } %>
-        </p>
-    </form>
+      </div>
+      <ul class="SuggestionList col-sm-12" id="suggestionList" style="width: 50%;left: 195px;"></ul>
+    </div>
+    <p class="m-2">
+      <%= __('search.found_plural', { count: count }) %> <%= __('search.in_seconds', { seconds: elapsed }) %>.
+      <%= indexing ? __('search.indexing') : "" %>
+      <% if (settings.hideNonGame) { %>
+      <span class="badge badge-info" data-toggle="tooltip" data-placement="top" title="<%= __('settings.extras.hide_non_game.tooltip') %>">
+        <%= __('search.non_game_filter') %>
+        <a href="/settings" class="text-white ml-1"><i class="bi bi-gear-fill"></i></a>
+      </span>
+      <% } %>
+    </p>
+  </form>
 
-    <div class="col-sm-12 w-100 mt-3">
-        <div>
-            <% for (let x = 0; x < results.length; x++) { %>
-            <%- include("../partials/result", {result: results[x]}) %>
-            <% } %>
-        </div>
-        <%
+  <div class="col-sm-12 w-100 mt-3">
+    <div>
+      <% for (let x = 0; x < results.length; x++) { %>
+      <%- include("../partials/result", {result: results[x]}) %>
+      <% } %>
+    </div>
+    <%
         if(pageCount > 1) {
         %>
-        <div class="row justify-content-between">
-            <div class="d-md-flex justify-content-between align-items-center dt-layout-end col-md-auto ml-auto">
-                <div class="dt-paging">
-                    <nav aria-label="pagination">
-                        <ul class="pagination">
-                            <%
-                                let ellipsesElem = '<li class="dt-paging-button page-item disabled"><a class="page-link ellipsis" aria-controls="results" aria-disabled="true" data-dt-idx="ellipsis" tabindex="-1">…</a></li>          '
+    <div class="row justify-content-between">
+      <div class="d-md-flex justify-content-between align-items-center dt-layout-end col-md-auto ml-auto">
+        <div class="dt-paging">
+          <nav aria-label="pagination">
+            <ul class="pagination">
+              <%
+                                let ellipsesElem = '<li class="dt-paging-button page-item disabled"><a class="page-link ellipsis" aria-controls="results" aria-disabled="true" data-dt-idx="ellipsis" tabindex="-1">…</a></li>'
                                 let pageUrlPrefix = ''
                                 const getPageRange = (page) => {
                                     let pageUpperLimit = pageCount - 4
@@ -73,22 +73,22 @@
                                 }
                                 let pageRange = getPageRange(pageNum)
                             %>
-                            <li class="dt-paging-button page-item <%= pageNum == 1 ? 'disabled' : '' %>"><a <%= pageNum != 1 ? `href=${urlPrefix + (pageNum - 1)}` : '' %> class="page-link previous" aria-controls="results" aria-disabled="true" aria-label="Previous" data-dt-idx="previous" tabindex="-1">‹</a></li>
-                            <li class="dt-paging-button page-item <%= pageNum == 1 ? 'active' : '' %>"><a href="<%= urlPrefix + 1 %>" class="page-link" aria-controls="results" aria-current="page" data-dt-idx="0">1</a></li>
-                            <%-  pageNum >= 5 ? ellipsesElem : '' %>
-                            <% for(let x = pageRange.lower; x <= pageRange.upper; x++){ 
+              <li class="dt-paging-button page-item <%= pageNum == 1 ? 'disabled' : '' %>"><a <%= pageNum != 1 ? `href=${urlPrefix + (pageNum - 1)}` : '' %> class="page-link previous" aria-controls="results" aria-disabled="true" aria-label="Previous" data-dt-idx="previous" tabindex="-1">‹</a></li>
+              <li class="dt-paging-button page-item <%= pageNum == 1 ? 'active' : '' %>"><a href="<%= urlPrefix + 1 %>" class="page-link" aria-controls="results" aria-current="page" data-dt-idx="0">1</a></li>
+              <%-  pageNum >= 5 ? ellipsesElem : '' %>
+              <% for(let x = pageRange.lower; x <= pageRange.upper; x++){ 
                                 if(x == pageCount) break;
                             %>
-                            <li class="dt-paging-button page-item <%= pageNum == x ? 'active' : '' %>"><a href="<%= urlPrefix + x %>" class="page-link" aria-controls="results" aria-current="page" data-dt-idx="<%= x - 1 %>"><%= x %></a></li>
-                            <% } %>
-                            <%-  pageNum <= pageCount - 5 ? ellipsesElem : '' %>
-                            <li class="dt-paging-button page-item <%= pageNum == pageCount ? 'active' : '' %>"><a href="<%= urlPrefix + pageCount %>" class="page-link" aria-controls="results" data-dt-idx="<%= pageCount - 1 %>"><%= pageCount %></a></li>
-                            <li class="dt-paging-button page-item <%= pageNum == pageCount ? 'disabled' : '' %>"><a <%= pageNum != pageCount ? `href=${urlPrefix + (pageNum + 1)}` : '' %> class="page-link next" aria-controls="results" aria-label="Next" data-dt-idx="next">›</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+              <li class="dt-paging-button page-item <%= pageNum == x ? 'active' : '' %>"><a href="<%= urlPrefix + x %>" class="page-link" aria-controls="results" aria-current="page" data-dt-idx="<%= x - 1 %>"><%= x %></a></li>
+              <% } %>
+              <%-  pageNum <= pageCount - 5 ? ellipsesElem : '' %>
+              <li class="dt-paging-button page-item <%= pageNum == pageCount ? 'active' : '' %>"><a href="<%= urlPrefix + pageCount %>" class="page-link" aria-controls="results" data-dt-idx="<%= pageCount - 1 %>"><%= pageCount %></a></li>
+              <li class="dt-paging-button page-item <%= pageNum == pageCount ? 'disabled' : '' %>"><a <%= pageNum != pageCount ? `href=${urlPrefix + (pageNum + 1)}` : '' %> class="page-link next" aria-controls="results" aria-label="Next" data-dt-idx="next">›</a></li>
+            </ul>
+          </nav>
         </div>
-        <% } %>
+      </div>
     </div>
+    <% } %>
+  </div>
 </div>

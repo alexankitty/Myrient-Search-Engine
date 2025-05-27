@@ -47,40 +47,46 @@
           <% } %>
           <% if(metadata.developers) {%>
           <div>
-            <p><span class="info">Developed by:</span> <%= JSON.parse(metadata.developers).join(", ") %></p>
+            <p><span class="info"><%= __('search.developed') %></span> <%= JSON.parse(metadata.developers).join(", ") %></p>
           </div>
           <% } %>
           <% if(metadata.publishers) {%>
           <div>
-            <p><span class="info">Published by:</span> <%= JSON.parse(metadata.publishers).join(", ") %></p>
+            <p><span class="info"><%= __('search.published') %></span> <%= JSON.parse(metadata.publishers).join(", ") %></p>
           </div>
           <% } %>
           <% if(metadata.releasedate) {%>
           <div>
-            <p><span class="info">Release date:</span> <%= metadata.releasedate %></p>
+            <p><span class="info"><%= __('search.release_date') %></span> <%= metadata.releasedate %></p>
           </div>
           <% } %>
           <% if(file.region) {%>
           <div>
-            <p><span class="info">Region:</span> <%= file.region %></p>
+            <p><span class="info"><%= __('search.region') %></span> <%= file.region %></p>
           </div>
           <% } %>
           <% if(metadata.genre) {%>
           <div>
-            <p><span class="info">Genre:</span> <%= JSON.parse(metadata.genre).join(", ") %></p>
+            <p><span class="info"><%= __('search.genre') %></span> <%= JSON.parse(metadata.genre).join(", ") %></p>
           </div>
           <% } %>
           <% if(metadata.gamemodes) {%>
           <div>
-            <p><span class="info">Gameplay modes:</span> <%= JSON.parse(metadata.gamemodes).join(", ") %></p>
+            <p><span class="info"><%= __('search.modes') %></span> <%= JSON.parse(metadata.gamemodes).join(", ") %></p>
           </div>
           <% } %>
+          <div>
+            <p><span class="info"><%= __('search.filename') %></span> <%= file.filename %></p>
+          </div>
+          <div>
+            <p><span class="info"><%= __('search.upload_date') %></span> <%= file.date %></p>
+          </div>
           <div class="">
             <p class="description"><%= metadata.description %></p>
           </div>
           <div>
             <p class="actions">
-              <a class="btn btn-sm btn-secondary" href="<%= file.path %>">Download</a>
+              <a class="btn btn-sm btn-secondary" href="<%= file.path %>"><%= __('search.download') %></a>
               <% if (process.env.EMULATOR_ENABLED === 'true') { %>
               <% if (isEmulatorCompatible(file.category)) { %>
               <a class="btn btn-sm btn-secondary" href="/play/<%= file.id %>"><%= __('emulator.play')%></a></a> <% } else { %>

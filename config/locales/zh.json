@@ -21,7 +21,22 @@
         "in_seconds": "用时{{seconds}}秒",
         "indexing": "索引正在进行中，如果列表中缺少内容，请稍后再试",
         "non_game_filter": "非游戏内容过滤已启用",
-        "displaying_results": "显示第{{start}}至{{end}}条结果。"
+        "displaying_results": "显示第{{start}}至{{end}}条结果。",
+        "no_description": "未找到描述。",
+        "no_metadata": "未找到元数据。",
+        "released": "发布时间：",
+        "release_date": "发行日期：",
+        "region": "地区：",
+        "platform": "平台：",
+        "genre": "类型：",
+        "published": "发行商：",
+        "developed": "开发商：",
+        "modes": "游戏模式：",
+        "download": "下载：",
+        "filename": "文件名：",
+        "release_group": "发布组：",
+        "upload_date": "上传日期：",
+        "more_info": "更多信息"
     },
     "about": {
         "title": "关于",
@@ -40,6 +55,10 @@
         "credits": {
             "created_by": "搜索引擎开发者：",
             "view_github": "在GitHub上查看项目"
+        },
+        "metadata": {
+            "title": "元数据信息",
+            "description": "本网站从{{metadata_source}}获取游戏的元数据信息。此信息在搜索时获取。在元数据缓存到数据库之前，搜索查询可能会较慢。"
         }
     },
     "settings": {

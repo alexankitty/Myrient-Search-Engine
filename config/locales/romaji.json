@@ -21,7 +21,22 @@
         "in_seconds": "{{seconds}}byou de kensaku kanryou",
         "indexing": "Indeksu sakusei chū desu. Risuto ni hyōji sarenai mono ga aru baai wa, sūfun go ni saikenshite kudasai",
         "non_game_filter": "Hi-gēmu kontentsu fuiruta ga yūkō desu",
-        "displaying_results": "{{start}}ken-me kara {{end}}ken-me wo hyōji chū."
+        "displaying_results": "{{start}}ken-me kara {{end}}ken-me wo hyōji chū.",
+        "no_description": "Setsumei ga mitsukarimasen.",
+        "no_metadata": "Metadēta ga mitsukarimasen.",
+        "released": "Hatsubai:",
+        "release_date": "Hatsubai-bi:",
+        "region": "Chiiki:",
+        "platform": "Purattofōmu:",
+        "genre": "Janru:",
+        "published": "Hatsubaisha:",
+        "developed": "Kaihatsusha:",
+        "modes": "Gēmu mōdo:",
+        "download": "Daunrōdo:",
+        "filename": "Fairu mei:",
+        "release_group": "Rirīsu gurūpu:",
+        "upload_date": "Apurōdo-bi:",
+        "more_info": "Kuwashii jōhō"
     },
     "about": {
         "title": "Saito ni tsuite",
@@ -40,6 +55,10 @@
         "credits": {
             "created_by": "Kensaku enjin kaihatsusha:",
             "view_github": "GitHub de purojekuto wo miru"
+        },
+        "metadata": {
+            "title": "Metadēta Jōhō",
+            "description": "Kono saito wa {{metadata_source}} kara gēmu no metadēta jōhō wo shutoku shimasu. Kono jōhō wa kensaku-ji ni shutoku saremasu. Metadēta ga dētabēsu ni kyasshu sareru made, kensaku kueri wa osoku naru kanōsei ga arimasu."
         }
     },
     "settings": {
@@ -103,7 +122,6 @@
             "more_info": "Kono sābisu ni tsuite no kuwashii jōhō wa, saito ni tsuite no pēji wo goran kudasai."
         },
         "recommended": "Suishou Emyurēta",
-        "download": "Daunrōdo",
         "play": "Purei",
         "not_available": "----",
         "disclaimer": "Kono emyurēta wa {{link}} kara chokusetsu gēmu wo yomikomi masu. Kuwashiku wa {{about}} pēji wo goran kudasai."
