@@ -19,6 +19,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=this-is-a-secure-db-password
       - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - TWITCH_CLIENT_ID=
+      - TWITCH_CLIENT_SECRET=
     volumes:
       - ./data:/usr/src/app/data
     depends_on:
