@@ -2,7 +2,7 @@
 let length = results.length > 5 ? 5 : results.length
 let resultString = ''
 for(let x = 0 ; x < length; x++){
-    resultString += `${x + 1}: ${results[x].filename}\n\n`
+    resultString += `${x + 1}: ${results[x].file.filename}\n\n`
 }
 resultString = resultString.trim()
 %>

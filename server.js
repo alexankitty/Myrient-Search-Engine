@@ -201,7 +201,7 @@ app.get("/search", async function (req, res) {
     delete settings.combineWith;
   }
   let loadOldResults = req.query.old === "true" ? true : false
-  settings.pageSize = settings.useOldResults ? 100 : 10;
+  settings.pageSize = loadOldResults ? 100 : 10;
   settings.page = pageNum - 1;
   settings.sort = req.query.o || "";
   let results = await search.findAllMatches(query, settings);
