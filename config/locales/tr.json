@@ -32,7 +32,7 @@
         "published": "Yayıncı:",
         "developed": "Geliştirici:",
         "modes": "Oyun modları:",
-        "download": "İndir:",
+        "download": "İndir",
         "filename": "Dosya adı:",
         "release_group": "Yayın grubu:",
         "upload_date": "Yükleme tarihi:",
@@ -129,6 +129,7 @@
         "download": "İndir",
         "play": "Oyna",
         "not_available": "----",
+        "not_available_tooltip": "Bu başlık için web emülasyonu kullanılamıyor çünkü ya bir oyun değil ya da platform desteklenmiyor.",
         "disclaimer": "Bu emülatör oyunları doğrudan {{link}} adresinden yükler. {{about}} sayfasında daha fazla bilgi edinin."
     },
     "results": {

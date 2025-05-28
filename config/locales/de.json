@@ -32,7 +32,7 @@
     "published": "Veröffentlicht von:",
     "developed": "Entwickelt von:",
     "modes": "Spielmodi:",
-    "download": "Herunterladen:",
+    "download": "Herunterladen",
     "filename": "Dateiname:",
     "release_group": "Release-Gruppe:",
     "upload_date": "Upload-Datum:",
@@ -129,6 +129,7 @@
     "download": "Herunterladen",
     "play": "Spielen",
     "not_available": "----",
+    "not_available_tooltip": "Web-Emulation ist für diesen Titel nicht verfügbar, da es sich entweder nicht um ein Spiel handelt oder die Plattform nicht unterstützt wird.",
     "disclaimer": "Dieser Emulator lädt Spiele direkt von {{link}}. Mehr dazu auf der {{about}}-Seite."
   },
   "results": {

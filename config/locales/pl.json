@@ -32,7 +32,7 @@
         "published": "Wydawca:",
         "developed": "Deweloper:",
         "modes": "Tryby gry:",
-        "download": "Pobierz:",
+        "download": "Pobierz",
         "filename": "Nazwa pliku:",
         "release_group": "Grupa wydania:",
         "upload_date": "Data przesłania:",
@@ -128,6 +128,7 @@
         "recommended": "Polecane emulatory",
         "play": "Graj",
         "not_available": "----",
+        "not_available_tooltip": "Emulacja internetowa nie jest dostępna dla tego tytułu, ponieważ nie jest to gra lub platforma nie jest obsługiwana.",
         "disclaimer": "Ten emulator ładuje gry bezpośrednio z {{link}}. Dowiedz się więcej na stronie {{about}}."
     },
     "results": {

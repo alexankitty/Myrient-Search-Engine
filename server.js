@@ -200,13 +200,14 @@ app.get("/search", async function (req, res) {
   if (settings.combineWith != "AND") {
     delete settings.combineWith;
   }
+  let loadOldResults = req.query.old === "true" ? true : false
   settings.pageSize = settings.useOldResults ? 100 : 10;
   settings.page = pageNum - 1;
   settings.sort = req.query.o || "";
   let results = await search.findAllMatches(query, settings);
   debugPrint(results);
   let metas = [];
-  if (!settings.useOldResults) {
+  if (!loadOldResults) {
     metas = await metadataSearch.queueGetGamesMetadata(results.db);
   }
   if (results.count && pageNum == 1) {
@@ -225,7 +226,7 @@ app.get("/search", async function (req, res) {
     urlPrefix: urlPrefix,
     settings: settings,
   };
-  let page = settings.useOldResults ? "resultsold" : "results";
+  let page = loadOldResults ? "resultsold" : "results";
   options = buildOptions(page, options);
   res.render(indexPage, options);
 });

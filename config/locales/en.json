@@ -32,7 +32,7 @@
     "published": "Published by:",
     "developed": "Developed by:",
     "modes": "Gameplay modes:",
-    "download": "Download:",
+    "download": "Download",
     "filename": "Filename:",
     "release_group": "Release group:",
     "upload_date": "Upload date:",
@@ -129,6 +129,7 @@
     "download": "Download",
     "play": "Play",
     "not_available": "----",
+    "not_available_tooltip": "Web emulation is unavailable for this title as it's either not a game or the platform is unsupported.",
     "disclaimer": "This emulator loads games directly from {{link}}. Learn more on the {{about}} page."
   },
   "results": {

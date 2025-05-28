@@ -90,7 +90,7 @@
               <% if (process.env.EMULATOR_ENABLED === 'true') { %>
               <% if (isEmulatorCompatible(file.category)) { %>
               <a class="btn btn-sm btn-secondary" href="/play/<%= file.id %>"><%= __('emulator.play')%></a></a> <% } else { %>
-              <button class="btn btn-sm btn-secondary" disabled><%= __('emulator.not_available') %></button>
+              <button class="btn btn-sm btn-secondary" disabled><%= __('emulator.not_available') %> <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="right" title="<%= __('emulator.not_available_tooltip') %>"></i></button>
               <% } 
                 }%>
           </div>

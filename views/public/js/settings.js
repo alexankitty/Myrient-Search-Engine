@@ -58,9 +58,6 @@
   }
 
   function loadSettings(){
-      $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-      })
     if(!settingStore) {
       settings = structuredClone(defaults)
       settingStore = JSON.stringify(settings)
