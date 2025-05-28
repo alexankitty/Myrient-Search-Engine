@@ -44,3 +44,10 @@
   height: auto;
   width: 240px;
 }
+
+.console {
+  height: 1.5rem;
+}
+.text-secondary{
+  font-size: 1.5rem;
+}

@@ -22,7 +22,7 @@
                 </a>
                 <input type="hidden" name="s" id="searchSettings">
                 <input id="search" type="text" class="w-50 form-control bg-dark text-white ml-2" name="q" value="<%= query %>" autocomplete="off" placeholder="<%= __('search.placeholder') %>">
-                <button type="submit" class="btn btn-secondary ml-2"><%= __('search.button') %></button>
+                <button type="submit" class="btn btn-secondary ml-2"><div id="loading" class="hidden spinner-border text-dark" role="status"></div><%= __('search.button') %></button>
 
             </div>
             <ul class="SuggestionList col-sm-12" id="suggestionList" style="width: 50%;left: 195px;"></ul>
@@ -175,4 +175,9 @@
 //         window.location = location.protocol + '//' + location.host + location.pathname + '?' + URLParams.toString()
 //     })
 // })
+</script>
+<script defer>
+  $( "#searchform" ).on( "submit", function( event ) {
+    $("#loading").removeClass('hidden')
+});
 </script>

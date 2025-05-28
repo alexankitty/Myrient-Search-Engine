@@ -8,10 +8,10 @@
     <img class="coverart" src="<%= coverUrl %>" href="<%= file.path %>">
   </div>
   <div class="col-md">
-    <p class="title"><a href="<%= file.path %>"><%= metadata.title || file.filename %></a></p>
-    <p class="info"><span class="infoitem badge badge-secondary"><%= __('search.released') %>: <%= metadata.releasedate || file.date %></span>
-      <span class="infoitem badge badge-secondary"><%= __('search.region') %> <%= file.region %></span>
-      <span class="infoitem badge badge-secondary"><%= __('search.platform') %> <%= file.category %></span>
+    <p class="title"><a href="/info/<%=file.id %>"><%= metadata.title || file.filename %></a></p>
+    <p class="info"><span class="infoitem badge badge-secondary"><%= __('search.released') %> <%= metadata.releasedate || file.date %></span>
+      <span class="infoitem badge badge-secondary"><%= __('search.region') %> <%= file.region %> <%- flags.createFlag(file.region) %></span>
+      <span class="infoitem badge badge-secondary"><%= __('search.platform') %> <%= file.category %> <%- consoleIcons.createConsoleImage(file.category) %></span>
       <% if(metadata.genre){ %>
       <span class="infoitem badge badge-secondary"><%= __('search.genre') %> <%= JSON.parse(metadata.genre).join(' / ') %></span>
       <% } %>

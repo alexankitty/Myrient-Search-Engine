@@ -20,13 +20,14 @@
   font-weight: bold;
   color: #f0a400;
   margin-bottom: 0!important;
+  font-size: 1.25em;
 }
 .title a {
     font-weight: bold;
     color: #f0a400;
 }
 .info {
-  font-size: 0.8em;
+  font-size: 1em;
 }
 .file {
   font-size: 0.8em;
@@ -36,7 +37,21 @@
 }
 .infoitem{
   margin-right: 0;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  height: 1.75em;
+  vertical-align: middle;
+  align-content: center;
 }
 .cover{
     margin-left: 1rem;
+}
+.flag{
+  height: 1.25em;
+  vertical-align: middle;
+}
+
+.console {
+  height: 1.25em;
+  vertical-align: middle;
 }

@@ -22,6 +22,8 @@ import i18n, { locales } from "./config/i18n.js";
 import { v4 as uuidv4 } from "uuid";
 import { optimizeDatabaseKws } from "./lib/dboptimize.js";
 import MetadataSearch from "./lib/metadatasearch.js";
+import Flag from "./lib/flag.js";
+import ConsoleIcons from "./lib/consoleicons.js";
 
 let categoryListPath = "./lib/categories.json";
 let nonGameTermsPath = "./lib/nonGameTerms.json";
@@ -33,6 +35,8 @@ let crawlTime = 0;
 let queryCount = 0;
 let fileCount = 0;
 let indexPage = "pages/index";
+let flags = new Flag();
+let consoleIcons = new ConsoleIcons(emulatorsData);
 
 // Initialize databases
 await initDB();
@@ -200,7 +204,8 @@ app.get("/search", async function (req, res) {
   if (settings.combineWith != "AND") {
     delete settings.combineWith;
   }
-  let loadOldResults = req.query.old === "true" || !metadataSearch.authorized ? true : false
+  let loadOldResults =
+    req.query.old === "true" || !metadataSearch.authorized ? true : false;
   settings.pageSize = loadOldResults ? 100 : 10;
   settings.page = pageNum - 1;
   settings.sort = req.query.o || "";
@@ -225,6 +230,8 @@ app.get("/search", async function (req, res) {
     indexing: search.indexing,
     urlPrefix: urlPrefix,
     settings: settings,
+    flags: flags,
+    consoleIcons: consoleIcons
   };
   let page = loadOldResults ? "resultsold" : "results";
   options = buildOptions(page, options);
@@ -259,7 +266,7 @@ app.get("/lucky", async function (req, res) {
 app.get("/settings", function (req, res) {
   let options = { defaultSettings: defaultSettings };
   let page = "settings";
-  options.oldSettingsAvailable = metadataSearch.authorized
+  options.oldSettingsAvailable = metadataSearch.authorized;
   options = buildOptions(page, options);
   res.render(indexPage, options);
 });
@@ -328,6 +335,8 @@ app.get("/info/:id", async function (req, res) {
   }
   let options = {
     romFile: romInfo[0],
+    flags: flags,
+    consoleIcons: consoleIcons
   };
   let page = "info";
   options = buildOptions(page, options);
