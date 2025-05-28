@@ -200,7 +200,7 @@ app.get("/search", async function (req, res) {
   if (settings.combineWith != "AND") {
     delete settings.combineWith;
   }
-  let loadOldResults = req.query.old === "true" ? true : false
+  let loadOldResults = req.query.old === "true" || !metadataSearch.authorized ? true : false
   settings.pageSize = loadOldResults ? 100 : 10;
   settings.page = pageNum - 1;
   settings.sort = req.query.o || "";
@@ -259,6 +259,7 @@ app.get("/lucky", async function (req, res) {
 app.get("/settings", function (req, res) {
   let options = { defaultSettings: defaultSettings };
   let page = "settings";
+  options.oldSettingsAvailable = metadataSearch.authorized
   options = buildOptions(page, options);
   res.render(indexPage, options);
 });
