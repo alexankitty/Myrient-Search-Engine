@@ -87,6 +87,7 @@ async function getFilesJob() {
     await metadataSearch.syncAllMetadata();
   }
   optimizeDatabaseKws();
+  metadataSearch.matchAllMetadata(true)
 }
 
 function buildOptions(page, options) {
