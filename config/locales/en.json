@@ -36,7 +36,10 @@
     "filename": "Filename:",
     "release_group": "Release group:",
     "upload_date": "Upload date:",
-    "more_info": "More Info"
+    "more_info": "More Info",
+    "size": "Size:",
+    "old_experience": "Using the old search experience.",
+    "new_experience": "Using the new search experience."
   },
   "about": {
     "title": "About",

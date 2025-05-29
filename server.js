@@ -1,4 +1,5 @@
 import getAllFiles from "./lib/dircrawl.js";
+import { optimizeDatabaseKws } from "./dboptimize.js";
 import FileHandler from "./lib/filehandler.js";
 import Searcher from "./lib/search.js";
 import cron from "node-cron";
@@ -16,11 +17,10 @@ import {
   isNonGameContent,
 } from "./lib/emulatorConfig.js";
 import fetch from "node-fetch";
-import { initDB, File, QueryCount } from "./lib/database.js";
+import { initDB, File, QueryCount, Metadata } from "./lib/database.js";
 import { initElasticsearch } from "./lib/services/elasticsearch.js";
 import i18n, { locales } from "./config/i18n.js";
 import { v4 as uuidv4 } from "uuid";
-import { optimizeDatabaseKws } from "./lib/dboptimize.js";
 import MetadataSearch from "./lib/metadatasearch.js";
 import Flag from "./lib/flag.js";
 import ConsoleIcons from "./lib/consoleicons.js";
@@ -81,6 +81,10 @@ async function getFilesJob() {
   }
   crawlTime = Date.now();
   console.log(`Finished updating file list. ${fileCount} found.`);
+  if(Metadata.count() > metadataSearch.getIGDBGamesCount()){
+    await metadataSearch.syncAllMetadata();
+  }
+  optimizeDatabaseKws();
 }
 
 function buildOptions(page, options) {
@@ -205,16 +209,12 @@ app.get("/search", async function (req, res) {
     delete settings.combineWith;
   }
   let loadOldResults =
-    req.query.old === "true" || !metadataSearch.authorized ? true : false;
+    req.query.old === "true" || !Metadata.count() ? true : false;
   settings.pageSize = loadOldResults ? 100 : 10;
   settings.page = pageNum - 1;
   settings.sort = req.query.o || "";
   let results = await search.findAllMatches(query, settings);
   debugPrint(results);
-  let metas = [];
-  if (!loadOldResults) {
-    metas = await metadataSearch.queueGetGamesMetadata(results.db);
-  }
   if (results.count && pageNum == 1) {
     queryCount += 1;
     await QueryCount.update({ count: queryCount }, { where: { id: 1 } });
@@ -222,7 +222,7 @@ app.get("/search", async function (req, res) {
   }
   let options = {
     query: query,
-    results: metas?.length ? metas : results.items,
+    results: results.items,
     count: results.count,
     elapsed: results.elapsed,
     pageNum: pageNum,
@@ -266,7 +266,7 @@ app.get("/lucky", async function (req, res) {
 app.get("/settings", function (req, res) {
   let options = { defaultSettings: defaultSettings };
   let page = "settings";
-  options.oldSettingsAvailable = metadataSearch.authorized;
+  options.oldSettingsAvailable = Metadata.count() ? true : false;
   options = buildOptions(page, options);
   res.render(indexPage, options);
 });

@@ -22,7 +22,7 @@
     <p class="description"><%= __('search.no_metadata') %></p>
     <% } %>
     <% if(metadata.title) {%>
-    <p class="file"><%= __('search.filename') %> <%= file.filename %> | <%= __('search.upload_date')%> <%= file.date %></p>
+    <p class="file"><%= __('search.filename') %> <%= file.filename %> | <%= __('search.size')%> <%= file.size %> | <%= __('search.upload_date')%> <%= file.date %></p>
     <% } %>
     <p class="group"><%= __('search.release_group') %> <%= file.group %></p>
     <p class="actions">
