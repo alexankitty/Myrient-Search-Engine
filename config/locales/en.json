@@ -94,7 +94,7 @@
       },
       "use_old_results": {
         "label": "Old Search",
-        "tooltip": "Redirects your search to the old table formatted results. These will load faster as they will ignore pulling metadata."
+        "tooltip": "Controls whether your searches direct to the new or old results experience."
       }
     },
     "save": "Save Settings"

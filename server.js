@@ -87,6 +87,7 @@ async function getFilesJob() {
     await metadataSearch.syncAllMetadata();
   }
   optimizeDatabaseKws();
+  //this is less important and needs to run last.
   metadataSearch.matchAllMetadata(true)
 }
 

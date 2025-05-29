@@ -36,7 +36,10 @@
         "filename": "Nazwa pliku:",
         "release_group": "Grupa wydania:",
         "upload_date": "Data przesłania:",
-        "more_info": "Więcej informacji"
+        "more_info": "Więcej informacji",
+        "size": "Rozmiar:",
+        "old_experience": "Używanie starego interfejsu wyszukiwania.",
+        "new_experience": "Używanie nowego interfejsu wyszukiwania."
     },
     "about": {
         "title": "O nas",
@@ -129,7 +132,8 @@
         "play": "Graj",
         "not_available": "----",
         "not_available_tooltip": "Emulacja internetowa nie jest dostępna dla tego tytułu, ponieważ nie jest to gra lub platforma nie jest obsługiwana.",
-        "disclaimer": "Ten emulator ładuje gry bezpośrednio z {{link}}. Dowiedz się więcej na stronie {{about}}."
+        "disclaimer": "Ten emulator ładuje gry bezpośrednio z {{link}}. Dowiedz się więcej na stronie {{about}}.",
+        "download": "Pobierz"
     },
     "results": {
         "table": {

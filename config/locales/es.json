@@ -36,7 +36,10 @@
         "filename": "Nombre del archivo:",
         "release_group": "Grupo de lanzamiento:",
         "upload_date": "Fecha de subida:",
-        "more_info": "Más información"
+        "more_info": "Más información",
+        "size": "Tamaño:",
+        "old_experience": "Usando la experiencia de búsqueda antigua.",
+        "new_experience": "Usando la nueva experiencia de búsqueda."
     },
     "about": {
         "title": "Acerca de",

@@ -36,7 +36,10 @@
         "filename": "Fairu mei:",
         "release_group": "Rirīsu gurūpu:",
         "upload_date": "Apurōdo-bi:",
-        "more_info": "Kuwashii jōhō"
+        "more_info": "Kuwashii jōhō",
+        "size": "Saizu:",
+        "old_experience": "Kyū kensaku taiken wo shiyō chū desu.",
+        "new_experience": "Atarashii kensaku taiken wo shiyō chū desu."
     },
     "about": {
         "title": "Saito ni tsuite",
@@ -88,6 +91,10 @@
             "hide_non_game": {
                 "label": "Hi-gēmu Kontentsu wo Hyōji Shinai",
                 "tooltip": "ROM hakku, patchi, ātowāku, sono ta no gēmu igai no kontentsu wo kensaku kekka kara jokyo shimasu."
+            },
+            "use_old_results": {
+                "label": "Kyū Kensaku",
+                "tooltip": "Kensaku kekka wo kyū tēburu keishiki ni redirekuto shimasu. Kore wa metadēta no shutoku wo sukippu suru tame, yori hayaku rōdo saremasu."
             }
         },
         "save": "Settei wo Hozon"
@@ -124,7 +131,9 @@
         "recommended": "Suishou Emyurēta",
         "play": "Purei",
         "not_available": "----",
-        "disclaimer": "Kono emyurēta wa {{link}} kara chokusetsu gēmu wo yomikomi masu. Kuwashiku wa {{about}} pēji wo goran kudasai."
+        "disclaimer": "Kono emyurēta wa {{link}} kara chokusetsu gēmu wo yomikomi masu. Kuwashiku wa {{about}} pēji wo goran kudasai.",
+        "download": "Daunrōdo",
+        "not_available_tooltip": "Kono taitoru wa gēmu de wa nai ka, purattofōmu ga sapōto sarete inai tame, webu emyurēshon wa riyō dekimasen."
     },
     "results": {
         "table": {

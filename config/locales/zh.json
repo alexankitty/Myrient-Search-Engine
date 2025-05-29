@@ -36,7 +36,10 @@
         "filename": "文件名：",
         "release_group": "发布组：",
         "upload_date": "上传日期：",
-        "more_info": "更多信息"
+        "more_info": "更多信息",
+        "size": "大小：",
+        "old_experience": "正在使用旧版搜索体验。",
+        "new_experience": "正在使用新版搜索体验。"
     },
     "about": {
         "title": "关于",
@@ -88,6 +91,10 @@
             "hide_non_game": {
                 "label": "隐藏非游戏内容",
                 "tooltip": "从搜索结果中过滤掉ROM修改、补丁、游戏插图等非游戏内容。"
+            },
+            "use_old_results": {
+                "label": "旧版搜索",
+                "tooltip": "控制您的搜索是使用新版还是旧版结果体验。"
             }
         },
         "save": "保存设置"
@@ -114,7 +121,8 @@
             "non_game": "警告：此文件可能不是游戏ROM，可能无法在网页模拟器中正常运行。",
             "see_about": "更多信息请参阅{{link}}页面。",
             "no_data": "没有可用的模拟器数据。",
-            "https": "不安全的HTTP连接：部分模拟器需要HTTPS才能正常运行。当前站点配置不正确。"
+            "https": "不安全的HTTP连接：部分模拟器需要HTTPS才能正常运行。当前站点配置不正确。",
+            "not_available_tooltip": "此标题无法使用网页模拟器，因为它不是游戏或平台不受支持。"
         },
         "console": {
             "about": "这是一个在线模拟器，直接从Myrient的公共档案运行游戏ROM。",

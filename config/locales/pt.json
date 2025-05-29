@@ -36,7 +36,10 @@
         "filename": "Nome do arquivo:",
         "release_group": "Grupo de lançamento:",
         "upload_date": "Data de upload:",
-        "more_info": "Mais informações"
+        "more_info": "Mais informações",
+        "size": "Tamanho:",
+        "old_experience": "Usando a experiência de busca antiga.",
+        "new_experience": "Usando a nova experiência de busca."
     },
     "about": {
         "title": "Sobre",
@@ -88,6 +91,10 @@
             "hide_non_game": {
                 "label": "Ocultar Conteúdo Não-Jogo",
                 "tooltip": "Filtra ROMs hackeadas, patches, artes e qualquer outro conteúdo que não seja um jogo dos resultados da busca."
+            },
+            "use_old_results": {
+                "label": "Busca Antiga",
+                "tooltip": "Controla se suas buscas usam a nova ou antiga experiência de resultados."
             }
         },
         "save": "Salvar Configurações"
@@ -114,7 +121,8 @@
             "non_game": "Aviso: Este arquivo pode não ser uma ROM de jogo e pode não funcionar corretamente no emulador web.",
             "see_about": "Veja a página {{link}} para mais informações.",
             "no_data": "Não há dados de emulador disponíveis.",
-            "https": "Conexão insegura: Alguns emuladores precisam de HTTPS para funcionar corretamente. Esta página não está configurada corretamente."
+            "https": "Conexão insegura: Alguns emuladores precisam de HTTPS para funcionar corretamente. Esta página não está configurada corretamente.",
+            "not_available_tooltip": "A emulação web não está disponível para este título pois não é um jogo ou a plataforma não é suportada."
         },
         "console": {
             "about": "Este é um emulador online que executa jogos diretamente do arquivo público do Myrient.",

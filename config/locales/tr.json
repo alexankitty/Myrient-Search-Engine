@@ -36,7 +36,10 @@
         "filename": "Dosya adı:",
         "release_group": "Yayın grubu:",
         "upload_date": "Yükleme tarihi:",
-        "more_info": "Daha fazla bilgi"
+        "more_info": "Daha fazla bilgi",
+        "size": "Boyut:",
+        "old_experience": "Eski arama deneyimi kullanılıyor.",
+        "new_experience": "Yeni arama deneyimi kullanılıyor."
     },
     "about": {
         "title": "Hakkında",
