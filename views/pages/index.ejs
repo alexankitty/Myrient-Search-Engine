@@ -1,3 +1,9 @@
+<% 
+  let ogPages = {
+    "results": "opengraphresults",
+    "info": "opengraphinfo"
+  }
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +12,7 @@
 <body class="d-flex flex-column min-vh-100">
 <header>
   <%- include('../partials/header'); %>
-  <%- page == 'results' ? include('../partials/opengraphresults') : include('../partials/opengraph') %>
+  <%- ogPages[page] ? include(`../partials/${ogPages[page]}`) : include('../partials/opengraph') %>
 </header>
 
 <%- include(page); %>

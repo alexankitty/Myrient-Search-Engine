@@ -9,7 +9,7 @@ resultString = resultString.trim()
 <meta name="description" content="Myrient Search Results">
 
 <!-- Facebook Meta Tags -->
-<meta property="og:url" content="https://myrientsearch.org">
+<meta property="og:url" content="https://<%= process.env.HOSTNAME %>">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Myrient Search Results: <%= query %>">
 <meta property="og:description" content="<%= resultString %>">
@@ -17,6 +17,6 @@ resultString = resultString.trim()
 <!-- Twitter Meta Tags -->
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:domain" content="myrientsearch.org">
-<meta property="twitter:url" content="https://myrientsearch.org">
+<meta property="twitter:url" content="https://<%= process.env.HOSTNAME %>">
 <meta name="twitter:title" content="Myrient Search Results: <%= query %>">
 <meta name="twitter:description" content="<%= resultString %>">
