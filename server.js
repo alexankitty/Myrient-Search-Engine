@@ -1,5 +1,5 @@
 import getAllFiles from "./lib/dircrawl.js";
-import { optimizeDatabaseKws } from "./dboptimize.js";
+import { optimizeDatabaseKws } from "./lib/dboptimize.js";
 import FileHandler from "./lib/filehandler.js";
 import Searcher from "./lib/search.js";
 import cron from "node-cron";

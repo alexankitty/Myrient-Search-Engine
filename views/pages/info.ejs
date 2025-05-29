@@ -1,7 +1,11 @@
 <%
     const metadata = romFile.metadata || new Object()
     const file = romFile.file || new Object()
-    const coverUrl = metadata.coverartid ? `/proxy-image?url=https://images.igdb.com/igdb/image/upload/t_cover_big/${metadata.coverartid}.webp` : "/public/images/coverart/nocoverart.png"
+    const titles = JSON.parse(metadata.alternatetitles)
+     
+    const coverarts = JSON.parse(metadata.coverartid)
+    const coverartId = coverarts[file.region] || coverarts.default
+    const coverUrl = coverartId ? `/proxy-image?url=https://images.igdb.com/igdb/image/upload/t_cover_big/${coverartId}.webp` : "/public/images/coverart/nocoverart.png"
     let images = []
     if(metadata.screenshots){
         images = JSON.parse(metadata.screenshots).map((im) => `/proxy-image?url=https://images.igdb.com/igdb/image/upload/t_720p/${im}.webp`)
@@ -47,12 +51,12 @@
           <% } %>
           <% if(metadata.developers) {%>
           <div>
-            <p><span class="info"><%= __('search.developed') %></span> <%= JSON.parse(metadata.developers).join(", ") %></p>
+            <p><span class="info"><%= __('search.developed') %></span> <%= metadata.developers.join(", ") %></p>
           </div>
           <% } %>
           <% if(metadata.publishers) {%>
           <div>
-            <p><span class="info"><%= __('search.published') %></span> <%= JSON.parse(metadata.publishers).join(", ") %></p>
+            <p><span class="info"><%= __('search.published') %></span> <%= metadata.publishers.join(", ") %></p>
           </div>
           <% } %>
           <% if(metadata.releasedate) {%>
@@ -67,12 +71,12 @@
           <% } %>
           <% if(metadata.genre) {%>
           <div>
-            <p><span class="info"><%= __('search.genre') %></span> <%= JSON.parse(metadata.genre).join(", ") %></p>
+            <p><span class="info"><%= __('search.genre') %></span> <%= metadata.genre.join(", ") %></p>
           </div>
           <% } %>
           <% if(metadata.gamemodes) {%>
           <div>
-            <p><span class="info"><%= __('search.modes') %></span> <%= JSON.parse(metadata.gamemodes).join(", ") %></p>
+            <p><span class="info"><%= __('search.modes') %></span> <%= metadata.gamemodes.join(", ") %></p>
           </div>
           <% } %>
           <div>

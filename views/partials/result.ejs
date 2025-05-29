@@ -1,7 +1,9 @@
 <% 
     const metadata = result.metadata || new Object()
     const file = result.file || new Object()
-    const coverUrl = metadata.coverartid ? `/proxy-image?url=https://images.igdb.com/igdb/image/upload/t_cover_big/${metadata.coverartid}.webp` : "/public/images/coverart/nocoverart.png"
+    const coverarts = JSON.parse(metadata.coverartid)
+    const coverartId = coverarts[file.region] || coverarts.default
+    const coverUrl = coverartId ? `/proxy-image?url=https://images.igdb.com/igdb/image/upload/t_cover_big/${coverartId}.webp` : "/public/images/coverart/nocoverart.png"
 %>
 <div class="col-md-auto row align-items-start searchresult">
   <div class="cover">
@@ -13,7 +15,7 @@
       <span class="infoitem badge badge-secondary"><%= __('search.region') %> <%= file.region %> <%- flags.createFlag(file.region) %></span>
       <span class="infoitem badge badge-secondary"><%= __('search.platform') %> <%= file.category %> <%- consoleIcons.createConsoleImage(file.category) %></span>
       <% if(metadata.genre){ %>
-      <span class="infoitem badge badge-secondary"><%= __('search.genre') %> <%= JSON.parse(metadata.genre).join(' / ') %></span>
+      <span class="infoitem badge badge-secondary"><%= __('search.genre') %> <%= metadata.genre.join(' / ') %></span>
       <% } %>
     </p>
     <% if(metadata.title) {%>
