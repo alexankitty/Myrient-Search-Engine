@@ -2,7 +2,13 @@
     const metadata = romFile.metadata || new Object()
     const file = romFile.file || new Object()
     const titles = JSON.parse(metadata.alternatetitles)
-     
+    let title = metadata.title
+    for(let x in titles){
+      //display in language specific name if available
+      if(titles[x].includes(localeNames[lang])){
+        title = titles[x]
+      }
+    }
     const coverarts = JSON.parse(metadata.coverartid)
     const coverartId = coverarts[file.region] || coverarts.default
     const coverUrl = coverartId ? `/proxy-image?url=https://images.igdb.com/igdb/image/upload/t_cover_big/${coverartId}.webp` : "/public/images/coverart/nocoverart.png"
@@ -20,7 +26,7 @@
   <div class="row justify-content-center">
     <div class="col-12 col-lg-10 col-xl-8">
       <div class="col-12 text-center">
-            <h2 class="text-white"><%= metadata.title %></h2>
+            <h2 class="text-white"><%= title %></h2>
             <p class="text-secondary text-platform"><%= file.category %> <%- consoleIcons.createConsoleImage(file.category) %></p>
           </div>
       <div class="row ml-1">

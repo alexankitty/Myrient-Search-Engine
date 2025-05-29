@@ -28,9 +28,11 @@ import ConsoleIcons from "./lib/consoleicons.js";
 let categoryListPath = "./lib/categories.json";
 let nonGameTermsPath = "./lib/nonGameTerms.json";
 let emulatorsPath = "./lib/emulators.json";
+let localeNamePath = "./lib/json/maps/name_localization.json"
 let categoryList = await FileHandler.parseJsonFile(categoryListPath);
 let nonGameTerms = await FileHandler.parseJsonFile(nonGameTermsPath);
 let emulatorsData = await FileHandler.parseJsonFile(emulatorsPath);
+let localeNames = await FileHandler.parseJsonFile(localeNamePath)
 let crawlTime = 0;
 let queryCount = 0;
 let fileCount = 0;
@@ -231,7 +233,8 @@ app.get("/search", async function (req, res) {
     urlPrefix: urlPrefix,
     settings: settings,
     flags: flags,
-    consoleIcons: consoleIcons
+    consoleIcons: consoleIcons,
+    localeNames: localeNames
   };
   let page = loadOldResults ? "resultsold" : "results";
   options = buildOptions(page, options);
@@ -336,7 +339,8 @@ app.get("/info/:id", async function (req, res) {
   let options = {
     romFile: romInfo[0],
     flags: flags,
-    consoleIcons: consoleIcons
+    consoleIcons: consoleIcons,
+    localeNames: localeNames
   };
   let page = "info";
   options = buildOptions(page, options);

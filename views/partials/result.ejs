@@ -1,6 +1,14 @@
 <% 
     const metadata = result.metadata || new Object()
     const file = result.file || new Object()
+    const titles = JSON.parse(metadata.alternatetitles)
+    let title = metadata.title
+    for(let x in titles){
+      //display in language specific name if available
+      if(titles[x].includes(localeNames[lang])){
+        title = titles[x]
+      }
+    }
     const coverarts = JSON.parse(metadata.coverartid)
     const coverartId = coverarts[file.region] || coverarts.default
     const coverUrl = coverartId ? `/proxy-image?url=https://images.igdb.com/igdb/image/upload/t_cover_big/${coverartId}.webp` : "/public/images/coverart/nocoverart.png"
@@ -10,7 +18,7 @@
     <img class="coverart" src="<%= coverUrl %>" href="<%= file.path %>">
   </div>
   <div class="col-md">
-    <p class="title"><a href="/info/<%=file.id %>"><%= metadata.title || file.filename %></a></p>
+    <p class="title"><a href="/info/<%=file.id %>"><%= title || file.filename %></a></p>
     <p class="info"><span class="infoitem badge badge-secondary"><%= __('search.released') %> <%= metadata.releasedate || file.date %></span>
       <span class="infoitem badge badge-secondary"><%= __('search.region') %> <%= file.region %> <%- flags.createFlag(file.region) %></span>
       <span class="infoitem badge badge-secondary"><%= __('search.platform') %> <%= file.category %> <%- consoleIcons.createConsoleImage(file.category) %></span>
