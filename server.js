@@ -83,10 +83,10 @@ async function getFilesJob() {
   }
   crawlTime = Date.now();
   console.log(`Finished updating file list. ${fileCount} found.`);
-  if(Metadata.count() > metadataSearch.getIGDBGamesCount()){
+  if(await Metadata.count() < await metadataSearch.getIGDBGamesCount()){
     await metadataSearch.syncAllMetadata();
   }
-  optimizeDatabaseKws();
+  await optimizeDatabaseKws();
   //this is less important and needs to run last.
   metadataSearch.matchAllMetadata(true)
 }
@@ -213,11 +213,11 @@ app.get("/search", async function (req, res) {
     delete settings.combineWith;
   }
   let loadOldResults =
-    req.query.old === "true" || !Metadata.count() ? true : false;
+    req.query.old === "true" || !await Metadata.count() ? true : false;
   settings.pageSize = loadOldResults ? 100 : 10;
   settings.page = pageNum - 1;
   settings.sort = req.query.o || "";
-  let results = await search.findAllMatches(query, settings);
+  let results = await search.findAllMatches(query.trim(), settings);
   debugPrint(results);
   if (results.count && pageNum == 1) {
     queryCount += 1;
@@ -268,10 +268,10 @@ app.get("/lucky", async function (req, res) {
   updateDefaults();
 });
 
-app.get("/settings", function (req, res) {
+app.get("/settings", async function (req, res) {
   let options = { defaultSettings: defaultSettings };
   let page = "settings";
-  options.oldSettingsAvailable = Metadata.count() ? true : false;
+  options.oldSettingsAvailable = await Metadata.count() ? true : false;
   options = buildOptions(page, options);
   res.render(indexPage, options);
 });

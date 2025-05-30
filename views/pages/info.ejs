@@ -24,7 +24,7 @@
   <div class="row justify-content-center">
     <div class="col-12 col-lg-10 col-xl-8">
       <div class="col-12 text-center">
-            <h2 class="text-white"><%= title %></h2>
+            <h2 class="text-white"><%= title || file.filename %></h2>
             <p class="text-secondary text-platform"><%= file.category %> <%- consoleIcons.createConsoleImage(file.category) %></p>
           </div>
       <div class="row ml-1">
@@ -107,9 +107,11 @@
           </div>
         </div>
       </div>
+      <% if(images.length || videos.length){ %>
       <div class="row col-md container mx-auto">
         <%- include("../partials/carousel", {images: images, videos: videos})%>
       </div>
+      <% } %>
     </div>
   </div>
 
