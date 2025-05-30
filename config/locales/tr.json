@@ -60,8 +60,8 @@
             "view_github": "Projeyi GitHub'da görüntüle"
         },
         "metadata": {
-            "title": "Meta Veri Bilgisi",
-            "description": "Bu web sitesi {{metadata_source}} üzerinden oyunlar hakkında meta veri bilgisi çeker. Bu bilgiler arama sırasında çekilir. Meta veriler veritabanında önbelleğe alınana kadar arama sorguları yavaş olabilir."
+            "title": "Meta Veri Bilgileri",
+            "description": "Bu web sitesi, oyunlar hakkındaki meta veri bilgilerini {{metadata_source}} kaynağından çeker. ROM adı uyuşmazlıkları veya servis sağlayıcı sorunları nedeniyle bazı meta veriler eksik veya hatalı olabilir."
         }
     },
     "settings": {

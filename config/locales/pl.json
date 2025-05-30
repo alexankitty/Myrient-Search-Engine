@@ -60,8 +60,8 @@
             "view_github": "Zobacz projekt na GitHub"
         },
         "metadata": {
-            "title": "Informacje o metadanych",
-            "description": "Ta strona pobiera informacje o metadanych gier z {{metadata_source}}. Te informacje są pobierane podczas wyszukiwania. Zapytania wyszukiwania mogą być wolne, dopóki metadane nie zostaną zapisane w pamięci podręcznej bazy danych."
+            "title": "Informacje o Metadanych",
+            "description": "Ta strona pobiera informacje o metadanych gier z {{metadata_source}}. Niektóre metadane mogą być brakujące lub nieprawidłowe z powodu niezgodności między nazwą ROM-u lub problemów z dostawcą usługi."
         }
     },
     "settings": {

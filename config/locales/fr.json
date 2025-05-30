@@ -60,8 +60,8 @@
             "view_github": "Voir le projet sur GitHub"
         },
         "metadata": {
-            "title": "Informations sur les métadonnées",
-            "description": "Ce site web récupère les métadonnées des jeux depuis {{metadata_source}}. Ces informations sont récupérées lors de la recherche. Les requêtes de recherche peuvent être lentes jusqu'à ce que les métadonnées soient mises en cache dans la base de données."
+            "title": "Informations sur les Métadonnées",
+            "description": "Ce site web extrait les informations de métadonnées sur les jeux de {{metadata_source}}. Certaines métadonnées peuvent être manquantes ou incorrectes en raison de différences entre le nom de la ROM ou de problèmes avec le fournisseur de service."
         }
     },
     "settings": {

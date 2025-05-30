@@ -61,7 +61,7 @@
         },
         "metadata": {
             "title": "Metadēta Jōhō",
-            "description": "Kono saito wa {{metadata_source}} kara gēmu no metadēta jōhō wo shutoku shimasu. Kono jōhō wa kensaku-ji ni shutoku saremasu. Metadēta ga dētabēsu ni kyasshu sareru made, kensaku kueri wa osoku naru kanōsei ga arimasu."
+            "description": "Kono websaito wa {{metadata_source}} kara gēmu no metadēta jōhō wo shutoku shiteimasu. ROM no namae no fuicchi ya sābisu purobaida no mondai ni yori, ichibu no metadēta ga ketsujo shiteiru ka, fuseikaku na baai ga arimasu."
         }
     },
     "settings": {

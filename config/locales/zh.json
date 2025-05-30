@@ -61,7 +61,7 @@
         },
         "metadata": {
             "title": "元数据信息",
-            "description": "本网站从{{metadata_source}}获取游戏的元数据信息。此信息在搜索时获取。在元数据缓存到数据库之前，搜索查询可能会较慢。"
+            "description": "本网站从 {{metadata_source}} 获取游戏的元数据信息。由于 ROM 名称不匹配或服务提供商的问题，某些元数据可能缺失或不准确。"
         }
     },
     "settings": {

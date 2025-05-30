@@ -61,7 +61,7 @@
     },
     "metadata": {
       "title": "Metadata Information",
-      "description": "This website pulls metadata information about games from {{metadata_source}}. This information is pulled on search. Search queries may be slow until metadata has been cached in the database."
+      "description": "This website pulls metadata information about games from {{metadata_source}}. Some metadata may be missing or incorrect due to mismatches between ROM name or problems with the service provider."
     }
   },
   "settings": {

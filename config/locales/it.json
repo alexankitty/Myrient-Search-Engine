@@ -61,7 +61,7 @@
         },
         "metadata": {
             "title": "Informazioni sui Metadati",
-            "description": "Questo sito web recupera informazioni sui metadati dei giochi da {{metadata_source}}. Queste informazioni vengono recuperate durante la ricerca. Le query di ricerca potrebbero essere lente fino a quando i metadati non vengono memorizzati nella cache del database."
+            "description": "Questo sito web estrae informazioni sui metadati dei giochi da {{metadata_source}}. Alcuni metadati potrebbero essere mancanti o incorretti a causa di discrepanze tra il nome della ROM o problemi con il fornitore del servizio."
         }
     },
     "settings": {
