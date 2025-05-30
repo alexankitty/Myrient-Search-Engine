@@ -76,6 +76,7 @@ let metadataSearch = new MetadataSearch();
 
 async function getFilesJob() {
   console.log("Updating the file list.");
+  let oldFileCount = fileCount || 0
   fileCount = await getAllFiles(categoryList);
   if (!fileCount) {
     console.log("File update failed");
@@ -86,9 +87,14 @@ async function getFilesJob() {
   if(await Metadata.count() < await metadataSearch.getIGDBGamesCount()){
     await metadataSearch.syncAllMetadata();
   }
+  if(fileCount > oldFileCount){
+    await metadataSearch.matchAllMetadata()
+  }
   await optimizeDatabaseKws();
   //this is less important and needs to run last.
-  metadataSearch.matchAllMetadata(true)
+  if(fileCount > oldFileCount){
+    metadataSearch.matchAllMetadata(true)
+  }
 }
 
 function buildOptions(page, options) {
