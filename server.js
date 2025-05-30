@@ -578,3 +578,6 @@ if (
 }
 
 cron.schedule("0 30 2 * * *", getFilesJob);
+
+await metadataSearch.syncAllMetadata()
+await metadataSearch.matchAllMetadata()
