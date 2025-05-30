@@ -40,6 +40,7 @@ let indexPage = "pages/index";
 let flags = new Flag();
 let consoleIcons = new ConsoleIcons(emulatorsData);
 
+
 // Initialize databases
 await initDB();
 await initElasticsearch();
@@ -579,5 +580,4 @@ if (
 
 cron.schedule("0 30 2 * * *", getFilesJob);
 
-await metadataSearch.syncAllMetadata()
-await metadataSearch.matchAllMetadata()
+await optimizeDatabaseKws()
