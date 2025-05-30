@@ -1,3 +1,9 @@
+<% 
+const coverarts = metadata.coverartid ? JSON.parse(metadata.coverartid) : []
+const coverartId = coverarts[file.region] || coverarts.default
+const coverUrl = coverartId ? `/proxy-image?url=https://images.igdb.com/igdb/image/upload/t_cover_big/${coverartId}.webp` : "/public/images/coverart/nocoverart.png"
+%>
+
 <meta name="description" content="Myrient Search Info">
 
 <!-- Facebook Meta Tags -->
@@ -12,6 +18,6 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:domain" content="myrientsearch.org">
 <meta property="twitter:url" content="https://<%= process.env.HOSTNAME %>">
-<meta name="twitter:title" content="Myrient Search Results: <%= metadata.title || file.filename %>">
+<meta name="twitter:title" content="<%= metadata.title || file.filename %>">
 <meta name="twitter:description" content="<%= metadata.description || "No description found." %>">
 <meta name="twitter:image" content="https://<%= process.env.HOSTNAME %>/<%=coverUrl%>">

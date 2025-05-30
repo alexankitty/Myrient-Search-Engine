@@ -1,15 +1,15 @@
 <% 
     const metadata = result.metadata || new Object()
     const file = result.file || new Object()
-    const titles = JSON.parse(metadata.alternatetitles)
+    const titles = metadata.alternatetitles ? JSON.parse(metadata.alternatetitles) : []
     let title = metadata.title
     for(let x in titles){
       //display in language specific name if available
-      if(titles[x].includes(localeNames[lang])){
+      if(x.includes(localeNames[locale])){
         title = titles[x]
       }
     }
-    const coverarts = JSON.parse(metadata.coverartid)
+    const coverarts = metadata.coverartid ? JSON.parse(metadata.coverartid) : []
     const coverartId = coverarts[file.region] || coverarts.default
     const coverUrl = coverartId ? `/proxy-image?url=https://images.igdb.com/igdb/image/upload/t_cover_big/${coverartId}.webp` : "/public/images/coverart/nocoverart.png"
 %>

@@ -332,14 +332,17 @@ app.get("/info/:id", async function (req, res) {
   }
   let romId = parseInt(req.params.id);
   let romFile = await search.findIndex(romId);
-  let romInfo = await metadataSearch.queueGetGamesMetadata([romFile]);
-
-  if (!romInfo.length) {
+  if (!romFile) {
     res.redirect("/");
     return;
   }
   let options = {
-    romFile: romInfo[0],
+    file: {
+      ...romFile.dataValues
+    },
+    metadata: {
+      ...romFile?.details?.dataValues
+    },
     flags: flags,
     consoleIcons: consoleIcons,
     localeNames: localeNames
