@@ -96,15 +96,15 @@ async function getFilesJob() {
       (await Metadata.count()) < (await metadataManager.getIGDBGamesCount())
     ) {
       await metadataManager.syncAllMetadata();
-      await metadataManager.matchAllMetadata();
-      metadataMatchCount = await File.count({
-        where: { detailsId: { [Op.ne]: null } },
-      });
     }
+    await metadataManager.matchAllMetadata();
+    metadataMatchCount = await File.count({
+      where: { detailsId: { [Op.ne]: null } },
+    });
     await optimizeDatabaseKws();
   }
   //this is less important and needs to run last.
-  if (fileCount > oldFileCount && await Metadata.count()) {
+  if (fileCount > oldFileCount && (await Metadata.count())) {
     metadataManager.matchAllMetadata(true);
   }
   metadataMatchCount = await File.count({
@@ -117,7 +117,7 @@ async function updateMetadata() {
   if (updatingFiles) return;
   if ((await Metadata.count()) < (await metadataManager.getIGDBGamesCount())) {
     await metadataManager.syncAllMetadata();
-    if(await Metadata.count()){
+    if (await Metadata.count()) {
       await metadataManager.matchAllMetadata();
     }
     metadataMatchCount = await File.count({
@@ -128,7 +128,7 @@ async function updateMetadata() {
 
 async function updateKws() {
   if (updatingFiles) return;
-  if (!await File.count({ where: { filenamekws: { [Op.ne]: null } } })) {
+  if (!(await File.count({ where: { filenamekws: { [Op.ne]: null } } }))) {
     await optimizeDatabaseKws();
   }
 }
@@ -232,7 +232,7 @@ app.get("/search", async function (req, res) {
   let urlPrefix = encodeURI(
     `/search?s=${req.query.s}&q=${req.query.q}${
       req.query.o ? "&o=" + req.query.o : ""
-    }${loadOldResults ? '&old=true': ''}&p=`
+    }${loadOldResults ? "&old=true" : ""}&p=`
   );
   pageNum = pageNum ? pageNum : 1;
   let settings = {};
@@ -615,5 +615,5 @@ if (
 cron.schedule("0 30 2 * * *", getFilesJob);
 
 //run these tasks after to add new functions
-await updateMetadata()
-await updateKws()
+await updateMetadata();
+await updateKws();
