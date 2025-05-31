@@ -104,7 +104,7 @@ async function getFilesJob() {
     await optimizeDatabaseKws();
   }
   //this is less important and needs to run last.
-  if (fileCount > oldFileCount) {
+  if (fileCount > oldFileCount && await Metadata.count()) {
     metadataManager.matchAllMetadata(true);
   }
   metadataMatchCount = await File.count({
@@ -117,7 +117,9 @@ async function updateMetadata() {
   if (updatingFiles) return;
   if ((await Metadata.count()) < (await metadataManager.getIGDBGamesCount())) {
     await metadataManager.syncAllMetadata();
-    await metadataManager.matchAllMetadata();
+    if(await Metadata.count()){
+      await metadataManager.matchAllMetadata();
+    }
     metadataMatchCount = await File.count({
       where: { detailsId: { [Op.ne]: null } },
     });
