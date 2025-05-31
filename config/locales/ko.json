@@ -100,10 +100,11 @@
         "save": "설정 저장"
     },
     "footer": {
-        "queries": "검색 횟수:",
-        "files": "등록된 파일:",
-        "terms": "색인된 단어 수:",
-        "last_crawl": "마지막 업데이트:"
+        "queries": "쿼리 수:",
+        "files": "알려진 파일:",
+        "terms": "용어 수:",
+        "metadata": "메타데이터가 있는 파일:",
+        "last_crawl": "마지막 크롤링 시간:"
     },
     "emulator": {
         "loading": {

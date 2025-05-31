@@ -100,10 +100,11 @@
         "save": "Ayarları Kaydet"
     },
     "footer": {
-        "queries": "Sorgu Sayısı:",
-        "files": "Bilinen Dosyalar:",
-        "terms": "Terim Sayısı:",
-        "last_crawl": "Son Güncellenme Zamanı:"
+        "queries": "Sorgu sayısı:",
+        "files": "Bilinen dosyalar:",
+        "terms": "Terim sayısı:",
+        "metadata": "Meta Verili Dosyalar:",
+        "last_crawl": "Son tarama zamanı:"
     },
     "emulator": {
         "loading": {

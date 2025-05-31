@@ -103,7 +103,8 @@
         "queries": "Liczba zapytań:",
         "files": "Znane pliki:",
         "terms": "Liczba terminów:",
-        "last_crawl": "Ostatnia aktualizacja:"
+        "metadata": "Pliki z Metadanymi:",
+        "last_crawl": "Czas ostatniego skanowania:"
     },
     "emulator": {
         "loading": {

@@ -100,10 +100,11 @@
         "save": "Settei wo Hozon"
     },
     "footer": {
-        "queries": "Kensaku Kueri Sū:",
-        "files": "Tōroku Fairu Sū:",
-        "terms": "Indeksu Tango Sū:",
-        "last_crawl": "Saishū Kōshin Jikoku:"
+        "queries": "Kueri-suu:",
+        "files": "Shiru fairu:",
+        "terms": "Yougo-suu:",
+        "metadata": "Metadata-tsuki Fairu:",
+        "last_crawl": "Saigo no kuroru jikoku:"
     },
     "emulator": {
         "loading": {

@@ -36,9 +36,11 @@ let localeNames = await FileHandler.parseJsonFile(localeNamePath);
 let crawlTime = 0;
 let queryCount = 0;
 let fileCount = 0;
+let metadataMatchCount = 0;
 let indexPage = "pages/index";
 let flags = new Flag();
 let consoleIcons = new ConsoleIcons(emulatorsData);
+import { Op } from "sequelize";
 
 // Initialize databases
 await initDB();
@@ -48,6 +50,9 @@ await initElasticsearch();
 fileCount = await File.count();
 crawlTime = (await File.max("updatedAt"))?.getTime() || 0;
 queryCount = (await QueryCount.findOne())?.count || 0;
+metadataMatchCount = await File.count({
+  where: { detailsId: { [Op.ne]: null } },
+});
 
 let searchFields = ["filename", "category", "type", "region"];
 
@@ -86,6 +91,9 @@ async function getFilesJob() {
   console.log(`Finished updating file list. ${fileCount} found.`);
   if ((await Metadata.count()) < (await metadataManager.getIGDBGamesCount())) {
     await metadataManager.syncAllMetadata();
+    metadataMatchCount = await File.count({
+      where: { detailsId: { [Op.ne]: null } },
+    });
   }
   if (fileCount > oldFileCount) {
     await metadataManager.matchAllMetadata();
@@ -95,6 +103,9 @@ async function getFilesJob() {
   if (fileCount > oldFileCount) {
     metadataManager.matchAllMetadata(true);
   }
+  metadataMatchCount = await File.count({
+    where: { detailsId: { [Op.ne]: null } },
+  });
 }
 
 function buildOptions(page, options) {
@@ -105,6 +116,7 @@ let defaultOptions = {
   crawlTime: crawlTime,
   queryCount: queryCount,
   fileCount: fileCount,
+  metadataMatchCount: metadataMatchCount,
   generateAsciiArt: generateAsciiArt,
   isEmulatorCompatible: isEmulatorCompatible,
   isNonGameContent: isNonGameContent,
@@ -115,6 +127,7 @@ function updateDefaults() {
   defaultOptions.crawlTime = crawlTime;
   defaultOptions.queryCount = queryCount;
   defaultOptions.fileCount = fileCount;
+  defaultOptions.metadataMatchCount = metadataMatchCount;
 }
 
 let app = express();
@@ -563,6 +576,7 @@ server.on("listening", function () {
   );
 });
 console.log(`Loaded ${fileCount} known files.`);
+console.log(`${metadataMatchCount} files contain matched metadata.`);
 
 // Run file update job if needed
 if (

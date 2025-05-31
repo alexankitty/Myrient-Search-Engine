@@ -100,10 +100,11 @@
         "save": "設定を保存"
     },
     "footer": {
-        "queries": "検索クエリ数：",
-        "files": "登録ファイル数：",
-        "terms": "インデックス語数：",
-        "last_crawl": "最終更新時刻："
+        "queries": "クエリ数：",
+        "files": "既知のファイル：",
+        "terms": "用語数：",
+        "metadata": "メタデータ付きファイル：",
+        "last_crawl": "最終クロール時刻："
     },
     "emulator": {
         "loading": {

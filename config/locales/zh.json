@@ -102,8 +102,9 @@
     "footer": {
         "queries": "查询次数：",
         "files": "已知文件：",
-        "terms": "索引词数：",
-        "last_crawl": "最近更新时间："
+        "terms": "术语数量：",
+        "metadata": "带元数据的文件：",
+        "last_crawl": "最后爬取时间："
     },
     "emulator": {
         "loading": {

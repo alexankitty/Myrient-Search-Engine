@@ -100,10 +100,11 @@
     "save": "Einstellungen speichern"
   },
   "footer": {
-    "queries": "Anzahl der Suchanfragen:",
+    "queries": "Anzahl der Abfragen:",
     "files": "Bekannte Dateien:",
-    "terms": "Indexierte Begriffe:",
-    "last_crawl": "Letztes Update:"
+    "terms": "Anzahl der Begriffe:",
+    "metadata": "Dateien mit Metadaten:",
+    "last_crawl": "Zeit des letzten Durchlaufs:"
   },
   "emulator": {
     "loading": {

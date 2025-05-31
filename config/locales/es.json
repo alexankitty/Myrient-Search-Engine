@@ -100,10 +100,11 @@
         "save": "Guardar ajustes"
     },
     "footer": {
-        "queries": "Número de Consultas:",
-        "files": "Archivos Conocidos:",
-        "terms": "Cantidad de Términos:",
-        "last_crawl": "Última Actualización:"
+        "queries": "Número de consultas:",
+        "files": "Archivos conocidos:",
+        "terms": "Recuento de términos:",
+        "metadata": "Archivos con Metadatos:",
+        "last_crawl": "Hora del último rastreo:"
     },
     "emulator": {
         "loading": {

@@ -103,6 +103,7 @@
     "queries": "Number of Queries:",
     "files": "Known Files:",
     "terms": "Term Count:",
+    "metadata": "Files with Metadata:",
     "last_crawl": "Time of Last Crawl:"
   },
   "emulator": {

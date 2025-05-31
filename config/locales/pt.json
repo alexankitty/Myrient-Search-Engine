@@ -100,10 +100,11 @@
         "save": "Salvar Configurações"
     },
     "footer": {
-        "queries": "Total de buscas:",
+        "queries": "Número de consultas:",
         "files": "Arquivos conhecidos:",
-        "terms": "Total de termos:",
-        "last_crawl": "Última atualização:"
+        "terms": "Contagem de termos:",
+        "metadata": "Arquivos com Metadados:",
+        "last_crawl": "Hora da última varredura:"
     },
     "emulator": {
         "loading": {
