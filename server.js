@@ -115,7 +115,7 @@ async function getFilesJob() {
 
 async function updateMetadata() {
   if (updatingFiles) return;
-  if ((await Metadata.count()) < (await metadataManager.getIGDBGamesCount())) {
+  if ((await Metadata.count()) < (await metadataManager.getIGDBGamesCount()) || process.env.FORCE_METADATA_RESYNC == "1") {
     await metadataManager.syncAllMetadata();
     if (await Metadata.count()) {
       await metadataManager.matchAllMetadata();
@@ -128,7 +128,7 @@ async function updateMetadata() {
 
 async function updateKws() {
   if (updatingFiles) return;
-  if (!(await File.count({ where: { filenamekws: { [Op.ne]: null } } }))) {
+  if (!(await File.count({ where: { filenamekws: { [Op.ne]: null } } })) || process.env.FORCE_DB_OPTIMIZE == "1") {
     await optimizeDatabaseKws();
   }
 }

@@ -7,6 +7,8 @@ services:
       - PORT=8062
       - BIND_ADDRESS=0.0.0.0
       - FORCE_FILE_REBUILD=0
+      - FORCE_METADATA_RESYNC=0
+      - FORCE_DB_OPTIMIZE=0
       - DEBUG=0
       - HOSTNAME=myrient.mahou.one
       - NODE_ENV=production
