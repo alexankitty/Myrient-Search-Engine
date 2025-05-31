@@ -40,6 +40,7 @@ let metadataMatchCount = 0;
 let indexPage = "pages/index";
 let flags = new Flag();
 let consoleIcons = new ConsoleIcons(emulatorsData);
+let updatingFiles = false;
 import { Op } from "sequelize";
 
 // Initialize databases
@@ -80,6 +81,7 @@ let search = new Searcher(searchFields);
 let metadataManager = new MetadataManager();
 
 async function getFilesJob() {
+  updatingFiles = true;
   console.log("Updating the file list.");
   let oldFileCount = fileCount || 0;
   fileCount = await getAllFiles(categoryList);
@@ -89,16 +91,18 @@ async function getFilesJob() {
   }
   crawlTime = Date.now();
   console.log(`Finished updating file list. ${fileCount} found.`);
-  if ((await Metadata.count()) < (await metadataManager.getIGDBGamesCount())) {
-    await metadataManager.syncAllMetadata();
-    metadataMatchCount = await File.count({
-      where: { detailsId: { [Op.ne]: null } },
-    });
-  }
   if (fileCount > oldFileCount) {
-    await metadataManager.matchAllMetadata();
+    if (
+      (await Metadata.count()) < (await metadataManager.getIGDBGamesCount())
+    ) {
+      await metadataManager.syncAllMetadata();
+      await metadataManager.matchAllMetadata();
+      metadataMatchCount = await File.count({
+        where: { detailsId: { [Op.ne]: null } },
+      });
+    }
+    await optimizeDatabaseKws();
   }
-  await optimizeDatabaseKws();
   //this is less important and needs to run last.
   if (fileCount > oldFileCount) {
     metadataManager.matchAllMetadata(true);
@@ -106,6 +110,25 @@ async function getFilesJob() {
   metadataMatchCount = await File.count({
     where: { detailsId: { [Op.ne]: null } },
   });
+  updatingFiles = false;
+}
+
+async function updateMetadata() {
+  if (updatingFiles) return;
+  if ((await Metadata.count()) < (await metadataManager.getIGDBGamesCount())) {
+    await metadataManager.syncAllMetadata();
+    await metadataManager.matchAllMetadata();
+    metadataMatchCount = await File.count({
+      where: { detailsId: { [Op.ne]: null } },
+    });
+  }
+}
+
+async function updateKws() {
+  if (updatingFiles) return;
+  if (!await File.count({ where: { filenamekws: { [Op.ne]: null } } })) {
+    await optimizeDatabaseKws();
+  }
 }
 
 function buildOptions(page, options) {
@@ -588,3 +611,7 @@ if (
 }
 
 cron.schedule("0 30 2 * * *", getFilesJob);
+
+//run these tasks after to add new functions
+updateMetadata()
+updateKws()
