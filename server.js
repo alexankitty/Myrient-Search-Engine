@@ -613,5 +613,5 @@ if (
 cron.schedule("0 30 2 * * *", getFilesJob);
 
 //run these tasks after to add new functions
-updateMetadata()
-updateKws()
+await updateMetadata()
+await updateKws()
