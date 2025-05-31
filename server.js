@@ -115,8 +115,12 @@ async function getFilesJob() {
 
 async function updateMetadata() {
   if (updatingFiles) return;
-  if ((await Metadata.count()) < (await metadataManager.getIGDBGamesCount()) || process.env.FORCE_METADATA_RESYNC == "1") {
+  let updateMatches = process.env.FORCE_METADATA_RESYNC == "1" ? true : false
+  if ((await Metadata.count()) < (await metadataManager.getIGDBGamesCount())) {
     await metadataManager.syncAllMetadata();
+    updateMatches = true;
+  }
+  if(updateMatches){
     if (await Metadata.count()) {
       await metadataManager.matchAllMetadata();
     }
