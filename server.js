@@ -225,12 +225,14 @@ app.get("/", function (req, res) {
 });
 
 app.get("/search", async function (req, res) {
+  let loadOldResults =
+    req.query.old === "true" || !(await Metadata.count()) ? true : false;
   let query = req.query.q ? req.query.q : "";
   let pageNum = parseInt(req.query.p);
   let urlPrefix = encodeURI(
     `/search?s=${req.query.s}&q=${req.query.q}${
       req.query.o ? "&o=" + req.query.o : ""
-    }&p=`
+    }${loadOldResults ? '&old=true': ''}&p=`
   );
   pageNum = pageNum ? pageNum : 1;
   let settings = {};
@@ -256,8 +258,6 @@ app.get("/search", async function (req, res) {
   if (settings.combineWith != "AND") {
     delete settings.combineWith;
   }
-  let loadOldResults =
-    req.query.old === "true" || !(await Metadata.count()) ? true : false;
   settings.pageSize = loadOldResults ? 100 : 10;
   settings.page = pageNum - 1;
   settings.sort = req.query.o || "";

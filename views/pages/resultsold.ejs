@@ -91,7 +91,7 @@
                 </td>
                 <% if (process.env.EMULATOR_ENABLED === 'true') { %>
                 <td>
-                    <% if (isEmulatorCompatible(results[x].category)) { %>
+                    <% if (isEmulatorCompatible(results[x].file.category)) { %>
                         <a href="/play/<%= results[x].id %>" class="btn btn-sm btn-secondary"><%= __('emulator.play') %></a>
                     <% } else { %>
                         <button class="btn btn-sm btn-secondary" disabled><%= __('emulator.not_available') %> <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="<%= __('emulator.not_available_tooltip') %>"></i></button>
