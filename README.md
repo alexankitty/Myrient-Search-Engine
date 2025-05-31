@@ -6,6 +6,9 @@ It is finally here. There is now a way to search all of Myrient's offerings.
 - 800MB-ish of memory for running the server
 - HTTPS for some CORS functions to work correctly.
 
+# Post Metasearch update
+Please clear your elasticsearch instance, and possibly run a new file rebuild to ensure there are no errors after updating your docker container or pulling the repo.
+
 # Self-Hosting
 
 ## Docker Method (Recommended)
@@ -68,6 +71,12 @@ server {
 ## SSL Certificate
 For the SSL certificate you can use certbot via the `certbot -d servername.tld` command and adding it to your `crontab`.
 [Additional Information for Certbot Setup](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04)
+
+# Opengraph
+To ensure OpenGraph metadata embed for chat apps works correctly, please be sure to set `HOSTNAME` in `.env` or `docker-compose.yml` to the FQDN (fully qualifed domain name) of the server that is hosting the site.
+
+# Metadata
+To enable metadata synchronize and matching, you will need to create a developer application in the [Twitch TV Developer Console](https://dev.twitch.tv/console) and then add your client id to `TWITCH_CLIENT_ID` in `.env` or `docker-compose.yml` along with adding your client secret to `TWITCH_CLIENT_SECRET`. Metadata takes about half an hour to synchronize from IGDB to your database, and about another half an hour to match via Postgres Full Text Search. Once all other database maintenance operations are done, the database will attempt to match anything that still isn't matched using a much slower fuzzy trigram search that can take up to a day to complete. These processes won't run again until a new crawl of myrient has been performed and the file count has increased.
 
 # Contributing
 You know the usual fluff.  

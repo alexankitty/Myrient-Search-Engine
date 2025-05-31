@@ -24,6 +24,7 @@ console.log('Available locales:', availableLocales);
 i18n.configure({
     locales: availableLocales,
     defaultLocale: 'en',
+    retryInDefaultLocale: true,
     directory: localesDir,
     objectNotation: true,
     updateFiles: false,

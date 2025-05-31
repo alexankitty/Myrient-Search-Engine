@@ -1,6 +1,9 @@
   $(document).ready(function() {
     // Make sure Bootstrap dropdown is properly initialized
     $('.dropdown-toggle').dropdown();
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
   });
 
   const aTags = document.querySelectorAll('a')

@@ -21,7 +21,25 @@
         "in_seconds": "{{seconds}}초 소요",
         "indexing": "인덱싱 중입니다. 목록에 누락된 항목이 있다면 잠시 후 다시 시도해 주세요",
         "non_game_filter": "비게임 콘텐츠 필터가 활성화되었습니다",
-        "displaying_results": "{{start}}번부터 {{end}}번까지의 결과를 표시합니다."
+        "displaying_results": "{{start}}번부터 {{end}}번까지의 결과를 표시합니다.",
+        "no_description": "설명을 찾을 수 없습니다.",
+        "no_metadata": "메타데이터를 찾을 수 없습니다.",
+        "released": "출시일：",
+        "release_date": "발매일：",
+        "region": "지역：",
+        "platform": "플랫폼：",
+        "genre": "장르：",
+        "published": "퍼블리셔：",
+        "developed": "개발사：",
+        "modes": "게임 모드：",
+        "download": "다운로드",
+        "filename": "파일명：",
+        "release_group": "릴리즈 그룹：",
+        "upload_date": "업로드 날짜：",
+        "more_info": "자세히 보기",
+        "size": "크기：",
+        "old_experience": "이전 검색 환경을 사용 중입니다.",
+        "new_experience": "새로운 검색 환경을 사용 중입니다."
     },
     "about": {
         "title": "소개",
@@ -40,6 +58,10 @@
         "credits": {
             "created_by": "검색 엔진 개발자:",
             "view_github": "GitHub에서 프로젝트 보기"
+        },
+        "metadata": {
+            "title": "메타데이터 정보",
+            "description": "이 웹사이트는 {{metadata_source}}에서 게임의 메타데이터 정보를 가져옵니다. ROM 이름의 불일치나 서비스 제공자의 문제로 인해 일부 메타데이터가 누락되거나 부정확할 수 있습니다."
         }
     },
     "settings": {
@@ -69,15 +91,20 @@
             "hide_non_game": {
                 "label": "비게임 콘텐츠 숨기기",
                 "tooltip": "ROM 해킹, 패치, 아트워크 등 게임이 아닌 콘텐츠를 검색 결과에서 제외합니다."
+            },
+            "use_old_results": {
+                "label": "이전 검색",
+                "tooltip": "검색 결과를 새로운 방식과 이전 방식 중 어느 것으로 표시할지 선택합니다."
             }
         },
         "save": "설정 저장"
     },
     "footer": {
-        "queries": "검색 횟수:",
-        "files": "등록된 파일:",
-        "terms": "색인된 단어 수:",
-        "last_crawl": "마지막 업데이트:"
+        "queries": "쿼리 수:",
+        "files": "알려진 파일:",
+        "terms": "용어 수:",
+        "metadata": "메타데이터가 있는 파일:",
+        "last_crawl": "마지막 크롤링 시간:"
     },
     "emulator": {
         "loading": {
@@ -95,7 +122,8 @@
             "non_game": "경고: 이 파일은 게임 ROM이 아닐 수 있으며 웹 에뮬레이터에서 제대로 작동하지 않을 수 있습니다.",
             "see_about": "자세한 내용은 {{link}} 페이지를 참조하세요.",
             "no_data": "사용 가능한 에뮬레이터 데이터가 없습니다.",
-            "https": "안전하지 않은 HTTP: 일부 에뮬레이터는 제대로 작동하려면 HTTPS가 필요합니다. 이 사이트는 올바르게 설정되지 않았습니다."
+            "https": "안전하지 않은 HTTP: 일부 에뮬레이터는 제대로 작동하려면 HTTPS가 필요합니다. 이 사이트는 올바르게 설정되지 않았습니다.",
+            "not_available_tooltip": "이 타이틀은 게임이 아니거나 지원되지 않는 플랫폼이기 때문에 웹 에뮬레이션을 사용할 수 없습니다."
         },
         "console": {
             "about": "이 온라인 에뮬레이터는 Myrient의 공개 아카이브에서 직접 게임 롬을 실행합니다.",
@@ -103,10 +131,10 @@
             "more_info": "이 서비스에 대한 자세한 정보는 소개 페이지를 확인하세요."
         },
         "recommended": "추천 에뮬레이터",
-        "download": "다운로드",
         "play": "플레이",
         "not_available": "----",
-        "disclaimer": "이 에뮬레이터는 {{link}}에서 직접 게임을 불러옵니다. {{about}} 페이지에서 더 자세히 알아보세요."
+        "disclaimer": "이 에뮬레이터는 {{link}}에서 직접 게임을 불러옵니다. {{about}} 페이지에서 더 자세히 알아보세요.",
+        "download": "다운로드"
     },
     "results": {
         "table": {

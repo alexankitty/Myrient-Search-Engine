@@ -1,115 +1,58 @@
 <%
-    let pageCount = Math.ceil(results.items.length / 100)
     pageCount = pageCount ? pageCount : 1 //always ensure 1 page
     if(pageNum > pageCount){
         pageNum = 1
     }
-    let entryStart = Math.floor((pageNum - 1) * 100)
-    let entryEnd = entryStart + 100
-    entryEnd = entryEnd > results.items.length ? results.items.length : entryEnd
 %>
-<script src='https://code.jquery.com/jquery-3.7.1.js' crossorigin="anonymous"></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js' crossorigin="anonymous"></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js' crossorigin="anonymous"></script>
-<script src='https://cdn.datatables.net/2.1.8/js/dataTables.js' crossorigin="anonymous"></script>
-<script src='https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap4.js' crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap4.css" crossorigin="anonymous">
+<link rel="stylesheet" href="/public/css/result.css">
 <div class="row w-100 m-0">
-    <form class="ml-2 form-inline w-100" action="/search">
-        <div class="w-100 align-items-center">
-            <div class="form-group">
-                <a href="/">
-                <pre class="mt-4 ml-2" style="font: 6px / 5px monospace; color: white; text-align: center; overflow: hidden; display: inline-flex;">
+  <form id="searchform" class="ml-2 form-inline w-100" action="/search">
+    <div class="w-100 align-items-center">
+      <div class="form-group">
+        <a href="/">
+          <pre class="mt-4 ml-2" style="font: 6px / 5px monospace; color: white; text-align: center; overflow: hidden; display: inline-flex;">
 <%= generateAsciiArt() %>
                 </pre>
-                </a>
-                <input type="hidden" name="s" id="searchSettings">
-                <input id="search" type="text" class="w-50 form-control bg-dark text-white ml-2" name="q" value="<%= query %>" autocomplete="off" placeholder="<%= __('search.placeholder') %>">
-                <button type="submit" class="btn btn-secondary ml-2"><%= __('search.button') %></button>
+        </a>
+        <input type="hidden" name="s" id="searchSettings">
+        <input id="search" type="text" class="w-50 form-control bg-dark text-white ml-2" name="q" value="<%= query %>" autocomplete="off" placeholder="<%= __('search.placeholder') %>">
+        <button type="submit" class="btn btn-secondary ml-2"><div id="loading" class="hidden spinner-border text-dark" role="status"></div><%= __('search.button') %></button>
 
-            </div>
-            <ul class="SuggestionList col-sm-12" id="suggestionList" style="width: 50%;left: 195px;"></ul>
-        </div>
-        <p class="m-2">
-            <%= __('search.found_plural', { count: results.items.length }) %> <%= __('search.in_seconds', { seconds: results.elapsed }) %>.
-            <%= indexing ? __('search.indexing') : "" %>
-            <% if (settings.hideNonGame) { %>
-            <span class="badge badge-info" data-toggle="tooltip" data-placement="top" title="<%= __('settings.extras.hide_non_game.tooltip') %>">
-                <%= __('search.non_game_filter') %>
-                <a href="/settings" class="text-white ml-1"><i class="bi bi-gear-fill"></i></a>
-            </span>
-            <% } %>
-        </p>
-    </form>
+      </div>
+      <ul class="SuggestionList col-sm-12" id="suggestionList" style="width: 50%;left: 195px;"></ul>
+    </div>
+    <p class="m-2">
+      <%= __('search.found_plural', { count: count }) %> <%= __('search.in_seconds', { seconds: elapsed }) %>.
+      <%= indexing ? __('search.indexing') : "" %>
+      <% if (settings.hideNonGame) { %>
+      <span class="badge badge-info" data-toggle="tooltip" data-placement="top" title="<%= __('settings.extras.hide_non_game.tooltip') %>">
+        <%= __('search.non_game_filter') %>
+        <a href="/settings" class="text-white ml-1"><i class="bi bi-gear-fill"></i></a>
+      </span>
+      <% } %>
+      <span class="badge badge-success" data-toggle="tooltip" data-placement="top" title="<%= __('settings.extras.use_old_results.tooltip') %>">
+        <%= __('search.new_experience') %>
+        <a href="/settings" class="text-white ml-1"><i class="bi bi-gear-fill"></i></a>
+      </span>
+    </p>
+  </form>
 
-    <div class="col-sm-12 w-100 mt-3">
-        <p><%= __('search.displaying_results', { start: entryStart, end: entryEnd }) %></p>
-        <table class="table text-white table-bordered" id="results">
-            <thead>
-                <tr>
-                    <th><%= __('results.table.name') %></th>
-                    <th><%= __('results.table.group') %></th>
-                    <th><%= __('results.table.category') %></th>
-                    <th><%= __('results.table.region') %></th>
-                    <th><%= __('results.table.type') %></th>
-                    <th><%= __('results.table.size') %></th>
-                    <th><%= __('results.table.date') %></th>
-                    <th><%= __('results.table.score') %></th>
-                    <% if (process.env.EMULATOR_ENABLED === 'true') { %>
-                        <th><%= __('results.table.play') %></th>
-                    <% } %>
-                </tr>
-            </thead>
-            <% for (let x = entryStart; x < entryEnd; x++) { %>
-            <tr>
-                <td>
-                    <a href="<%= results.items[x].path %>">
-                        <%= results.items[x].filename %>
-                    </a>
-                </td>
-                <td>
-                    <%= results.items[x].group %>
-                </td>
-                <td>
-                    <%= results.items[x].category %>
-                </td>
-                <td>
-                    <%= results.items[x].region %>
-                </td>
-                <td>
-                    <%= results.items[x].type %>
-                </td>
-                <td>
-                    <%= results.items[x].size %>
-                </td>
-                <td>
-                    <%= results.items[x].date %>
-                </td>
-                <td>
-                    <%= results.items[x].score.toFixed(2) %>
-                </td>
-                <% if (process.env.EMULATOR_ENABLED === 'true') { %>
-                <td>
-                    <% if (isEmulatorCompatible(results.items[x].category)) { %>
-                        <a href="/play/<%= results.items[x].id %>" class="btn btn-sm btn-secondary"><%= __('emulator.play') %></a>
-                    <% } else { %>
-                        <button class="btn btn-sm btn-secondary" disabled><%= __('emulator.not_available') %></button>
-                    <% } %>
-                </td>
-                <% } %>
-            </tr>
-            <% } %>
-        </table>
-        <%
+  <div class="col-sm-12 w-100 mt-3">
+    <div>
+      <% for (let x = 0; x < results.length; x++) { %>
+      <%- include("../partials/result", {result: results[x]}) %>
+      <% } %>
+    </div>
+    <%
         if(pageCount > 1) {
         %>
-        <div class="row justify-content-between">
-            <div class="d-md-flex justify-content-between align-items-center dt-layout-end col-md-auto ml-auto">
-                <div class="dt-paging">
-                    <nav aria-label="pagination">
-                        <ul class="pagination">
-                            <%
-                                let ellipsesElem = '<li class="dt-paging-button page-item disabled"><a class="page-link ellipsis" aria-controls="results" aria-disabled="true" data-dt-idx="ellipsis" tabindex="-1">…</a></li>          '
+    <div class="row justify-content-between">
+      <div class="d-md-flex justify-content-between align-items-center dt-layout-end col-md-auto ml-auto">
+        <div class="dt-paging">
+          <nav aria-label="pagination">
+            <ul class="pagination">
+              <%
+                                let ellipsesElem = '<li class="dt-paging-button page-item disabled"><a class="page-link ellipsis" aria-controls="results" aria-disabled="true" data-dt-idx="ellipsis" tabindex="-1">…</a></li>'
                                 let pageUrlPrefix = ''
                                 const getPageRange = (page) => {
                                     let pageUpperLimit = pageCount - 4
@@ -134,49 +77,27 @@
                                 }
                                 let pageRange = getPageRange(pageNum)
                             %>
-                            <li class="dt-paging-button page-item <%= pageNum == 1 ? 'disabled' : '' %>"><a <%= pageNum != 1 ? `href=${urlPrefix + (pageNum - 1)}` : '' %> class="page-link previous" aria-controls="results" aria-disabled="true" aria-label="Previous" data-dt-idx="previous" tabindex="-1">‹</a></li>
-                            <li class="dt-paging-button page-item <%= pageNum == 1 ? 'active' : '' %>"><a href="<%= urlPrefix + 1 %>" class="page-link" aria-controls="results" aria-current="page" data-dt-idx="0">1</a></li>
-                            <%-  pageNum >= 5 ? ellipsesElem : '' %>
-                            <% for(let x = pageRange.lower; x <= pageRange.upper; x++){ %>
-                            <li class="dt-paging-button page-item <%= pageNum == x ? 'active' : '' %>"><a href="<%= urlPrefix + x %>" class="page-link" aria-controls="results" aria-current="page" data-dt-idx="<%= x - 1 %>"><%= x %></a></li>
-                            <% } %>
-                            <%-  pageNum <= pageCount - 5 ? ellipsesElem : '' %>
-                            <li class="dt-paging-button page-item <%= pageNum == pageCount ? 'active' : '' %>"><a href="<%= urlPrefix + pageCount %>" class="page-link" aria-controls="results" data-dt-idx="<%= pageCount - 1 %>"><%= pageCount %></a></li>
-                            <li class="dt-paging-button page-item <%= pageNum == pageCount ? 'disabled' : '' %>"><a <%= pageNum != pageCount ? `href=${urlPrefix + (pageNum + 1)}` : '' %> class="page-link next" aria-controls="results" aria-label="Next" data-dt-idx="next">›</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+              <li class="dt-paging-button page-item <%= pageNum == 1 ? 'disabled' : '' %>"><a <%= pageNum != 1 ? `href=${urlPrefix + (pageNum - 1)}` : '' %> class="page-link previous" aria-controls="results" aria-disabled="true" aria-label="Previous" data-dt-idx="previous" tabindex="-1">‹</a></li>
+              <li class="dt-paging-button page-item <%= pageNum == 1 ? 'active' : '' %>"><a href="<%= urlPrefix + 1 %>" class="page-link" aria-controls="results" aria-current="page" data-dt-idx="0">1</a></li>
+              <%-  pageNum >= 5 ? ellipsesElem : '' %>
+              <% for(let x = pageRange.lower; x <= pageRange.upper; x++){ 
+                                if(x == pageCount) break;
+                            %>
+              <li class="dt-paging-button page-item <%= pageNum == x ? 'active' : '' %>"><a href="<%= urlPrefix + x %>" class="page-link" aria-controls="results" aria-current="page" data-dt-idx="<%= x - 1 %>"><%= x %></a></li>
+              <% } %>
+              <%-  pageNum <= pageCount - 5 ? ellipsesElem : '' %>
+              <li class="dt-paging-button page-item <%= pageNum == pageCount ? 'active' : '' %>"><a href="<%= urlPrefix + pageCount %>" class="page-link" aria-controls="results" data-dt-idx="<%= pageCount - 1 %>"><%= pageCount %></a></li>
+              <li class="dt-paging-button page-item <%= pageNum == pageCount ? 'disabled' : '' %>"><a <%= pageNum != pageCount ? `href=${urlPrefix + (pageNum + 1)}` : '' %> class="page-link next" aria-controls="results" aria-label="Next" data-dt-idx="next">›</a></li>
+            </ul>
+          </nav>
         </div>
-        <% } %>
+      </div>
     </div>
+    <% } %>
+  </div>
 </div>
 <script defer>
-    resultTable = new DataTable('#results', {
-        "order": [[7, 'desc']],
-        "columns": [
-            { "data": "name" },      // Name
-            { "data": "group" },     // Group
-            { "data": "category" },  // Category
-            { "data": "region" },    // Region
-            { "data": "type" },      // Type
-            { "data": "size" },      // Size
-            { "data": "date" },      // Date
-            { "data": "score" },     // Search Score
-            <% if (process.env.EMULATOR_ENABLED === 'true') { %>
-                { "data": "play", "orderable": false }  // Play button column
-            <% } %>
-        ],
-        "lengthMenu": [100, { label: 'All', value: -1 }, 50, 25, 10],
-        "paging": false,
-        "filter": false,
-        "layout": {
-            "bottomStart": ''
-        }
-    });
-
-    // Initialize tooltips
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    });
+  $( "#searchform" ).on( "submit", function( event ) {
+    $("#loading").removeClass('hidden')
+});
 </script>

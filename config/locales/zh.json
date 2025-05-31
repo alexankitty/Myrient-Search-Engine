@@ -21,7 +21,25 @@
         "in_seconds": "用时{{seconds}}秒",
         "indexing": "索引正在进行中，如果列表中缺少内容，请稍后再试",
         "non_game_filter": "非游戏内容过滤已启用",
-        "displaying_results": "显示第{{start}}至{{end}}条结果。"
+        "displaying_results": "显示第{{start}}至{{end}}条结果。",
+        "no_description": "未找到描述。",
+        "no_metadata": "未找到元数据。",
+        "released": "发布时间：",
+        "release_date": "发行日期：",
+        "region": "地区：",
+        "platform": "平台：",
+        "genre": "类型：",
+        "published": "发行商：",
+        "developed": "开发商：",
+        "modes": "游戏模式：",
+        "download": "下载",
+        "filename": "文件名：",
+        "release_group": "发布组：",
+        "upload_date": "上传日期：",
+        "more_info": "更多信息",
+        "size": "大小：",
+        "old_experience": "正在使用旧版搜索体验。",
+        "new_experience": "正在使用新版搜索体验。"
     },
     "about": {
         "title": "关于",
@@ -40,6 +58,10 @@
         "credits": {
             "created_by": "搜索引擎开发者：",
             "view_github": "在GitHub上查看项目"
+        },
+        "metadata": {
+            "title": "元数据信息",
+            "description": "本网站从 {{metadata_source}} 获取游戏的元数据信息。由于 ROM 名称不匹配或服务提供商的问题，某些元数据可能缺失或不准确。"
         }
     },
     "settings": {
@@ -69,6 +91,10 @@
             "hide_non_game": {
                 "label": "隐藏非游戏内容",
                 "tooltip": "从搜索结果中过滤掉ROM修改、补丁、游戏插图等非游戏内容。"
+            },
+            "use_old_results": {
+                "label": "旧版搜索",
+                "tooltip": "控制您的搜索是使用新版还是旧版结果体验。"
             }
         },
         "save": "保存设置"
@@ -76,8 +102,9 @@
     "footer": {
         "queries": "查询次数：",
         "files": "已知文件：",
-        "terms": "索引词数：",
-        "last_crawl": "最近更新时间："
+        "terms": "术语数量：",
+        "metadata": "带元数据的文件：",
+        "last_crawl": "最后爬取时间："
     },
     "emulator": {
         "loading": {
@@ -95,7 +122,8 @@
             "non_game": "警告：此文件可能不是游戏ROM，可能无法在网页模拟器中正常运行。",
             "see_about": "更多信息请参阅{{link}}页面。",
             "no_data": "没有可用的模拟器数据。",
-            "https": "不安全的HTTP连接：部分模拟器需要HTTPS才能正常运行。当前站点配置不正确。"
+            "https": "不安全的HTTP连接：部分模拟器需要HTTPS才能正常运行。当前站点配置不正确。",
+            "not_available_tooltip": "此标题无法使用网页模拟器，因为它不是游戏或平台不受支持。"
         },
         "console": {
             "about": "这是一个在线模拟器，直接从Myrient的公共档案运行游戏ROM。",

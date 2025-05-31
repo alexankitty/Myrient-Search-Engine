@@ -17,6 +17,11 @@
                 </div>
 
                 <div class="mb-4 border-top pt-3">
+                    <h5><%= __('about.metadata.title') %></h5>
+                    <p><%= __('about.metadata.description', {metadata_source: 'IGDB'}) %></p>
+                </div>
+
+                <div class="mb-4 border-top pt-3">
                     <h5><%= __('about.emulator.title') %></h5>
                     <% if (process.env.EMULATOR_ENABLED === 'true') { %>
                         <p><%= __('about.emulator.description') %></p>

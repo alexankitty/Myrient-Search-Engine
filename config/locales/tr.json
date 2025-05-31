@@ -21,7 +21,25 @@
         "in_seconds": "{{seconds}} saniyede",
         "indexing": "İndeksleme devam ediyor, listede eksik bir şey varsa lütfen birkaç dakika sonra tekrar deneyin",
         "non_game_filter": "Oyun dışı içerik filtresi etkin",
-        "displaying_results": "{{start}} ile {{end}} arası sonuçlar gösteriliyor."
+        "displaying_results": "{{start}} ile {{end}} arası sonuçlar gösteriliyor.",
+        "no_description": "Açıklama bulunamadı.",
+        "no_metadata": "Meta veri bulunamadı.",
+        "released": "Yayınlandı:",
+        "release_date": "Çıkış tarihi:",
+        "region": "Bölge:",
+        "platform": "Platform:",
+        "genre": "Tür:",
+        "published": "Yayıncı:",
+        "developed": "Geliştirici:",
+        "modes": "Oyun modları:",
+        "download": "İndir",
+        "filename": "Dosya adı:",
+        "release_group": "Yayın grubu:",
+        "upload_date": "Yükleme tarihi:",
+        "more_info": "Daha fazla bilgi",
+        "size": "Boyut:",
+        "old_experience": "Eski arama deneyimi kullanılıyor.",
+        "new_experience": "Yeni arama deneyimi kullanılıyor."
     },
     "about": {
         "title": "Hakkında",
@@ -40,6 +58,10 @@
         "credits": {
             "created_by": "Arama motoru şu kişi tarafından oluşturuldu:",
             "view_github": "Projeyi GitHub'da görüntüle"
+        },
+        "metadata": {
+            "title": "Meta Veri Bilgileri",
+            "description": "Bu web sitesi, oyunlar hakkındaki meta veri bilgilerini {{metadata_source}} kaynağından çeker. ROM adı uyuşmazlıkları veya servis sağlayıcı sorunları nedeniyle bazı meta veriler eksik veya hatalı olabilir."
         }
     },
     "settings": {
@@ -67,17 +89,22 @@
                 "tooltip": "Arama sorgusundaki tüm kelimelerin eşleşmesini gerektirir."
             },
             "hide_non_game": {
-                "label": "Oyun Olmayan İçeriği Gizle",
-                "tooltip": "ROM hackleri, yamalar, görseller ve diğer oyun dışı içerikleri arama sonuçlarından filtreler."
+                "label": "Oyun Dışı İçeriği Gizle",
+                "tooltip": "ROM hack'leri, yamalar, görseller ve diğer oyun dışı içerikleri arama sonuçlarından filtreler."
+            },
+            "use_old_results": {
+                "label": "Eski Arama",
+                "tooltip": "Aramanızı eski tablo formatındaki sonuçlara yönlendirir. Bunlar meta verileri çekmeyeceği için daha hızlı yüklenecektir."
             }
         },
         "save": "Ayarları Kaydet"
     },
     "footer": {
-        "queries": "Sorgu Sayısı:",
-        "files": "Bilinen Dosyalar:",
-        "terms": "Terim Sayısı:",
-        "last_crawl": "Son Güncellenme Zamanı:"
+        "queries": "Sorgu sayısı:",
+        "files": "Bilinen dosyalar:",
+        "terms": "Terim sayısı:",
+        "metadata": "Meta Verili Dosyalar:",
+        "last_crawl": "Son tarama zamanı:"
     },
     "emulator": {
         "loading": {
@@ -106,6 +133,7 @@
         "download": "İndir",
         "play": "Oyna",
         "not_available": "----",
+        "not_available_tooltip": "Bu başlık için web emülasyonu kullanılamıyor çünkü ya bir oyun değil ya da platform desteklenmiyor.",
         "disclaimer": "Bu emülatör oyunları doğrudan {{link}} adresinden yükler. {{about}} sayfasında daha fazla bilgi edinin."
     },
     "results": {

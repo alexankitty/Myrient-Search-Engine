@@ -8,6 +8,7 @@ services:
       - BIND_ADDRESS=0.0.0.0
       - FORCE_FILE_REBUILD=0
       - DEBUG=0
+      - HOSTNAME=myrient.mahou.one
       - NODE_ENV=production
       - MAX_JOB_QUEUE=1000
       - MAX_FETCH_JOBS=1000
@@ -19,6 +20,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=this-is-a-secure-db-password
       - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - TWITCH_CLIENT_ID=
+      - TWITCH_CLIENT_SECRET=
     volumes:
       - ./data:/usr/src/app/data
     depends_on:

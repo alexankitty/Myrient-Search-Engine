@@ -144,3 +144,18 @@ td a {
   position: relative;
   z-index: 9999 !important;
 }
+.flag {
+  object-fit: contain;
+}
+.console {
+  object-fit: contain;
+}
+.spinner-border {
+  height: 1rem;
+  width: 1rem;
+  margin-right: 0.25em;
+  vertical-align: sub;
+}
+.hidden {
+  display: none;
+}

@@ -1,149 +1,177 @@
 {
-    "app": {
-        "name": "Myrient Search",
-        "description": "A search engine for Myrient - a service by Erista dedicated to video game preservation.",
-        "tagline": "Myrient offers organized and publicly available video game collections, keeping them from becoming lost to time.",
-        "disclaimer": "Not affiliated with Myrient/Erista!"
-    },
-    "nav": {
-        "settings": "Settings",
-        "emulators": "Emulators",
-        "about": "About",
-        "search": "Search",
-        "results": "Results"
-    },
-    "search": {
-        "placeholder": "Search...",
-        "button": "Search",
-        "lucky": "I'm Feeling Lucky",
-        "found": "Found {{count}} result",
-        "found_plural": "Found {{count}} results",
-        "in_seconds": "in {{seconds}} seconds",
-        "indexing": "Indexing in progress, if the list is missing something please try reloading in a few minutes",
-        "non_game_filter": "Non-game content filter is active",
-        "displaying_results": "Displaying results {{start}} through {{end}}."
-    },
-    "about": {
-        "title": "About",
-        "support": "If you like this project, please consider supporting Myrient:",
-        "donate": "Donate to Myrient",
-        "emulator": {
-            "title": "Built-in Emulator",
-            "description": "This website includes a built-in emulator powered by EmulatorJS that brings retro gaming directly to your browser.",
-            "compatibility": "Compatible games will feature a play button on their search result page.",
-            "browser_tip": "For the best gaming experience, use a Chromium-based browser with hardware acceleration turned on.",
-            "save_states": "Games are loaded directly from Myrient's public archive. Save states are stored locally in the browser.",
-            "limitations": "ROM hacks, soundtracks, and other non-game content are not supported by the emulator and may fail to load.",
-            "disabled": "Web Emulator functionality was disabled by the administrator.",
-            "contact": "Contact the administrator or spin up your own instance of Myrient Search."
-        },
-        "credits": {
-            "created_by": "Search engine created by",
-            "view_github": "View project on GitHub"
-        }
-    },
-    "settings": {
-        "title": "Settings",
-        "search_columns": {
-            "title": "Search Columns",
-            "tooltip": "Selects which columns the search engine will search on."
-        },
-        "score_multiplier": {
-            "title": "Search Score Multiplier",
-            "tooltip": "Multiplies the match score for each word found based on the category it's found in."
-        },
-        "extras": {
-            "title": "Extras",
-            "fuzzy": {
-                "label": "Fuzzy Value",
-                "tooltip": "Value between 0.00 and 1.00 that determines the fuzzy distance (Levenshtein distance) for how closely a word needs to be considered a match. A higher value allows for less stringent matches. A value of 0 disables."
-            },
-            "prefix": {
-                "label": "Allow Prefixes",
-                "tooltip": "Allows partial matches of words at the start of the word."
-            },
-            "match_all": {
-                "label": "Match All Words",
-                "tooltip": "Requires all words in the search query to match."
-            },
-            "hide_non_game": {
-                "label": "Hide Non-Game Content",
-                "tooltip": "Filters out ROM hacks, patches, artwork, and other non-game content from search results."
-            }
-        },
-        "save": "Save Settings"
-    },
-    "footer": {
-        "queries": "Number of Queries:",
-        "files": "Known Files:",
-        "terms": "Term Count:",
-        "last_crawl": "Time of Last Crawl:"
-    },
+  "app": {
+    "name": "Myrient Search",
+    "description": "A search engine for Myrient - a service by Erista dedicated to video game preservation.",
+    "tagline": "Myrient offers organized and publicly available video game collections, keeping them from becoming lost to time.",
+    "disclaimer": "Not affiliated with Myrient/Erista!"
+  },
+  "nav": {
+    "settings": "Settings",
+    "emulators": "Emulators",
+    "about": "About",
+    "search": "Search",
+    "results": "Results"
+  },
+  "search": {
+    "placeholder": "Search...",
+    "button": "Search",
+    "lucky": "I'm Feeling Lucky",
+    "found": "Found {{count}} result",
+    "found_plural": "Found {{count}} results",
+    "in_seconds": "in {{seconds}} seconds",
+    "indexing": "Indexing in progress, if the list is missing something please try reloading in a few minutes",
+    "non_game_filter": "Non-game content filter is active",
+    "no_description": "No descrption found.",
+    "no_metadata": "No metadata found.",
+    "displaying_results": "Displaying results {{start}} through {{end}}.",
+    "released": "Released:",
+    "release_date": "Release date:",
+    "region": "Region:",
+    "platform": "Platform:",
+    "genre": "Genre:",
+    "published": "Published by:",
+    "developed": "Developed by:",
+    "modes": "Gameplay modes:",
+    "download": "Download",
+    "filename": "Filename:",
+    "release_group": "Release group:",
+    "upload_date": "Upload date:",
+    "more_info": "More Info",
+    "size": "Size:",
+    "old_experience": "Using the old search experience.",
+    "new_experience": "Using the new search experience."
+  },
+  "about": {
+    "title": "About",
+    "support": "If you like this project, please consider supporting Myrient:",
+    "donate": "Donate to Myrient",
     "emulator": {
-        "loading": {
-            "rom": "Loading ROM...",
-            "downloading": "Downloading ROM",
-            "downloading_progress": "Downloading ROM: {{percent}}%",
-            "decompressing": "Decompressing the game..."
-        },
-        "error": {
-            "loading": "Error loading game",
-            "no_rom": "No ROM file found in archive",
-            "http_error": "HTTP error! status: {{status}}"
-        },
-        "warning": {
-            "non_game": "Warning: This file may not be a game ROM and might not work properly in the web emulator.",
-            "see_about": "See the {{link}} page for more information.",
-            "no_data": "No emulator data available.",
-            "https": "Insecure HTTP: Some emulators require HTTPS to function properly. This instance isn't properly configured."
-        },
-        "console": {
-            "about": "This is an online emulator running game ROMs directly from Myrient's public archive.",
-            "disclaimer": "No game ROMs are hosted on this website. All content is loaded directly from Myrient servers.",
-            "more_info": "For more information about this service, please visit the About page."
-        },
-        "recommended": "Recommended Emulators",
-        "download": "Download",
-        "play": "Play",
-        "not_available": "----",
-        "disclaimer": "This emulator loads games directly from {{link}}. Learn more on the {{about}} page."
+      "title": "Built-in Emulator",
+      "description": "This website includes a built-in emulator powered by EmulatorJS that brings retro gaming directly to your browser.",
+      "compatibility": "Compatible games will feature a play button on their search result page.",
+      "browser_tip": "For the best gaming experience, use a Chromium-based browser with hardware acceleration turned on.",
+      "save_states": "Games are loaded directly from Myrient's public archive. Save states are stored locally in the browser.",
+      "limitations": "ROM hacks, soundtracks, and other non-game content are not supported by the emulator and may fail to load.",
+      "disabled": "Web Emulator functionality was disabled by the administrator.",
+      "contact": "Contact the administrator or spin up your own instance of Myrient Search."
     },
-    "results": {
-        "table": {
-            "name": "Name",
-            "group": "Group",
-            "category": "Category",
-            "region": "Region",
-            "type": "Type",
-            "size": "Size",
-            "date": "Date",
-            "score": "Search Score",
-            "play": "Play"
-        }
+    "credits": {
+      "created_by": "Search engine created by",
+      "view_github": "View project on GitHub"
+    },
+    "metadata": {
+      "title": "Metadata Information",
+      "description": "This website pulls metadata information about games from {{metadata_source}}. Some metadata may be missing or incorrect due to mismatches between ROM name or problems with the service provider."
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "search_columns": {
+      "title": "Search Columns",
+      "tooltip": "Selects which columns the search engine will search on."
+    },
+    "score_multiplier": {
+      "title": "Search Score Multiplier",
+      "tooltip": "Multiplies the match score for each word found based on the category it's found in."
+    },
+    "extras": {
+      "title": "Extras",
+      "fuzzy": {
+        "label": "Fuzzy Value",
+        "tooltip": "Value between 0.00 and 1.00 that determines the fuzzy distance (Levenshtein distance) for how closely a word needs to be considered a match. A higher value allows for less stringent matches. A value of 0 disables."
+      },
+      "prefix": {
+        "label": "Allow Prefixes",
+        "tooltip": "Allows partial matches of words at the start of the word."
+      },
+      "match_all": {
+        "label": "Match All Words",
+        "tooltip": "Requires all words in the search query to match."
+      },
+      "hide_non_game": {
+        "label": "Hide Non-Game Content",
+        "tooltip": "Filters out ROM hacks, patches, artwork, and other non-game content from search results."
+      },
+      "use_old_results": {
+        "label": "Old Search",
+        "tooltip": "Controls whether your searches direct to the new or old results experience."
+      }
+    },
+    "save": "Save Settings"
+  },
+  "footer": {
+    "queries": "Number of Queries:",
+    "files": "Known Files:",
+    "terms": "Term Count:",
+    "metadata": "Files with Metadata:",
+    "last_crawl": "Time of Last Crawl:"
+  },
+  "emulator": {
+    "loading": {
+      "rom": "Loading ROM...",
+      "downloading": "Downloading ROM",
+      "downloading_progress": "Downloading ROM: {{percent}}%",
+      "decompressing": "Decompressing the game..."
     },
     "error": {
-        "title": "Error",
-        "message": "Something went wrong",
-        "details": "Error details: {{message}}",
-        "back_home": "Back to Home",
-        "go_back": "Go Back"
+      "loading": "Error loading game",
+      "no_rom": "No ROM file found in archive",
+      "http_error": "HTTP error! status: {{status}}"
     },
-    "languages": {
-        "en": "English",
-        "es": "Español",
-        "pt": "Português",
-        "zh": "中文",
-        "ja": "日本語",
-        "fr": "Français",
-        "de": "Deutsch",
-        "ko": "한국어",
-        "pl": "Polski",
-        "tr": "Türkçe",
-        "it": "Italiano",
-        "romaji": "Romaji",
-        "hi": "हिन्दी",
-        "ar": "العربية",
-        "bn": "বাংলা",
-        "ru": "Русский"
+    "warning": {
+      "non_game": "Warning: This file may not be a game ROM and might not work properly in the web emulator.",
+      "see_about": "See the {{link}} page for more information.",
+      "no_data": "No emulator data available.",
+      "https": "Insecure HTTP: Some emulators require HTTPS to function properly. This instance isn't properly configured."
+    },
+    "console": {
+      "about": "This is an online emulator running game ROMs directly from Myrient's public archive.",
+      "disclaimer": "No game ROMs are hosted on this website. All content is loaded directly from Myrient servers.",
+      "more_info": "For more information about this service, please visit the About page."
+    },
+    "recommended": "Recommended Emulators",
+    "download": "Download",
+    "play": "Play",
+    "not_available": "----",
+    "not_available_tooltip": "Web emulation is unavailable for this title as it's either not a game or the platform is unsupported.",
+    "disclaimer": "This emulator loads games directly from {{link}}. Learn more on the {{about}} page."
+  },
+  "results": {
+    "table": {
+      "name": "Name",
+      "group": "Group",
+      "category": "Category",
+      "region": "Region",
+      "type": "Type",
+      "size": "Size",
+      "date": "Date",
+      "score": "Search Score",
+      "play": "Play"
     }
+  },
+  "error": {
+    "title": "Error",
+    "message": "Something went wrong",
+    "details": "Error details: {{message}}",
+    "back_home": "Back to Home",
+    "go_back": "Go Back"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "pt": "Português",
+    "zh": "中文",
+    "ja": "日本語",
+    "fr": "Français",
+    "de": "Deutsch",
+    "ko": "한국어",
+    "pl": "Polski",
+    "tr": "Türkçe",
+    "it": "Italiano",
+    "romaji": "Romaji",
+    "hi": "हिन्दी",
+    "ar": "العربية",
+    "bn": "বাংলা",
+    "ru": "Русский"
+  }
 }

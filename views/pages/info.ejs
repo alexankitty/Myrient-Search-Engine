@@ -1,0 +1,118 @@
+<%
+    const titles = metadata.alternatetitles ? JSON.parse(metadata.alternatetitles) : []
+    let title = metadata.title
+    for(let x in titles){
+      //display in language specific name if available
+      if(x.includes(localeNames[locale])){
+        title = titles[x]
+      }
+    }
+    const coverarts = metadata.coverartid ? JSON.parse(metadata.coverartid) : []
+    const coverartId = coverarts[file.region] || coverarts.default
+    const coverUrl = coverartId ? `/proxy-image?url=https://images.igdb.com/igdb/image/upload/t_cover_big/${coverartId}.webp` : "/public/images/coverart/nocoverart.png"
+    let images = []
+    if(metadata.screenshots){
+        images = metadata.screenshots.map((im) => `/proxy-image?url=https://images.igdb.com/igdb/image/upload/t_720p/${im}.webp`)
+    }
+    let videos = []
+    if(metadata.videos){
+        videos = metadata.videos
+    }
+%>
+<link rel="stylesheet" href="/public/css/info.css">
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-10 col-xl-8">
+      <div class="col-12 text-center">
+            <h2 class="text-white"><%= title || file.filename %></h2>
+            <p class="text-secondary text-platform"><%= file.category %> <%- consoleIcons.createConsoleImage(file.category) %></p>
+          </div>
+      <div class="row ml-1">
+          <img class="coverart col-md d-block mx-auto" src="<%= coverUrl %>" href="<%= file.path %>">
+        <div class="col-md">
+          <% if(metadata.rating) {%>
+          <div>
+            <% 
+                const fullstars = Math.floor(metadata.rating / 20)
+                const halfstars = Math.floor(metadata.rating % 20 / 10)
+                const nostars = 5 - fullstars - halfstars
+                const nostarstring = '<i class="bi bi-star"></i>'
+                const fullstarstring = '<i class="bi bi-star-fill"></i>'
+                const halfstarstring = '<i class="bi bi-star-half"></i>'
+                let stars = ''
+                for(let x = 0; x < fullstars ; x++){
+                    stars += fullstarstring
+                }
+                if(halfstars){
+                    stars += halfstarstring
+                }
+                for(let x = 0; x < nostars; x++){
+                    stars += nostarstring
+                }
+                %>
+            <p> <span class="stars"><%- stars%></span> (<%= Math.floor(metadata.rating) %>%)</p>
+          </div>
+          <% } %>
+          <% if(metadata.developers) {%>
+          <div>
+            <p><span class="info"><%= __('search.developed') %></span> <%= metadata.developers.join(", ") %></p>
+          </div>
+          <% } %>
+          <% if(metadata.publishers) {%>
+          <div>
+            <p><span class="info"><%= __('search.published') %></span> <%= metadata.publishers.join(", ") %></p>
+          </div>
+          <% } %>
+          <% if(metadata.releasedate) {%>
+          <div>
+            <p><span class="info"><%= __('search.release_date') %></span> <%= metadata.releasedate %></p>
+          </div>
+          <% } %>
+          <% if(file.region) {%>
+          <div>
+            <p><span class="info"><%= __('search.region') %></span> <%= file.region %> <%- flags.createFlag(file.region) %></p>
+          </div>
+          <% } %>
+          <% if(metadata.genre) {%>
+          <div>
+            <p><span class="info"><%= __('search.genre') %></span> <%= metadata.genre.join(", ") %></p>
+          </div>
+          <% } %>
+          <% if(metadata.gamemodes) {%>
+          <div>
+            <p><span class="info"><%= __('search.modes') %></span> <%= metadata.gamemodes.join(", ") %></p>
+          </div>
+          <% } %>
+          <div>
+            <p><span class="info"><%= __('search.filename') %></span> <%= file.filename %></p>
+          </div>
+          <div>
+            <p><span class="info"><%= __('search.size') %></span> <%= file.size %></p>
+          </div>
+          <div>
+            <p><span class="info"><%= __('search.upload_date') %></span> <%= file.date %></p>
+          </div>
+          <div class="">
+            <p class="description"><%= metadata.description %></p>
+          </div>
+          <div>
+            <p class="actions">
+              <a class="btn btn-sm btn-secondary" href="<%= file.path %>"><%= __('search.download') %></a>
+              <% if (process.env.EMULATOR_ENABLED === 'true') { %>
+              <% if (isEmulatorCompatible(file.category)) { %>
+              <a class="btn btn-sm btn-secondary" href="/play/<%= file.id %>"><%= __('emulator.play')%></a></a> <% } else { %>
+              <button class="btn btn-sm btn-secondary" disabled><%= __('emulator.not_available') %> <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="right" title="<%= __('emulator.not_available_tooltip') %>"></i></button>
+              <% } 
+                }%>
+          </div>
+        </div>
+      </div>
+      <% if(images.length || videos.length){ %>
+      <div class="row col-md container mx-auto">
+        <%- include("../partials/carousel", {images: images, videos: videos})%>
+      </div>
+      <% } %>
+    </div>
+  </div>
+
+</div>

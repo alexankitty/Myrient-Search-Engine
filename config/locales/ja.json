@@ -21,7 +21,25 @@
         "in_seconds": "{{seconds}}秒で検索完了",
         "indexing": "インデックス作成中です。リストに表示されないものがある場合は、数分後に再度お試しください",
         "non_game_filter": "非ゲームコンテンツフィルターが有効です",
-        "displaying_results": "{{start}}件目から{{end}}件目を表示中。"
+        "displaying_results": "{{start}}件目から{{end}}件目を表示中。",
+        "no_description": "説明が見つかりません。",
+        "no_metadata": "メタデータが見つかりません。",
+        "released": "発売日：",
+        "release_date": "リリース日：",
+        "region": "地域：",
+        "platform": "プラットフォーム：",
+        "genre": "ジャンル：",
+        "published": "発売元：",
+        "developed": "開発元：",
+        "modes": "ゲームモード：",
+        "download": "ダウンロード",
+        "filename": "ファイル名：",
+        "release_group": "リリースグループ：",
+        "upload_date": "アップロード日：",
+        "more_info": "詳細情報",
+        "size": "サイズ：",
+        "old_experience": "旧検索エクスペリエンスを使用中。",
+        "new_experience": "新検索エクスペリエンスを使用中。"
     },
     "about": {
         "title": "サイトについて",
@@ -40,6 +58,10 @@
         "credits": {
             "created_by": "検索エンジン開発者：",
             "view_github": "GitHubでプロジェクトを見る"
+        },
+        "metadata": {
+            "title": "メタデータ情報",
+            "description": "このウェブサイトは {{metadata_source}} からゲームのメタデータ情報を取得しています。ROMの名前の不一致やサービスプロバイダーの問題により、一部のメタデータが欠落しているか、不正確な場合があります。"
         }
     },
     "settings": {
@@ -69,15 +91,20 @@
             "hide_non_game": {
                 "label": "非ゲームコンテンツを非表示",
                 "tooltip": "ROMハック、パッチ、アートワーク、その他のゲーム以外のコンテンツを検索結果から除外します。"
+            },
+            "use_old_results": {
+                "label": "旧検索",
+                "tooltip": "検索結果を新しい表示形式と旧表示形式のどちらで表示するかを切り替えます。"
             }
         },
         "save": "設定を保存"
     },
     "footer": {
-        "queries": "検索クエリ数：",
-        "files": "登録ファイル数：",
-        "terms": "インデックス語数：",
-        "last_crawl": "最終更新時刻："
+        "queries": "クエリ数：",
+        "files": "既知のファイル：",
+        "terms": "用語数：",
+        "metadata": "メタデータ付きファイル：",
+        "last_crawl": "最終クロール時刻："
     },
     "emulator": {
         "loading": {
@@ -95,7 +122,8 @@
             "non_game": "警告：このファイルはゲームROMではない可能性があり、Webエミュレーターで正しく動作しない場合があります。",
             "see_about": "詳細については{{link}}ページをご覧ください。",
             "no_data": "エミュレーターデータがありません。",
-            "https": "安全でないHTTP接続：一部のエミュレーターは正常に動作するためにHTTPSが必要です。このサイトは正しく設定されていません。"
+            "https": "安全でないHTTP接続：一部のエミュレーターは正常に動作するためにHTTPSが必要です。このサイトは正しく設定されていません。",
+            "not_available_tooltip": "このタイトルはゲームではないか、プラットフォームが非対応のため、Webエミュレーションを利用できません。"
         },
         "console": {
             "about": "これはMyrientの公開アーカイブから直接ゲームを実行するオンラインエミュレータです。",

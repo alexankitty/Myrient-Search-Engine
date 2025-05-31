@@ -1,6 +1,3 @@
-<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 <div class="row h-50 w-100 m-0">
   <div class="col-sm-12 my-auto text-center">
     <pre style="font: 20px / 19px monospace; color: white; text-align: center; overflow: hidden;">
@@ -48,10 +45,14 @@
               <label class="checkbox-inline p-1">
                 <input type="checkbox" id="combineWith" value="AND">
                 <%= __('settings.extras.match_all.label') %> <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="<%= __('settings.extras.match_all.tooltip') %>"></i>
-              </label>
+              </label><br>
               <label class="checkbox-inline p-1">
                 <input type="checkbox" id="hideNonGame" value="true">
                 <%= __('settings.extras.hide_non_game.label') %> <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="<%= __('settings.extras.hide_non_game.tooltip') %>"></i>
+              </label>
+              <label class="checkbox-inline p-1">
+                <input type="checkbox" id="useOldResults" value="true" <%= oldSettingsAvailable ? '' : 'disabled=""' %>">
+                <%= __('settings.extras.use_old_results.label') %> <i class="bi bi-question-circle" data-toggle="tooltip" data-placement="top" title="<%= __('settings.extras.use_old_results.tooltip') %>"></i>
               </label>
             </div>
           </div>

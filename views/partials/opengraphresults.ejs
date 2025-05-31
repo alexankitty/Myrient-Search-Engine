@@ -1,16 +1,15 @@
 <%
-let resultStart = Math.floor((pageNum - 1) * 100)
-let length = results.items.length > 5 + resultStart ? 5 + resultStart : results.items.length
+let length = results.length > 5 ? 5 : results.length
 let resultString = ''
-for(let x = resultStart ; x < length; x++){
-    resultString += `${x + 1}: ${results.items[x].filename}\n\n`
+for(let x = 0 ; x < length; x++){
+    resultString += `${x + 1}: ${results[x].file.filename}\n\n`
 }
 resultString = resultString.trim()
 %>
 <meta name="description" content="Myrient Search Results">
 
 <!-- Facebook Meta Tags -->
-<meta property="og:url" content="https://myrientsearch.org">
+<meta property="og:url" content="https://<%= process.env.HOSTNAME %>">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Myrient Search Results: <%= query %>">
 <meta property="og:description" content="<%= resultString %>">
@@ -18,6 +17,6 @@ resultString = resultString.trim()
 <!-- Twitter Meta Tags -->
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:domain" content="myrientsearch.org">
-<meta property="twitter:url" content="https://myrientsearch.org">
+<meta property="twitter:url" content="https://<%= process.env.HOSTNAME %>">
 <meta name="twitter:title" content="Myrient Search Results: <%= query %>">
 <meta name="twitter:description" content="<%= resultString %>">

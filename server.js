@@ -1,37 +1,46 @@
-import getAllFiles from "./lib/dircrawl.js";
-import FileHandler from "./lib/filehandler.js";
-import Searcher from "./lib/search.js";
+import getAllFiles from "./lib/crawler/dircrawl.js";
+import { optimizeDatabaseKws } from "./lib/database/dboptimize.js";
+import FileHandler from "./lib/crawler/filehandler.js";
+import Searcher from "./lib/search/search.js";
 import cron from "node-cron";
 import "dotenv/config";
 import express from "express";
 import http from "http";
 import sanitize from "sanitize";
-import debugPrint from "./lib/debugprint.js";
+import debugPrint from "./lib/utility/printutils.js";
 import compression from "compression";
 import cookieParser from "cookie-parser";
-import { generateAsciiArt } from "./lib/asciiart.js";
+import { generateAsciiArt } from "./lib/utility/asciiart.js";
 import {
   getEmulatorConfig,
   isEmulatorCompatible,
   isNonGameContent,
-} from "./lib/emulatorConfig.js";
+} from "./lib/emulator/emulatorConfig.js";
 import fetch from "node-fetch";
-import { initDB, File, QueryCount } from "./lib/database.js";
+import { initDB, File, QueryCount, Metadata } from "./lib/database/database.js";
 import { initElasticsearch } from "./lib/services/elasticsearch.js";
 import i18n, { locales } from "./config/i18n.js";
 import { v4 as uuidv4 } from "uuid";
-import { optimizeDatabaseKws } from "./lib/dboptimize.js";
+import Flag from "./lib/images/flag.js";
+import ConsoleIcons from "./lib/images/consoleicons.js";
+import MetadataManager from "./lib/crawler/metadatamanager.js";
 
-let categoryListPath = "./lib/categories.json";
-let nonGameTermsPath = "./lib/nonGameTerms.json";
-let emulatorsPath = "./lib/emulators.json";
+let categoryListPath = "./lib/json/terms/categories.json";
+let nonGameTermsPath = "./lib/json/terms/nonGameTerms.json";
+let emulatorsPath = "./lib/json/dynamic_content/emulators.json";
+let localeNamePath = "./lib/json/maps/name_localization.json";
 let categoryList = await FileHandler.parseJsonFile(categoryListPath);
 let nonGameTerms = await FileHandler.parseJsonFile(nonGameTermsPath);
 let emulatorsData = await FileHandler.parseJsonFile(emulatorsPath);
+let localeNames = await FileHandler.parseJsonFile(localeNamePath);
 let crawlTime = 0;
 let queryCount = 0;
 let fileCount = 0;
+let metadataMatchCount = 0;
 let indexPage = "pages/index";
+let flags = new Flag();
+let consoleIcons = new ConsoleIcons(emulatorsData);
+import { Op } from "sequelize";
 
 // Initialize databases
 await initDB();
@@ -41,6 +50,9 @@ await initElasticsearch();
 fileCount = await File.count();
 crawlTime = (await File.max("updatedAt"))?.getTime() || 0;
 queryCount = (await QueryCount.findOne())?.count || 0;
+metadataMatchCount = await File.count({
+  where: { detailsId: { [Op.ne]: null } },
+});
 
 let searchFields = ["filename", "category", "type", "region"];
 
@@ -51,6 +63,7 @@ let defaultSettings = {
   fuzzy: 0,
   prefix: true,
   hideNonGame: true,
+  useOldResults: false,
 };
 
 //programmatically set the default boosts while reducing overhead when adding another search field
@@ -64,9 +77,11 @@ for (let field in searchFields) {
 }
 
 let search = new Searcher(searchFields);
+let metadataManager = new MetadataManager();
 
 async function getFilesJob() {
   console.log("Updating the file list.");
+  let oldFileCount = fileCount || 0;
   fileCount = await getAllFiles(categoryList);
   if (!fileCount) {
     console.log("File update failed");
@@ -74,6 +89,23 @@ async function getFilesJob() {
   }
   crawlTime = Date.now();
   console.log(`Finished updating file list. ${fileCount} found.`);
+  if ((await Metadata.count()) < (await metadataManager.getIGDBGamesCount())) {
+    await metadataManager.syncAllMetadata();
+    metadataMatchCount = await File.count({
+      where: { detailsId: { [Op.ne]: null } },
+    });
+  }
+  if (fileCount > oldFileCount) {
+    await metadataManager.matchAllMetadata();
+  }
+  await optimizeDatabaseKws();
+  //this is less important and needs to run last.
+  if (fileCount > oldFileCount) {
+    metadataManager.matchAllMetadata(true);
+  }
+  metadataMatchCount = await File.count({
+    where: { detailsId: { [Op.ne]: null } },
+  });
 }
 
 function buildOptions(page, options) {
@@ -84,6 +116,7 @@ let defaultOptions = {
   crawlTime: crawlTime,
   queryCount: queryCount,
   fileCount: fileCount,
+  metadataMatchCount: metadataMatchCount,
   generateAsciiArt: generateAsciiArt,
   isEmulatorCompatible: isEmulatorCompatible,
   isNonGameContent: isNonGameContent,
@@ -94,6 +127,7 @@ function updateDefaults() {
   defaultOptions.crawlTime = crawlTime;
   defaultOptions.queryCount = queryCount;
   defaultOptions.fileCount = fileCount;
+  defaultOptions.metadataMatchCount = metadataMatchCount;
 }
 
 let app = express();
@@ -106,7 +140,7 @@ app.use((req, res, next) => {
 });
 
 //static files
-app.use('/public', express.static('views/public'))
+app.use("/public", express.static("views/public"));
 
 //middleware
 app.use(sanitize.middleware);
@@ -168,7 +202,11 @@ app.get("/", function (req, res) {
 app.get("/search", async function (req, res) {
   let query = req.query.q ? req.query.q : "";
   let pageNum = parseInt(req.query.p);
-  let urlPrefix = encodeURI(`/search?s=${req.query.s}&q=${req.query.q}&p=`);
+  let urlPrefix = encodeURI(
+    `/search?s=${req.query.s}&q=${req.query.q}${
+      req.query.o ? "&o=" + req.query.o : ""
+    }&p=`
+  );
   pageNum = pageNum ? pageNum : 1;
   let settings = {};
   try {
@@ -193,22 +231,33 @@ app.get("/search", async function (req, res) {
   if (settings.combineWith != "AND") {
     delete settings.combineWith;
   }
-  let results = await search.findAllMatches(query, settings);
+  let loadOldResults =
+    req.query.old === "true" || !(await Metadata.count()) ? true : false;
+  settings.pageSize = loadOldResults ? 100 : 10;
+  settings.page = pageNum - 1;
+  settings.sort = req.query.o || "";
+  let results = await search.findAllMatches(query.trim(), settings);
   debugPrint(results);
-  if (results.items.length && pageNum == 1) {
+  if (results.count && pageNum == 1) {
     queryCount += 1;
     await QueryCount.update({ count: queryCount }, { where: { id: 1 } });
     updateDefaults();
   }
   let options = {
     query: query,
-    results: results,
+    results: results.items,
+    count: results.count,
+    elapsed: results.elapsed,
     pageNum: pageNum,
+    pageCount: Math.ceil(results.count / settings.pageSize),
     indexing: search.indexing,
     urlPrefix: urlPrefix,
     settings: settings,
+    flags: flags,
+    consoleIcons: consoleIcons,
+    localeNames: localeNames,
   };
-  let page = "results";
+  let page = loadOldResults ? "resultsold" : "results";
   options = buildOptions(page, options);
   res.render(indexPage, options);
 });
@@ -238,9 +287,10 @@ app.get("/lucky", async function (req, res) {
   updateDefaults();
 });
 
-app.get("/settings", function (req, res) {
+app.get("/settings", async function (req, res) {
   let options = { defaultSettings: defaultSettings };
   let page = "settings";
+  options.oldSettingsAvailable = (await Metadata.count()) ? true : false;
   options = buildOptions(page, options);
   res.render(indexPage, options);
 });
@@ -288,6 +338,31 @@ app.get("/play/:id", async function (req, res) {
   };
 
   let page = "emulator";
+  options = buildOptions(page, options);
+  res.render(indexPage, options);
+});
+
+app.get("/info/:id", async function (req, res) {
+  //set header to allow video embed
+  res.setHeader("Cross-Origin-Embedder-Policy", "unsafe-non");
+  let romId = parseInt(req.params.id);
+  let romFile = await search.findIndex(romId);
+  if (!romFile) {
+    res.redirect("/");
+    return;
+  }
+  let options = {
+    file: {
+      ...romFile.dataValues,
+    },
+    metadata: {
+      ...romFile?.details?.dataValues,
+    },
+    flags: flags,
+    consoleIcons: consoleIcons,
+    localeNames: localeNames,
+  };
+  let page = "info";
   options = buildOptions(page, options);
   res.render(indexPage, options);
 });
@@ -501,6 +576,7 @@ server.on("listening", function () {
   );
 });
 console.log(`Loaded ${fileCount} known files.`);
+console.log(`${metadataMatchCount} files contain matched metadata.`);
 
 // Run file update job if needed
 if (

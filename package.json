@@ -1,13 +1,13 @@
 {
   "dependencies": {
     "@elastic/elasticsearch": "^8.12.2",
+    "@phalcode/ts-igdb-client": "^1.0.22",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.7",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
     "figlet": "^1.7.0",
-    "file-older-than": "^1.0.0",
     "i18n": "^0.15.1",
     "innertext": "^1.0.3",
     "jsdom": "^25.0.1",
@@ -19,7 +19,7 @@
     "pg-hstore": "^2.3.4",
     "piscina": "^4.7.0",
     "sanitize": "^2.1.2",
-    "sequelize": "^6.37.1",
+    "sequelize": "^6.37.7",
     "sequelize-cli": "^6.6.2",
     "to-words": "^4.5.1",
     "uuid": "^11.1.0"

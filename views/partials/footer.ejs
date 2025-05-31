@@ -4,18 +4,15 @@
     <div class="stats"> | </div>
     <div id="file-count" class="stats"><%= __('footer.files') %></div>
     <div class="stats"> | </div>
+    <div id="metadata-count" class="stats"><%= __('footer.metadata') %></div>
+    <div class="stats"> | </div>
     <div id="crawl-time" class="stats"><%= __('footer.last_crawl') %></div>
     </div>
 </div>
 
 <script defer>
-    function timeConverter(UNIX_timestamp){
-        var timestamp = parseInt(UNIX_timestamp)
-        var date = new Date(timestamp);
-        var options = { hour12: false };
-        return date.toLocaleString(options)
-    }
     document.getElementById('crawl-time').innerText += ` ${timeConverter('<%= crawlTime %>')}`
     document.getElementById('file-count').innerText += ` ${(<%= fileCount %>).toLocaleString(undefined)}`
+    document.getElementById('metadata-count').innerText += ` ${(<%= metadataMatchCount %>).toLocaleString(undefined)}`
     document.getElementById('query-count').innerText += ` ${(<%= queryCount %>).toLocaleString(undefined)}`
 </script>

@@ -21,7 +21,25 @@
         "in_seconds": "in {{seconds}} secondi",
         "indexing": "Indicizzazione in corso, se manca qualcosa nell'elenco riprova tra qualche minuto",
         "non_game_filter": "Filtro per contenuti non-gioco attivo",
-        "displaying_results": "Risultati da {{start}} a {{end}}."
+        "displaying_results": "Risultati da {{start}} a {{end}}.",
+        "no_description": "Nessuna descrizione trovata.",
+        "no_metadata": "Nessun metadato trovato.",
+        "released": "Rilasciato:",
+        "release_date": "Data di uscita:",
+        "region": "Regione:",
+        "platform": "Piattaforma:",
+        "genre": "Genere:",
+        "published": "Pubblicato da:",
+        "developed": "Sviluppato da:",
+        "modes": "Modalità di gioco:",
+        "download": "Scarica",
+        "filename": "Nome file:",
+        "release_group": "Gruppo di release:",
+        "upload_date": "Data di caricamento:",
+        "more_info": "Più informazioni",
+        "size": "Dimensione:",
+        "old_experience": "Utilizzo della vecchia esperienza di ricerca.",
+        "new_experience": "Utilizzo della nuova esperienza di ricerca."
     },
     "about": {
         "title": "Informazioni",
@@ -40,6 +58,10 @@
         "credits": {
             "created_by": "Motore di ricerca creato da",
             "view_github": "Visualizza progetto su GitHub"
+        },
+        "metadata": {
+            "title": "Informazioni sui Metadati",
+            "description": "Questo sito web estrae informazioni sui metadati dei giochi da {{metadata_source}}. Alcuni metadati potrebbero essere mancanti o incorretti a causa di discrepanze tra il nome della ROM o problemi con il fornitore del servizio."
         }
     },
     "settings": {
@@ -68,16 +90,21 @@
             },
             "hide_non_game": {
                 "label": "Nascondi contenuti non di gioco",
-                "tooltip": "Filtra ROM modificate, patch, grafica e altri contenuti non di gioco dai risultati della ricerca."
+                "tooltip": "Filtra ROM hack, patch, artwork e altri contenuti non di gioco dai risultati di ricerca."
+            },
+            "use_old_results": {
+                "label": "Ricerca vecchia",
+                "tooltip": "Reindirizza la tua ricerca ai risultati nel vecchio formato tabellare. Questi caricheranno più velocemente poiché ignoreranno il recupero dei metadati."
             }
         },
-        "save": "Salva Impostazioni"
+        "save": "Salva impostazioni"
     },
     "footer": {
-        "queries": "Numero di Ricerche:",
-        "files": "File Conosciuti:",
-        "terms": "Numero di Termini:",
-        "last_crawl": "Ultimo Aggiornamento:"
+        "queries": "Numero di query:",
+        "files": "File conosciuti:",
+        "terms": "Conteggio termini:",
+        "metadata": "File con Metadati:",
+        "last_crawl": "Ora dell'ultima scansione:"
     },
     "emulator": {
         "loading": {
@@ -106,6 +133,7 @@
         "download": "Scarica",
         "play": "Gioca",
         "not_available": "----",
+        "not_available_tooltip": "L'emulazione web non è disponibile per questo titolo poiché non è un gioco o la piattaforma non è supportata.",
         "disclaimer": "Questo emulatore carica i giochi direttamente da {{link}}. Maggiori informazioni nella pagina {{about}}."
     },
     "results": {
