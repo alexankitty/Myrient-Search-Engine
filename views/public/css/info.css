@@ -42,7 +42,7 @@
 
 .coverart{
   object-fit: contain;
-  height: auto;
+  max-height: 700px;
   width: 240px;
 }
 
