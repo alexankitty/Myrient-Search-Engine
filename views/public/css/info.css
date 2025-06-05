@@ -22,7 +22,7 @@
 }
 .slideshow-container {
   position: relative;
-  width: 100%;
+  width: 90%;
   margin: auto;
   overflow: hidden;
   display: flex;
@@ -48,7 +48,8 @@
 
 .carousel-inner {
   height: 0;
-  padding-bottom: 60%;
+  padding-bottom: 56%;
+  background-color: black;
 }
 
 .carousel-item {
