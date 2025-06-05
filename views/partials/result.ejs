@@ -11,7 +11,7 @@
     }
     const coverarts = metadata.coverartid ? JSON.parse(metadata.coverartid) : []
     const coverartId = coverarts[file.region] || coverarts.default
-    const coverUrl = coverartId ? `/proxy-image?url=https://images.igdb.com/igdb/image/upload/t_cover_big_2x/${coverartId}.webp` : "/public/images/coverart/nocoverart.png"
+    const coverUrl = coverartId ? `/proxy-image?url=https://images.igdb.com/igdb/image/upload/t_cover_big/${coverartId}.webp` : "/public/images/coverart/nocoverart.png"
 %>
 <div class="col-md-auto row align-items-start searchresult">
   <div class="cover">
