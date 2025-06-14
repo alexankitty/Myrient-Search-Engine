@@ -6,7 +6,7 @@
         "logo": "https://raw.githubusercontent.com/Jaffacakelover/emulator-icons-svg/94ac7b3a126c70e746cdb1464e24786c3aaf7e74/stella%202600.svg",
         "url": "https://stella-emu.github.io/",
         "description": "A finished Atari 2600 emulator, in a donationware state.",
-        "platforms": ["Windows", "Linux", "macOS"]
+        "platforms": ["Windows", "Linux", "macOS", "FreeBSD"]
       }
     }
   },
@@ -29,7 +29,7 @@
         "logo": "https://emu7800.github.io/appicon_128x128.png",
         "url": "https://emu7800.github.io/",
         "description": "A maintained open source Atari 7800 and 2600 emulator.",
-        "platforms": ["Windows", "Linux", "macOS"]
+        "platforms": ["Windows"]
       }
     }
   },
@@ -42,7 +42,7 @@
         "logo": "https://raw.githubusercontent.com/Jaffacakelover/emulator-icons-svg/94ac7b3a126c70e746cdb1464e24786c3aaf7e74/Duckstation.svg ",
         "url": "https://github.com/stenzek/duckstation",
         "description": "A PlayStation 1 emulator focused on accuracy, speed, and modern features like enhanced resolution, PGXP geometry correction, and texture filtering.",
-        "platforms": ["Windows", "Linux", "macOS", "Android"]
+        "platforms": ["Windows", "Linux", "macOS", "Android", "Xbox"]
       },
       "RetroArch (Beetle PSX HW)": {
         "logo": "https://raw.githubusercontent.com/libretro/retroarch-assets/refs/heads/master/branding/logo.png",
@@ -92,7 +92,7 @@
         "logo": "https://raw.githubusercontent.com/Jaffacakelover/emulator-icons-svg/94ac7b3a126c70e746cdb1464e24786c3aaf7e74/ppsspp.svg",
         "url": "https://www.ppsspp.org/",
         "description": "An open-source, fast PlayStation Portable emulator with support for upscaling, shader effects, and a wide range of games.",
-        "platforms": ["Windows", "Linux", "macOS", "Android"]
+        "platforms": ["Windows", "Linux", "macOS", "Android", "iOS", "Quest"]
       }
     }
   },
@@ -103,7 +103,7 @@
         "logo": "https://raw.githubusercontent.com/Jaffacakelover/emulator-icons-svg/94ac7b3a126c70e746cdb1464e24786c3aaf7e74/Blastem.svg",
         "url": "https://www.retrodev.com/blastem/",
         "description": "A fast and accurate Genesis/Mega Drive emulator focused on hardware accuracy while maintaining excellent performance, with support for advanced demos like Titan's Overdrive.",
-        "platforms": ["Windows", "Linux"]
+        "platforms": ["Windows", "Linux", "macOS"]
       },
       "Genesis Plus GX": {
         "logo": "https://raw.githubusercontent.com/Jaffacakelover/emulator-icons-svg/94ac7b3a126c70e746cdb1464e24786c3aaf7e74/Genesis%20Plus%20GX.svg",
@@ -137,7 +137,7 @@
         "logo": "https://raw.githubusercontent.com/Jaffacakelover/emulator-icons-svg/94ac7b3a126c70e746cdb1464e24786c3aaf7e74/flycast.svg",
         "url": "https://github.com/flyinghead/flycast",
         "description": "An open-source emulator for the Sega Dreamcast, Naomi, Naomi 2, and Atomiswave, forked from reicast.",
-        "platforms": ["Windows", "Linux", "macOS"]
+        "platforms": ["Windows", "Linux", "macOS", "FreeBSD", "Android", "iOS", "Xbox"]
       }
     }
   },
@@ -148,7 +148,7 @@
         "logo": "https://raw.githubusercontent.com/Jaffacakelover/emulator-icons-svg/94ac7b3a126c70e746cdb1464e24786c3aaf7e74/Mesen.svg",
         "url": "https://www.mesen.ca/",
         "description": "A high-accuracy multi-system emulator supporting NES, SNES, Game Boy, GBA, and PC Engine with extensive debugging tools for developers.",
-        "platforms": ["Windows", "Linux"]
+        "platforms": ["Windows", "Linux", "macOS"]
       },
       "Nestopia UE": {
         "logo": "https://raw.githubusercontent.com/Jaffacakelover/emulator-icons-svg/94ac7b3a126c70e746cdb1464e24786c3aaf7e74/Nestopia%20-%20icon.svg",
@@ -199,7 +199,7 @@
         "logo": "https://raw.githubusercontent.com/Jaffacakelover/emulator-icons-svg/94ac7b3a126c70e746cdb1464e24786c3aaf7e74/Dolphin%20-%20icon.svg",
         "url": "https://dolphin-emu.org/",
         "description": "The definitive GameCube/Wii emulator with high compatibility, HD graphics, texture packs, online multiplayer, and support for various controllers including Wiimotes.",
-        "platforms": ["Windows", "Linux", "macOS", "Android"]
+        "platforms": ["Windows", "Linux", "macOS", "Android", "iOS", "Xbox"]
       }
     }
   },
@@ -210,7 +210,7 @@
         "logo": "https://raw.githubusercontent.com/Jaffacakelover/emulator-icons-svg/94ac7b3a126c70e746cdb1464e24786c3aaf7e74/Dolphin%20-%20icon.svg",
         "url": "https://dolphin-emu.org/",
         "description": "The definitive GameCube/Wii emulator with high compatibility, HD graphics, texture packs, online multiplayer, and support for various controllers including Wiimotes.",
-        "platforms": ["Windows", "Linux", "macOS", "Android"]
+        "platforms": ["Windows", "Linux", "macOS", "Android", "iOS", "Xbox"]
       }
     }
   },
@@ -328,7 +328,18 @@
         "logo": "https://raw.githubusercontent.com/xenia-project/xenia/refs/heads/master/assets/icon/256.png",
         "url": "https://xenia.jp",
         "description": "An Xbox 360 emulator with support for a wide range of games, including many that are not officially supported by Microsoft.",
-        "platforms": ["Windows", "Linux", "macOS"]
+        "platforms": ["Windows", "Xbox"]
+      }
+    }
+  },
+  "Xbox One": {
+    "icon": "https://raw.githubusercontent.com/libretro/retroarch-assets/refs/heads/master/xmb/dot-art/png/Microsoft%20-%20Xbox.png",
+    "emulators": {
+      "Xemu": {
+        "logo": "https://raw.githubusercontent.com/xemu-project/xemu-website/bb17e41a1a4515522ba3fe5057605a20fd6516bc/resources/logo-green.svg",
+        "url": "https://xemu.app/",
+        "description": "A free and open-source multi-platform Xbox emulator, with support for a wide range of Xbox Classics.",
+        "platforms": ["Windows"]
       }
     }
   }
