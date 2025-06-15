@@ -96,6 +96,17 @@
       }
     }
   },
+  "PlayStation Vita": {
+    "icon": "https://raw.githubusercontent.com/libretro/retroarch-assets/refs/heads/master/xmb/dot-art/png/Sony%20-%20PlayStation%20Portable.png",
+    "emulators": {
+      "Vita3K": {
+        "logo": "https://raw.githubusercontent.com/Jaffacakelover/emulator-icons-svg/94ac7b3a126c70e746cdb1464e24786c3aaf7e74/ppsspp.svg",
+        "url": "https://vita3k.org/",
+        "description": "An open-source, fast PlayStation Portable emulator with support for upscaling, shader effects, and a wide range of games.",
+        "platforms": ["Windows", "Linux", "macOS", "Android"]
+      }
+    }
+  },
   "Sega Genesis / Mega Drive": {
     "icon": "https://raw.githubusercontent.com/libretro/retroarch-assets/refs/heads/master/xmb/dot-art/png/Sega%20-%20Mega%20Drive%20-%20Genesis.png",
     "emulators": {
