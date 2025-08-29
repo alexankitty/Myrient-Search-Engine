@@ -156,6 +156,25 @@
         "back_home": "ホームに戻る",
         "go_back": "戻る"
     },
+    "ai_chat": {
+        "title": "AIアシスタント",
+        "button_tooltip": "AIアシスタント",
+        "welcome": {
+            "title": "AIアシスタント",
+            "description": "レトロゲームの検索、ゲームの推薦、検索エンジンの使用方法に関する質問にお答えします。"
+        },
+        "suggestions": {
+            "game_recommendations": "Nintendo 64におすすめのゲームはありますか？",
+            "search_tips": "特定の地域で検索するにはどうすればいいですか？",
+            "gaming_history": "レトロゲーム機について教えてください"
+        },
+        "input_placeholder": "何でもお聞きください...",
+        "typing_indicator": "AIが考えています",
+        "error": {
+            "network": "AIサービスに接続できません。インターネット接続を確認して、もう一度お試しください。",
+            "generic": "申し訳ございませんが、現在接続に問題があります。後ほど再度お試しください。"
+        }
+    },
     "languages": {
         "en": "English",
         "es": "Español",

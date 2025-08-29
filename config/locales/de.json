@@ -156,6 +156,25 @@
     "back_home": "Zurück zur Startseite",
     "go_back": "Zurück"
   },
+  "ai_chat": {
+    "title": "KI-Assistent",
+    "button_tooltip": "KI-Assistent",
+    "welcome": {
+      "title": "KI-Assistent",
+      "description": "Ich kann Ihnen helfen, Retro-Spiele zu finden, Spiel-Empfehlungen zu geben und Fragen zur Nutzung der Suchmaschine zu beantworten."
+    },
+    "suggestions": {
+      "game_recommendations": "Welche Spiele empfehlen Sie für Nintendo 64?",
+      "search_tips": "Wie suche ich nach bestimmten Regionen?",
+      "gaming_history": "Erzählen Sie mir von Retro-Spielkonsolen"
+    },
+    "input_placeholder": "Fragen Sie mich etwas...",
+    "typing_indicator": "KI denkt nach",
+    "error": {
+      "network": "Verbindung zum KI-Service nicht möglich. Überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.",
+      "generic": "Entschuldigung, ich habe gerade Verbindungsprobleme. Bitte versuchen Sie es später erneut."
+    }
+  },
   "languages": {
     "en": "English",
     "es": "Español",

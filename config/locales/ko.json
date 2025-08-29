@@ -156,6 +156,25 @@
         "back_home": "홈으로 돌아가기",
         "go_back": "뒤로 가기"
     },
+    "ai_chat": {
+        "title": "AI 어시스턴트",
+        "button_tooltip": "AI 어시스턴트",
+        "welcome": {
+            "title": "AI 어시스턴트",
+            "description": "레트로 게임 찾기, 게임 추천 제공, 검색 엔진 사용에 대한 질문 답변을 도와드릴 수 있습니다."
+        },
+        "suggestions": {
+            "game_recommendations": "Nintendo 64에 어떤 게임을 추천하시나요?",
+            "search_tips": "특정 지역을 어떻게 검색하나요?",
+            "gaming_history": "레트로 게임 콘솔에 대해 알려주세요"
+        },
+        "input_placeholder": "무엇이든 물어보세요...",
+        "typing_indicator": "AI가 생각 중입니다",
+        "error": {
+            "network": "AI 서비스에 연결할 수 없습니다. 인터넷 연결을 확인하고 다시 시도해 주세요.",
+            "generic": "죄송합니다. 지금 연결에 문제가 있습니다. 나중에 다시 시도해 주세요."
+        }
+    },
     "languages": {
         "en": "English",
         "es": "Español",

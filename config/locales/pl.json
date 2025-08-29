@@ -156,6 +156,25 @@
         "back_home": "Powrót do strony głównej",
         "go_back": "Wróć"
     },
+    "ai_chat": {
+        "title": "Asystent AI",
+        "button_tooltip": "Asystent AI",
+        "welcome": {
+            "title": "Asystent AI",
+            "description": "Mogę pomóc znaleźć retro gry, udzielić rekomendacji gier i odpowiedzieć na pytania dotyczące używania wyszukiwarki."
+        },
+        "suggestions": {
+            "game_recommendations": "Jakie gry polecasz na Nintendo 64?",
+            "search_tips": "Jak szukać określonych regionów?",
+            "gaming_history": "Opowiedz mi o retro konsolach do gier"
+        },
+        "input_placeholder": "Zapytaj mnie o cokolwiek...",
+        "typing_indicator": "AI myśli",
+        "error": {
+            "network": "Nie można połączyć się z usługą AI. Sprawdź połączenie internetowe i spróbuj ponownie.",
+            "generic": "Przepraszam, mam teraz problemy z połączeniem. Spróbuj ponownie później."
+        }
+    },
     "languages": {
         "en": "English",
         "es": "Español",
@@ -169,7 +188,7 @@
         "tr": "Türkçe",
         "it": "Italiano",
         "romaji": "Romaji",
-        "hi": "हिन्दी",
+        "hi": "हिन्दŀ",
         "ar": "العربية",
         "bn": "বাংলা",
         "ru": "Русский"

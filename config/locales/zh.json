@@ -156,6 +156,25 @@
         "back_home": "返回首页",
         "go_back": "返回"
     },
+    "ai_chat": {
+        "title": "AI助手",
+        "button_tooltip": "AI助手",
+        "welcome": {
+            "title": "AI助手",
+            "description": "我可以帮助您找到复古游戏，提供游戏推荐，并回答有关使用搜索引擎的问题。"
+        },
+        "suggestions": {
+            "game_recommendations": "您推荐Nintendo 64有什么游戏？",
+            "search_tips": "如何搜索特定地区？",
+            "gaming_history": "告诉我关于复古游戏机的信息"
+        },
+        "input_placeholder": "问我任何问题...",
+        "typing_indicator": "AI正在思考",
+        "error": {
+            "network": "无法连接到AI服务。请检查您的互联网连接并重试。",
+            "generic": "抱歉，我现在连接有问题。请稍后再试。"
+        }
+    },
     "languages": {
         "en": "English",
         "es": "Español",

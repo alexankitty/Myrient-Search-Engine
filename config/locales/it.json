@@ -156,6 +156,25 @@
         "back_home": "Torna alla Home",
         "go_back": "Indietro"
     },
+    "ai_chat": {
+        "title": "Assistente AI",
+        "button_tooltip": "Assistente AI",
+        "welcome": {
+            "title": "Assistente AI",
+            "description": "Posso aiutarti a trovare giochi retrò, fornire raccomandazioni sui giochi e rispondere a domande sull'utilizzo del motore di ricerca."
+        },
+        "suggestions": {
+            "game_recommendations": "Che giochi consigli per Nintendo 64?",
+            "search_tips": "Come cerco regioni specifiche?",
+            "gaming_history": "Dimmi delle console retro"
+        },
+        "input_placeholder": "Chiedimi qualsiasi cosa...",
+        "typing_indicator": "L'AI sta pensando",
+        "error": {
+            "network": "Impossibile connettersi al servizio AI. Controlla la tua connessione internet e riprova.",
+            "generic": "Mi dispiace, sto avendo problemi di connessione ora. Riprova più tardi."
+        }
+    },
     "languages": {
         "en": "English",
         "es": "Español",
@@ -169,7 +188,7 @@
         "tr": "Türkçe",
         "it": "Italiano",
         "romaji": "Romaji",
-        "hi": "हिन्दी",
+        "hi": "हिन्दŀ",
         "ar": "العربية",
         "bn": "বাংলা",
         "ru": "Русский"

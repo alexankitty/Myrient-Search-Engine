@@ -532,6 +532,110 @@ app.get("/api/emulators", function (req, res) {
   res.json(emulatorsData);
 });
 
+app.post("/api/ai-chat", async function (req, res) {
+  try {
+    const { message } = req.body;
+
+    if (!message || typeof message !== 'string') {
+      return res.status(400).json({ error: 'Message is required' });
+    }
+
+    // Check if AI is enabled and configured
+    const aiEnabled = process.env.AI_ENABLED === 'true';
+    const apiKey = process.env.AI_API_KEY;
+    const apiUrl = process.env.AI_API_URL || 'https://api.openai.com/v1/chat/completions';
+    const model = process.env.AI_MODEL || 'gpt-3.5-turbo';
+
+    if (!aiEnabled) {
+      return res.status(503).json({
+        error: 'AI chat is currently disabled. Please contact the administrator.'
+      });
+    }
+
+    if (!apiKey) {
+      return res.status(503).json({
+        error: 'AI service is not configured. Please contact the administrator.'
+      });
+    }
+
+    // Create system prompt with context about Myrient
+    const systemPrompt = `You are a helpful AI assistant for the Myrient Search Engine, a website that helps users find and search through retro games and ROMs.
+
+About Myrient:
+- Myrient is a preservation project that offers a comprehensive collection of retro games
+- Users can search for games by filename, category, type, and region
+- The site includes an emulator feature for playing games directly in the browser
+- The search engine indexes thousands of games from various gaming systems and regions
+
+Your role:
+- Help users find games they're looking for
+- Provide information about gaming history, consoles, and game recommendations
+- Answer questions about how to use the search features
+- Be knowledgeable about retro gaming but stay focused on being helpful
+- Keep responses concise and friendly
+- If users ask about downloading or legal issues, remind them that Myrient focuses on preservation
+
+Current search context: The user is on a retro gaming search website and may be looking for specific games or gaming information.`;
+
+    const aiResponse = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
+        'User-Agent': 'Myrient-Search-Engine/1.0'
+      },
+      body: JSON.stringify({
+        model: model,
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: message }
+        ],
+        max_tokens: 500,
+        temperature: 0.7,
+        stream: false
+      })
+    });
+
+    if (!aiResponse.ok) {
+      const errorData = await aiResponse.json().catch(() => ({}));
+      console.error('AI API Error:', aiResponse.status, errorData);
+
+      // Handle specific error cases
+      if (aiResponse.status === 401) {
+        return res.status(503).json({
+          error: 'AI service authentication failed. Please contact the administrator.'
+        });
+      } else if (aiResponse.status === 429) {
+        return res.status(429).json({
+          error: 'AI service is currently busy. Please try again in a moment.'
+        });
+      } else {
+        return res.status(503).json({
+          error: 'AI service is temporarily unavailable. Please try again later.'
+        });
+      }
+    }
+
+    const aiData = await aiResponse.json();
+
+    if (!aiData.choices || aiData.choices.length === 0) {
+      return res.status(503).json({
+        error: 'AI service returned an unexpected response.'
+      });
+    }
+
+    const response = aiData.choices[0].message.content.trim();
+
+    res.json({ response });
+
+  } catch (error) {
+    console.error('AI Chat Error:', error);
+    res.status(500).json({
+      error: 'An unexpected error occurred. Please try again later.'
+    });
+  }
+});
+
 app.get("/proxy-image", async function (req, res, next) {
   const imageUrl = req.query.url;
 

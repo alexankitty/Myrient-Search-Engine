@@ -156,6 +156,25 @@
         "back_home": "Ana Sayfaya Dön",
         "go_back": "Geri Dön"
     },
+    "ai_chat": {
+        "title": "AI Asistanı",
+        "button_tooltip": "AI Asistanı",
+        "welcome": {
+            "title": "AI Asistanı",
+            "description": "Retro oyunlar bulmanıza, oyun önerileri sunmama ve arama motoru kullanımıyla ilgili sorularınızı yanıtlamama yardımcı olabilirim."
+        },
+        "suggestions": {
+            "game_recommendations": "Nintendo 64 için hangi oyunları önerirsiniz?",
+            "search_tips": "Belirli bölgeleri nasıl ararım?",
+            "gaming_history": "Retro oyun konsolları hakkında bilgi verin"
+        },
+        "input_placeholder": "Bana her şeyi sorabilirsiniz...",
+        "typing_indicator": "AI düşünüyor",
+        "error": {
+            "network": "AI hizmetine bağlanılamıyor. İnternet bağlantınızı kontrol edin ve tekrar deneyin.",
+            "generic": "Üzgünüm, şu anda bağlantı sorunum var. Lütfen daha sonra tekrar deneyin."
+        }
+    },
     "languages": {
         "en": "English",
         "es": "Español",

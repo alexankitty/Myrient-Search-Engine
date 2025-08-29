@@ -68,7 +68,7 @@
         "title": "Configurações",
         "search_columns": {
             "title": "Colunas de Busca",
-            "tooltip": "Seleciona em quais colunas o buscador vai pesquisar."
+            "tooltip": "Seleciona em quais colunas o mecanismo de busca vai pesquisar."
         },
         "score_multiplier": {
             "title": "Multiplicador de Relevância",
@@ -78,7 +78,7 @@
             "title": "Opções avançadas",
             "fuzzy": {
                 "label": "Busca aproximada",
-                "tooltip": "Valor entre 0,00 e 1,00 que determina o quão similar uma palavra precisa ser para ser considerada uma correspondência (distância Levenshtein). Valor mais alto permite correspondências menos exatas. Valor 0 desativa esta função."
+                "tooltip": "Valor entre 0,00 e 1,00 que determina o quão similar uma palavra precisa ser para ser considerada uma correspondência (distância Levenshtein). Valor mais alto permite correspondências menos exatas. Valor 0 desabilita esta função."
             },
             "prefix": {
                 "label": "Permitir Prefixos",
@@ -86,7 +86,7 @@
             },
             "match_all": {
                 "label": "Corresponder Todas as Palavras",
-                "tooltip": "Exige que todas as palavras da busca sejam encontradas nos resultados."
+                "tooltip": "Requer que todas as palavras da busca sejam encontradas nos resultados."
             },
             "hide_non_game": {
                 "label": "Ocultar Conteúdo Não-Jogo",
@@ -123,7 +123,7 @@
             "see_about": "Veja a página {{link}} para mais informações.",
             "no_data": "Não há dados de emulador disponíveis.",
             "https": "Conexão insegura: Alguns emuladores precisam de HTTPS para funcionar corretamente. Esta página não está configurada corretamente.",
-            "not_available_tooltip": "A emulação web não está disponível para este título pois não é um jogo ou a plataforma não é suportada."
+            "not_available_tooltip": "A emulação web não está disponível para este título porque não é um jogo ou a plataforma não é suportada."
         },
         "console": {
             "about": "Este é um emulador online que executa jogos diretamente do arquivo público do Myrient.",
@@ -155,6 +155,25 @@
         "details": "Detalhes do erro: {{message}}",
         "back_home": "Voltar para a Página Inicial",
         "go_back": "Voltar"
+    },
+    "ai_chat": {
+        "title": "Assistente IA",
+        "button_tooltip": "Assistente IA",
+        "welcome": {
+            "title": "Assistente IA",
+            "description": "Posso ajudar a encontrar jogos retrô, fornecer recomendações de jogos e responder perguntas sobre o uso da busca."
+        },
+        "suggestions": {
+            "game_recommendations": "Que jogos recomenda para Nintendo 64?",
+            "search_tips": "Como pesquisar por regiões específicas?",
+            "gaming_history": "Conte-me sobre consoles de videogames antigos"
+        },
+        "input_placeholder": "Pergunte-me qualquer coisa...",
+        "typing_indicator": "A IA está pensando",
+        "error": {
+            "network": "Não foi possível conectar ao serviço de IA. Tente novamente mais tarde.",
+            "generic": "Desculpe, estou com problemas de conexão agora. Tente novamente mais tarde."
+        }
     },
     "languages": {
         "en": "English",

@@ -156,6 +156,25 @@
     "back_home": "Back to Home",
     "go_back": "Go Back"
   },
+  "ai_chat": {
+    "title": "AI Assistant",
+    "button_tooltip": "AI Assistant",
+    "welcome": {
+      "title": "AI Assistant",
+      "description": "I can help you find retro games, provide gaming recommendations, and answer questions about using the search engine."
+    },
+    "suggestions": {
+      "game_recommendations": "What games do you recommend for Nintendo 64?",
+      "search_tips": "How do I search for specific regions?",
+      "gaming_history": "Tell me about retro gaming consoles"
+    },
+    "input_placeholder": "Ask me anything...",
+    "typing_indicator": "AI is thinking",
+    "error": {
+      "network": "Unable to connect to the AI service. Please check your internet connection and try again.",
+      "generic": "Sorry, I'm having trouble connecting right now. Please try again later."
+    }
+  },
   "languages": {
     "en": "English",
     "es": "Español",

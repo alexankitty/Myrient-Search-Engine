@@ -156,6 +156,25 @@
         "back_home": "Hōmu ni modoru",
         "go_back": "Modoru"
     },
+    "ai_chat": {
+        "title": "AI Ashisutanto",
+        "button_tooltip": "AI Ashisutanto",
+        "welcome": {
+            "title": "AI Ashisutanto",
+            "description": "Retoro geemu no kensaku, geemu no suisen, kensaku enjin no shiyouhouhou ni kansuru shitsumon ni otae dekimasu."
+        },
+        "suggestions": {
+            "game_recommendations": "Nintendo 64 ni osusume no geemu wa arimasu ka?",
+            "search_tips": "Tokutei no chiiki de kensaku suru ni wa dou sureba ii desu ka?",
+            "gaming_history": "Retoro geemu ki ni tsuite oshiete kudasai"
+        },
+        "input_placeholder": "Nandemo okiki kudasai...",
+        "typing_indicator": "AI ga kangaete imasu",
+        "error": {
+            "network": "AI saabisu ni setsuzoku dekimasen. Intaanetto setsuzoku wo kakunin shite, mou ichido otameshi kudasai.",
+            "generic": "Moushiwake gozaimasen ga, genzai setsuzoku ni mondai ga arimasu. Nochihodo saido otameshi kudasai."
+        }
+    },
     "languages": {
         "en": "English",
         "es": "Español",
