@@ -55,6 +55,14 @@
             "disabled": "ウェブエミュレータ機能は管理者によって無効化されています。",
             "contact": "管理者にお問い合わせいただくか、ご自身でMyrient Searchのインスタンスを立ち上げてください。"
         },
+        "ai": {
+            "title": "AIアシスタント",
+            "description": "このウェブサイトには、ゲームを見つけたり、おすすめを提供したり、レトロゲームに関する質問に答えたりできるAI搭載アシスタントが搭載されています。",
+            "provider_info": "{{model}}モデルを使用した{{provider}}によって提供されています。",
+            "privacy_note": "AIアシスタントは外部サービスによって提供されています。詳細については、サービスのプライバシーポリシーをご参照ください。",
+            "disabled": "AIアシスタント機能は管理者によって無効化されています。",
+            "contact": "管理者にお問い合わせいただくか、独自のMyrient Searchインスタンスを立ち上げてください。"
+        },
         "credits": {
             "created_by": "検索エンジン開発者：",
             "view_github": "GitHubでプロジェクトを見る"
@@ -155,6 +163,25 @@
         "details": "エラー詳細: {{message}}",
         "back_home": "ホームに戻る",
         "go_back": "戻る"
+    },
+    "ai_chat": {
+        "title": "AIアシスタント",
+        "button_tooltip": "AIアシスタント",
+        "welcome": {
+            "title": "AIアシスタント",
+            "description": "レトロゲームの検索、ゲームの推薦、検索エンジンの使用方法に関する質問にお答えします。"
+        },
+        "suggestions": {
+            "game_recommendations": "Nintendo 64におすすめのゲームはありますか？",
+            "search_tips": "特定の地域で検索するにはどうすればいいですか？",
+            "gaming_history": "レトロゲーム機について教えてください"
+        },
+        "input_placeholder": "何でもお聞きください...",
+        "typing_indicator": "AIが考えています",
+        "error": {
+            "network": "AIサービスに接続できません。インターネット接続を確認して、もう一度お試しください。",
+            "generic": "申し訳ございませんが、現在接続に問題があります。後ほど再度お試しください。"
+        }
     },
     "languages": {
         "en": "English",

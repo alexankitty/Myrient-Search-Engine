@@ -78,7 +78,13 @@ To ensure OpenGraph metadata embed for chat apps works correctly, please be sure
 # Metadata
 To enable metadata synchronize and matching, you will need to create a developer application in the [Twitch TV Developer Console](https://dev.twitch.tv/console) and then add your client id to `TWITCH_CLIENT_ID` in `.env` or `docker-compose.yml` along with adding your client secret to `TWITCH_CLIENT_SECRET`. Metadata takes about half an hour to synchronize from IGDB to your database, and about another half an hour to match via Postgres Full Text Search. Once all other database maintenance operations are done, the database will attempt to match anything that still isn't matched using a much slower fuzzy trigram search that can take up to a day to complete. These processes won't run again until a new crawl of myrient has been performed and the file count has increased.
 
+# AI Chat Assistant
+The search engine includes an optional AI chat assistant that can help users find games and answer questions. The AI assistant appears as a floating button in the bottom-right corner of all pages. You will have to fill API configuration in `.env` or `docker-compose.yml` to enable the AI chat assistant.
+
+The AI chat is OpenAI compatible, so you can use any compatible providers, like ChatGPT, Gemini, Ollama etc. We recommend using [Groq](https://groq.com) with `openai/gpt-oss-120b`, as it has excellent performance, great reasoning and generous limits for free usage.
+
+
 # Contributing
-You know the usual fluff.  
-Is there a missing category or string association? `lib/categories.json` and any of the files under `lib/json/relatedkeywords` can both updated to include these. If you do update/improve these, please put in a pull request so that it can be added to the public hosted server, as well.  
+You know the usual fluff.
+Is there a missing category or string association? `lib/categories.json` and any of the files under `lib/json/relatedkeywords` can both updated to include these. If you do update/improve these, please put in a pull request so that it can be added to the public hosted server, as well.
 Pull requests are always welcome. Make sure to make any changes clear in your pull request, and if possible, run any files you've modified through prettier.

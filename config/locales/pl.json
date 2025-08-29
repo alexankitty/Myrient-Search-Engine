@@ -55,6 +55,14 @@
             "disabled": "Funkcja emulatora internetowego została wyłączona przez administratora.",
             "contact": "Skontaktuj się z administratorem lub uruchom własną instancję Myrient Search."
         },
+        "ai": {
+            "title": "Asystent AI",
+            "description": "Ta strona internetowa posiada asystenta zasilanego przez AI, który może pomóc w znalezieniu gier, dostarczaniu rekomendacji i odpowiadaniu na pytania dotyczące retro gamingu.",
+            "provider_info": "Zasilany przez {{provider}} używający modelu {{model}}.",
+            "privacy_note": "Asystent AI jest zasilany przez zewnętrzną usługę. Aby uzyskać więcej informacji, zapoznaj się z polityką prywatności usługi.",
+            "disabled": "Funkcjonalność Asystenta AI została wyłączona przez administratora.",
+            "contact": "Skontaktuj się z administratorem lub uruchom własną instancję Myrient Search."
+        },
         "credits": {
             "created_by": "Wyszukiwarka stworzona przez",
             "view_github": "Zobacz projekt na GitHub"
@@ -156,6 +164,25 @@
         "back_home": "Powrót do strony głównej",
         "go_back": "Wróć"
     },
+    "ai_chat": {
+        "title": "Asystent AI",
+        "button_tooltip": "Asystent AI",
+        "welcome": {
+            "title": "Asystent AI",
+            "description": "Mogę pomóc znaleźć retro gry, udzielić rekomendacji gier i odpowiedzieć na pytania dotyczące używania wyszukiwarki."
+        },
+        "suggestions": {
+            "game_recommendations": "Jakie gry polecasz na Nintendo 64?",
+            "search_tips": "Jak szukać określonych regionów?",
+            "gaming_history": "Opowiedz mi o retro konsolach do gier"
+        },
+        "input_placeholder": "Zapytaj mnie o cokolwiek...",
+        "typing_indicator": "AI myśli",
+        "error": {
+            "network": "Nie można połączyć się z usługą AI. Sprawdź połączenie internetowe i spróbuj ponownie.",
+            "generic": "Przepraszam, mam teraz problemy z połączeniem. Spróbuj ponownie później."
+        }
+    },
     "languages": {
         "en": "English",
         "es": "Español",
@@ -169,7 +196,7 @@
         "tr": "Türkçe",
         "it": "Italiano",
         "romaji": "Romaji",
-        "hi": "हिन्दी",
+        "hi": "हिन्दŀ",
         "ar": "العربية",
         "bn": "বাংলা",
         "ru": "Русский"

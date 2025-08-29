@@ -55,6 +55,14 @@
       "disabled": "Die Webemulator-Funktion wurde vom Administrator deaktiviert.",
       "contact": "Kontaktieren Sie den Administrator oder starten Sie Ihre eigene Instanz von Myrient Search."
     },
+    "ai": {
+      "title": "KI-Assistent",
+      "description": "Diese Website verfügt über einen KI-gestützten Assistenten, der Ihnen beim Finden von Spielen, bei Empfehlungen und bei der Beantwortung von Fragen zum Retro-Gaming helfen kann.",
+      "provider_info": "Bereitgestellt von {{provider}} mit dem {{model}}-Modell.",
+      "privacy_note": "Der KI-Assistent wird von einem externen Dienst betrieben. Weitere Informationen finden Sie in der Datenschutzrichtlinie des Dienstes.",
+      "disabled": "Die KI-Assistenten-Funktionalität wurde vom Administrator deaktiviert.",
+      "contact": "Kontaktieren Sie den Administrator oder starten Sie Ihre eigene Instanz von Myrient Search."
+    },
     "credits": {
       "created_by": "Suchmaschine entwickelt von",
       "view_github": "Projekt auf GitHub ansehen"
@@ -155,6 +163,25 @@
     "details": "Fehlerdetails: {{message}}",
     "back_home": "Zurück zur Startseite",
     "go_back": "Zurück"
+  },
+  "ai_chat": {
+    "title": "KI-Assistent",
+    "button_tooltip": "KI-Assistent",
+    "welcome": {
+      "title": "KI-Assistent",
+      "description": "Ich kann Ihnen helfen, Retro-Spiele zu finden, Spiel-Empfehlungen zu geben und Fragen zur Nutzung der Suchmaschine zu beantworten."
+    },
+    "suggestions": {
+      "game_recommendations": "Welche Spiele empfehlen Sie für Nintendo 64?",
+      "search_tips": "Wie suche ich nach bestimmten Regionen?",
+      "gaming_history": "Erzählen Sie mir von Retro-Spielkonsolen"
+    },
+    "input_placeholder": "Fragen Sie mich etwas...",
+    "typing_indicator": "KI denkt nach",
+    "error": {
+      "network": "Verbindung zum KI-Service nicht möglich. Überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.",
+      "generic": "Entschuldigung, ich habe gerade Verbindungsprobleme. Bitte versuchen Sie es später erneut."
+    }
   },
   "languages": {
     "en": "English",

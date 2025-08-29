@@ -55,6 +55,14 @@
       "disabled": "Web Emulator functionality was disabled by the administrator.",
       "contact": "Contact the administrator or spin up your own instance of Myrient Search."
     },
+    "ai": {
+      "title": "AI Assistant",
+      "description": "This website features an AI-powered assistant that can help you find games, provide recommendations, and answer questions about retro gaming.",
+      "provider_info": "Powered by {{provider}} using the {{model}} model.",
+      "privacy_note": "The AI assistant is powered by an external service. Please refer to the service's privacy policy for more information.",
+      "disabled": "AI Assistant functionality was disabled by the administrator.",
+      "contact": "Contact the administrator or spin up your own instance of Myrient Search."
+    },
     "credits": {
       "created_by": "Search engine created by",
       "view_github": "View project on GitHub"
@@ -155,6 +163,25 @@
     "details": "Error details: {{message}}",
     "back_home": "Back to Home",
     "go_back": "Go Back"
+  },
+  "ai_chat": {
+    "title": "AI Assistant",
+    "button_tooltip": "AI Assistant",
+    "welcome": {
+      "title": "AI Assistant",
+      "description": "I can help you find retro games, provide gaming recommendations, and answer questions about using the search engine."
+    },
+    "suggestions": {
+      "game_recommendations": "What games do you recommend for Nintendo 64?",
+      "search_tips": "How do I search for specific regions?",
+      "gaming_history": "Tell me about retro gaming consoles"
+    },
+    "input_placeholder": "Ask me anything...",
+    "typing_indicator": "AI is thinking",
+    "error": {
+      "network": "Unable to connect to the AI service. Please check your internet connection and try again.",
+      "generic": "Sorry, I'm having trouble connecting right now. Please try again later."
+    }
   },
   "languages": {
     "en": "English",

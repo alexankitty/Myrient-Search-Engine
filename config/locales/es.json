@@ -55,6 +55,14 @@
             "disabled": "La función del emulador web ha sido desactivada por el administrador.",
             "contact": "Contacta con el administrador o lanza tu propia instancia de Myrient Search."
         },
+        "ai": {
+            "title": "Asistente de IA",
+            "description": "Esta web incluye un asistente potenciado por IA que puede ayudarte a encontrar juegos, proporcionar recomendaciones y responder preguntas sobre juegos retro.",
+            "provider_info": "Potenciado por {{provider}} usando el modelo {{model}}.",
+            "privacy_note": "El asistente de IA está potenciado por un servicio externo. Por favor, consulta la política de privacidad del servicio para más información.",
+            "disabled": "La funcionalidad del Asistente de IA ha sido desactivada por el administrador.",
+            "contact": "Contacta con el administrador o lanza tu propia instancia de Myrient Search."
+        },
         "credits": {
             "created_by": "Buscador creado por",
             "view_github": "Ver proyecto en GitHub"
@@ -155,6 +163,25 @@
         "details": "Detalles del error: {{message}}",
         "back_home": "Volver al Inicio",
         "go_back": "Volver atrás"
+    },
+    "ai_chat": {
+        "title": "Asistente de IA",
+        "button_tooltip": "Asistente de IA",
+        "welcome": {
+            "title": "Asistente de IA",
+            "description": "Puedo ayudarte a encontrar juegos retro, proporcionar recomendaciones de juegos y responder preguntas sobre el uso del motor de búsqueda."
+        },
+        "suggestions": {
+            "game_recommendations": "¿Qué juegos recomiendas para Nintendo 64?",
+            "search_tips": "¿Cómo busco regiones específicas?",
+            "gaming_history": "Cuéntame sobre consolas de videojuegos retro"
+        },
+        "input_placeholder": "Pregúntame cualquier cosa...",
+        "typing_indicator": "La IA está pensando",
+        "error": {
+            "network": "No se puede conectar con el servicio de IA. Revisa tu conexión a internet e inténtalo de nuevo.",
+            "generic": "Lo siento, tengo problemas para conectarme ahora mismo. Inténtalo más tarde."
+        }
     },
     "languages": {
         "en": "English",

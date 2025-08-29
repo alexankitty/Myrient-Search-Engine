@@ -55,6 +55,14 @@
             "disabled": "La fonctionnalité d'émulation web a été désactivée par l'administrateur.",
             "contact": "Contactez l'administrateur ou lancez votre propre instance de Myrient Search."
         },
+        "ai": {
+            "title": "Assistant IA",
+            "description": "Ce site web dispose d'un assistant alimenté par l'IA qui peut vous aider à trouver des jeux, fournir des recommandations et répondre aux questions sur le gaming rétro.",
+            "provider_info": "Alimenté par {{provider}} utilisant le modèle {{model}}.",
+            "privacy_note": "L'assistant IA est alimenté par un service externe. Veuillez vous référer à la politique de confidentialité du service pour plus d'informations.",
+            "disabled": "La fonctionnalité Assistant IA a été désactivée par l'administrateur.",
+            "contact": "Contactez l'administrateur ou lancez votre propre instance de Myrient Search."
+        },
         "credits": {
             "created_by": "Moteur de recherche créé par",
             "view_github": "Voir le projet sur GitHub"
@@ -156,6 +164,25 @@
         "back_home": "Retour à l'accueil",
         "go_back": "Retour"
     },
+    "ai_chat": {
+        "title": "Assistant IA",
+        "button_tooltip": "Assistant IA",
+        "welcome": {
+            "title": "Assistant IA",
+            "description": "Je peux vous aider à trouver des jeux rétro, fournir des recommandations de jeux et répondre aux questions sur l'utilisation du moteur de recherche."
+        },
+        "suggestions": {
+            "game_recommendations": "Quels jeux recommandez-vous pour Nintendo 64 ?",
+            "search_tips": "Comment rechercher des régions spécifiques ?",
+            "gaming_history": "Parlez-moi des consoles de jeux rétro"
+        },
+        "input_placeholder": "Demandez-moi n'importe quoi...",
+        "typing_indicator": "L'IA réfléchit",
+        "error": {
+            "network": "Impossible de se connecter au service IA. Vérifiez votre connexion internet et réessayez.",
+            "generic": "Désolé, j'ai du mal à me connecter en ce moment. Veuillez réessayer plus tard."
+        }
+    },
     "languages": {
         "en": "English",
         "es": "Español",
@@ -169,7 +196,7 @@
         "tr": "Türkçe",
         "it": "Italiano",
         "romaji": "Romaji",
-        "hi": "हिन्दी",
+        "hi": "हiन्दी",
         "ar": "العربية",
         "bn": "বাংলা",
         "ru": "Русский"

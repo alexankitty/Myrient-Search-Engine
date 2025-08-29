@@ -55,6 +55,14 @@
             "disabled": "웹 에뮬레이터 기능이 관리자에 의해 비활성화되었습니다.",
             "contact": "관리자에게 문의하거나 직접 Myrient Search 인스턴스를 설치해 보세요."
         },
+        "ai": {
+            "title": "AI 어시스턴트",
+            "description": "이 웹사이트는 게임을 찾고, 추천을 제공하며, 레트로 게임에 대한 질문에 답할 수 있는 AI 기반 어시스턴트를 제공합니다.",
+            "provider_info": "{{model}} 모델을 사용하는 {{provider}}에 의해 구동됩니다.",
+            "privacy_note": "AI 어시스턴트는 외부 서비스에 의해 구동됩니다. 자세한 정보는 해당 서비스의 개인정보 보호정책을 참조하세요.",
+            "disabled": "AI 어시스턴트 기능이 관리자에 의해 비활성화되었습니다.",
+            "contact": "관리자에게 문의하거나 자신만의 Myrient Search 인스턴스를 실행하세요."
+        },
         "credits": {
             "created_by": "검색 엔진 개발자:",
             "view_github": "GitHub에서 프로젝트 보기"
@@ -155,6 +163,25 @@
         "details": "오류 세부 정보: {{message}}",
         "back_home": "홈으로 돌아가기",
         "go_back": "뒤로 가기"
+    },
+    "ai_chat": {
+        "title": "AI 어시스턴트",
+        "button_tooltip": "AI 어시스턴트",
+        "welcome": {
+            "title": "AI 어시스턴트",
+            "description": "레트로 게임 찾기, 게임 추천 제공, 검색 엔진 사용에 대한 질문 답변을 도와드릴 수 있습니다."
+        },
+        "suggestions": {
+            "game_recommendations": "Nintendo 64에 어떤 게임을 추천하시나요?",
+            "search_tips": "특정 지역을 어떻게 검색하나요?",
+            "gaming_history": "레트로 게임 콘솔에 대해 알려주세요"
+        },
+        "input_placeholder": "무엇이든 물어보세요...",
+        "typing_indicator": "AI가 생각 중입니다",
+        "error": {
+            "network": "AI 서비스에 연결할 수 없습니다. 인터넷 연결을 확인하고 다시 시도해 주세요.",
+            "generic": "죄송합니다. 지금 연결에 문제가 있습니다. 나중에 다시 시도해 주세요."
+        }
     },
     "languages": {
         "en": "English",
