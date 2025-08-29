@@ -150,6 +150,11 @@ let defaultOptions = {
   isEmulatorCompatible: isEmulatorCompatible,
   isNonGameContent: isNonGameContent,
   nonGameTerms: nonGameTerms,
+  aiEnabled: process.env.AI_ENABLED === 'true',
+  aiConfig: {
+    apiUrl: process.env.AI_API_URL || 'https://example.com',
+    model: process.env.AI_MODEL || 'default',
+  },
 };
 
 function updateDefaults() {

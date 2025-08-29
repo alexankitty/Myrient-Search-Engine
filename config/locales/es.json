@@ -55,6 +55,14 @@
             "disabled": "La función del emulador web ha sido desactivada por el administrador.",
             "contact": "Contacta con el administrador o lanza tu propia instancia de Myrient Search."
         },
+        "ai": {
+            "title": "Asistente de IA",
+            "description": "Esta web incluye un asistente potenciado por IA que puede ayudarte a encontrar juegos, proporcionar recomendaciones y responder preguntas sobre juegos retro.",
+            "provider_info": "Potenciado por {{provider}} usando el modelo {{model}}.",
+            "privacy_note": "El asistente de IA está potenciado por un servicio externo. Por favor, consulta la política de privacidad del servicio para más información.",
+            "disabled": "La funcionalidad del Asistente de IA ha sido desactivada por el administrador.",
+            "contact": "Contacta con el administrador o lanza tu propia instancia de Myrient Search."
+        },
         "credits": {
             "created_by": "Buscador creado por",
             "view_github": "Ver proyecto en GitHub"

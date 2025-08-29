@@ -55,6 +55,14 @@
             "disabled": "Web Emülatörü işlevi yönetici tarafından devre dışı bırakıldı.",
             "contact": "Yöneticiyle iletişime geçin veya kendi Myrient Search örneğinizi kurun."
         },
+        "ai": {
+            "title": "AI Asistanı",
+            "description": "Bu web sitesi, oyun bulmanıza, öneriler sunmanıza ve retro oyunlar hakkındaki sorularınızı yanıtlamanıza yardımcı olabilecek AI destekli bir asistana sahiptir.",
+            "provider_info": "{{model}} modelini kullanan {{provider}} tarafından desteklenmektedir.",
+            "privacy_note": "AI asistanı harici bir hizmet tarafından desteklenmektedir. Daha fazla bilgi için lütfen hizmetin gizlilik politikasına bakın.",
+            "disabled": "AI Asistanı işlevselliği yönetici tarafından devre dışı bırakılmıştır.",
+            "contact": "Yönetici ile iletişime geçin veya kendi Myrient Search örneğinizi çalıştırın."
+        },
         "credits": {
             "created_by": "Arama motoru şu kişi tarafından oluşturuldu:",
             "view_github": "Projeyi GitHub'da görüntüle"

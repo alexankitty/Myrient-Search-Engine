@@ -55,6 +55,14 @@
             "disabled": "Webu emyurēta kinō wa kanrisha ni yotte mukouka sareteimasu.",
             "contact": "Kanrisha ni otoiawase itadaku ka, go jishin de Myrient Search no insutansu wo tachiagetekudasai."
         },
+        "ai": {
+            "title": "AI Ashisutanto",
+            "description": "Kono websaito ni wa, geemu wo mitsukete, osusume wo teikyou shite, retoro geemu ni kansuru shitsumon ni kotaeru koto ga dekiru AI-shihaisha ga tousai sarete imasu.",
+            "provider_info": "{{model}} moderu wo shiyou shita {{provider}} ni yotte teikyou sarete imasu.",
+            "privacy_note": "AI ashisutanto wa gaibu saabisu ni yotte teikyou sarete imasu. Shousai ni tsuite wa, saabisu no puraibashii porishii wo go-sanshou kudasai.",
+            "disabled": "AI ashisutanto kinou wa kanrisha ni yotte mukouka sarete imasu.",
+            "contact": "Kanrisha ni otoiawase itadaku ka, dokuji no Myrient Search insutansu wo tachiagete kudasai."
+        },
         "credits": {
             "created_by": "Kensaku enjin kaihatsusha:",
             "view_github": "GitHub de purojekuto wo miru"

@@ -55,6 +55,14 @@
             "disabled": "网页模拟器功能已被管理员禁用。",
             "contact": "请联系管理员或自行部署Myrient Search实例。"
         },
+        "ai": {
+            "title": "AI助手",
+            "description": "该网站配备了AI助手，可以帮助您查找游戏、提供推荐并回答有关复古游戏的问题。",
+            "provider_info": "由{{provider}}提供支持，使用{{model}}模型。",
+            "privacy_note": "AI助手由外部服务提供支持。更多信息请参阅服务的隐私政策。",
+            "disabled": "AI助手功能已被管理员禁用。",
+            "contact": "请联系管理员或运行您自己的Myrient Search实例。"
+        },
         "credits": {
             "created_by": "搜索引擎开发者：",
             "view_github": "在GitHub上查看项目"

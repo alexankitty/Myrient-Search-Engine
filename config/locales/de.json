@@ -55,6 +55,14 @@
       "disabled": "Die Webemulator-Funktion wurde vom Administrator deaktiviert.",
       "contact": "Kontaktieren Sie den Administrator oder starten Sie Ihre eigene Instanz von Myrient Search."
     },
+    "ai": {
+      "title": "KI-Assistent",
+      "description": "Diese Website verfügt über einen KI-gestützten Assistenten, der Ihnen beim Finden von Spielen, bei Empfehlungen und bei der Beantwortung von Fragen zum Retro-Gaming helfen kann.",
+      "provider_info": "Bereitgestellt von {{provider}} mit dem {{model}}-Modell.",
+      "privacy_note": "Der KI-Assistent wird von einem externen Dienst betrieben. Weitere Informationen finden Sie in der Datenschutzrichtlinie des Dienstes.",
+      "disabled": "Die KI-Assistenten-Funktionalität wurde vom Administrator deaktiviert.",
+      "contact": "Kontaktieren Sie den Administrator oder starten Sie Ihre eigene Instanz von Myrient Search."
+    },
     "credits": {
       "created_by": "Suchmaschine entwickelt von",
       "view_github": "Projekt auf GitHub ansehen"

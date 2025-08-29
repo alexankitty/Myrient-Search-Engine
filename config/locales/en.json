@@ -55,6 +55,14 @@
       "disabled": "Web Emulator functionality was disabled by the administrator.",
       "contact": "Contact the administrator or spin up your own instance of Myrient Search."
     },
+    "ai": {
+      "title": "AI Assistant",
+      "description": "This website features an AI-powered assistant that can help you find games, provide recommendations, and answer questions about retro gaming.",
+      "provider_info": "Powered by {{provider}} using the {{model}} model.",
+      "privacy_note": "The AI assistant is powered by an external service. Please refer to the service's privacy policy for more information.",
+      "disabled": "AI Assistant functionality was disabled by the administrator.",
+      "contact": "Contact the administrator or spin up your own instance of Myrient Search."
+    },
     "credits": {
       "created_by": "Search engine created by",
       "view_github": "View project on GitHub"

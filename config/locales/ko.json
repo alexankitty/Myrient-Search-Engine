@@ -55,6 +55,14 @@
             "disabled": "웹 에뮬레이터 기능이 관리자에 의해 비활성화되었습니다.",
             "contact": "관리자에게 문의하거나 직접 Myrient Search 인스턴스를 설치해 보세요."
         },
+        "ai": {
+            "title": "AI 어시스턴트",
+            "description": "이 웹사이트는 게임을 찾고, 추천을 제공하며, 레트로 게임에 대한 질문에 답할 수 있는 AI 기반 어시스턴트를 제공합니다.",
+            "provider_info": "{{model}} 모델을 사용하는 {{provider}}에 의해 구동됩니다.",
+            "privacy_note": "AI 어시스턴트는 외부 서비스에 의해 구동됩니다. 자세한 정보는 해당 서비스의 개인정보 보호정책을 참조하세요.",
+            "disabled": "AI 어시스턴트 기능이 관리자에 의해 비활성화되었습니다.",
+            "contact": "관리자에게 문의하거나 자신만의 Myrient Search 인스턴스를 실행하세요."
+        },
         "credits": {
             "created_by": "검색 엔진 개발자:",
             "view_github": "GitHub에서 프로젝트 보기"

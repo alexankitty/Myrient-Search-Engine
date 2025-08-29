@@ -55,6 +55,14 @@
             "disabled": "La fonctionnalité d'émulation web a été désactivée par l'administrateur.",
             "contact": "Contactez l'administrateur ou lancez votre propre instance de Myrient Search."
         },
+        "ai": {
+            "title": "Assistant IA",
+            "description": "Ce site web dispose d'un assistant alimenté par l'IA qui peut vous aider à trouver des jeux, fournir des recommandations et répondre aux questions sur le gaming rétro.",
+            "provider_info": "Alimenté par {{provider}} utilisant le modèle {{model}}.",
+            "privacy_note": "L'assistant IA est alimenté par un service externe. Veuillez vous référer à la politique de confidentialité du service pour plus d'informations.",
+            "disabled": "La fonctionnalité Assistant IA a été désactivée par l'administrateur.",
+            "contact": "Contactez l'administrateur ou lancez votre propre instance de Myrient Search."
+        },
         "credits": {
             "created_by": "Moteur de recherche créé par",
             "view_github": "Voir le projet sur GitHub"
