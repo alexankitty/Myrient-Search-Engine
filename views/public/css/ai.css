@@ -558,3 +558,34 @@
     padding: 6px 10px;
   }
 }
+
+/* Tool Usage Indicator */
+.ai-tool-usage-indicator {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 5px 0;
+  opacity: 0.8;
+}
+
+.ai-tool-indicator {
+  background: rgba(255, 189, 51, 0.1);
+  border: 1px solid rgba(255, 189, 51, 0.2);
+  border-radius: 20px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #ffbd33;
+}
+
+.ai-tool-icon {
+  font-size: 14px;
+  filter: brightness(1.1);
+}
+
+.ai-tool-indicator small {
+  font-size: 11px;
+  color: #b0b8c1;
+  margin: 0;
+}

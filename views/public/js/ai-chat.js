@@ -13,6 +13,9 @@ class AIChat {
     this.isTyping = false;
     this.hasMessages = false;
 
+    // Track conversation history for tool calling
+    this.conversation = [];
+
     // Initialize translations
     this.translations = window.aiChatTranslations || {
       typing_indicator: 'AI is thinking',
@@ -177,13 +180,19 @@ class AIChat {
     this.showTypingIndicator();
 
     try {
-      // Send to backend
+      // Add user message to conversation history
+      this.conversation.push({ role: 'user', content: message });
+
+      // Send to backend with conversation history
       const response = await fetch('/api/ai-chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ message })
+        body: JSON.stringify({
+          message,
+          conversation: this.conversation.slice(-10) // Send last 10 messages for context
+        })
       });
 
       if (!response.ok) {
@@ -193,9 +202,23 @@ class AIChat {
 
       const data = await response.json();
 
+      // Update conversation history
+      if (data.conversation) {
+        this.conversation = data.conversation;
+      }
+
       // Remove typing indicator and add AI response
       this.hideTypingIndicator();
+
+      // Show tool usage indicator if tools were used
+      if (data.tool_calls_made && data.tool_calls_made > 0) {
+        this.addToolUsageIndicator(data.tool_calls_made, data.tools_used || []);
+      }
+
       this.addMessage(data.response, 'ai');
+
+      // Add AI response to conversation history
+      this.conversation.push({ role: 'assistant', content: data.response });
 
     } catch (error) {
       console.error('AI Chat Error:', error);
@@ -229,6 +252,42 @@ class AIChat {
     `;
 
     this.messagesContainer.appendChild(messageDiv);
+    this.scrollToBottom();
+  }
+
+  addToolUsageIndicator(toolCount, toolsUsed = []) {
+    const indicatorDiv = document.createElement('div');
+    indicatorDiv.className = 'ai-tool-usage-indicator';
+
+    // Create user-friendly tool names
+    const friendlyToolNames = {
+      'search_games': 'game search',
+      'get_search_suggestions': 'search suggestions'
+    };
+
+    let toolText;
+    if (toolsUsed.length > 0) {
+      const friendlyNames = toolsUsed.map(tool => friendlyToolNames[tool] || tool);
+      if (friendlyNames.length === 1) {
+        toolText = `Used ${friendlyNames[0]}`;
+      } else {
+        toolText = `Used ${friendlyNames.join(' & ')}`;
+      }
+    } else {
+      // Fallback to generic text
+      const genericToolText = toolCount === 1 ? 'tool' : 'tools';
+      toolText = `Used ${toolCount} ${genericToolText}`;
+    }
+
+    indicatorDiv.innerHTML = `
+      <div class="ai-tool-indicator">
+        <span class="ai-tool-icon">🔧</span>
+        <small>${toolText}</small>
+      </div>
+    `;
+
+    this.messagesContainer.appendChild(indicatorDiv);
+    this.scrollToBottom();
   }
 
   formatMessage(message) {

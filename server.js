@@ -573,16 +573,61 @@ About Myrient:
 - The search engine indexes thousands of games from various gaming systems and regions
 
 Your role:
-- Help users find games they're looking for
+- Help users find games they're looking for by using the search tools available to you
 - Provide information about gaming history, consoles, and game recommendations
 - Answer questions about how to use the search features
 - Be knowledgeable about retro gaming but stay focused on being helpful
-- Keep responses concise and friendly
+- When users ask for games, always use the search_games tool to find them
+- Keep responses SHORT, CONCISE and SIMPLE - the chat interface is small
+- Present search results as simple lists, NOT tables (tables don't fit in the small chat window)
+- Use bullet points or numbered lists instead of tables
+- Limit responses to 3-5 game recommendations maximum to keep it readable
 - If users ask about downloading or legal issues, remind them that Myrient focuses on preservation
 
-Current search context: The user is on a retro gaming search website and may be looking for specific games or gaming information.`;
+IMPORTANT SEARCH STRATEGY:
+- When users describe a game, THINK about what the actual game title might be before searching
+- Don't search literal descriptions - identify the likely game name first
+- Use SIMPLE searches with just the game title for best results
+- The search is fuzzy and will find partial matches - keep queries simple
+- If first search fails or returns few results, try alternative searches with different terms
+- For empty results, suggest the user try different search terms or check spelling
 
-    const aiResponse = await fetch(apiUrl, {
+GAME RECOMMENDATION STRATEGY:
+- When users ask for "best [console] games", don't search the console name
+- Instead, search for specific popular titles for that console
+- EFFICIENCY: Limit to 2-3 searches maximum for recommendations to avoid hitting rate limits
+- Stop searching when you have enough games (3-5) for a good recommendation
+- Focus on well-known AAA titles, not obscure indie games
+
+Available Tools:
+- search_games: Fuzzy text search for games by title/name (returns URLs for each game)
+- get_search_suggestions: Get search suggestions for partial queries
+
+CRITICAL LINKING RULES:
+- NEVER make up or guess URLs - ONLY use URLs from search tool results
+- When mentioning specific games found via search_games tool, ALWAYS link to them using EXACTLY the urls.info value from the search results
+- Format: [Game Title](EXACT_INFO_URL_FROM_SEARCH_RESULTS)
+- Do NOT create links like /info/123 - use the EXACT urls.info field from the tool response
+- If you haven't searched for a game using the tool, do NOT create any links for it
+- Only link to games that were actually returned by the search_games tool with their provided URLs`;
+
+    // Import tools dynamically
+    const { tools, executeToolCall } = await import('./lib/ai/tools.js');
+
+    // Build conversation history
+    let messages = [
+      { role: 'system', content: systemPrompt }
+    ];
+
+    // Add conversation history if provided
+    if (req.body.conversation && Array.isArray(req.body.conversation)) {
+      messages = messages.concat(req.body.conversation);
+    }
+
+    // Add current user message
+    messages.push({ role: 'user', content: message });
+
+    let aiResponse = await fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -591,11 +636,10 @@ Current search context: The user is on a retro gaming search website and may be 
       },
       body: JSON.stringify({
         model: model,
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: message }
-        ],
-        max_tokens: 500,
+        messages: messages,
+        tools: tools,
+        tool_choice: 'auto',
+        max_tokens: 1000,
         temperature: 0.7,
         stream: false
       })
@@ -603,7 +647,13 @@ Current search context: The user is on a retro gaming search website and may be 
 
     if (!aiResponse.ok) {
       const errorData = await aiResponse.json().catch(() => ({}));
-      console.error('AI API Error:', aiResponse.status, errorData);
+      console.error('AI API Error on initial request:');
+      console.error('Status:', aiResponse.status);
+      console.error('Error data:', errorData);
+      console.error('Request details:');
+      console.error('- Model:', model);
+      console.error('- Messages count:', messages.length);
+      console.error('- User message:', message.substring(0, 100) + '...');
 
       // Handle specific error cases
       if (aiResponse.status === 401) {
@@ -621,7 +671,7 @@ Current search context: The user is on a retro gaming search website and may be 
       }
     }
 
-    const aiData = await aiResponse.json();
+    let aiData = await aiResponse.json();
 
     if (!aiData.choices || aiData.choices.length === 0) {
       return res.status(503).json({
@@ -629,9 +679,172 @@ Current search context: The user is on a retro gaming search website and may be 
       });
     }
 
-    const response = aiData.choices[0].message.content.trim();
+    let assistantMessage = aiData.choices[0].message;
+    let toolCallsCount = 0; // Track tool calls executed
+    let toolsUsed = []; // Track which tools were used
 
-    res.json({ response });
+    console.log('Initial AI request successful');
+
+    // Handle multiple rounds of tool calls
+    let maxToolRounds = 3; // Prevent infinite loops and token exhaustion
+    let currentRound = 0;
+
+    while (assistantMessage.tool_calls && assistantMessage.tool_calls.length > 0 && currentRound < maxToolRounds) {
+      currentRound++;
+      const roundToolCalls = assistantMessage.tool_calls.length;
+      const roundToolsUsed = assistantMessage.tool_calls.map(tc => tc.function.name);
+
+      console.log(`Round ${currentRound}: AI wants to use ${roundToolCalls} tools: ${roundToolsUsed.join(', ')}`);
+
+      // Track total tools across all rounds
+      toolCallsCount += roundToolCalls;
+      toolsUsed = toolsUsed.concat(roundToolsUsed);
+
+      // Add assistant message with tool calls to conversation
+      messages.push(assistantMessage);
+
+      // Execute each tool call in this round
+      for (const toolCall of assistantMessage.tool_calls) {
+        try {
+          const toolResult = await executeToolCall(toolCall);
+
+          // Add tool result to conversation
+          messages.push({
+            role: 'tool',
+            tool_call_id: toolCall.id,
+            content: JSON.stringify(toolResult)
+          });
+        } catch (error) {
+          console.error('Tool execution error:', error);
+          // Add error result
+          messages.push({
+            role: 'tool',
+            tool_call_id: toolCall.id,
+            content: JSON.stringify({ error: error.message })
+          });
+        }
+      }
+
+      // Get AI response after this round of tool execution
+      console.log(`Making AI request after round ${currentRound} tool execution...`);
+      aiResponse = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`,
+          'User-Agent': 'Myrient-Search-Engine/1.0'
+        },
+        body: JSON.stringify({
+          model: model,
+          messages: messages,
+          tools: tools,
+          tool_choice: 'auto',
+          max_tokens: 1000,
+          temperature: 0.7,
+          stream: false
+        })
+      });
+
+      if (!aiResponse.ok) {
+        const errorData = await aiResponse.json().catch(() => ({}));
+        console.error(`AI API Error after round ${currentRound} tool execution:`);
+        console.error('Status:', aiResponse.status);
+        console.error('Error data:', errorData);
+        console.error('Request details:');
+        console.error('- Model:', model);
+        console.error('- Messages count:', messages.length);
+        console.error('- Tools used:', toolsUsed);
+
+        // Handle specific error cases
+        if (aiResponse.status === 429) {
+          // Extract wait time from error message if available
+          let waitTime = 5000; // Default 5 seconds
+          if (errorData.error?.message) {
+            const waitMatch = errorData.error.message.match(/Please try again in ([\d.]+)s/);
+            if (waitMatch) {
+              waitTime = Math.ceil(parseFloat(waitMatch[1]) * 1000) + 1000; // Add 1 extra second
+            }
+          }
+
+          console.error(`Rate limit hit after tool execution. Waiting ${waitTime/1000}s and retrying once...`);
+          await new Promise(resolve => setTimeout(resolve, waitTime));
+
+          const retryResponse = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${apiKey}`,
+              'User-Agent': 'Myrient-Search-Engine/1.0'
+            },
+            body: JSON.stringify({
+              model: model,
+              messages: messages,
+              tools: tools,
+              tool_choice: 'auto',
+              max_tokens: 1000,
+              temperature: 0.7,
+              stream: false
+            })
+          });
+
+          if (retryResponse.ok) {
+            console.log('Retry successful after rate limit');
+            aiData = await retryResponse.json();
+            assistantMessage = aiData.choices[0].message;
+          } else {
+            console.error('Retry also failed with status:', retryResponse.status);
+            return res.status(429).json({
+              error: 'AI service is currently busy processing your request. Please try again in a moment.'
+            });
+          }
+        } else if (aiResponse.status === 401) {
+          return res.status(503).json({
+            error: 'AI service authentication failed. Please contact the administrator.'
+          });
+        } else {
+          return res.status(503).json({
+            error: 'AI service encountered an error while processing your request. Please try again later.'
+          });
+        }
+      } else {
+        console.log(`AI request after round ${currentRound} tool execution successful`);
+        aiData = await aiResponse.json();
+        assistantMessage = aiData.choices[0].message;
+
+        console.log(`Round ${currentRound} response - has tool_calls:`, !!assistantMessage.tool_calls);
+        console.log(`Round ${currentRound} response - has content:`, !!assistantMessage.content);
+      }
+    }
+
+    if (currentRound >= maxToolRounds && assistantMessage.tool_calls) {
+      console.warn('Maximum tool rounds reached, AI still wants to use tools. Stopping.');
+    }
+
+    if (currentRound === 0) {
+      console.log('No tool calls needed, using initial response');
+    } else {
+      console.log(`Total rounds completed: ${currentRound}`);
+    }
+
+    console.log('Final tool calls check - has tool_calls:', !!assistantMessage.tool_calls);
+    console.log('Final tool calls check - has content:', !!assistantMessage.content);
+
+    console.log('Final assistant message structure:', JSON.stringify(assistantMessage, null, 2));
+    console.log('Assistant message content:', assistantMessage.content);
+    console.log('Assistant message content type:', typeof assistantMessage.content);
+    console.log('Assistant message keys:', Object.keys(assistantMessage));
+
+    const response = assistantMessage.content?.trim() || 'Something went wrong';
+    console.log('Final response after processing:', response.substring(0, 100) + '...');
+    console.log('Tools used in this request:', toolsUsed);
+
+    // Return the response along with updated conversation
+    res.json({
+      response,
+      conversation: messages.slice(1), // Exclude system message from returned conversation
+      tool_calls_made: toolCallsCount,
+      tools_used: toolsUsed
+    });
 
   } catch (error) {
     console.error('AI Chat Error:', error);
