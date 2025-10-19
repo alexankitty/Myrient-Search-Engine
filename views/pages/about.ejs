@@ -52,38 +52,37 @@
                     <% if (aiEnabled) { %>
                     <%
                             // Extract provider from API URL
-                            let provider = 'Unknown';
-                            if (aiConfig.apiUrl.includes('api.groq.com')) {
-                                provider = 'Groq';
-                            } else if (aiConfig.apiUrl.includes('api.openai.com')) {
-                                provider = 'OpenAI';
-                            } else if (aiConfig.apiUrl.includes('api.anthropic.com')) {
-                                provider = 'Anthropic';
-                            } else if (aiConfig.apiUrl.includes('generativelanguage.googleapis.com')) {
-                                provider = 'Google Gemini';
-                            } else if (aiConfig.apiUrl.includes('api.perplexity.ai')) {
-                                provider = 'Perplexity';
-                            } else if (aiConfig.apiUrl.includes('api.cohere.ai')) {
-                                provider = 'Cohere';
-                            } else if (aiConfig.apiUrl.includes('api.mistral.ai')) {
-                                provider = 'Mistral';
-                            } else if (aiConfig.apiUrl.includes('localhost') || aiConfig.apiUrl.includes('127.0.0.1') || aiConfig.apiUrl.includes('0.0.0.0')) {
-                                provider = 'Local LLM';
-                            } else {
-                                // Try to extract domain from URL
+                            const providers = [
+                                { pattern: 'api.groq.com', name: 'Groq' },
+                                { pattern: 'api.openai.com', name: 'OpenAI' },
+                                { pattern: 'api.anthropic.com', name: 'Anthropic' },
+                                { pattern: 'generativelanguage.googleapis.com', name: 'Google Gemini' },
+                                { pattern: 'api.perplexity.ai', name: 'Perplexity' },
+                                { pattern: 'api.cohere.ai', name: 'Cohere' },
+                                { pattern: 'api.mistral.ai', name: 'Mistral' },
+                            ];
+                            const localPatterns = ['localhost', '127.0.0.1', '0.0.0.0'];
+
+                            const apiUrl = aiConfig.apiUrl;
+
+                            // Helper to extract provider name from domain
+                            const extractProviderFromDomain = (url) => {
                                 try {
-                                    const url = new URL(aiConfig.apiUrl);
-                                    const hostname = url.hostname;
-                                    if (hostname.startsWith('api.')) {
-                                        provider = hostname.substring(4).split('.')[0];
-                                    } else {
-                                        provider = hostname.split('.')[0];
-                                    }
-                                    provider = provider.charAt(0).toUpperCase() + provider.slice(1);
+                                    const { hostname } = new URL(url);
+                                    const domain = hostname.startsWith('api.')
+                                        ? hostname.substring(4).split('.')[0]
+                                        : hostname.split('.')[0];
+                                    return domain.charAt(0).toUpperCase() + domain.slice(1);
                                 } catch (e) {
-                                    provider = 'Custom Provider';
+                                    return 'Custom Provider';
                                 }
-                            }
+                            };
+
+                            // Determine provider: local → known providers → domain extraction
+                            const provider = localPatterns.some(pattern => apiUrl.includes(pattern))
+                                ? 'Local LLM'
+                                : providers.find(p => apiUrl.includes(p.pattern))?.name
+                                    || extractProviderFromDomain(apiUrl);
                         %>
                     <p><%= __('about.ai.description') %></p>
                     <p><%- __('about.ai.provider_info', {provider: provider, model: aiConfig.model}) %></p>
