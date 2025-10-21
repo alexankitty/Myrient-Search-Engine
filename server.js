@@ -101,7 +101,7 @@ async function getFilesJob() {
     metadataMatchCount = await File.count({
       where: { detailsId: { [Op.ne]: null } },
     });
-    if(process.env.DB_KEYWORD_OPTIMIZER === "1"){
+    if (process.env.DB_KEYWORD_OPTIMIZER === "1") {
       await optimizeDatabaseKws();
     }
   }
@@ -117,12 +117,12 @@ async function getFilesJob() {
 
 async function updateMetadata() {
   if (updatingFiles) return;
-  let updateMatches = process.env.FORCE_METADATA_RESYNC == "1" ? true : false
+  let updateMatches = process.env.FORCE_METADATA_RESYNC == "1" ? true : false;
   if ((await Metadata.count()) < (await metadataManager.getIGDBGamesCount())) {
     await metadataManager.syncAllMetadata();
     updateMatches = true;
   }
-  if(updateMatches){
+  if (updateMatches) {
     if (await Metadata.count()) {
       await metadataManager.matchAllMetadata();
     }
@@ -135,7 +135,10 @@ async function updateMetadata() {
 async function updateKws() {
   if (updatingFiles) return;
   if (process.env.DB_KEYWORD_OPTIMIZER !== "1") return;
-  if (!(await File.count({ where: { filenamekws: { [Op.ne]: null } } })) || process.env.FORCE_DB_OPTIMIZE == "1") {
+  if (
+    !(await File.count({ where: { filenamekws: { [Op.ne]: null } } })) ||
+    process.env.FORCE_DB_OPTIMIZE == "1"
+  ) {
     await optimizeDatabaseKws();
   }
 }
@@ -153,10 +156,10 @@ let defaultOptions = {
   isEmulatorCompatible: isEmulatorCompatible,
   isNonGameContent: isNonGameContent,
   nonGameTerms: nonGameTerms,
-  aiEnabled: process.env.AI_ENABLED === 'true',
+  aiEnabled: process.env.AI_ENABLED === "true",
   aiConfig: {
-    apiUrl: process.env.AI_API_URL || 'https://example.com',
-    model: process.env.AI_MODEL || 'default',
+    apiUrl: process.env.AI_API_URL || "https://example.com",
+    model: process.env.AI_MODEL || "default",
   },
 };
 
@@ -418,7 +421,11 @@ app.get("/proxy-rom/:id", async function (req, res, next) {
   }
 
   try {
-    const response = await fetch(romFile.path);
+    const response = await fetch(romFile.path, {
+      headers: {
+        "User-Agent": "Wget/1.25.0",
+      },
+    });
     const contentLength = response.headers.get("content-length");
 
     res.setHeader("Content-Type", "application/zip");
@@ -544,25 +551,28 @@ app.post("/api/ai-chat", async function (req, res) {
   try {
     const { message } = req.body;
 
-    if (!message || typeof message !== 'string') {
-      return res.status(400).json({ error: 'Message is required' });
+    if (!message || typeof message !== "string") {
+      return res.status(400).json({ error: "Message is required" });
     }
 
     // Check if AI is enabled and configured
-    const aiEnabled = process.env.AI_ENABLED === 'true';
+    const aiEnabled = process.env.AI_ENABLED === "true";
     const apiKey = process.env.AI_API_KEY;
-    const apiUrl = process.env.AI_API_URL || 'https://api.openai.com/v1/chat/completions';
-    const model = process.env.AI_MODEL || 'gpt-3.5-turbo';
+    const apiUrl =
+      process.env.AI_API_URL || "https://api.openai.com/v1/chat/completions";
+    const model = process.env.AI_MODEL || "gpt-3.5-turbo";
 
     if (!aiEnabled) {
       return res.status(503).json({
-        error: 'AI chat is currently disabled. Please contact the administrator.'
+        error:
+          "AI chat is currently disabled. Please contact the administrator.",
       });
     }
 
     if (!apiKey) {
       return res.status(503).json({
-        error: 'AI service is not configured. Please contact the administrator.'
+        error:
+          "AI service is not configured. Please contact the administrator.",
       });
     }
 
@@ -615,12 +625,10 @@ CRITICAL LINKING RULES:
 - Only link to games that were actually returned by the search_games tool with their provided URLs`;
 
     // Import tools dynamically
-    const { tools, executeToolCall } = await import('./lib/ai/tools.js');
+    const { tools, executeToolCall } = await import("./lib/ai/tools.js");
 
     // Build conversation history
-    let messages = [
-      { role: 'system', content: systemPrompt }
-    ];
+    let messages = [{ role: "system", content: systemPrompt }];
 
     // Add conversation history if provided
     if (req.body.conversation && Array.isArray(req.body.conversation)) {
@@ -628,48 +636,50 @@ CRITICAL LINKING RULES:
     }
 
     // Add current user message
-    messages.push({ role: 'user', content: message });
+    messages.push({ role: "user", content: message });
 
     let aiResponse = await fetch(apiUrl, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`,
-        'User-Agent': 'Myrient-Search-Engine/1.0'
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+        "User-Agent": "Myrient-Search-Engine/1.0",
       },
       body: JSON.stringify({
         model: model,
         messages: messages,
         tools: tools,
-        tool_choice: 'auto',
+        tool_choice: "auto",
         max_tokens: 1000,
         temperature: 0.7,
-        stream: false
-      })
+        stream: false,
+      }),
     });
 
     if (!aiResponse.ok) {
       const errorData = await aiResponse.json().catch(() => ({}));
-      console.error('AI API Error on initial request:');
-      console.error('Status:', aiResponse.status);
-      console.error('Error data:', errorData);
-      console.error('Request details:');
-      console.error('- Model:', model);
-      console.error('- Messages count:', messages.length);
-      console.error('- User message:', message.substring(0, 100) + '...');
+      console.error("AI API Error on initial request:");
+      console.error("Status:", aiResponse.status);
+      console.error("Error data:", errorData);
+      console.error("Request details:");
+      console.error("- Model:", model);
+      console.error("- Messages count:", messages.length);
+      console.error("- User message:", message.substring(0, 100) + "...");
 
       // Handle specific error cases
       if (aiResponse.status === 401) {
         return res.status(503).json({
-          error: 'AI service authentication failed. Please contact the administrator.'
+          error:
+            "AI service authentication failed. Please contact the administrator.",
         });
       } else if (aiResponse.status === 429) {
         return res.status(429).json({
-          error: 'AI service is currently busy. Please try again in a moment.'
+          error: "AI service is currently busy. Please try again in a moment.",
         });
       } else {
         return res.status(503).json({
-          error: 'AI service is temporarily unavailable. Please try again later.'
+          error:
+            "AI service is temporarily unavailable. Please try again later.",
         });
       }
     }
@@ -678,7 +688,7 @@ CRITICAL LINKING RULES:
 
     if (!aiData.choices || aiData.choices.length === 0) {
       return res.status(503).json({
-        error: 'AI service returned an unexpected response.'
+        error: "AI service returned an unexpected response.",
       });
     }
 
@@ -686,18 +696,28 @@ CRITICAL LINKING RULES:
     let toolCallsCount = 0; // Track tool calls executed
     let toolsUsed = []; // Track which tools were used
 
-    console.log('Initial AI request successful');
+    console.log("Initial AI request successful");
 
     // Handle multiple rounds of tool calls
     let maxToolRounds = 3; // Prevent infinite loops and token exhaustion
     let currentRound = 0;
 
-    while (assistantMessage.tool_calls && assistantMessage.tool_calls.length > 0 && currentRound < maxToolRounds) {
+    while (
+      assistantMessage.tool_calls &&
+      assistantMessage.tool_calls.length > 0 &&
+      currentRound < maxToolRounds
+    ) {
       currentRound++;
       const roundToolCalls = assistantMessage.tool_calls.length;
-      const roundToolsUsed = assistantMessage.tool_calls.map(tc => tc.function.name);
+      const roundToolsUsed = assistantMessage.tool_calls.map(
+        (tc) => tc.function.name
+      );
 
-      console.log(`Round ${currentRound}: AI wants to use ${roundToolCalls} tools: ${roundToolsUsed.join(', ')}`);
+      console.log(
+        `Round ${currentRound}: AI wants to use ${roundToolCalls} tools: ${roundToolsUsed.join(
+          ", "
+        )}`
+      );
 
       // Track total tools across all rounds
       toolCallsCount += roundToolCalls;
@@ -713,146 +733,186 @@ CRITICAL LINKING RULES:
 
           // Add tool result to conversation
           messages.push({
-            role: 'tool',
+            role: "tool",
             tool_call_id: toolCall.id,
-            content: JSON.stringify(toolResult)
+            content: JSON.stringify(toolResult),
           });
         } catch (error) {
-          console.error('Tool execution error:', error);
+          console.error("Tool execution error:", error);
           // Add error result
           messages.push({
-            role: 'tool',
+            role: "tool",
             tool_call_id: toolCall.id,
-            content: JSON.stringify({ error: error.message })
+            content: JSON.stringify({ error: error.message }),
           });
         }
       }
 
       // Get AI response after this round of tool execution
-      console.log(`Making AI request after round ${currentRound} tool execution...`);
+      console.log(
+        `Making AI request after round ${currentRound} tool execution...`
+      );
       aiResponse = await fetch(apiUrl, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`,
-          'User-Agent': 'Myrient-Search-Engine/1.0'
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
+          "User-Agent": "Myrient-Search-Engine/1.0",
         },
         body: JSON.stringify({
           model: model,
           messages: messages,
           tools: tools,
-          tool_choice: 'auto',
+          tool_choice: "auto",
           max_tokens: 1000,
           temperature: 0.7,
-          stream: false
-        })
+          stream: false,
+        }),
       });
 
       if (!aiResponse.ok) {
         const errorData = await aiResponse.json().catch(() => ({}));
-        console.error(`AI API Error after round ${currentRound} tool execution:`);
-        console.error('Status:', aiResponse.status);
-        console.error('Error data:', errorData);
-        console.error('Request details:');
-        console.error('- Model:', model);
-        console.error('- Messages count:', messages.length);
-        console.error('- Tools used:', toolsUsed);
+        console.error(
+          `AI API Error after round ${currentRound} tool execution:`
+        );
+        console.error("Status:", aiResponse.status);
+        console.error("Error data:", errorData);
+        console.error("Request details:");
+        console.error("- Model:", model);
+        console.error("- Messages count:", messages.length);
+        console.error("- Tools used:", toolsUsed);
 
         // Handle specific error cases
         if (aiResponse.status === 429) {
           // Extract wait time from error message if available
           let waitTime = 5000; // Default 5 seconds
           if (errorData.error?.message) {
-            const waitMatch = errorData.error.message.match(/Please try again in ([\d.]+)s/);
+            const waitMatch = errorData.error.message.match(
+              /Please try again in ([\d.]+)s/
+            );
             if (waitMatch) {
               waitTime = Math.ceil(parseFloat(waitMatch[1]) * 1000) + 1000; // Add 1 extra second
             }
           }
 
-          console.error(`Rate limit hit after tool execution. Waiting ${waitTime/1000}s and retrying once...`);
-          await new Promise(resolve => setTimeout(resolve, waitTime));
+          console.error(
+            `Rate limit hit after tool execution. Waiting ${
+              waitTime / 1000
+            }s and retrying once...`
+          );
+          await new Promise((resolve) => setTimeout(resolve, waitTime));
 
           const retryResponse = await fetch(apiUrl, {
-            method: 'POST',
+            method: "POST",
             headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${apiKey}`,
-              'User-Agent': 'Myrient-Search-Engine/1.0'
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${apiKey}`,
+              "User-Agent": "Myrient-Search-Engine/1.0",
             },
             body: JSON.stringify({
               model: model,
               messages: messages,
               tools: tools,
-              tool_choice: 'auto',
+              tool_choice: "auto",
               max_tokens: 1000,
               temperature: 0.7,
-              stream: false
-            })
+              stream: false,
+            }),
           });
 
           if (retryResponse.ok) {
-            console.log('Retry successful after rate limit');
+            console.log("Retry successful after rate limit");
             aiData = await retryResponse.json();
             assistantMessage = aiData.choices[0].message;
           } else {
-            console.error('Retry also failed with status:', retryResponse.status);
+            console.error(
+              "Retry also failed with status:",
+              retryResponse.status
+            );
             return res.status(429).json({
-              error: 'AI service is currently busy processing your request. Please try again in a moment.'
+              error:
+                "AI service is currently busy processing your request. Please try again in a moment.",
             });
           }
         } else if (aiResponse.status === 401) {
           return res.status(503).json({
-            error: 'AI service authentication failed. Please contact the administrator.'
+            error:
+              "AI service authentication failed. Please contact the administrator.",
           });
         } else {
           return res.status(503).json({
-            error: 'AI service encountered an error while processing your request. Please try again later.'
+            error:
+              "AI service encountered an error while processing your request. Please try again later.",
           });
         }
       } else {
-        console.log(`AI request after round ${currentRound} tool execution successful`);
+        console.log(
+          `AI request after round ${currentRound} tool execution successful`
+        );
         aiData = await aiResponse.json();
         assistantMessage = aiData.choices[0].message;
 
-        console.log(`Round ${currentRound} response - has tool_calls:`, !!assistantMessage.tool_calls);
-        console.log(`Round ${currentRound} response - has content:`, !!assistantMessage.content);
+        console.log(
+          `Round ${currentRound} response - has tool_calls:`,
+          !!assistantMessage.tool_calls
+        );
+        console.log(
+          `Round ${currentRound} response - has content:`,
+          !!assistantMessage.content
+        );
       }
     }
 
     if (currentRound >= maxToolRounds && assistantMessage.tool_calls) {
-      console.warn('Maximum tool rounds reached, AI still wants to use tools. Stopping.');
+      console.warn(
+        "Maximum tool rounds reached, AI still wants to use tools. Stopping."
+      );
     }
 
     if (currentRound === 0) {
-      console.log('No tool calls needed, using initial response');
+      console.log("No tool calls needed, using initial response");
     } else {
       console.log(`Total rounds completed: ${currentRound}`);
     }
 
-    console.log('Final tool calls check - has tool_calls:', !!assistantMessage.tool_calls);
-    console.log('Final tool calls check - has content:', !!assistantMessage.content);
+    console.log(
+      "Final tool calls check - has tool_calls:",
+      !!assistantMessage.tool_calls
+    );
+    console.log(
+      "Final tool calls check - has content:",
+      !!assistantMessage.content
+    );
 
-    console.log('Final assistant message structure:', JSON.stringify(assistantMessage, null, 2));
-    console.log('Assistant message content:', assistantMessage.content);
-    console.log('Assistant message content type:', typeof assistantMessage.content);
-    console.log('Assistant message keys:', Object.keys(assistantMessage));
+    console.log(
+      "Final assistant message structure:",
+      JSON.stringify(assistantMessage, null, 2)
+    );
+    console.log("Assistant message content:", assistantMessage.content);
+    console.log(
+      "Assistant message content type:",
+      typeof assistantMessage.content
+    );
+    console.log("Assistant message keys:", Object.keys(assistantMessage));
 
-    const response = assistantMessage.content?.trim() || 'Something went wrong';
-    console.log('Final response after processing:', response.substring(0, 100) + '...');
-    console.log('Tools used in this request:', toolsUsed);
+    const response = assistantMessage.content?.trim() || "Something went wrong";
+    console.log(
+      "Final response after processing:",
+      response.substring(0, 100) + "..."
+    );
+    console.log("Tools used in this request:", toolsUsed);
 
     // Return the response along with updated conversation
     res.json({
       response,
       conversation: messages.slice(1), // Exclude system message from returned conversation
       tool_calls_made: toolCallsCount,
-      tools_used: toolsUsed
+      tools_used: toolsUsed,
     });
-
   } catch (error) {
-    console.error('AI Chat Error:', error);
+    console.error("AI Chat Error:", error);
     res.status(500).json({
-      error: 'An unexpected error occurred. Please try again later.'
+      error: "An unexpected error occurred. Please try again later.",
     });
   }
 });
