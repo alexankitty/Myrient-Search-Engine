@@ -16,6 +16,7 @@ services:
       - MAX_FETCH_JOBS=1000
       - INSTANCE_NAME=Myrient
       - EMULATOR_ENABLED=true
+      - DB_KEYWORD_OPTIMIZER=0
       - POSTGRES_HOST=postgres
       - POSTGRES_PORT=5432
       - POSTGRES_DB=myrient

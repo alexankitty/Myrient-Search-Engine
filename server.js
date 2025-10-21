@@ -101,7 +101,9 @@ async function getFilesJob() {
     metadataMatchCount = await File.count({
       where: { detailsId: { [Op.ne]: null } },
     });
-    await optimizeDatabaseKws();
+    if(process.env.DB_KEYWORD_OPTIMIZER === "1"){
+      await optimizeDatabaseKws();
+    }
   }
   //this is less important and needs to run last.
   if (fileCount > oldFileCount && (await Metadata.count())) {
@@ -132,6 +134,7 @@ async function updateMetadata() {
 
 async function updateKws() {
   if (updatingFiles) return;
+  if (process.env.DB_KEYWORD_OPTIMIZER !== "1") return;
   if (!(await File.count({ where: { filenamekws: { [Op.ne]: null } } })) || process.env.FORCE_DB_OPTIMIZE == "1") {
     await optimizeDatabaseKws();
   }
