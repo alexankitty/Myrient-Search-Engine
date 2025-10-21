@@ -24,6 +24,10 @@ services:
       - ELASTICSEARCH_URL=http://elasticsearch:9200
       - TWITCH_CLIENT_ID=
       - TWITCH_CLIENT_SECRET=
+      - AI_ENABLED=true
+      - AI_API_KEY=gsk_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      - AI_API_URL=https://api.groq.com/openai/v1/chat/completions
+      - AI_MODEL=openai/gpt-oss-120b
     volumes:
       - ./data:/usr/src/app/data
     depends_on:

@@ -24,40 +24,98 @@
                 <div class="mb-4 border-top pt-3">
                     <h5><%= __('about.emulator.title') %></h5>
                     <% if (process.env.EMULATOR_ENABLED === 'true') { %>
-                        <p><%= __('about.emulator.description') %></p>
-                        <p><%= __('about.emulator.compatibility') %></p>
+                    <p><%= __('about.emulator.description') %></p>
+                    <p><%= __('about.emulator.compatibility') %></p>
 
-                        <p><%= __('about.emulator.browser_tip') %></p>
+                    <p><%= __('about.emulator.browser_tip') %></p>
 
-                        <p class="text-secondary">
-                            <small>
-                                <i class="fas fa-info-circle"></i>
-                                <%= __('about.emulator.save_states') %>
-                            </small>
-                            <br>
-                            <small>
-                                <i class="fas fa-exclamation-triangle"></i>
-                                <%= __('about.emulator.limitations') %>
-                            </small>
-                        </p>
+                    <p class="text-secondary">
+                        <small>
+                            <i class="fas fa-info-circle"></i>
+                            <%= __('about.emulator.save_states') %>
+                        </small>
+                        <br>
+                        <small>
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <%= __('about.emulator.limitations') %>
+                        </small>
+                    </p>
 
                     <% } else { %>
-                        <p><%= __('about.emulator.disabled') %></p>
-                        <p><%= __('about.emulator.contact') %></p>
+                    <p><%= __('about.emulator.disabled') %></p>
+                    <p><%= __('about.emulator.contact') %></p>
+                    <% } %>
+                </div>
+
+                <div class="mb-4 border-top pt-3">
+                    <h5><%= __('about.ai.title') %></h5>
+                    <% if (aiEnabled) { %>
+                    <%
+                            // Extract provider from API URL
+                            const providers = [
+                                { pattern: 'api.groq.com', name: 'Groq' },
+                                { pattern: 'api.openai.com', name: 'OpenAI' },
+                                { pattern: 'api.anthropic.com', name: 'Anthropic' },
+                                { pattern: 'generativelanguage.googleapis.com', name: 'Google Gemini' },
+                                { pattern: 'api.perplexity.ai', name: 'Perplexity' },
+                                { pattern: 'api.cohere.ai', name: 'Cohere' },
+                                { pattern: 'api.mistral.ai', name: 'Mistral' },
+                            ];
+                            const localPatterns = ['localhost', '127.0.0.1', '0.0.0.0'];
+
+                            const apiUrl = aiConfig.apiUrl;
+
+                            // Helper to extract provider name from domain
+                            const extractProviderFromDomain = (url) => {
+                                try {
+                                    const { hostname } = new URL(url);
+                                    const domain = hostname.startsWith('api.')
+                                        ? hostname.substring(4).split('.')[0]
+                                        : hostname.split('.')[0];
+                                    return domain.charAt(0).toUpperCase() + domain.slice(1);
+                                } catch (e) {
+                                    return 'Custom Provider';
+                                }
+                            };
+
+                            // Determine provider: local → known providers → domain extraction
+                            const provider = localPatterns.some(pattern => apiUrl.includes(pattern))
+                                ? 'Local LLM'
+                                : providers.find(p => apiUrl.includes(p.pattern))?.name
+                                    || extractProviderFromDomain(apiUrl);
+                        %>
+                    <p><%= __('about.ai.description') %></p>
+                    <p><%- __('about.ai.provider_info', {provider: provider, model: aiConfig.model}) %></p>
+
+                    <p class="text-secondary">
+                        <small>
+                            <i class="fas fa-info-circle"></i>
+                            <%= __('about.ai.privacy_note') %>
+                        </small>
+                    </p>
+
+                    <% } else { %>
+                    <p><%= __('about.ai.disabled') %></p>
+                    <p><%= __('about.ai.contact') %></p>
                     <% } %>
                 </div>
 
                 <div class="border-top pt-3">
-                    <p><%= __('about.credits.created_by') %> <a href="https://github.com/alexankitty">Alexankitty</a></p>
+                    <p><%= __('about.credits.created_by') %> <a href="https://github.com/alexankitty">Alexankitty</a>
+                    </p>
                     <div class="mb-3">
                         <a href="https://github.com/alexankitty/Myrient-Search-Engine/graphs/contributors">
-                            <img src="/proxy-image?url=<%= encodeURIComponent('https://contrib.rocks/image?repo=alexankitty/Myrient-Search-Engine') %>" alt="Contributors" />
+                            <img src="/proxy-image?url=<%= encodeURIComponent('https://contrib.rocks/image?repo=alexankitty/Myrient-Search-Engine') %>"
+                                alt="Contributors" />
                         </a>
                     </div>
-                    <p><a href="https://github.com/alexankitty/myrient-global-search"><%= __('about.credits.view_github') %></a></p>
+                    <p><a
+                            href="https://github.com/alexankitty/myrient-global-search"><%= __('about.credits.view_github') %></a>
+                    </p>
                     <a href='https://ko-fi.com/Q5Q4IFNAO' target='_blank'>
                         <img height='36' style='border:0px;height:36px;'
-                            src='/proxy-image?url=<%= encodeURIComponent("https://storage.ko-fi.com/cdn/kofi5.png?v=3") %>' alt='Buy Me a Coffee at ko-fi.com' />
+                            src='/proxy-image?url=<%= encodeURIComponent("https://storage.ko-fi.com/cdn/kofi5.png?v=3") %>'
+                            alt='Buy Me a Coffee at ko-fi.com' />
                     </a>
                 </div>
             </div>

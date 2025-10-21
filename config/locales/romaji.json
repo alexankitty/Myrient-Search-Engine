@@ -55,6 +55,14 @@
             "disabled": "Webu emyurēta kinō wa kanrisha ni yotte mukouka sareteimasu.",
             "contact": "Kanrisha ni otoiawase itadaku ka, go jishin de Myrient Search no insutansu wo tachiagetekudasai."
         },
+        "ai": {
+            "title": "AI Ashisutanto",
+            "description": "Kono websaito ni wa, geemu wo mitsukete, osusume wo teikyou shite, retoro geemu ni kansuru shitsumon ni kotaeru koto ga dekiru AI-shihaisha ga tousai sarete imasu.",
+            "provider_info": "{{model}} moderu wo shiyou shita {{provider}} ni yotte teikyou sarete imasu.",
+            "privacy_note": "AI ashisutanto wa gaibu saabisu ni yotte teikyou sarete imasu. Shousai ni tsuite wa, saabisu no puraibashii porishii wo go-sanshou kudasai.",
+            "disabled": "AI ashisutanto kinou wa kanrisha ni yotte mukouka sarete imasu.",
+            "contact": "Kanrisha ni otoiawase itadaku ka, dokuji no Myrient Search insutansu wo tachiagete kudasai."
+        },
         "credits": {
             "created_by": "Kensaku enjin kaihatsusha:",
             "view_github": "GitHub de purojekuto wo miru"
@@ -155,6 +163,25 @@
         "details": "Erā shōsai: {{message}}",
         "back_home": "Hōmu ni modoru",
         "go_back": "Modoru"
+    },
+    "ai_chat": {
+        "title": "AI Ashisutanto",
+        "button_tooltip": "AI Ashisutanto",
+        "welcome": {
+            "title": "AI Ashisutanto",
+            "description": "Retoro geemu no kensaku, geemu no suisen, kensaku enjin no shiyouhouhou ni kansuru shitsumon ni otae dekimasu."
+        },
+        "suggestions": {
+            "game_recommendations": "Nintendo 64 ni osusume no geemu wa arimasu ka?",
+            "search_tips": "Tokutei no chiiki de kensaku suru ni wa dou sureba ii desu ka?",
+            "gaming_history": "Retoro geemu ki ni tsuite oshiete kudasai"
+        },
+        "input_placeholder": "Nandemo okiki kudasai...",
+        "typing_indicator": "AI ga kangaete imasu",
+        "error": {
+            "network": "AI saabisu ni setsuzoku dekimasen. Intaanetto setsuzoku wo kakunin shite, mou ichido otameshi kudasai.",
+            "generic": "Moushiwake gozaimasen ga, genzai setsuzoku ni mondai ga arimasu. Nochihodo saido otameshi kudasai."
+        }
     },
     "languages": {
         "en": "English",

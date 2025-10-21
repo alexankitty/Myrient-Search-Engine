@@ -21,7 +21,6 @@ a:hover {
   color: #ffffff;
 }
 td {
-  webkit-transition: background 300ms ease-in;
   transition-behavior: normal;
   transition-duration: 300ms;
   transition-timing-function: ease-in;

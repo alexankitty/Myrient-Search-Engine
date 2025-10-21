@@ -55,6 +55,14 @@
             "disabled": "La funzionalità dell'emulatore web è stata disabilitata dall'amministratore.",
             "contact": "Contatta l'amministratore o avvia la tua istanza di Myrient Search."
         },
+        "ai": {
+            "title": "Assistente IA",
+            "description": "Questo sito web dispone di un assistente potenziato dall'IA che può aiutarti a trovare giochi, fornire raccomandazioni e rispondere a domande sul gaming retrò.",
+            "provider_info": "Alimentato da {{provider}} utilizzando il modello {{model}}.",
+            "privacy_note": "L'assistente IA è alimentato da un servizio esterno. Si prega di fare riferimento alla politica sulla privacy del servizio per ulteriori informazioni.",
+            "disabled": "La funzionalità Assistente IA è stata disabilitata dall'amministratore.",
+            "contact": "Contatta l'amministratore o avvia la tua istanza di Myrient Search."
+        },
         "credits": {
             "created_by": "Motore di ricerca creato da",
             "view_github": "Visualizza progetto su GitHub"
@@ -156,6 +164,25 @@
         "back_home": "Torna alla Home",
         "go_back": "Indietro"
     },
+    "ai_chat": {
+        "title": "Assistente AI",
+        "button_tooltip": "Assistente AI",
+        "welcome": {
+            "title": "Assistente AI",
+            "description": "Posso aiutarti a trovare giochi retrò, fornire raccomandazioni sui giochi e rispondere a domande sull'utilizzo del motore di ricerca."
+        },
+        "suggestions": {
+            "game_recommendations": "Che giochi consigli per Nintendo 64?",
+            "search_tips": "Come cerco regioni specifiche?",
+            "gaming_history": "Dimmi delle console retro"
+        },
+        "input_placeholder": "Chiedimi qualsiasi cosa...",
+        "typing_indicator": "L'AI sta pensando",
+        "error": {
+            "network": "Impossibile connettersi al servizio AI. Controlla la tua connessione internet e riprova.",
+            "generic": "Mi dispiace, sto avendo problemi di connessione ora. Riprova più tardi."
+        }
+    },
     "languages": {
         "en": "English",
         "es": "Español",
@@ -169,7 +196,7 @@
         "tr": "Türkçe",
         "it": "Italiano",
         "romaji": "Romaji",
-        "hi": "हिन्दी",
+        "hi": "हिन्दŀ",
         "ar": "العربية",
         "bn": "বাংলা",
         "ru": "Русский"

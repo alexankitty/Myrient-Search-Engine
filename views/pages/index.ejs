@@ -1,4 +1,4 @@
-<% 
+<%
   let ogPages = {
     "results": "opengraphresults",
     "info": "opengraphinfo"
@@ -21,7 +21,62 @@
   <%- include('../partials/footer'); %>
 </footer>
 
+<% if (aiEnabled) { %>
+<!-- AI Chat Button and Modal -->
+<button class="ai-chat-button" id="aiChatButton" title="<%= __('ai_chat.button_tooltip') %>">
+  <i class="fas fa-robot"></i>
+</button>
+
+<div class="ai-chat-modal" id="aiChatModal">
+  <div class="ai-chat-header">
+    <h5 class="ai-chat-title"><%= __('ai_chat.title') %></h5>
+    <button class="ai-chat-close" id="aiChatClose">&times;</button>
+  </div>
+  <div class="ai-chat-messages" id="aiChatMessages">
+    <div class="ai-chat-empty-state" id="aiChatEmptyState">
+      <div class="ai-chat-welcome">
+        <i class="fas fa-robot ai-chat-welcome-icon"></i>
+        <h6 class="ai-chat-welcome-title"><%= __('ai_chat.welcome.title') %></h6>
+        <p class="ai-chat-welcome-text">
+          <%= __('ai_chat.welcome.description') %>
+        </p>
+        <div class="ai-chat-suggestions">
+          <button class="ai-suggestion-pill" data-suggestion="<%= __('ai_chat.suggestions.game_recommendations') %>">🎮 <%= __('ai_chat.suggestions.game_recommendations') %></button>
+          <button class="ai-suggestion-pill" data-suggestion="<%= __('ai_chat.suggestions.search_tips') %>">🔍 <%= __('ai_chat.suggestions.search_tips') %></button>
+          <button class="ai-suggestion-pill" data-suggestion="<%= __('ai_chat.suggestions.gaming_history') %>">🕹️ <%= __('ai_chat.suggestions.gaming_history') %></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ai-chat-input-container">
+    <textarea
+      class="ai-chat-input"
+      id="aiChatInput"
+      placeholder="<%= __('ai_chat.input_placeholder') %>"
+      rows="1"
+      maxlength="1000"
+    ></textarea>
+    <button class="ai-chat-send" id="aiChatSend" title="<%= __('search.button') %>">
+      ➤
+    </button>
+  </div>
+</div>
+<% } %>
+
 </body>
+<% if (aiEnabled) { %>
+<script>
+  // Pass AI Chat translations to the client
+  window.aiChatTranslations = {
+    typing_indicator: '<%= __('ai_chat.typing_indicator') %>',
+    error: {
+      network: '<%= __('ai_chat.error.network') %>',
+      generic: '<%= __('ai_chat.error.generic') %>'
+    }
+  };
+</script>
+<% } %>
+
 <script>
   if(window.location.pathname != '/settings'){ //don't load on the settings page
     settingStore = localStorage.getItem('settings')
@@ -34,12 +89,20 @@
     if(typeof settingStore == 'string' && window.location.href){
         oldResultElem = document.getElementById('oldResults')
         if(oldResultElem){
-            oldResultElem.value = JSON.parse(settingStore).useOldResults.toString() 
+            oldResultElem.value = JSON.parse(settingStore).useOldResults.toString()
         }
     }
   }
 </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous">
+<% if (aiEnabled) { %>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<% } %>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+<% if (aiEnabled) { %>
+<link rel="stylesheet" href="/public/css/ai.css">
+<script src="/public/js/ai-chat.js"></script>
+<% } %>
 </html>
