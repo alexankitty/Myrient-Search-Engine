@@ -1,3 +1,6 @@
+# Deprecation Notice
+A [v2 rewrite](https://github.com/Myrient-Search/Myrient-Search) is in progress, eventually this repo will be archived. The new v2 website is live now.
+
 # Myrient Search Engine
 It is finally here. There is now a way to search all of Myrient's offerings.
 [Myrient Search](https://myrient.mahou.one) can be accessed by clicking the link.
