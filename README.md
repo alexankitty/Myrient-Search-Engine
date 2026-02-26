@@ -1,6 +1,6 @@
 > [!WARNING]
 > # Shutdown
-> Myrient is shutting down Mar 31, 2026.
+> Myrient is shutting down Mar 31, 2026. [Announcement](https://canary.discord.com/channels/1021656232018333716/1022189761370267708/1476692124929097739)
 
 >[!WARNING]
 ># Deprecation Notice
