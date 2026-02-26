@@ -1,5 +1,10 @@
-# Deprecation Notice
-A [v2 rewrite](https://github.com/Myrient-Search/Myrient-Search) is in progress, eventually this repo will be archived. The new v2 website is live now.
+> [!WARNING]
+> # Shutdown
+> Myrient is shutting down Mar 31, 2026.
+
+>[!WARNING]
+># Deprecation Notice
+>A [v2 rewrite](https://github.com/Myrient-Search/Myrient-Search) is in progress, eventually this repo will be archived. The new v2 website is live now.
 
 # Myrient Search Engine
 It is finally here. There is now a way to search all of Myrient's offerings.
